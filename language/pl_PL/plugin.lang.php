@@ -19,7 +19,7 @@
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
 
-$lang['Community'] = 'Communauté polonaise';
+$lang['Community'] = 'Polish comunity';
 $lang['Add permissions'] = 'Ajouter des permissions';
 $lang['Permission level'] = 'Niveau de permission';
 $lang['Community level 1'] = 'ajouter des photos';
