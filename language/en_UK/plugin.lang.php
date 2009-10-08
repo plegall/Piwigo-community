@@ -18,13 +18,12 @@
 // | Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, |
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
-//Polish transaltion voyteckst
 
-$lang['Community'] = 'Społeczność';
-$lang['Add permissions'] = 'Dodaj uprawnienia';
-$lang['Permission level'] = 'Poziom uprawnień';
-$lang['Community level 1'] = 'dodaj zdjęcia';
-$lang['Community level 2'] = 'dodaj zdjęcia + kategorie';
-$lang['community permissions "%s" added/updated for "%s"'] = 'dodano/zautualizowano uprawnienia społecznościowe "%s" dla "%s"';
-$lang['community permissions "%s" removed for "%s"'] = 'Usunięto uprawnienia społecznościowe "%s" dla "%s"';
+$lang['Community'] = 'Community';
+$lang['Add permissions'] = 'Add permissions';
+$lang['Permission level'] = 'Permission level';
+$lang['Community level 1'] = 'add photos';
+$lang['Community level 2'] = 'add photos + categories';
+$lang['community permissions "%s" added/updated for "%s"'] = 'community permissions "%s" added/updated for "%s"';
+$lang['community permissions "%s" removed for "%s"'] = 'community permissions "%s" removed for "%s"';
 ?>
