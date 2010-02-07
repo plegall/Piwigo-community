@@ -1,0 +1,1 @@
+Permettre à des utilisateurs d'ajouter des photos avec pLoader
