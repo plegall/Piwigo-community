@@ -24,6 +24,6 @@ $lang['Add permissions'] = 'Añadir permisos';
 $lang['Permission level'] = 'Nivel de permiso';
 $lang['Community level 1'] = 'añadir fotos';
 $lang['Community level 2'] = 'añadir fotos + categorias';
-$lang['community permissions "%s" added/updated for "%s"'] = 'permisos comunitarios "%s" añadidas o puestas al día para "%s"';
-$lang['community permissions "%s" removed for "%s"'] = 'permisos comunitarios "%s" suprimidas para "%s"';
+$lang['community permissions "%s" added/updated for "%s"'] = 'permisos comunitarios "%s" añadidos o actualizados para "%s"';
+$lang['community permissions "%s" removed for "%s"'] = 'permisos comunitarios "%s" suprimidos para "%s"';
 ?>
