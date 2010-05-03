@@ -46,6 +46,7 @@ function community_switch_user_to_admin($res, $methodName, $params)
     'pwg.images.add',
     'pwg.images.setInfo',
     'pwg.images.addChunk',
+    'pwg.images.checkUpload',
     );
 
   // permission_level 2 has all methods of level 1 + others
