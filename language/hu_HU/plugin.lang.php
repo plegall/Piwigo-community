@@ -24,6 +24,6 @@ $lang['Add permissions'] = 'Jogosultság hozzáadása';
 $lang['Permission level'] = 'Jogosultsági szint';
 $lang['Community level 1'] = 'kép feltöltése';
 $lang['Community level 2'] = 'kép és kategória feltöltése';
-$lang['community permissions "%s" added/updated for "%s"'] = 'közösségi jogosultságok: "%s" hozzáadás/feltöltés Felhaszláló: "%s"';
-$lang['community permissions "%s" removed for "%s"'] = 'közösségi jogosultságok: "%s" eltávolítás Felhasználó: "%s"';
+$lang['community permissions "%s" added/updated for "%s"'] = 'Jogosultság a közösségben: "%s" hozzáadva/módosítva. Felhaszláló: "%s"';
+$lang['community permissions "%s" removed for "%s"'] = 'Jogosultság a közösségben: "%s" eltávolítva. Felhasználó: "%s"';
 ?>
