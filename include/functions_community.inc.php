@@ -54,11 +54,15 @@ SELECT
 
   if ($user_id != $conf['guest_id'])
   {
-  $query.= '
+    $query.= '
     OR (type = \'any_registered_user\')
-    OR (type = \'user\' AND user_id = '.$user_id.')
-    OR (type = \'group\' AND group_id IN ('.implode(',', $user_group_ids).'))
-';
+    OR (type = \'user\' AND user_id = '.$user_id.')';
+
+    if (count($user_group_ids) > 0)
+    {
+      $query.= '
+    OR (type = \'group\' AND group_id IN ('.implode(',', $user_group_ids).'))';
+    }
   }
     
   $query.= '
