@@ -148,6 +148,8 @@ $template->assign(
   );
 
 // list of groups
+$groups = array();
+
 $query = '
 SELECT
     id,
