@@ -2,7 +2,9 @@
 // +-----------------------------------------------------------------------+
 // | Piwigo - a PHP based picture gallery                                  |
 // +-----------------------------------------------------------------------+
-// | Copyright(C) 2009      Pierrick LE GALL             http://piwigo.org |
+// | Copyright(C) 2008-2011 Piwigo Team                  http://piwigo.org |
+// | Copyright(C) 2003-2008 PhpWebGallery Team    http://phpwebgallery.net |
+// | Copyright(C) 2002-2003 Pierrick LE GALL   http://le-gall.net/pierrick |
 // +-----------------------------------------------------------------------+
 // | This program is free software; you can redistribute it and/or modify  |
 // | it under the terms of the GNU General Public License as published by  |
@@ -25,124 +27,58 @@ if( !defined("PHPWG_ROOT_PATH") )
 }
 
 include_once(PHPWG_ROOT_PATH.'admin/include/functions.php');
+include_once(PHPWG_ROOT_PATH.'admin/include/tabsheet.class.php');
+
 load_language('plugin.lang', COMMUNITY_PATH);
 
-$conf['community_permission_levels'] = array(1,2);
-$admin_base_url = get_root_url().'admin.php?page=plugin&section=community%2Fadmin.php';
+define('COMMUNITY_BASE_URL', get_root_url().'admin.php?page=plugin-community');
 
 // +-----------------------------------------------------------------------+
 // | Check Access and exit when user status is not ok                      |
 // +-----------------------------------------------------------------------+
+
 check_status(ACCESS_ADMINISTRATOR);
 
 // +-----------------------------------------------------------------------+
-// |                               functions                               |
+// | Tabs                                                                  |
 // +-----------------------------------------------------------------------+
 
-function get_permission_level_label($level)
+$tabs = array(
+  array(
+    'code' => 'permissions',
+    'label' => l10n('Upload Permissions'),
+    ),
+  array(
+    'code' => 'pendings',
+    'label' => l10n('Pending Photos'),
+    ),
+  );
+
+$tab_codes = array_map(
+  create_function('$a', 'return $a["code"];'),
+  $tabs
+  );
+
+if (isset($_GET['tab']) and in_array($_GET['tab'], $tab_codes))
 {
-  return '('.$level.') '.l10n( sprintf('Community level %d', $level) );
+  $page['tab'] = $_GET['tab'];
+}
+else
+{
+  $page['tab'] = $tabs[0]['code'];
 }
 
-// +-----------------------------------------------------------------------+
-// |                            add permissions                            |
-// +-----------------------------------------------------------------------+
-
-if (isset($_POST['submit_add']) and !is_adviser())
+$tabsheet = new tabsheet();
+foreach ($tabs as $tab)
 {
-  if (!is_numeric($_POST['user_options']))
-  {
-    array_push($page['errors'], 'invalid user');
-  }
-  if (!is_numeric($_POST['permission_level_options']))
-  {
-    array_push($page['errors'], 'invalid permission level');
-  }
-
-  if (count($page['errors']) == 0)
-  {
-    $query = '
-SELECT
-    '.$conf['user_fields']['username'].' AS username
-  FROM '.USERS_TABLE.'
-  WHERE '.$conf['user_fields']['id'].' = '.$_POST['user_options'].'
-;';
-    list($username) = mysql_fetch_row(pwg_query($query));
-    // remove any existing permission for this user
-    $query = '
-DELETE
-  FROM '.COMMUNITY_TABLE.'
-  WHERE user_id = '.$_POST['user_options'].'
-;';
-    pwg_query($query);
-
-    // creating the permission
-    $query = '
-INSERT INTO '.COMMUNITY_TABLE.'
-  (user_id, permission_level)
-  VALUES
-  ('.$_POST['user_options'].', '.$_POST['permission_level_options'].')
-;';
-    pwg_query($query);
-
-    array_push(
-      $page['infos'],
-      sprintf(
-        l10n('community permissions "%s" added/updated for "%s"'),
-        get_permission_level_label($_POST['permission_level_options']),
-        $username
-        )
-      );
-  }
-
+  $tabsheet->add(
+    $tab['code'],
+    $tab['label'],
+    COMMUNITY_BASE_URL.'-'.$tab['code']
+    );
 }
-
-// +-----------------------------------------------------------------------+
-// |                           remove permissions                          |
-// +-----------------------------------------------------------------------+
-
-if (isset($_GET['delete']) and !is_adviser())
-{
-  if (is_numeric($_GET['delete']))
-  {
-    $query = '
-SELECT
-    community.user_id,
-    community.permission_level,
-    u.'.$conf['user_fields']['username'].' AS username
-  FROM '.COMMUNITY_TABLE.' AS community
-    INNER JOIN '.USERS_TABLE.' AS u
-      ON u.'.$conf['user_fields']['id'].' = community.user_id
-  WHERE community.user_id = '.$_GET['delete'].'
-;';
-    $result = pwg_query($query);
-    if (mysql_num_rows($result) == 0)
-    {
-      array_push($page['errors'], 'this user has no community permission yet');
-    }
-
-    if (count($page['errors']) == 0)
-    {
-      list($user_id, $permission_level, $username) = mysql_fetch_row($result);
-
-      $query = '
-DELETE
-  FROM '.COMMUNITY_TABLE.'
-  WHERE user_id = '.$user_id.'
-;';
-      pwg_query($query);
-
-      array_push(
-        $page['infos'],
-        sprintf(
-          l10n('community permissions "%s" removed for "%s"'),
-          get_permission_level_label($permission_level),
-          $username
-        )
-      );
-    }
-  }
-}
+$tabsheet->select($page['tab']);
+$tabsheet->assign();
 
 // +-----------------------------------------------------------------------+
 // |                             template init                             |
@@ -150,81 +86,13 @@ DELETE
 
 $template->set_filenames(
   array(
-    'plugin_admin_content' => dirname(__FILE__).'/admin.tpl'
+    'photos_add' => 'photos_add_'.$page['tab'].'.tpl'
     )
   );
-
-$template->assign(
-    array(
-      'F_ADD_ACTION'=> $admin_base_url,
-    )
-  );
-
-
-// user options
-$query = '
-SELECT
-    u.'.$conf['user_fields']['id'].' AS id,
-    u.'.$conf['user_fields']['username'].' AS username
-  FROM '.USERS_TABLE.' AS u
-    INNER JOIN '.USER_INFOS_TABLE.' AS ui
-      ON u.'.$conf['user_fields']['id'].' = ui.user_id
-  WHERE ui.status = "normal"
-  ORDER BY username
-;';
-$user_options = array();
-$result = pwg_query($query);
-while ($row = mysql_fetch_assoc($result))
-{
-  $user_options[ $row['id'] ] = $row['username'];
-}
-$template->assign(
-    array(
-      'user_options'=> $user_options,
-    )
-  );
-
-  
-// permission level options
-$permission_level_options = array();
-foreach ($conf['community_permission_levels'] as $level)
-{
-  $permission_level_options[$level] = get_permission_level_label($level);
-}
-$template->assign(
-    array(
-      'permission_level_options'=> $permission_level_options,
-    )
-  );
-
-// user with community permissions
-$query = '
-SELECT
-    community.user_id,
-    community.permission_level,
-    u.'.$conf['user_fields']['username'].' AS username
-  FROM '.COMMUNITY_TABLE.' AS community
-    INNER JOIN '.USERS_TABLE.' AS u
-      ON u.'.$conf['user_fields']['id'].' = community.user_id
-  ORDER BY username
-;';
-$result = pwg_query($query);
-
-while ($row = mysql_fetch_assoc($result))
-{
-  $template->append(
-    'users',
-    array(
-      'NAME' => $row['username'],
-      'PERMISSION_LEVEL' => get_permission_level_label($row['permission_level']),
-      'U_DELETE' => $admin_base_url.'&amp;delete='.$row['user_id']
-      )
-    );
-}
 
 // +-----------------------------------------------------------------------+
-// |                           sending html code                           |
+// |                             Load the tab                              |
 // +-----------------------------------------------------------------------+
 
-$template->assign_var_from_handle('ADMIN_CONTENT', 'plugin_admin_content');
+include(COMMUNITY_PATH.'admin_'.$page['tab'].'.php');
 ?>

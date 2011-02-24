@@ -1,1 +1,1 @@
-Permettre à des utilisateurs d'ajouter des photos avec pLoader
+Permet aux utilisateurs d'ajouter des photos sans être administrateur

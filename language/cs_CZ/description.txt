@@ -1,1 +1,0 @@
-Uživatelé bez administrátorských práv mohou vkládat fotky pomocí API nebo pLoaderu,atd. 

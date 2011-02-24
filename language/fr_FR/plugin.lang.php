@@ -2,7 +2,9 @@
 // +-----------------------------------------------------------------------+
 // | Piwigo - a PHP based picture gallery                                  |
 // +-----------------------------------------------------------------------+
-// | Copyright(C) 2009      Pierrick LE GALL             http://piwigo.org |
+// | Copyright(C) 2008-2011 Piwigo Team                  http://piwigo.org |
+// | Copyright(C) 2003-2008 PhpWebGallery Team    http://phpwebgallery.net |
+// | Copyright(C) 2002-2003 Pierrick LE GALL   http://le-gall.net/pierrick |
 // +-----------------------------------------------------------------------+
 // | This program is free software; you can redistribute it and/or modify  |
 // | it under the terms of the GNU General Public License as published by  |
@@ -19,11 +21,34 @@
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
 
-$lang['Community'] = 'Communauté';
-$lang['Add permissions'] = 'Ajouter des permissions';
-$lang['Permission level'] = 'Niveau de permission';
-$lang['Community level 1'] = 'ajouter des photos';
-$lang['Community level 2'] = 'ajouter des photos + categories';
-$lang['community permissions "%s" added/updated for "%s"'] = 'permissions communautaires "%s" ajoutées ou mises à jour pour "%s"';
-$lang['community permissions "%s" removed for "%s"'] = 'permissions communautaires "%s" supprimées pour "%s"';
+$lang['Add a permission'] = 'Ajouter une permission';
+$lang['Who?'] = 'Qui ?';
+$lang['any visitor'] = 'n\'importe quel visiteur';
+$lang['any registered user'] = 'n\'importe quel utilisateur enregistré';
+$lang['a specific user'] = 'un utilisateur en particulier';
+$lang['a group'] = 'un groupe';
+$lang['Where?'] = 'Où ?';
+$lang['The whole gallery'] = 'La galerie toute entière';
+$lang['ability to create sub-albums'] = 'possibilité de créer des sous-albums';
+$lang['Which level of trust?'] = 'Quel degré de confiance ?';
+$lang['sub-albums creation'] = 'création de sous-albums';
+$lang['Upload Permissions'] = 'Permissions d\'ajout';
+$lang['Pending Photos'] = 'Photos en attente';
+$lang['Permission added'] = 'Permission enregistrée';
+$lang['Permission removed'] = 'Permission supprimée';
+$lang['%s (the user)'] = '%s (l\'utilisateur)';
+$lang['%s (the group)'] = '%s (le groupe)';
+$lang['low trust'] = 'confiance faible';
+$lang['uploaded photos must be validated by an administrator'] = 'les photos ajoutées doivent être validées par un administrateur';
+$lang['high trust'] = 'confiance élevée';
+$lang['uploaded photos are directly displayed in the gallery'] = 'les photos ajoutées sont directement visibles dans la galerie';
+$lang['%d photos validated'] = '%d photos validées';
+$lang['%d photos rejected'] = '%d photos rejetées';
+$lang['web size'] = 'taille web';
+$lang['Zoom'] = 'Zoom';
+$lang['Upload your own photos'] = 'Ajoutez vos propres photos';
+$lang['%d photos uploaded by %s'] = '%d photos ajoutées par %s';
+$lang['Validation page: %s'] = 'Page de validation : %s';
+$lang['%d photos uploaded into album "%s"'] = '%d photos ajoutée à l\'album "%s"';
+$lang['Hi administrators,'] = 'Bonjours chers administrateurs,';
 ?>

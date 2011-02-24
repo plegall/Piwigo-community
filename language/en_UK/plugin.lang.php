@@ -19,11 +19,34 @@
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
 
-$lang['Community'] = 'Community';
-$lang['Add permissions'] = 'Add permissions';
-$lang['Permission level'] = 'Permission level';
-$lang['Community level 1'] = 'add photos';
-$lang['Community level 2'] = 'add photos + categories';
-$lang['community permissions "%s" added/updated for "%s"'] = 'community permissions "%s" added/updated for "%s"';
-$lang['community permissions "%s" removed for "%s"'] = 'community permissions "%s" removed for "%s"';
+$lang['Add a permission'] = 'Add a permission';
+$lang['Who?'] = 'Who?';
+$lang['any visitor'] = 'any visitor';
+$lang['any registered user'] = 'any registered user';
+$lang['a specific user'] = 'a specific user';
+$lang['a group'] = 'a group';
+$lang['Where?'] = 'Where?';
+$lang['The whole gallery'] = 'The whole gallery';
+$lang['ability to create sub-albums'] = 'ability to create sub-albums';
+$lang['Which level of trust?'] = 'Which level of trust?';
+$lang['sub-albums creation'] = 'sub-albums creation';
+$lang['Upload Permissions'] = 'Upload Permissions';
+$lang['Pending Photos'] = 'Pending Photos';
+$lang['Permission added'] = 'Permission added';
+$lang['Permission removed'] = 'Permission removed';
+$lang['%s (the user)'] = '%s (the user)';
+$lang['%s (the group)'] = '%s (the group)';
+$lang['low trust'] = 'low trust';
+$lang['uploaded photos must be validated by an administrator'] = 'uploaded photos must be validated by an administrator';
+$lang['high trust'] = 'high trust';
+$lang['uploaded photos are directly displayed in the gallery'] = 'uploaded photos are directly displayed in the gallery';
+$lang['%d photos validated'] = '%d photos validated';
+$lang['%d photos rejected'] = '%d photos rejected';
+$lang['web size'] = 'web size';
+$lang['Zoom'] = 'Zoom';
+$lang['Upload your own photos'] = 'Upload your own photos';
+$lang['%d photos uploaded by %s'] = '%d photos uploaded by %s';
+$lang['Validation page: %s'] = 'Validation page: %s';
+$lang['%d photos uploaded into album "%s"'] = '%d photos uploaded into album "%s"';
+$lang['Hi administrators,'] = 'Hi administrators,';
 ?>

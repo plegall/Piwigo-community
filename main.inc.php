@@ -14,7 +14,11 @@ if (!defined('PHPWG_ROOT_PATH'))
 }
 
 define('COMMUNITY_PATH' , PHPWG_PLUGINS_PATH.basename(dirname(__FILE__)).'/');
-include_once (COMMUNITY_PATH.'/include/constants.php');
+
+global $prefixeTable;
+define('COMMUNITY_TABLE', $prefixeTable.'community');
+define('COMMUNITY_PERMISSIONS_TABLE', $prefixeTable.'community_permissions');
+define('COMMUNITY_PENDINGS_TABLE', $prefixeTable.'community_pendings');
 
 /* Plugin admin */
 add_event_handler('get_admin_plugin_menu_links', 'community_admin_menu');
@@ -25,12 +29,101 @@ function community_admin_menu($menu)
     $menu,
     array(
       'NAME' => 'Community',
-      'URL'  => get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php')
+      'URL'  => get_root_url().'admin.php?page=plugin-community'
       )
     );
 
   return $menu;
 }
+
+add_event_handler('loc_end_section_init', 'community_section_init');
+function community_section_init()
+{
+  global $tokens, $page;
+  
+  if ($tokens[0] == 'add_photos')
+  {
+    $page['section'] = 'add_photos';
+  }
+}
+
+add_event_handler('loc_end_index', 'community_index');
+function community_index()
+{
+  global $page;
+  
+  if (isset($page['section']) and $page['section'] == 'add_photos')
+  {
+    include(COMMUNITY_PATH.'add_photos.php');
+  }
+}
+
+add_event_handler('blockmanager_apply' , 'community_gallery_menu');
+function community_gallery_menu($menu_ref_arr)
+{
+  global $conf, $user;
+
+  // conditional : depending on community permissions, display the "Add
+  // photos" link in the gallery menu
+  
+  // admins are not concerned about community permissions
+  if (!is_admin())
+  {
+    // what are the user groups?
+    $query = '
+SELECT
+    group_id
+  FROM '.USER_GROUP_TABLE.'
+  WHERE user_id = '.$user['id'].'
+;';
+    $user_group_ids = array_from_query($query, 'group_id');
+
+    $query = '
+SELECT
+    COUNT(*)
+  FROM '.COMMUNITY_PERMISSIONS_TABLE.'
+  WHERE (type = \'any_visitor\')';
+
+    if ($user['id'] != $conf['guest_id'])
+    {
+      $query.= '
+    OR (type = \'any_registered_user\')
+    OR (type = \'user\' AND user_id = '.$user['id'].')
+    OR (type = \'group\' AND group_id IN ('.implode(',', $user_group_ids).'))
+';
+    }
+    
+    $query.= '
+;';
+
+    list($counter) = pwg_db_fetch_row(pwg_query($query));
+    if (0 == $counter)
+    {
+      return;
+    }
+  }
+
+  $menu = & $menu_ref_arr[0];
+
+  if (($block = $menu->get_block('mbMenu')) != null )
+  {
+    load_language('plugin.lang', COMMUNITY_PATH);
+
+    array_splice(
+      $block->data,
+      count($block->data),
+      0,
+      array(
+        '' => array(
+          'URL' => make_index_url(array('section' => 'add_photos')),
+          'TITLE' => l10n('Upload your own photos'),
+          'NAME' => l10n('Upload Photos')
+          )
+        )
+      );
+  }
+}
+
 
 add_event_handler('ws_invoke_allowed', 'community_switch_user_to_admin', EVENT_HANDLER_PRIORITY_NEUTRAL, 3);
 
