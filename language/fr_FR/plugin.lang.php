@@ -51,4 +51,6 @@ $lang['%d photos uploaded by %s'] = '%d photos ajoutées par %s';
 $lang['Validation page: %s'] = 'Page de validation : %s';
 $lang['%d photos uploaded into album "%s"'] = '%d photos ajoutée à l\'album "%s"';
 $lang['Hi administrators,'] = 'Bonjours chers administrateurs,';
+
+$lang['No album, this photo is orphan'] = 'Aucun album, cette photo est orpheline';
 ?>

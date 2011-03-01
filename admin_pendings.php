@@ -214,6 +214,16 @@ foreach ($rows as $row)
   {
     $dimensions = $websize_props;
   }
+
+  $album = null;
+  if (isset($category_for_image[ $row['id'] ]))
+  {
+    $album = $category_for_image[ $row['id'] ];
+  }
+  else
+  {
+    $album = '<em>'.l10n('No album, this photo is orphan').'</em>';
+  }
   
   $template->append(
     'photos',
@@ -228,7 +238,7 @@ foreach ($rows as $row)
       'DIMENSIONS' => $dimensions,
       'FILE' => $row['file'],
       'DATE_CREATION' => format_date($row['date_creation']),
-      'ALBUM' => $category_for_image[ $row['id'] ],
+      'ALBUM' => $album,
       )
     );
 }
