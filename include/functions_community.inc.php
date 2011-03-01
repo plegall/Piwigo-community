@@ -25,6 +25,17 @@ function community_get_user_permissions($user_id)
 {
   global $conf;
 
+  if (is_admin())
+  {
+    return array(
+      'upload_whole_gallery' => true,
+      'create_whole_gallery' => true,
+      'create_categories' => array(),
+      'upload_categories' => array(),
+      'permission_ids' => array(),
+      );
+  }
+
   $return = array(
     'upload_whole_gallery' => false,
     'create_whole_gallery' => false,
@@ -32,8 +43,6 @@ function community_get_user_permissions($user_id)
     'upload_categories' => array(),
     'permission_ids' => array(),
     );
-
-  $user_permissions = array();
   
   // what are the user groups?
   $query = '
@@ -95,7 +104,7 @@ SELECT
     }
   }
 
-  if (!$return['upload_whole_gallery'])
+  if (!$return['upload_whole_gallery'] and count($return['upload_categories']) > 0)
   {
     $return['upload_categories'] = get_subcat_ids($return['upload_categories']);
   }

@@ -20,6 +20,8 @@ define('COMMUNITY_TABLE', $prefixeTable.'community');
 define('COMMUNITY_PERMISSIONS_TABLE', $prefixeTable.'community_permissions');
 define('COMMUNITY_PENDINGS_TABLE', $prefixeTable.'community_pendings');
 
+include_once(COMMUNITY_PATH.'include/functions_community.inc.php');
+
 /* Plugin admin */
 add_event_handler('get_admin_plugin_menu_links', 'community_admin_menu');
 
@@ -65,42 +67,11 @@ function community_gallery_menu($menu_ref_arr)
 
   // conditional : depending on community permissions, display the "Add
   // photos" link in the gallery menu
+  $user_permissions = community_get_user_permissions($user['id']);
   
-  // admins are not concerned about community permissions
-  if (!is_admin())
+  if (!$user_permissions['upload_whole_gallery'] and count($user_permissions['upload_categories']) == 0)
   {
-    // what are the user groups?
-    $query = '
-SELECT
-    group_id
-  FROM '.USER_GROUP_TABLE.'
-  WHERE user_id = '.$user['id'].'
-;';
-    $user_group_ids = array_from_query($query, 'group_id');
-
-    $query = '
-SELECT
-    COUNT(*)
-  FROM '.COMMUNITY_PERMISSIONS_TABLE.'
-  WHERE (type = \'any_visitor\')';
-
-    if ($user['id'] != $conf['guest_id'])
-    {
-      $query.= '
-    OR (type = \'any_registered_user\')
-    OR (type = \'user\' AND user_id = '.$user['id'].')
-    OR (type = \'group\' AND group_id IN ('.implode(',', $user_group_ids).'))
-';
-    }
-    
-    $query.= '
-;';
-
-    list($counter) = pwg_db_fetch_row(pwg_query($query));
-    if (0 == $counter)
-    {
-      return;
-    }
+    return;
   }
 
   $menu = & $menu_ref_arr[0];
