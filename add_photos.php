@@ -31,6 +31,8 @@ include_once(COMMUNITY_PATH.'include/functions_community.inc.php');
 
 define('PHOTOS_ADD_BASE_URL', make_index_url(array('section' => 'add_photos')));
 
+prepare_upload_configuration();
+
 $user_permissions = community_get_user_permissions($user['id']);
 
 // +-----------------------------------------------------------------------+
