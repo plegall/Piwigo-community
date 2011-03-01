@@ -107,8 +107,13 @@ if (isset($image_ids) and count($image_ids) > 0)
   // then he's not moderated when uploading in
   // events/parties/happyNewYear2011
   $moderate = true;
-  
-  $query = '
+  if (is_admin())
+  {
+    $moderate = false;
+  }
+  else
+  {  
+    $query = '
 SELECT
     cp.category_id,
     c.uppercats
@@ -117,19 +122,20 @@ SELECT
   WHERE cp.id IN ('.implode(',', $user_permissions['permission_ids']).')
     AND cp.moderated = \'false\'
 ;';
-  $result = pwg_query($query);
-  while ($row = pwg_db_fetch_assoc($result))
-  {
-    if (empty($row['category_id']))
+    $result = pwg_query($query);
+    while ($row = pwg_db_fetch_assoc($result))
     {
-      $moderate = false;
-    }
-    elseif (preg_match('/^'.$row['uppercats'].'(,|$)/', $category_infos['uppercats']))
-    {
-      $moderate = false;
+      if (empty($row['category_id']))
+      {
+        $moderate = false;
+      }
+      elseif (preg_match('/^'.$row['uppercats'].'(,|$)/', $category_infos['uppercats']))
+      {
+        $moderate = false;
+      }
     }
   }
-
+  
   if ($moderate)
   {
     $inserts = array();
