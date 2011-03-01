@@ -5,8 +5,6 @@ if (!defined("COMMUNITY_PATH"))
   define('COMMUNITY_PATH', PHPWG_PLUGINS_PATH.basename(dirname(__FILE__)));
 }
 
-include_once (COMMUNITY_PATH.'/include/constants.php');
-
 function plugin_install()
 {
   global $conf, $prefixeTable;
