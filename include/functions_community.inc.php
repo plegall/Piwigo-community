@@ -117,4 +117,42 @@ SELECT
   return $return;
 }
 
+function community_reject_pendings($image_ids)
+{
+  if (count($image_ids) == 0)
+  {
+    return;
+  }
+  
+  $query = '
+DELETE
+  FROM '.COMMUNITY_PENDINGS_TABLE.'
+  WHERE image_id IN ('.implode(',', $image_ids).')
+;';
+  pwg_query($query);
+
+  // needs to be in administration panel
+  delete_elements($image_ids, true);
+}
+
+function community_reject_user_pendings($user_id)
+{
+  $query = '
+SELECT
+    image_id
+  FROM '.COMMUNITY_PENDINGS_TABLE.' AS cp
+    INNER JOIN '.IMAGES_TABLE.' AS i ON i.id = cp.image_id
+  WHERE state != \'validated\'
+    AND added_by = '.$user_id.'
+;';
+  $result = pwg_query($query);
+  $image_ids = array();
+  while ($row = pwg_db_fetch_assoc($result))
+  {
+    array_push($image_ids, $row['image_id']);
+  }
+
+  community_reject_pendings($image_ids);
+}
+
 ?>

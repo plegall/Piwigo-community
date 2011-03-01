@@ -16,7 +16,6 @@ if (!defined('PHPWG_ROOT_PATH'))
 define('COMMUNITY_PATH' , PHPWG_PLUGINS_PATH.basename(dirname(__FILE__)).'/');
 
 global $prefixeTable;
-define('COMMUNITY_TABLE', $prefixeTable.'community');
 define('COMMUNITY_PERMISSIONS_TABLE', $prefixeTable.'community_permissions');
 define('COMMUNITY_PENDINGS_TABLE', $prefixeTable.'community_pendings');
 
@@ -147,10 +146,12 @@ function community_delete_user($user_id)
 {
   $query = '
 DELETE
-  FROM '.COMMUNITY_TABLE.'
+  FROM '.COMMUNITY_PERMISSIONS_TABLE.'
   WHERE user_id = '.$user_id.'
 ;';
   pwg_query($query);
+
+  community_reject_user_pendings($user_id);
 }
 
 ?>
