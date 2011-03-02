@@ -49,6 +49,5 @@ $lang['%d photos uploaded by %s'] = '%d resimler %s tarafından yüklendi';
 $lang['Validation page: %s'] = 'Onaylama sayfası: %s';
 $lang['%d photos uploaded into album "%s"'] = '%d resimler "%s" albümüne yüklendi';
 $lang['Hi administrators,'] = 'Merhaba yöneticiler,';
-
-/*TODO*/$lang['No album, this photo is orphan'] = 'No album, this photo is orphan';
+$lang['No album, this photo is orphan'] = 'Albüm yok, yanlız bir resim';
 ?>
