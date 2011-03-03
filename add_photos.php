@@ -179,50 +179,10 @@ SELECT
   }
   else
   {
-    // we have to change the level.
-    //
-    // the level must equal the minimum level between :
-    // * the privacy level of the uploader
-    // * the minimum level for photos in the same album
-    $category_min_level = null;
-    
-    $query = '
-SELECT
-    image_id,
-    level
-  FROM '.IMAGE_CATEGORY_TABLE.' AS ic
-    JOIN '.IMAGES_TABLE.' AS i ON ic.image_id = i.id
-  WHERE category_id = '.$category_id.'
-;';
-    $result = pwg_query($query);
-    while ($row = pwg_db_fetch_assoc($result))
-    {
-      if (in_array($row['image_id'], $image_ids))
-      {
-        continue;
-      }
-
-      if (!isset($category_min_level))
-      {
-        $category_min_level = $row['level'];
-      }
-
-      if ($row['level'] < $category_min_level)
-      {
-        $category_min_level = $row['level'];
-      }
-    }
-
-    if (!isset($category_min_level))
-    {
-      $category_min_level = 0;
-    }
-
-    $level = min($category_min_level, $user['level']);
-
+    // the level of a user upload photo with no moderation is 0
     $query = '
 UPDATE '.IMAGES_TABLE.'
-  SET level = '.$level.'
+  SET level = 0
   WHERE id IN ('.implode(',', $image_ids).')
 ;';
     pwg_query($query);
