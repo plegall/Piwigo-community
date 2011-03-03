@@ -25,6 +25,19 @@ function community_get_user_permissions($user_id)
 {
   global $conf, $user;
 
+  if (!isset($conf['community_update']))
+  {
+    conf_update_param('community_update', time());
+  }
+  
+  if (isset($_SESSION['community_user_permissions']))
+  {
+    if ($_SESSION['community_update'] > $conf['community_update'])
+    {
+      return $_SESSION['community_user_permissions'];
+    }
+  }
+
   $return = array(
     'upload_whole_gallery' => false,
     'create_whole_gallery' => false,
@@ -184,7 +197,10 @@ SELECT
       );
   }
 
-  return $return;
+  $_SESSION['community_user_permissions'] = $return;
+  $_SESSION['community_update'] = time();
+
+  return $_SESSION['community_user_permissions'];
 }
 
 function community_reject_pendings($image_ids)
