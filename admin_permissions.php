@@ -73,9 +73,11 @@ if (isset($_POST['submit_add']))
     'group_id' => ('group' == $_POST['who']) ? $_POST['who_group'] : null,
     'user_id' => ('user' == $_POST['who']) ? $_POST['who_user'] : null,
     'category_id' => ($_POST['category'] > 0) ? $_POST['category'] : null,
+    'recursive' => isset($_POST['recursive']) ? 'true' : 'false',
     'create_subcategories' => isset($_POST['create_subcategories']) ? 'true' : 'false',
     'moderated' => $_POST['moderate'],
     );
+  
   mass_inserts(
     COMMUNITY_PERMISSIONS_TABLE,
     array_keys($insert),
@@ -323,6 +325,8 @@ foreach ($permissions as $permission)
       'WHERE' => $where,
       'TRUST' => $trust,
       'TRUST_TOOLTIP' => $trust_tooltip,
+      'RECURSIVE' => get_boolean($permission['recursive']),
+      'RECURSIVE_TOOLTIP' => l10n('Apply to sub-albums'),
       'CREATE_SUBCATEGORIES' => get_boolean($permission['create_subcategories']),
       'U_DELETE' => $admin_base_url.'&amp;delete='.$permission['id']
       )

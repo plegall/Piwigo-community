@@ -50,24 +50,18 @@ if (isset($_GET['processed']))
   if ('existing' == $_POST['category_type'])
   {
     // is the user authorized to upload in this album?
-    if (!$user_permissions['upload_whole_gallery'])
+    if (!in_array($_POST['category'], $user_permissions['upload_categories']))
     {
-      if (!in_array($_POST['category'], $user_permissions['upload_categories']))
-      {
-        echo 'Hacking attempt, you have no permission to upload in this album';
-        $hacking_attempt = true;
-      }
+      echo 'Hacking attempt, you have no permission to upload in this album';
+      $hacking_attempt = true;
     }
   }
   elseif ('new' == $_POST['category_type'])
   {
-    if (!$user_permissions['create_whole_gallery'])
+    if (!in_array($_POST['category_parent'], $user_permissions['create_categories']))
     {
-      if (!in_array($_POST['category_parent'], $user_permissions['create_categories']))
-      {
-        echo 'Hacking attempt, you have no permission to create this album';
-        $hacking_attempt = true;
-      }
+      echo 'Hacking attempt, you have no permission to create this album';
+      $hacking_attempt = true;
     }
   }
 
@@ -290,40 +284,30 @@ $template->set_filenames(array('add_photos' => dirname(__FILE__).'/add_photos.tp
 
 include_once(PHPWG_ROOT_PATH.'admin/include/photos_add_direct_prepare.inc.php');
 
-if (!$user_permissions['upload_whole_gallery'])
-{
-  // we have to change the list of uploadable albums
-  $query = '
+// we have to change the list of uploadable albums
+$query = '
 SELECT id,name,uppercats,global_rank
   FROM '.CATEGORIES_TABLE.'
   WHERE id IN ('.implode(',', $user_permissions['upload_categories']).')
 ;';
 
-  display_select_cat_wrapper(
-    $query,
-    $selected_category,
-    'category_options'
-    );
-}
+display_select_cat_wrapper(
+  $query,
+  $selected_category,
+  'category_options'
+  );
 
 $create_subcategories = false;
 
-if ($user_permissions['create_whole_gallery'] or count($user_permissions['create_categories']) > 0)
+if (count($user_permissions['create_categories']) > 0)
 {
   $create_subcategories = true;
   $category_ids = null;
   
   $query = '
 SELECT id,name,uppercats,global_rank
-  FROM '.CATEGORIES_TABLE;
-  
-  if (!$user_permissions['create_whole_gallery'])
-  {
-    $query.= '
-  WHERE id IN ('.implode(',', $user_permissions['create_categories']).')';
-  }
-
-  $query.= '
+  FROM '.CATEGORIES_TABLE.'
+  WHERE id IN ('.implode(',', $user_permissions['create_categories']).')
 ;';
 
   display_select_cat_wrapper(
@@ -357,9 +341,6 @@ if (count($page['infos']) != 0)
 
 $title = l10n('Upload Photos');
 $page['body_id'] = 'theUploadPage';
-// include(PHPWG_ROOT_PATH.'include/page_header.php');
-// $template->pparse('add_photos');
-// include(PHPWG_ROOT_PATH.'include/page_tail.php');
 
 $template->assign_var_from_handle('PLUGIN_INDEX_CONTENT_BEGIN', 'add_photos');
 

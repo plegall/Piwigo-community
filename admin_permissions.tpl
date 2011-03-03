@@ -11,6 +11,37 @@ $(document).ready(function() {
     $("[name=who_"+$(this).attr("value")+"]").show();
   });
 
+  function checkWhereOptions() {
+    var recursive = $("input[name=recursive]");
+    var create = $("input[name=create_subcategories]");
+
+    if ($("select[name=category] option:selected").val() == 0) {
+      $(recursive).attr("disabled", true);
+      $(recursive).attr('checked', true);
+    }
+    else {
+      $(recursive).removeAttr("disabled");
+    }
+
+    if (!$(recursive).is(':checked')) {
+      $(create).attr('checked', false);
+      $(create).attr("disabled", true);
+    }
+    else {
+      $(create).removeAttr("disabled");
+    }
+  }
+
+  checkWhereOptions();
+
+  $("select[name=category]").change(function() {
+    checkWhereOptions();
+  });
+
+  $("input[name=recursive]").change(function() {
+    checkWhereOptions();
+  });
+
   $("#displayForm").click(function() {
     $("[name=add_permission]").show();
     $(this).hide();
@@ -58,6 +89,8 @@ $(document).ready(function() {
         {html_options options=$category_options selected=$category_options_selected}
       </select>
       <br>
+      <label><input type="checkbox" name="recursive" checked="checked"> {'Apply to sub-albums'|@translate}</label>
+      <br>
       <label><input type="checkbox" name="create_subcategories"> {'ability to create sub-albums'|@translate}</label>
     </p>
 
@@ -87,6 +120,9 @@ $(document).ready(function() {
     <td>{$permission.WHERE}</td>
     <td>
       <span title="{$permission.TRUST_TOOLTIP}">{$permission.TRUST}</span>
+    {if $permission.RECURSIVE}
+, <span title="{$permission.RECURSIVE_TOOLTIP}">{'sub-albums'|@translate}</span>
+    {/if}
     {if $permission.CREATE_SUBCATEGORIES}
 , {'sub-albums creation'|@translate}
     {/if}

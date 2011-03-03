@@ -23,18 +23,7 @@
 
 function community_get_user_permissions($user_id)
 {
-  global $conf;
-
-  if (is_admin())
-  {
-    return array(
-      'upload_whole_gallery' => true,
-      'create_whole_gallery' => true,
-      'create_categories' => array(),
-      'upload_categories' => array(),
-      'permission_ids' => array(),
-      );
-  }
+  global $conf, $user;
 
   $return = array(
     'upload_whole_gallery' => false,
@@ -57,6 +46,7 @@ SELECT
 SELECT
     id,
     category_id,
+    recursive,
     create_subcategories
   FROM '.COMMUNITY_PERMISSIONS_TABLE.'
   WHERE (type = \'any_visitor\')';
@@ -77,6 +67,8 @@ SELECT
   $query.= '
 ;';
 
+  $recursive_categories = array();
+
   $result = pwg_query($query);
   while ($row = pwg_db_fetch_assoc($result))
   {
@@ -89,6 +81,11 @@ SELECT
     else
     {
       array_push($return['upload_categories'], $row['category_id']);
+
+      if ('true' == $row['recursive'])
+      {
+        array_push($recursive_categories, $row['category_id']);
+      }
     }
 
     if ('true' == $row['create_subcategories'])
@@ -104,14 +101,87 @@ SELECT
     }
   }
 
-  if (!$return['upload_whole_gallery'] and count($return['upload_categories']) > 0)
+  if (is_admin())
   {
-    $return['upload_categories'] = get_subcat_ids($return['upload_categories']);
+    $return ['upload_whole_gallery'] = true;
+    $return ['create_whole_gallery'] = true;
   }
 
-  if (!$return ['create_whole_gallery'] and count($return['create_categories']) > 0)
+  // these are categories with access permission but considering the user
+  // has a level 8 (maximum level). We want to keep categories with no
+  // photos inside (for nobody)
+  $forbidden_categories = calculate_permissions($user['id'], $user['status']);
+  
+  $empty_categories = array_diff(
+    explode(',', $user['forbidden_categories']),
+    explode(',', $forbidden_categories)
+    );
+
+  if (count($empty_categories) > 0)
   {
+    $query = '
+SELECT
+    category_id
+  FROM '.IMAGE_CATEGORY_TABLE.'
+    JOIN '.IMAGES_TABLE.'
+  WHERE category_id IN ('.implode(',', $empty_categories).')
+    AND level > '.$user['level'].'
+    AND level <= 8
+  GROUP BY category_id
+;';
+    $not_really_empty_categories = array_keys(hash_from_query($query, 'category_id'));
+    $forbidden_categories.= ','.implode(',', $not_really_empty_categories);
+  }
+
+  $query = '
+SELECT
+    id
+  FROM '.CATEGORIES_TABLE.'
+;';
+  $all_categories = array_keys(hash_from_query($query, 'id'));
+
+  if ($return['upload_whole_gallery'])
+  {
+    $return['upload_categories'] = array_diff(
+      $all_categories,
+      explode(',', $forbidden_categories)
+      );
+  }
+  elseif (count($return['upload_categories']) > 0)
+  {
+    if (count($recursive_categories) > 0)
+    {
+      $return['upload_categories'] = array_unique(
+        array_merge(
+          $return['upload_categories'],
+          get_subcat_ids($recursive_categories)
+          )
+        );
+    }
+
+    $return['upload_categories'] = array_diff(
+      $return['upload_categories'],
+      explode(',', $forbidden_categories)
+      );
+  }
+
+  if ($return ['create_whole_gallery'])
+  {
+    $return['create_categories'] = array_diff(
+      $all_categories,
+      explode(',', $forbidden_categories)
+      );
+  }
+  elseif (count($return['create_categories']) > 0)
+  {
+    // no need to check for "recursive", an upload permission can't be
+    // "create_subcategories" without being "recursive"
     $return['create_categories'] = get_subcat_ids($return['create_categories']);
+
+    $return['create_categories'] = array_diff(
+      $return['create_categories'],
+      explode(',', $forbidden_categories)
+      );
   }
 
   return $return;

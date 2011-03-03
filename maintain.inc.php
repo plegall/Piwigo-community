@@ -18,6 +18,7 @@ CREATE TABLE '.$prefixeTable.'community_permissions (
   group_id smallint(5) unsigned DEFAULT NULL,
   user_id smallint(5) DEFAULT NULL,
   category_id smallint(5) unsigned DEFAULT NULL,
+  recursive enum(\'true\',\'false\') NOT NULL DEFAULT \'true\',
   create_subcategories enum(\'true\',\'false\') NOT NULL DEFAULT \'false\',
   moderated enum(\'true\',\'false\') NOT NULL DEFAULT \'true\',
   PRIMARY KEY (id)
@@ -44,6 +45,7 @@ CREATE TABLE "'.$prefixeTable.'community_permissions" (
   "group_id" INTEGER,
   "user_id" INTEGER,
   "category_id" INTEGER,
+  "recursive" BOOLEAN default true,
   "create_subcategories" BOOLEAN default false,
   "moderated" BOOLEAN default true,
   PRIMARY KEY ("id")
@@ -70,6 +72,7 @@ CREATE TABLE "'.$prefixeTable.'community_permissions" (
   "group_id" INTEGER,
   "user_id" INTEGER,
   "category_id" INTEGER,
+  "recursive" BOOLEAN default true,
   "create_subcategories" BOOLEAN default false,
   "moderated" BOOLEAN default true,
   PRIMARY KEY ("id")
