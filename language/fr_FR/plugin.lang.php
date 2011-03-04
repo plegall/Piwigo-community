@@ -53,4 +53,7 @@ $lang['%d photos uploaded into album "%s"'] = '%d photos ajoutée à l\'album "%
 $lang['Hi administrators,'] = 'Bonjours chers administrateurs,';
 
 $lang['No album, this photo is orphan'] = 'Aucun album, cette photo est orpheline';
+$lang['Cancel'] = 'Annuler';
+$lang['Permission updated'] = 'Permission mise à jour';
+$lang['Delete permission'] = 'Supprimer la permission';
 ?>

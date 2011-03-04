@@ -31,6 +31,13 @@ load_language('plugin.lang', COMMUNITY_PATH);
 
 $admin_base_url = get_root_url().'admin.php?page=plugin-community-permissions';
 
+$who_options = array(
+  'any_visitor' => l10n('any visitor'),
+  'any_registered_user' => l10n('any registered user'),
+  'user' => l10n('a specific user'),
+  'group' => l10n('a group'),
+  );
+
 // +-----------------------------------------------------------------------+
 // | Check Access and exit when user status is not ok                      |
 // +-----------------------------------------------------------------------+
@@ -43,9 +50,7 @@ check_status(ACCESS_ADMINISTRATOR);
 
 if (isset($_POST['submit_add']))
 {
-  $who_options = array('any_visitor', 'any_registered_user', 'user', 'group');
-  
-  if (!in_array($_POST['who'], $who_options))
+  if (!in_array($_POST['who'], array_keys($who_options)))
   {
     die('hacking attempt: invalid "who" option');
   }
@@ -65,7 +70,7 @@ if (isset($_POST['submit_add']))
     check_input_parameter('category', $_POST, false, PATTERN_ID);
   }
 
-  check_input_parameter('moderate', $_POST, false, '/^(true|false)$/');
+  check_input_parameter('moderated', $_POST, false, '/^(true|false)$/');
 
   // creating the permission
   $insert = array(
@@ -75,19 +80,46 @@ if (isset($_POST['submit_add']))
     'category_id' => ($_POST['category'] > 0) ? $_POST['category'] : null,
     'recursive' => isset($_POST['recursive']) ? 'true' : 'false',
     'create_subcategories' => isset($_POST['create_subcategories']) ? 'true' : 'false',
-    'moderated' => $_POST['moderate'],
+    'moderated' => $_POST['moderated'],
     );
+
+  if (isset($_POST['edit']))
+  {
+    check_input_parameter('edit', $_POST, false, PATTERN_ID);
+
+    $insert['id'] = $_POST['edit'];
+
+    mass_updates(
+      COMMUNITY_PERMISSIONS_TABLE,
+      array(
+        'primary' => array('id'),
+        'update' => array_keys($insert),
+        ),
+      array($insert)
+      );
+
+    $page['highlight'] = $insert['id'];
+
+    array_push(
+      $page['infos'],
+      l10n('Permission updated')
+      );
+  }
+  else
+  {
+    mass_inserts(
+      COMMUNITY_PERMISSIONS_TABLE,
+      array_keys($insert),
+      array($insert)
+      );
+
+    $page['highlight'] = pwg_db_insert_id(COMMUNITY_PERMISSIONS_TABLE);
   
-  mass_inserts(
-    COMMUNITY_PERMISSIONS_TABLE,
-    array_keys($insert),
-    array($insert)
-    );
-  
-  array_push(
-    $page['infos'],
-    l10n('Permission added')
-    );
+    array_push(
+      $page['infos'],
+      l10n('Permission added')
+      );
+  }
 
   conf_update_param('community_update', time());
 }
@@ -127,6 +159,51 @@ $template->set_filenames(
 // | prepare form                                                          |
 // +-----------------------------------------------------------------------+
 
+// edit mode?
+if (isset($_GET['edit']))
+{
+  check_input_parameter('edit', $_GET, false, PATTERN_ID);
+  
+  $query = '
+SELECT
+    *
+  FROM '.COMMUNITY_PERMISSIONS_TABLE.'
+  WHERE id = '.$_GET['edit'].'
+;';
+  $result = pwg_query($query);
+  $row = pwg_db_fetch_assoc($result);
+
+  if (isset($row['id']))
+  {
+    $template->assign(
+      array(
+        'edit' => $row['id'],
+        'who_options_selected' => $row['type'],
+        'user_options_selected' => $row['user_id'],
+        'group_options_selected' => $row['group_id'],
+        'category_options_selected' => $row['category_id'],
+        'recursive' => get_boolean($row['recursive']),
+        'create_subcategories' => get_boolean($row['create_subcategories']),
+        'moderated' => get_boolean($row['moderated']),
+        )
+      );
+  }
+}
+else
+{
+  $template->assign(
+    array(
+      'moderated' => true,
+      )
+    );
+}
+
+// who options
+$template->assign(
+  array(
+    'who_options' => $who_options,
+    )
+  );
 
 // list of users
 $users = array();
@@ -321,6 +398,17 @@ foreach ($permissions as $permission)
     $trust = l10n('high trust');
     $trust_tooltip = l10n('uploaded photos are directly displayed in the gallery');
   }
+
+  $highlight = false;
+  if (isset($_GET['edit']) and $permission['id'] == $_GET['edit'])
+  {
+    $highlight = true;
+  }
+  if (isset($page['highlight']) and $permission['id'] == $page['highlight'])
+  {
+    $highlight = true;
+  }
+  
   
   $template->append(
     'permissions',
@@ -332,7 +420,9 @@ foreach ($permissions as $permission)
       'RECURSIVE' => get_boolean($permission['recursive']),
       'RECURSIVE_TOOLTIP' => l10n('Apply to sub-albums'),
       'CREATE_SUBCATEGORIES' => get_boolean($permission['create_subcategories']),
-      'U_DELETE' => $admin_base_url.'&amp;delete='.$permission['id']
+      'U_DELETE' => $admin_base_url.'&amp;delete='.$permission['id'],
+      'U_EDIT' => $admin_base_url.'&amp;edit='.$permission['id'],
+      'HIGHLIGHT' => $highlight,
       )
     );
 }
