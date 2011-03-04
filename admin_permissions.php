@@ -83,6 +83,40 @@ if (isset($_POST['submit_add']))
     'moderated' => $_POST['moderated'],
     );
 
+  // does this permission already exist?
+  //
+  // a permission is identified by a who+where
+  $query = '
+SELECT
+    id
+  FROM '.COMMUNITY_PERMISSIONS_TABLE.'
+  WHERE type = \''.$insert['type'].'\'
+    AND user_id '.(isset($insert['user_id']) ? '= '.$insert['user_id'] : 'is null').'
+    AND group_id '.(isset($insert['group_id']) ? '= '.$insert['group_id'] : 'is null').'
+;';
+  $result = pwg_query($query);
+  $row = pwg_db_fetch_assoc($result);
+  if (isset($row['id']))
+  {
+    if (isset($_POST['edit']))
+    {
+      check_input_parameter('edit', $_POST, false, PATTERN_ID);
+      
+      if ($_POST['edit'] != $row['id'])
+      {
+        // we have to delete the edited permission
+        $query = '
+DELETE
+  FROM '.COMMUNITY_PERMISSIONS_TABLE.'
+  WHERE id = '.$_POST['edit'].'
+;';
+        pwg_query($query);
+      }
+    }
+
+    $_POST['edit'] = $row['id'];
+  }
+
   if (isset($_POST['edit']))
   {
     check_input_parameter('edit', $_POST, false, PATTERN_ID);
