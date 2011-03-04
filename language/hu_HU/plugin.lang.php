@@ -27,7 +27,7 @@ $lang['a specific user'] = 'konkrét felhasználó';
 $lang['a group'] = 'csoport';
 $lang['Where?'] = 'Hová?';
 $lang['The whole gallery'] = 'Teljes galéria';
-$lang['ability to create sub-albums'] = 'létrehozhat belső albumot';
+$lang['ability to create sub-albums'] = 'Létrehozhat belső albumot';
 $lang['Which level of trust?'] = 'Felhasználói szint?';
 $lang['sub-albums creation'] = 'belső album létrehozása';
 $lang['Upload Permissions'] = 'Engedélyek feltöltése';
@@ -51,4 +51,9 @@ $lang['%d photos uploaded into album "%s"'] = '%d kép feltöltve a(z) "%s album
 $lang['Hi administrators,'] = 'Szia adminisztrátor,';
 
 $lang['No album, this photo is orphan'] = 'Nincs album, ez a kép árva';
+
+$lang['Cancel'] = 'Mégsem';
+$lang['Permission updated'] = 'Engedély frissítve';
+$lang['Delete permission'] = 'Engedély törlése';
+$lang['%u pending photos'] = '%u elbírálandó kép';
 ?>
