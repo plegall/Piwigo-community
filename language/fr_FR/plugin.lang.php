@@ -56,4 +56,5 @@ $lang['No album, this photo is orphan'] = 'Aucun album, cette photo est orphelin
 $lang['Cancel'] = 'Annuler';
 $lang['Permission updated'] = 'Permission mise à jour';
 $lang['Delete permission'] = 'Supprimer la permission';
+$lang['%u pending photos'] = '%u photos en attente';
 ?>

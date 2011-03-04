@@ -29,8 +29,6 @@ if( !defined("PHPWG_ROOT_PATH") )
 include_once(PHPWG_ROOT_PATH.'admin/include/functions.php');
 include_once(PHPWG_ROOT_PATH.'admin/include/tabsheet.class.php');
 
-load_language('plugin.lang', COMMUNITY_PATH);
-
 define('COMMUNITY_BASE_URL', get_root_url().'admin.php?page=plugin-community');
 
 // +-----------------------------------------------------------------------+
@@ -43,6 +41,12 @@ check_status(ACCESS_ADMINISTRATOR);
 // | Tabs                                                                  |
 // +-----------------------------------------------------------------------+
 
+$pendings_label = l10n('Pending Photos');
+if ($page['community_nb_pendings'] > 0)
+{
+  $pendings_label.= ' ('.$page['community_nb_pendings'].')';
+}
+
 $tabs = array(
   array(
     'code' => 'permissions',
@@ -50,7 +54,7 @@ $tabs = array(
     ),
   array(
     'code' => 'pendings',
-    'label' => l10n('Pending Photos'),
+    'label' => $pendings_label,
     ),
   );
 

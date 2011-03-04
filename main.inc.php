@@ -20,21 +20,69 @@ define('COMMUNITY_PERMISSIONS_TABLE', $prefixeTable.'community_permissions');
 define('COMMUNITY_PENDINGS_TABLE', $prefixeTable.'community_pendings');
 
 include_once(COMMUNITY_PATH.'include/functions_community.inc.php');
+load_language('plugin.lang', COMMUNITY_PATH);
 
 /* Plugin admin */
 add_event_handler('get_admin_plugin_menu_links', 'community_admin_menu');
-
 function community_admin_menu($menu)
 {
+  global $page;
+  
+  $query = '
+SELECT
+    COUNT(*)
+  FROM '.COMMUNITY_PENDINGS_TABLE.'
+  WHERE state = \'moderation_pending\'
+;';
+  $result = pwg_query($query);
+  list($page['community_nb_pendings']) = pwg_db_fetch_row($result);
+
+  $name = 'Community';
+  if ($page['community_nb_pendings'] > 0)
+  {
+    $style = 'background-color:#666;';
+    $style.= 'color:white;';
+    $style.= 'padding:1px 5px;';
+    $style.= '-moz-border-radius:10px;';
+    $style.= '-webkit-border-radius:10px;';
+    $style.= '-border-radius:10px;';
+    $style.= 'margin-left:5px;';
+    
+    $name.= '<span style="'.$style.'">'.$page['community_nb_pendings'].'</span>';
+
+    if (defined('IN_ADMIN') and IN_ADMIN and $page['page'] == 'intro')
+    {
+      global $template;
+      
+      $template->set_prefilter('intro', 'community_pendings_on_intro');
+      $template->assign(
+        array(
+          'COMMUNITY_PENDINGS' => sprintf(
+            '<a href="%s">'.l10n('%u pending photos').'</a>',
+            get_root_url().'admin.php?page=plugin-community-pendings',
+            $page['community_nb_pendings']
+            ),
+          )
+        );
+    }
+  }
+
   array_push(
     $menu,
     array(
-      'NAME' => 'Community',
+      'NAME' => $name,
       'URL'  => get_root_url().'admin.php?page=plugin-community'
       )
     );
 
   return $menu;
+}
+
+function community_pendings_on_intro($content, &$smarty)
+{
+  $pattern = '#<li>\s*{\$DB_ELEMENTS\}#ms';
+  $replacement = '<li>{$COMMUNITY_PENDINGS}</li><li>{$DB_ELEMENTS}';
+  return preg_replace($pattern, $replacement, $content);
 }
 
 add_event_handler('loc_end_section_init', 'community_section_init');
@@ -153,5 +201,4 @@ DELETE
 
   community_reject_user_pendings($user_id);
 }
-
 ?>
