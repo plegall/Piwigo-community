@@ -85,6 +85,16 @@ function community_pendings_on_intro($content, &$smarty)
   return preg_replace($pattern, $replacement, $content);
 }
 
+add_event_handler('init', 'community_load_language');
+function community_load_language()
+{
+  if (!defined('IN_ADMIN') or !IN_ADMIN)
+  {
+    load_language('admin.lang');
+  }
+}
+
+
 add_event_handler('loc_end_section_init', 'community_section_init');
 function community_section_init()
 {
