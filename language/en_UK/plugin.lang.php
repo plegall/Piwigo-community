@@ -56,4 +56,5 @@ $lang['Cancel'] = 'Cancel';
 $lang['Permission updated'] = 'Permission updated';
 $lang['Delete permission'] = 'Delete permission';
 $lang['%u pending photos'] = '%u pending photos';
+$lang['Level 16'] = 'Pending';
 ?>
