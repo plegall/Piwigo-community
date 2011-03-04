@@ -20,7 +20,6 @@ define('COMMUNITY_PERMISSIONS_TABLE', $prefixeTable.'community_permissions');
 define('COMMUNITY_PENDINGS_TABLE', $prefixeTable.'community_pendings');
 
 include_once(COMMUNITY_PATH.'include/functions_community.inc.php');
-load_language('plugin.lang', COMMUNITY_PATH);
 
 /* Plugin admin */
 add_event_handler('get_admin_plugin_menu_links', 'community_admin_menu');
@@ -92,6 +91,8 @@ function community_load_language()
   {
     load_language('admin.lang');
   }
+  
+  load_language('plugin.lang', COMMUNITY_PATH);
 }
 
 
