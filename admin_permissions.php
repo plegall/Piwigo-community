@@ -93,6 +93,7 @@ SELECT
   WHERE type = \''.$insert['type'].'\'
     AND user_id '.(isset($insert['user_id']) ? '= '.$insert['user_id'] : 'is null').'
     AND group_id '.(isset($insert['group_id']) ? '= '.$insert['group_id'] : 'is null').'
+    AND category_id '.(isset($insert['category_id']) ? '= '.$insert['category_id'] : 'is null').'
 ;';
   $result = pwg_query($query);
   $row = pwg_db_fetch_assoc($result);
