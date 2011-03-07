@@ -127,7 +127,7 @@ function community_gallery_menu($menu_ref_arr)
   // photos" link in the gallery menu
   $user_permissions = community_get_user_permissions($user['id']);
   
-  if (!$user_permissions['upload_whole_gallery'] and count($user_permissions['upload_categories']) == 0)
+  if (count($user_permissions['upload_categories']) == 0 and !$user_permissions ['create_whole_gallery'])
   {
     return;
   }

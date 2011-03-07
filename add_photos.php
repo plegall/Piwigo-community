@@ -35,6 +35,11 @@ prepare_upload_configuration();
 
 $user_permissions = community_get_user_permissions($user['id']);
 
+if (count($user_permissions['upload_categories']) == 0 and !$user_permissions ['create_whole_gallery'])
+{
+  redirect(make_index_url());
+}
+
 // +-----------------------------------------------------------------------+
 // |                             process form                              |
 // +-----------------------------------------------------------------------+
@@ -245,10 +250,16 @@ $template->set_filenames(array('add_photos' => dirname(__FILE__).'/add_photos.tp
 include_once(PHPWG_ROOT_PATH.'admin/include/photos_add_direct_prepare.inc.php');
 
 // we have to change the list of uploadable albums
+$upload_categories = $user_permissions['upload_categories'];
+if (count($upload_categories) == 0)
+{
+  $upload_categories = array(-1);
+}
+
 $query = '
 SELECT id,name,uppercats,global_rank
   FROM '.CATEGORIES_TABLE.'
-  WHERE id IN ('.implode(',', $user_permissions['upload_categories']).')
+  WHERE id IN ('.implode(',', $upload_categories).')
 ;';
 
 display_select_cat_wrapper(
@@ -258,6 +269,11 @@ display_select_cat_wrapper(
   );
 
 $create_subcategories = false;
+
+if ($user_permissions['create_whole_gallery'])
+{
+  $create_subcategories = true;
+}
 
 if (count($user_permissions['create_categories']) > 0)
 {
