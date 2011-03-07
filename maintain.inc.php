@@ -105,8 +105,21 @@ function plugin_uninstall()
 
 function plugin_activate()
 {
+  global $prefixeTable;
+
   community_get_data_from_core21();
   community_get_data_from_community21();
+
+  $query = '
+SELECT
+    COUNT(*)
+  FROM '.$prefixeTable.'community_permissions
+;';
+  list($counter) = pwg_db_fetch_row(pwg_query($query));
+  if (0 == $counter)
+  {
+    community_create_default_permission();
+  }
 }
 
 function community_get_data_from_core21()
@@ -295,5 +308,25 @@ SELECT
       break;
     }
   }
+}
+
+function community_create_default_permission()
+{
+  global $prefixeTable;
+  
+  // create an album "Community"
+  $category_info = create_virtual_category('Community');
+
+  $insert = array(
+    'type' => 'any_registered_user',
+    'category_id' => $category_info['id'],
+    'recursive' => 'true',
+    'create_subcategories' => 'true',
+    'moderated' => 'true',
+    );
+
+  mass_inserts($prefixeTable.'community_permissions', array_keys($insert), array($insert));
+
+  conf_update_param('community_update', time());
 }
 ?>
