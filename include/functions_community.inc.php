@@ -25,17 +25,24 @@ function community_get_user_permissions($user_id)
 {
   global $conf, $user;
 
-  if (!isset($conf['community_update']))
+  $cache_key = community_get_cache_key();
+  if (!isset($cache_key))
   {
-    conf_update_param('community_update', time());
+    $cache_key = community_update_cache_key();
   }
-  
-  if (isset($_SESSION['community_user_permissions']))
+
+  // I (plg) don't understand why, but when you connect, you keep the
+  // permissions calculated for the "guest" : the session is "inheritated"
+  // from guest to the connected user, so I add a
+  // $_SESSION['community_user_id'] to force refresh if the permissions were
+  // not calculated for the right user
+  if (
+    isset($_SESSION['community_user_id'])
+    and $_SESSION['community_user_id'] == $user_id
+    and $_SESSION['community_cache_key'] == $cache_key
+    )
   {
-    if ($_SESSION['community_update'] > $conf['community_update'])
-    {
-      return $_SESSION['community_user_permissions'];
-    }
+    return $_SESSION['community_user_permissions'];
   }
 
   $return = array(
@@ -198,7 +205,8 @@ SELECT
   }
 
   $_SESSION['community_user_permissions'] = $return;
-  $_SESSION['community_update'] = time();
+  $_SESSION['community_cache_key'] = $cache_key;
+  $_SESSION['community_user_id'] = $user_id;
 
   return $_SESSION['community_user_permissions'];
 }
@@ -241,4 +249,24 @@ SELECT
   community_reject_pendings($image_ids);
 }
 
+function community_update_cache_key()
+{
+  $cache_key = generate_key(20);
+  conf_update_param('community_cache_key', $cache_key);
+  return $cache_key;
+}
+
+function community_get_cache_key()
+{
+  global $conf;
+
+  if (isset($conf['community_cache_key']))
+  {
+    return $conf['community_cache_key'];
+  }
+  else
+  {
+    return null;
+  }
+}
 ?>

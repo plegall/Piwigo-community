@@ -327,6 +327,7 @@ function community_create_default_permission()
 
   mass_inserts($prefixeTable.'community_permissions', array_keys($insert), array($insert));
 
-  conf_update_param('community_update', time());
+  include_once(dirname(__FILE__).'/include/functions_community.inc.php');
+  community_update_cache_key();
 }
 ?>

@@ -126,7 +126,7 @@ function community_gallery_menu($menu_ref_arr)
   // conditional : depending on community permissions, display the "Add
   // photos" link in the gallery menu
   $user_permissions = community_get_user_permissions($user['id']);
-  
+
   if (count($user_permissions['upload_categories']) == 0 and !$user_permissions ['create_whole_gallery'])
   {
     return;
@@ -211,5 +211,11 @@ DELETE
   pwg_query($query);
 
   community_reject_user_pendings($user_id);
+}
+
+add_event_handler('invalidate_user_cache', 'community_refresh_cache_update_time');
+function community_refresh_cache_update_time()
+{
+  community_update_cache_key();
 }
 ?>

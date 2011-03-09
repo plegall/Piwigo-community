@@ -269,29 +269,28 @@ display_select_cat_wrapper(
   );
 
 $create_subcategories = false;
-
-if ($user_permissions['create_whole_gallery'])
+if ($user_permissions['create_whole_gallery'] or count($user_permissions['create_categories']) > 0)
 {
   $create_subcategories = true;
 }
 
-if (count($user_permissions['create_categories']) > 0)
+$create_categories = $user_permissions['create_categories'];
+if (count($user_permissions['create_categories']) == 0)
 {
-  $create_subcategories = true;
-  $category_ids = null;
-  
-  $query = '
+  $create_categories = array(-1);
+}
+
+$query = '
 SELECT id,name,uppercats,global_rank
   FROM '.CATEGORIES_TABLE.'
-  WHERE id IN ('.implode(',', $user_permissions['create_categories']).')
+  WHERE id IN ('.implode(',', $create_categories).')
 ;';
 
-  display_select_cat_wrapper(
-    $query,
-    $selected_category,
-    'category_parent_options'
-    );
-}
+display_select_cat_wrapper(
+  $query,
+  $selected_category,
+  'category_parent_options'
+  );
 
 $template->assign(
   array(

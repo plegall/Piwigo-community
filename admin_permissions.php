@@ -156,7 +156,7 @@ DELETE
       );
   }
 
-  conf_update_param('community_update', time());
+  community_update_cache_key();
 }
 
 // +-----------------------------------------------------------------------+
@@ -174,7 +174,7 @@ DELETE
 ;';
   pwg_query($query);
 
-  conf_update_param('community_update', time());
+  community_update_cache_key();
 
   $_SESSION['page_infos'] = array(l10n('Permission removed'));
   redirect($admin_base_url);
