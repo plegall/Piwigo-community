@@ -32,8 +32,8 @@ function community_get_user_permissions($user_id)
   }
 
   // I (plg) don't understand why, but when you connect, you keep the
-  // permissions calculated for the "guest" : the session is "inheritated"
-  // from guest to the connected user, so I add a
+  // permissions calculated for the "guest" : the session "inherits"
+  // variables from guest to the connected user, so I add a
   // $_SESSION['community_user_id'] to force refresh if the permissions were
   // not calculated for the right user
   if (
