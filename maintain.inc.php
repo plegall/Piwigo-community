@@ -120,6 +120,9 @@ SELECT
   {
     community_create_default_permission();
   }
+
+  include_once(dirname(__FILE__).'/include/functions_community.inc.php');
+  community_update_cache_key();
 }
 
 function community_get_data_from_core21()
@@ -326,8 +329,5 @@ function community_create_default_permission()
     );
 
   mass_inserts($prefixeTable.'community_permissions', array_keys($insert), array($insert));
-
-  include_once(dirname(__FILE__).'/include/functions_community.inc.php');
-  community_update_cache_key();
 }
 ?>
