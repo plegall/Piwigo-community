@@ -30,7 +30,7 @@ $lang['The whole gallery'] = 'Teljes galéria';
 $lang['ability to create sub-albums'] = 'Létrehozhat belső albumot';
 $lang['Which level of trust?'] = 'Felhasználói szint?';
 $lang['sub-albums creation'] = 'belső album létrehozása';
-$lang['Upload Permissions'] = 'Engedélyek feltöltése';
+$lang['Upload Permissions'] = 'Engedélyek kezelése';
 $lang['Pending Photos'] = 'Függőben lévő képek';
 $lang['Permission added'] = 'Engedély hozzáadva';
 $lang['Permission removed'] = 'Engedély törölve';
@@ -56,4 +56,7 @@ $lang['Cancel'] = 'Mégsem';
 $lang['Permission updated'] = 'Engedély frissítve';
 $lang['Delete permission'] = 'Engedély törlése';
 $lang['%u pending photos'] = '%u elbírálandó kép';
+$lang['Level 16'] = 'Elbírálandó';
+$lang['Edit a permission'] = 'Engedély módosítása';
+$lang['Your photos are waiting for validation, administrators have been notified'] = 'A kép közzétételét engedélyezni kell, az adminisztrátort értesítettük';
 ?>
