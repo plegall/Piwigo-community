@@ -50,4 +50,11 @@ $lang['Validation page: %s'] = 'Validierungsseite: %s';
 $lang['%d photos uploaded into album "%s"'] = '%d Fotos hochgeladen im Album "%s"';
 $lang['Hi administrators,'] = 'Hallo Administratoren,';
 
+$lang['No album, this photo is orphan'] = 'Kein Album, dieses Foto ist verwaist';
+
+$lang['Cancel'] = 'Abbrechen';
+$lang['Permission updated'] = 'Zugriffsberechtigung aktualisiert';
+$lang['Delete permission'] = 'Lösche Zugriffsberechtigung';
+$lang['%u pending photos'] = '%u erwartete Fotos'; 
+$lang['Level 16'] = ' Ausstehend';
 ?>
