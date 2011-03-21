@@ -10,7 +10,7 @@ form fieldset p {text-align:left;margin:0 0 1.5em 0;line-height:20px;}
 
 {footer_script}{literal}
 $(document).ready(function() {
-  $("select[name=who]").click(function () {
+  $("select[name=who]").change(function () {
     $("[name^=who_]").hide();
     $("[name=who_"+$(this).attr("value")+"]").show();
   });
