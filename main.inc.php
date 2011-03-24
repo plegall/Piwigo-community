@@ -213,6 +213,20 @@ DELETE
   community_reject_user_pendings($user_id);
 }
 
+add_event_handler('delete_categories', 'community_delete_category');
+function community_delete_category($category_ids)
+{
+  // $category_ids includes all the sub-category ids
+  $query = '
+DELETE
+  FROM '.COMMUNITY_PERMISSIONS_TABLE.'
+  WHERE category_id IN ('.implode(',', $category_ids).')
+;';
+  pwg_query($query);
+  
+  community_update_cache_key();
+}
+
 add_event_handler('invalidate_user_cache', 'community_refresh_cache_update_time');
 function community_refresh_cache_update_time()
 {
