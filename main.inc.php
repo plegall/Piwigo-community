@@ -155,49 +155,378 @@ function community_gallery_menu($menu_ref_arr)
 
 
 add_event_handler('ws_invoke_allowed', 'community_switch_user_to_admin', EVENT_HANDLER_PRIORITY_NEUTRAL, 3);
-
 function community_switch_user_to_admin($res, $methodName, $params)
 {
-  global $user;
+  global $user, $community;
 
-  $methods_of_permission_level[1] = array(
-    'pwg.categories.getList',
-    'pwg.tags.getAdminList',
-    'pwg.tags.add',
-    'pwg.images.exist',
-    'pwg.images.add',
-    'pwg.images.setInfo',
-    'pwg.images.addChunk',
-    'pwg.images.checkUpload',
-    );
+  if (is_admin())
+  {
+    return $res;
+  }
+  
+  $community = array('method' => $methodName);
 
-  // permission_level 2 has all methods of level 1 + others
-  $methods_of_permission_level[2] = array_merge(
-    $methods_of_permission_level[1],
-    array(
-      'pwg.categories.add',
-      'pwg.categories.setInfo',
-      )
+  if ('pwg.images.addSimple' == $community['method'])
+  {
+    $community['category'] = $params['category'];
+  }
+  elseif ('pwg.images.add' == $community['method'])
+  {
+    $community['category'] = $params['categories'];
+    $community['md5sum'] = $params['original_sum'];
+  }
+
+  // $print_params = $params;
+  // unset($print_params['data']);
+  // file_put_contents('/tmp/community.log', '['.$methodName.'] '.json_encode($print_params)."\n" ,FILE_APPEND);
+
+  // conditional : depending on community permissions, display the "Add
+  // photos" link in the gallery menu
+  $user_permissions = community_get_user_permissions($user['id']);
+
+  if (count($user_permissions['upload_categories']) == 0 and !$user_permissions ['create_whole_gallery'])
+  {
+    return $res;
+  }
+
+  // if level of trust is low, then we have to set level to 16
+
+  $methods = array();
+  $methods[] = 'pwg.tags.add';
+  $methods[] = 'pwg.images.exist';
+  $methods[] = 'pwg.images.add';
+  $methods[] = 'pwg.images.addSimple';
+  $methods[] = 'pwg.images.addChunk';
+  $methods[] = 'pwg.images.checkUpload';
+  $methods[] = 'pwg.images.checkFiles';
+  $methods[] = 'pwg.images.setInfo';
+
+  // TODO ability to create sub-albums with the web API
+  $methods_creates = array(
+    'pwg.categories.add',
+    'pwg.categories.setInfo',
     );
     
-  $query = '
-SELECT
-    permission_level
-  FROM '.COMMUNITY_TABLE.'
-  WHERE user_id = '.$user['id'].'
-;';
-  $result = pwg_query($query);
-  if (1 == mysql_num_rows($result))
+  if (in_array($methodName, $methods))
   {
-    list($permission_level) = mysql_fetch_row($result);
-
-    if (in_array($methodName, $methods_of_permission_level[$permission_level]))
-    {
-      $user['status'] = 'admin';
-    }
+    $user['status'] = 'admin';
   }
 
   return $res;
+}
+
+add_event_handler('ws_add_methods', 'community_ws_replace_methods', EVENT_HANDLER_PRIORITY_NEUTRAL+5);
+function community_ws_replace_methods($arr)
+{
+  global $conf, $user;
+  
+  $service = &$arr[0];
+
+  if (is_admin())
+  {
+    return;
+  }
+
+  $user_permissions = community_get_user_permissions($user['id']);
+  
+  if (count($user_permissions['permission_ids']) == 0)
+  {
+    return;
+  }
+  
+  // the plugin Community is activated, the user has upload permissions, we
+  // use a specific function to list available categories, assuming the use
+  // want to list categories where upload is possible for him
+  
+  $service->addMethod(
+    'pwg.categories.getList',
+    'community_ws_categories_getList',
+    array(
+      'cat_id' => array('default'=>0),
+      'recursive' => array('default'=>false),
+      'public' => array('default'=>false),
+      ),
+    'retrieves a list of categories'
+    );
+  
+  $service->addMethod(
+    'pwg.tags.getAdminList',
+    'community_ws_tags_getAdminList',
+    array(),
+    'administration method only'
+    );
+}
+
+/**
+ * returns a list of categories (web service method)
+ */
+function community_ws_categories_getList($params, &$service)
+{
+  global $user, $conf;
+
+  $where = array('1=1');
+  $join_type = 'LEFT';
+  $join_user = $user['id'];
+
+  if (!$params['recursive'])
+  {
+    if ($params['cat_id']>0)
+      $where[] = '(id_uppercat='.(int)($params['cat_id']).'
+    OR id='.(int)($params['cat_id']).')';
+    else
+      $where[] = 'id_uppercat IS NULL';
+  }
+  else if ($params['cat_id']>0)
+  {
+    $where[] = 'uppercats '.DB_REGEX_OPERATOR.' \'(^|,)'.
+      (int)($params['cat_id'])
+      .'(,|$)\'';
+  }
+
+  if ($params['public'])
+  {
+    $where[] = 'status = "public"';
+    $where[] = 'visible = "true"';
+    
+    $join_user = $conf['guest_id'];
+  }
+
+  $user_permissions = community_get_user_permissions($user['id']);
+  $upload_categories = $user_permissions['upload_categories'];
+  if (count($upload_categories) == 0)
+  {
+    $upload_categories = array(-1);
+  }
+
+  $where[] = 'id IN ('.implode(',', $upload_categories).')';
+
+  $query = '
+SELECT
+    id,
+    name,
+    permalink,
+    uppercats,
+    global_rank,
+    comment,
+    nb_images,
+    count_images AS total_nb_images,
+    date_last,
+    max_date_last,
+    count_categories AS nb_categories
+  FROM '.CATEGORIES_TABLE.'
+   '.$join_type.' JOIN '.USER_CACHE_CATEGORIES_TABLE.' ON id=cat_id AND user_id='.$join_user.'
+  WHERE '. implode('
+    AND ', $where);
+
+  $result = pwg_query($query);
+
+  $cats = array();
+  while ($row = pwg_db_fetch_assoc($result))
+  {
+    $row['url'] = make_index_url(
+        array(
+          'category' => $row
+          )
+      );
+    foreach( array('id','nb_images','total_nb_images','nb_categories') as $key)
+    {
+      $row[$key] = (int)$row[$key];
+    }
+
+    $row['name'] = strip_tags(
+      trigger_event(
+        'render_category_name',
+        $row['name'],
+        'ws_categories_getList'
+        )
+      );
+    
+    $row['comment'] = strip_tags(
+      trigger_event(
+        'render_category_description',
+        $row['comment'],
+        'ws_categories_getList'
+        )
+      );
+    
+    array_push($cats, $row);
+  }
+  usort($cats, 'global_rank_compare');
+  return array(
+    'categories' => new PwgNamedArray(
+      $cats,
+      'category',
+      array(
+        'id',
+        'url',
+        'nb_images',
+        'total_nb_images',
+        'nb_categories',
+        'date_last',
+        'max_date_last',
+        )
+      )
+    );
+}
+
+function community_ws_tags_getAdminList($params, &$service)
+{
+  $tags = get_available_tags();
+
+  // keep orphan tags
+  include_once(PHPWG_ROOT_PATH.'admin/include/functions.php');
+  $orphan_tags = get_orphan_tags();
+  if (count($orphan_tags) > 0)
+  {
+    $orphan_tag_ids = array();
+    foreach ($orphan_tags as $tag)
+    {
+      $orphan_tag_ids[] = $tag['id'];
+    }
+    
+    $query = '
+SELECT *
+  FROM '.TAGS_TABLE.'
+  WHERE id IN ('.implode(',', $orphan_tag_ids).')
+;';
+    $result = pwg_query($query);
+    while ($row = pwg_db_fetch_assoc($result))
+    {
+      $tags[] = $row;
+    }
+  }
+
+  usort($tags, 'tag_alpha_compare');
+  
+  return array(
+    'tags' => new PwgNamedArray(
+      $tags,
+      'tag',
+      array(
+        'name',
+        'id',
+        'url_name',
+        )
+      )
+    );
+}
+
+add_event_handler('sendResponse', 'community_sendResponse');
+function community_sendResponse($encodedResponse)
+{
+  global $community, $user;
+
+  if (!isset($community['method']))
+  {
+    return;
+  }
+
+  if ('pwg.images.addSimple' == $community['method'])
+  {
+    $response = json_decode($encodedResponse);
+    $image_id = $response->result->image_id;
+  }
+  elseif ('pwg.images.add' == $community['method'])
+  {    
+    $query = '
+SELECT
+    id
+  FROM '.IMAGES_TABLE.'
+  WHERE md5sum = \''.$community['md5sum'].'\'
+  ORDER BY id DESC
+  LIMIT 1
+;';
+    list($image_id) = pwg_db_fetch_row(pwg_query($query));
+  }
+  else
+  {
+    return;
+  }
+  
+  $image_ids = array($image_id);
+
+  // $category_id is set in the photos_add_direct_process.inc.php included script
+  $category_infos = get_cat_info($community['category']);
+
+  // should the photos be moderated?
+  //
+  // if one of the user community permissions is not moderated on the path
+  // to gallery root, then the upload is not moderated. For example, if the
+  // user is allowed to upload to events/parties with no admin moderation,
+  // then he's not moderated when uploading in
+  // events/parties/happyNewYear2011
+  $moderate = true;
+
+  $user_permissions = community_get_user_permissions($user['id']);
+  $query = '
+SELECT
+    cp.category_id,
+    c.uppercats
+  FROM '.COMMUNITY_PERMISSIONS_TABLE.' AS cp
+    LEFT JOIN '.CATEGORIES_TABLE.' AS c ON category_id = c.id
+  WHERE cp.id IN ('.implode(',', $user_permissions['permission_ids']).')
+    AND cp.moderated = \'false\'
+;';
+  $result = pwg_query($query);
+  while ($row = pwg_db_fetch_assoc($result))
+  {
+    if (empty($row['category_id']))
+    {
+      $moderate = false;
+    }
+    elseif (preg_match('/^'.$row['uppercats'].'(,|$)/', $category_infos['uppercats']))
+    {
+      $moderate = false;
+    }
+  }
+  
+  if ($moderate)
+  {
+    $inserts = array();
+
+    $query = '
+SELECT
+    id,
+    date_available
+  FROM '.IMAGES_TABLE.'
+  WHERE id IN ('.implode(',', $image_ids).')
+;';
+    $result = pwg_query($query);
+    while ($row = pwg_db_fetch_assoc($result))
+    {
+      array_push(
+        $inserts,
+        array(
+          'image_id' => $row['id'],
+          'added_on' => $row['date_available'],
+          'state' => 'moderation_pending',
+          )
+        );
+    }
+    
+    mass_inserts(
+      COMMUNITY_PENDINGS_TABLE,
+      array_keys($inserts[0]),
+      $inserts
+      );
+    
+    // the level of a user upload photo with moderation is 16
+    $level = 16;
+  }
+  else
+  {
+    // the level of a user upload photo with no moderation is 0
+    $level = 0;
+  }
+
+  $query = '
+UPDATE '.IMAGES_TABLE.'
+  SET level = '.$level.'
+  WHERE id IN ('.implode(',', $image_ids).')
+;';
+  pwg_query($query);
+
+  invalidate_user_cache();
 }
 
 add_event_handler('delete_user', 'community_delete_user');
