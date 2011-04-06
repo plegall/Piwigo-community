@@ -210,13 +210,14 @@ SELECT
 
   if (isset($row['id']))
   {
+    $category_options_selected = $row['category_id'];
+   
     $template->assign(
       array(
         'edit' => $row['id'],
         'who_options_selected' => $row['type'],
         'user_options_selected' => $row['user_id'],
         'group_options_selected' => $row['group_id'],
-        'category_options_selected' => $row['category_id'],
         'recursive' => get_boolean($row['recursive']),
         'create_subcategories' => get_boolean($row['create_subcategories']),
         'moderated' => get_boolean($row['moderated']),
@@ -303,7 +304,7 @@ SELECT id,name,uppercats,global_rank
 
 display_select_cat_wrapper(
   $query,
-  array(),
+  isset($category_options_selected) ? $category_options_selected : array(),
   'category_options'
   );
 
