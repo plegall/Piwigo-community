@@ -1,1 +1,1 @@
-Utenti non amministratori possono aggiungere delle foto
+Permette agli utenti di aggiungere delle foto senza essere amministratori
