@@ -43,10 +43,16 @@ $lang['uploaded photos are directly displayed in the gallery'] = 'uploadované f
 $lang['%d photos validated'] = '%d fotek schváleno';
 $lang['%d photos rejected'] = '%d fotek nechváleno';
 $lang['web size'] = 'web velikost';
-$lang['Zoom'] = 'Zoom';
+$lang['Zoom'] = 'Přiblížit';
 $lang['Upload your own photos'] = 'Nahraj vlastní fotky';
 $lang['%d photos uploaded by %s'] = '%d obrázků náhrál %s';
 $lang['Validation page: %s'] = 'Ověřovací stránka: %s';
 $lang['%d photos uploaded into album "%s"'] = '%d fotek nahráno do alba "%s"';
 $lang['Hi administrators,'] = 'Ahoj administrátoři,';
+$lang['No album, this photo is orphan'] = 'Žádné album, tato fotka je samostatně';
+$lang['Cancel'] = 'Ukončit';
+$lang['Permission updated'] = 'Práva aktualizována';
+$lang['Delete permission'] = 'Smazat oprávnění';
+$lang['%u pending photos'] = '%u nedokončených fotek';
+$lang['Level 16'] = 'Probíhá';
 ?>
