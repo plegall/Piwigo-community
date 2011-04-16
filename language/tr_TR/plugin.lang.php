@@ -50,4 +50,10 @@ $lang['Validation page: %s'] = 'Onaylama sayfası: %s';
 $lang['%d photos uploaded into album "%s"'] = '%d resimler "%s" albümüne yüklendi';
 $lang['Hi administrators,'] = 'Merhaba yöneticiler,';
 $lang['No album, this photo is orphan'] = 'Albüm yok, yanlız bir resim';
+$lang['Cancel'] = 'İptal';
+$lang['Permission updated'] = 'izni güncelle'; 
+$lang['Delete permission'] = 'İzni sil'; 
+$lang['%u pending photos'] = '%u bekleyen resimler'; 
+$lang['Level 16'] = 'Bekleyen';
+
 ?>
