@@ -49,5 +49,11 @@ $lang['%d photos uploaded by %s'] = '%d fotografií nahratých %s';
 $lang['Validation page: %s'] = 'Potvrdzovacia stránka: %s'; 
 $lang['%d photos uploaded into album "%s"'] = '%d fotografií nahratých do albumu "%s"'; 
 $lang['Hi administrators,'] = 'Ahojte administrátori,';
+$lang['No album, this photo is orphan'] = 'Žiaden album, táto fotografia je osamotená';
+$lang['Cancel'] = 'Zrušiť';
+$lang['Permission updated'] = 'Oprávnenie aktualizované';
+$lang['Delete permission'] = 'Oprávnenie vymazané';
+$lang['%u pending photos'] = '%u nevyriešených fotografií';
+$lang['Level 16'] = 'Nevyriešené';
 
 ?>
