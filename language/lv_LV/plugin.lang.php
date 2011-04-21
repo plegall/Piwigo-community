@@ -49,5 +49,11 @@ $lang['%d photos uploaded by %s'] = '%d fotogrāfijas augšupielādētas ar %s';
 $lang['Validation page: %s'] = 'Validācijas lapa: %s';
 $lang['%d photos uploaded into album "%s"'] = '%d fotogrāfijas augšupielādētas albūmā "%s"';
 $lang['Hi administrators,'] = 'Sveiki administratori,';
+$lang['No album, this photo is orphan'] = 'Albūms neeksistē, šī fotogrāfija ir pamesta';
+$lang['Cancel'] = 'Atcelt';
+$lang['Permission updated'] = 'Piekļuves atļauja atjaunināta';
+$lang['Delete permission'] = 'Dzēst piekļuves atļauju';
+$lang['%u pending photos'] = '%u rindā gaidošas fotogrāfijas';
+$lang['Level 16'] = 'Notiek gaidīšana';
 
 ?>
