@@ -49,4 +49,10 @@ $lang['%d photos uploaded by %s'] = '%d bilder uppladdade av %s';
 $lang['Validation page: %s'] = 'Validering sida: %s';
 $lang['%d photos uploaded into album "%s"'] = '%d bilder uppladdade till albumet "%s"';
 $lang['Hi administrators,'] = 'Hej administratörer,';
+$lang['No album, this photo is orphan'] = 'Inga album, det här fotot saknar tillhörighet';
+$lang['Cancel'] = 'Avbryt';
+$lang['Permission updated'] = 'Behörighet uppdateras';
+$lang['Delete permission'] = 'Ta bort behörighet';
+$lang['%u pending photos'] = '%u avvaktande bilder';
+$lang['Level 16'] = 'Avvaktar';
 ?>
