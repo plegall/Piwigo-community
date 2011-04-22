@@ -51,5 +51,10 @@ $lang['%d photos uploaded by %s'] = '%d zdjęć wgranych przez %s';
 $lang['Validation page: %s'] = 'Strona walidacji: %s';
 $lang['%d photos uploaded into album "%s"'] = '%d zdjęć wgranych do albumu "%s"';
 $lang['Hi administrators,'] = 'Witajcie administratorzy,';
+$lang['No album, this photo is orphan'] = 'To zdjecie nie jest w albumie';
+$lang['Cancel'] = 'Zrezygnuj';
+$lang['Permission updated'] = 'Pozwolenie zaktualizowane';
+$lang['Delete permission'] = 'Usun pozwolenie';
+$lang['Level 16'] = 'W oczekiwaniu'; 
 
 ?>
