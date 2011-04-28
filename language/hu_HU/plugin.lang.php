@@ -57,5 +57,7 @@ $lang['Permission updated'] = 'Engedély frissítve';
 $lang['Delete permission'] = 'Engedély törlése';
 $lang['%u pending photos'] = '%u elbírálandó kép';
 $lang['Level 16'] = 'Elbírálandó';
+$lang['Edit a permission'] = 'Engedély módosítása';
+$lang['Your photos are waiting for validation, administrators have been notified'] = 'A kép közzétételét engedélyezni kell, az adminisztrátort értesítettük';
 
 ?>
