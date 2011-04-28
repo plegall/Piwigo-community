@@ -53,9 +53,13 @@ $lang['%d photos uploaded into album "%s"'] = '%d photos ajoutée à l\'album "%
 $lang['Hi administrators,'] = 'Bonjours chers administrateurs,';
 
 $lang['No album, this photo is orphan'] = 'Aucun album, cette photo est orpheline';
+
 $lang['Cancel'] = 'Annuler';
 $lang['Permission updated'] = 'Permission mise à jour';
 $lang['Delete permission'] = 'Supprimer la permission';
 $lang['%u pending photos'] = '%u photos en attente';
 $lang['Level 16'] = 'En attente';
+
+$lang['Edit a permission'] = 'Editer une permission';
+$lang['Your photos are waiting for validation, administrators have been notified'] = 'Vos photos sont en attente de validation, les administrateurs sont prévenus';
 ?>
