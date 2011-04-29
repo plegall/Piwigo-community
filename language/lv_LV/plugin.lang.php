@@ -55,5 +55,7 @@ $lang['Permission updated'] = 'Piekļuves atļauja atjaunināta';
 $lang['Delete permission'] = 'Dzēst piekļuves atļauju';
 $lang['%u pending photos'] = '%u rindā gaidošas fotogrāfijas';
 $lang['Level 16'] = 'Notiek gaidīšana';
+$lang['Edit a permission'] = 'Rediģēt atļauju';
+$lang['Your photos are waiting for validation, administrators have been notified'] = 'Jūsu fotogrāfijas gaida validāciju, administratoram ir paziņots';
 
 ?>
