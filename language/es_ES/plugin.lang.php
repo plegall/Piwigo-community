@@ -57,4 +57,6 @@ $lang['Permission updated'] = 'Permiso de actualización';
 $lang['Delete permission'] = 'Eliminar el permisa';
 $lang['%u pending photos'] = '%u fotos en espera';
 $lang['Level 16'] = 'En espera';
+$lang['Edit a permission'] = 'Editar un permiso';
+$lang['Your photos are waiting for validation, administrators have been notified'] = 'Sus fotos están en espera de aprobación, los administradores están avisados';
 ?>
