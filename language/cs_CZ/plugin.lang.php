@@ -55,4 +55,6 @@ $lang['Permission updated'] = 'Práva aktualizována';
 $lang['Delete permission'] = 'Smazat oprávnění';
 $lang['%u pending photos'] = '%u nedokončených fotek';
 $lang['Level 16'] = 'Probíhá';
+$lang['Edit a permission'] = 'Edituj a oprávnění';
+$lang['Your photos are waiting for validation, administrators have been notified'] = 'Vaše fotky čekají na ověření, správce byl informován';
 ?>
