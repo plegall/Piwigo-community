@@ -59,5 +59,7 @@ $lang['Permission updated'] = 'Quyền hạn đã được cập nhật';
 $lang['Delete permission'] = 'Xóa quyền hạn';
 $lang['%u pending photos'] = 'có %u ảnh đang chờ xử lý';
 $lang['Level 16'] = 'Đang chờ xử lý';
+$lang['Edit a permission'] = 'Điều chỉnh quyền hạn';
+$lang['Your photos are waiting for validation, administrators have been notified'] = 'Ảnh của bạn đang đợi để xác nhận, Quản trị viên đã được thông báo về điều này';
 
 ?>
