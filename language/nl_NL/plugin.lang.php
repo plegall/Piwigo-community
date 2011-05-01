@@ -59,5 +59,8 @@ $lang['Permission updated'] = 'Permissie geüpdate';
 $lang['Delete permission'] = 'Verwijder permissie';
 $lang['%u pending photos'] = '%u foto\'s in de wachtrij';
 $lang['Level 16'] = 'In de wachtrij';
+$lang['Edit a permission'] = 'Wijzig een permissie';
+$lang['Your photos are waiting for validation, administrators have been notified'] = 'Uw foto\'s wachten op goedkeuring, administrators hebben daarvan bericht ontvangen';
+
 
 ?>
