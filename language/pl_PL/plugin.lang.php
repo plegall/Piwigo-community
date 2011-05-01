@@ -55,6 +55,9 @@ $lang['No album, this photo is orphan'] = 'To zdjecie nie jest w albumie';
 $lang['Cancel'] = 'Zrezygnuj';
 $lang['Permission updated'] = 'Pozwolenie zaktualizowane';
 $lang['Delete permission'] = 'Usun pozwolenie';
-$lang['Level 16'] = 'W oczekiwaniu'; 
+$lang['Level 16'] = 'W oczekiwaniu';
+$lang['%u pending photos'] = '%u oczekujących zdjęć';
+$lang['Edit a permission'] = 'Edytuj uprawnienie';
+$lang['Your photos are waiting for validation, administrators have been notified'] = 'Twoje zdjęcia oczekują na zatwierdzenie, administratorzy zostali powiadomieni.';
 
 ?>
