@@ -51,6 +51,8 @@ $lang['%d photos uploaded by %s'] = '%d foto caricate da %s';
 $lang['Validation page: %s'] = 'Pagina di convalida: %s';
 $lang['%d photos uploaded into album "%s"'] = '%d le foto caricate nell\'album "%s"';
 $lang['Hi administrators,'] = 'Salve amministratori,';
+$lang['Your photos are waiting for validation, administrators have been notified'] = 'Le vostre foto sono in attesa di convalida, gli amministratori sono stati avvisati';
+
 
 $lang['No album, this photo is orphan'] = 'Nessun album, questa photo è orfana';
 $lang['Cancel'] = 'Cancellare';
