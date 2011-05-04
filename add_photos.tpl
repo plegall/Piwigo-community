@@ -238,6 +238,11 @@ var sizeLimit = {$upload_max_filesize};
   margin:20px auto;
 }
 
+#photosAddContent fieldset#photoProperties {padding-bottom:0}
+#photosAddContent fieldset#photoProperties p {text-align:left;margin:0 0 1em 0;line-height:20px;}
+#photosAddContent fieldset#photoProperties input[type="text"] {width:320px}
+#photosAddContent fieldset#photoProperties textarea {width:500px; height:100px}
+
 #photosAddContent P {
   /* margin:0; */
 }
@@ -374,6 +379,28 @@ var sizeLimit = {$upload_max_filesize};
       </div>
 {/if}
     </fieldset>
+
+{if $community_ask_for_properties}
+    <fieldset id="photoProperties">
+      <legend>{'Photo Properties'|@translate}</legend>
+
+      <p>
+        {'Name'|@translate}<br>
+        <input type="text" class="large" name="name" value="{$NAME}">
+      </p>
+
+      <p>
+        {'Author'|@translate}<br>
+        <input type="text" class="large" name="author" value="{$AUTHOR}">
+      </p>
+
+      <p>
+        {'Description'|@translate}<br>
+        <textarea name="description" id="description" class="description" style="margin:0">{$DESCRIPTION}</textarea>
+      </p>
+
+    </fieldset>
+{/if}
 
     <fieldset>
       <legend>{'Select files'|@translate}</legend>

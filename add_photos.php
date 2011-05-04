@@ -86,6 +86,41 @@ if (isset($image_ids) and count($image_ids) > 0)
 {
   // reinitialize the informations to display on the result page
   $page['infos'] = array();
+
+  if (isset($conf['community_ask_for_properties']) and $conf['community_ask_for_properties'])
+  {
+    $data = array();
+    
+    $data['name'] = $_POST['name'];
+    $data['author'] = $_POST['author'];
+    
+    if ($conf['allow_html_descriptions'])
+    {
+      $data['comment'] = @$_POST['description'];
+    }
+    else
+    {
+      $data['comment'] = strip_tags(@$_POST['description']);
+    }
+
+    $updates = array();
+    foreach ($image_ids as $image_id)
+    {
+      $update = $data;
+      $update['id'] = $image_id;
+
+      array_push($updates, $update);
+    }
+
+    mass_updates(
+      IMAGES_TABLE,
+      array(
+        'primary' => array('id'),
+        'update' => array_keys($updates[0])
+        ),
+      $updates
+      );
+  }
   
   // $category_id is set in the photos_add_direct_process.inc.php included script
   $category_infos = get_cat_info($category_id);
@@ -299,6 +334,14 @@ $template->assign(
     )
   );
 
+if (isset($conf['community_ask_for_properties']) and $conf['community_ask_for_properties'])
+{
+  $template->assign(
+    array(
+      'community_ask_for_properties' => true,
+      )
+    );
+}
 
 // +-----------------------------------------------------------------------+
 // |                             display page                              |
