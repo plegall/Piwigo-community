@@ -326,7 +326,7 @@ $user_ids = array();
 $group_ids = array();
 $category_ids = array();
 
-while ($row = mysql_fetch_assoc($result))
+while ($row = pwg_db_fetch_assoc($result))
 {
   array_push($permissions, $row);
 
