@@ -56,7 +56,6 @@ $lang['Delete permission'] = 'İzni sil';
 $lang['%u pending photos'] = '%u bekleyen resimler'; 
 $lang['Level 16'] = 'Bekleyen';
 $lang['Edit a permission'] = 'Bir izni düzenle';
-$lang['Your photos are waiting for validation, administrators have been 
-notified'] = 'Resimlerinizin onaylanması için yöneticilere e-posta uyarısı gönderildi';
+$lang['Your photos are waiting for validation, administrators have been notified'] = 'Resimlerinizin onaylanması için yöneticilere e-posta uyarısı gönderildi';
 
 ?>
