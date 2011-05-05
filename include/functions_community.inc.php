@@ -143,7 +143,7 @@ SELECT
 SELECT
     category_id
   FROM '.IMAGE_CATEGORY_TABLE.'
-    JOIN '.IMAGES_TABLE.'
+    JOIN '.IMAGES_TABLE.' ON image_id = id
   WHERE category_id IN ('.implode(',', $empty_categories).')
     AND level > '.$user['level'].'
     AND level <= 8
