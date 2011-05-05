@@ -107,6 +107,23 @@ function plugin_activate()
 {
   global $prefixeTable;
 
+  $are_new_tables_installed = false;
+  
+  $query = 'SHOW TABLES;';
+  $result = pwg_query($query);
+  while ($row = pwg_db_fetch_row($result))
+  {
+    if ($prefixeTable.'community_permissions' == $row[0])
+    {
+      $are_new_tables_installed = true;
+    }
+  }
+
+  if (!$are_new_tables_installed)
+  {
+    plugin_install();
+  }
+
   community_get_data_from_core21();
   community_get_data_from_community21();
 
