@@ -57,4 +57,8 @@ $lang['Permission updated'] = 'Zugriffsberechtigung aktualisiert';
 $lang['Delete permission'] = 'Lösche Zugriffsberechtigung';
 $lang['%u pending photos'] = '%u erwartete Fotos'; 
 $lang['Level 16'] = ' Ausstehend';
+$lang['Edit a permission'] = 'Ändere eine Zugriffsberechtigung';
+$lang['Your photos are waiting for validation, administrators have been notified'] = 'Ihre Fotos müssen noch freigeschaltet werden, ein Administrator wurde benachrichtigt';
+
+
 ?>
