@@ -201,15 +201,17 @@ function community_switch_user_to_admin($res, $methodName, $params)
   $methods[] = 'pwg.images.checkFiles';
   $methods[] = 'pwg.images.setInfo';
 
-  // TODO ability to create sub-albums with the web API
-  $methods_creates = array(
-    'pwg.categories.add',
-    'pwg.categories.setInfo',
-    );
-    
   if (in_array($methodName, $methods))
   {
     $user['status'] = 'admin';
+  }
+
+  if ('pwg.categories.add' == $methodName)
+  {
+    if (in_array($params['parent'], $user_permissions['create_categories']))
+    {
+      $user['status'] = 'admin';
+    }
   }
 
   return $res;
