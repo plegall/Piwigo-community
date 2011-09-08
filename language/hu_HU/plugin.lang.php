@@ -48,7 +48,7 @@ $lang['Upload your own photos'] = 'Töltsd fel a képeid';
 $lang['%d photos uploaded by %s'] = '%d kép %s által feltöltve';
 $lang['Validation page: %s'] = 'Érvényesítés oldal: %s';
 $lang['%d photos uploaded into album "%s"'] = '%d kép feltöltve a(z) "%s albumba"';
-$lang['Hi administrators,'] = 'Szia adminisztrátor,';
+$lang['Hi administrators,'] = 'Üdv adminisztrátor,';
 
 $lang['No album, this photo is orphan'] = 'Nincs album, ez a kép árva';
 
