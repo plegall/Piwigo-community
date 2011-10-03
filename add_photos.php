@@ -31,8 +31,6 @@ include_once(COMMUNITY_PATH.'include/functions_community.inc.php');
 
 define('PHOTOS_ADD_BASE_URL', make_index_url(array('section' => 'add_photos')));
 
-prepare_upload_configuration();
-
 $user_permissions = community_get_user_permissions($user['id']);
 
 if (count($user_permissions['upload_categories']) == 0 and !$user_permissions ['create_whole_gallery'])
@@ -46,28 +44,20 @@ if (count($user_permissions['upload_categories']) == 0 and !$user_permissions ['
 
 $page['errors'] = array();
 $page['infos'] = array();
+
+// this is for "browser uploader", for Flash Uploader the problem is solved
+// with function community_uploadify_privacy_level (see main.inc.php)
 $_POST['level'] = 16;
 
 if (isset($_GET['processed']))
 {
   $hacking_attempt = false;
   
-  if ('existing' == $_POST['category_type'])
+  // is the user authorized to upload in this album?
+  if (!in_array($_POST['category'], $user_permissions['upload_categories']))
   {
-    // is the user authorized to upload in this album?
-    if (!in_array($_POST['category'], $user_permissions['upload_categories']))
-    {
-      echo 'Hacking attempt, you have no permission to upload in this album';
-      $hacking_attempt = true;
-    }
-  }
-  elseif ('new' == $_POST['category_type'])
-  {
-    if (!in_array($_POST['category_parent'], $user_permissions['create_categories']))
-    {
-      echo 'Hacking attempt, you have no permission to create this album';
-      $hacking_attempt = true;
-    }
+    echo 'Hacking attempt, you have no permission to upload in this album';
+    $hacking_attempt = true;
   }
 
   if ($hacking_attempt)
@@ -87,7 +77,7 @@ if (isset($image_ids) and count($image_ids) > 0)
   // reinitialize the informations to display on the result page
   $page['infos'] = array();
 
-  if (isset($conf['community_ask_for_properties']) and $conf['community_ask_for_properties'])
+  if (isset($_POST['name']))
   {
     $data = array();
     

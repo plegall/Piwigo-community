@@ -60,4 +60,6 @@ $lang['Level 16'] = 'Pending';
 
 $lang['Edit a permission'] = 'Edit a permission';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Your photos are waiting for validation, administrators have been notified';
+
+$lang['Set Photo Properties'] = 'Set Photo Properties';
 ?>

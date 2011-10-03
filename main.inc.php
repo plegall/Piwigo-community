@@ -335,13 +335,20 @@ SELECT
       $row[$key] = (int)$row[$key];
     }
 
-    $row['name'] = strip_tags(
-      trigger_event(
-        'render_category_name',
-        $row['name'],
-        'ws_categories_getList'
-        )
-      );
+    if ($params['fullname'])
+    {
+      $row['name'] = strip_tags(get_cat_display_name_cache($row['uppercats'], null, false));
+    }
+    else
+    {
+      $row['name'] = strip_tags(
+        trigger_event(
+          'render_category_name',
+          $row['name'],
+          'ws_categories_getList'
+          )
+        );
+    }
     
     $row['comment'] = strip_tags(
       trigger_event(
@@ -562,5 +569,14 @@ add_event_handler('invalidate_user_cache', 'community_refresh_cache_update_time'
 function community_refresh_cache_update_time()
 {
   community_update_cache_key();
+}
+
+add_event_handler('init', 'community_uploadify_privacy_level');
+function community_uploadify_privacy_level()
+{
+  if (script_basename() == 'uploadify' and !is_admin())
+  {
+    $_POST['level'] = 16;
+  }
 }
 ?>
