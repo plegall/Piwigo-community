@@ -152,9 +152,6 @@ function community_get_data_from_core21()
     include($from_piwigo21_file);
     $user_upload_conf = unserialize($user_upload_conf);
     
-    include_once(PHPWG_ROOT_PATH.'admin/include/functions_upload.inc.php');
-    prepare_upload_configuration();
-
     $user_upload_conf['upload_user_access'] = 1;
 
     if (isset($user_upload_conf['uploadable_categories']) and is_array($user_upload_conf['uploadable_categories']))
