@@ -60,4 +60,5 @@ $lang['Level 16'] = 'Elbírálandó';
 $lang['Edit a permission'] = 'Engedély módosítása';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'A kép közzétételét engedélyezni kell, az adminisztrátort értesítettük';
 
+$lang['Set Photo Properties'] = 'Kép adatainak megadása';
 ?>
