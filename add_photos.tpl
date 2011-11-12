@@ -161,6 +161,7 @@ jQuery(document).ready(function(){
   jQuery("#showPhotoProperties").click(function() {
     jQuery(this).parent(".showFieldset").hide();
     jQuery("#photoProperties").show();
+    jQuery("input[name=set_photo_properties]").attr('checked', true);
   });
 
 {/literal}
@@ -462,6 +463,8 @@ p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
 
     <fieldset id="photoProperties" style="display:none">
       <legend>{'Photo Properties'|@translate}</legend>
+
+      <input type="checkbox" name="set_photo_properties" style="display:none">
 
       <p>
         {'Name'|@translate}<br>

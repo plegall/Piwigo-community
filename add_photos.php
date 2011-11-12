@@ -77,7 +77,7 @@ if (isset($image_ids) and count($image_ids) > 0)
   // reinitialize the informations to display on the result page
   $page['infos'] = array();
 
-  if (isset($_POST['name']))
+  if (isset($_POST['set_photo_properties']))
   {
     $data = array();
     
@@ -106,7 +106,7 @@ if (isset($image_ids) and count($image_ids) > 0)
       IMAGES_TABLE,
       array(
         'primary' => array('id'),
-        'update' => array_keys($updates[0])
+        'update' => array_diff(array_keys($updates[0]), array('id'))
         ),
       $updates
       );
