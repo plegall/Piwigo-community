@@ -61,4 +61,5 @@ $lang['Edit a permission'] = 'Ändere eine Zugriffsberechtigung';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Ihre Fotos müssen noch freigeschaltet werden, ein Administrator wurde benachrichtigt';
 
 
+$lang['Set Photo Properties'] = 'Bildeigenschaften anpassen';
 ?>
