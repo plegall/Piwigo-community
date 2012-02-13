@@ -57,4 +57,5 @@ $lang['%u pending photos'] = '%u avvaktande bilder';
 $lang['Level 16'] = 'Avvaktar';
 $lang['Edit a permission'] = 'Editera ett tillstånd';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Dina bilder väntar på godkännande, administratorn har meddelats'; 
+$lang['Set Photo Properties'] = 'Ställa in Fotoegenskaper';
 ?>
