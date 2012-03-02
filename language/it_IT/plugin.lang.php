@@ -62,4 +62,5 @@ $lang['Level 16'] = 'In attesa';
 
 $lang['Edit a permission'] = 'Modificare un permesso';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Le vostre foto sono in attesa di convalida, gli amministratori sono stati avvisati';
+$lang['Set Photo Properties'] = 'Imposta proprietà immagine';
 ?>
