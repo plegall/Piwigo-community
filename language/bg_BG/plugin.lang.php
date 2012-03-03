@@ -57,4 +57,5 @@ $lang['%u pending photos'] = '%u чакащи снимки';
 $lang['Level 16'] = 'В очакване';
 $lang['Edit a permission'] = 'Редактиране на права';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Вашите снимки очакват одобрение, администраторите са информирани';
+$lang['Set Photo Properties'] = 'Настройване свойствата на снимката';
 ?>
