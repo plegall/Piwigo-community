@@ -1,0 +1,1 @@
+Fotografije mogu dodati i korisnici koji nisu administratori.
