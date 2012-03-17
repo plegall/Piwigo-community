@@ -63,4 +63,5 @@ $lang['Edit a permission'] = 'Wijzig een permissie';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Uw foto\'s wachten op goedkeuring, administrators hebben daarvan bericht ontvangen';
 
 
+$lang['Set Photo Properties'] = 'Stel de foto-eigenschappen in';
 ?>
