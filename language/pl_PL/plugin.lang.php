@@ -60,4 +60,5 @@ $lang['%u pending photos'] = '%u oczekujących zdjęć';
 $lang['Edit a permission'] = 'Edytuj uprawnienie';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Twoje zdjęcia oczekują na zatwierdzenie, administratorzy zostali powiadomieni.';
 
+$lang['Set Photo Properties'] = 'Zmień właściwości zdjęcia';
 ?>
