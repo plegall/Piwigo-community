@@ -59,4 +59,7 @@ $lang['Permission updated'] = 'الصلاحيات حدثت';
 $lang['Delete permission'] = 'حذف الصلاحية';
 $lang['%u pending photos'] = '%u صور بالانتظار';
 $lang['Level 16'] = 'انتظار';
+$lang['Edit a permission'] = 'تصريح التحرير';
+$lang['Set Photo Properties'] = 'تحرير خصائص الصورة ';
+$lang['Your photos are waiting for validation, administrators have been notified'] = 'صورك في انتظار المراجعة وتصريح مدير المعرض، تم ابلاغ  المدير';
 ?>
