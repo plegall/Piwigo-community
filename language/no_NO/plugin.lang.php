@@ -51,4 +51,12 @@ $lang['%d photos uploaded into album "%s"'] = '%d bilder lastet opp til album "%
 $lang['Hi administrators,'] = 'Hei administratorer,';
 
 /*TODO*/$lang['No album, this photo is orphan'] = 'No album, this photo is orphan';
+$lang['%u pending photos'] = '%u bilder på vent';
+$lang['Cancel'] = 'Avbryt';
+$lang['Delete permission'] = 'Slett rettigheter';
+$lang['Edit a permission'] = 'Endre rettigheter';
+$lang['Level 16'] = 'På vent';
+$lang['Permission updated'] = 'Rettigheter oppdatert';
+$lang['Set Photo Properties'] = 'Sett egenskaper til bilde';
+$lang['Your photos are waiting for validation, administrators have been notified'] = 'Dine bilder venter på kontroll, administrator har blitt kontaktet';
 ?>
