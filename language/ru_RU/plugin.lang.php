@@ -62,4 +62,5 @@ $lang['Level 16'] = 'проверка';
 
 $lang['Edit a permission'] = 'создать разрешение';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Вы загрузили фото, администратор скоро их проверит, так как письмо о ваших фотографиях ему уже выслано';
+$lang['Set Photo Properties'] = 'Свойства фото';
 ?>
