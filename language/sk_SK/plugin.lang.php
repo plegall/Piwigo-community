@@ -58,4 +58,5 @@ $lang['Level 16'] = 'Nevyriešené';
 $lang['Edit a permission'] = 'Edit a permission';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Vaše fotografie čakajú na schválenie, administrátor ich musí schváliť';
 $lang['Edit a permission'] = 'Upraviť prístup';
+$lang['Set Photo Properties'] = 'Nastaviť vlastnosti fotky';
 ?>
