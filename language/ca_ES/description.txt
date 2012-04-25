@@ -1,0 +1,1 @@
+Permet afegir imatges als usuaris no administradors.
