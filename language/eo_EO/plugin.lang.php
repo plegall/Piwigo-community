@@ -22,4 +22,21 @@
 // +-----------------------------------------------------------------------+
 $lang['Where?'] = 'Kie?';
 $lang['Who?'] = 'Kiu?';
+$lang['%s (the group)'] = '%s (la grupo)';
+$lang['%s (the user)'] = '%s (la uzanto)';
+$lang['Add a permission'] = 'aldoni permeson';
+$lang['Permission added'] = 'permeso aldonita';
+$lang['Permission removed'] = 'permeso forigita';
+$lang['Set Photo Properties'] = 'Agordi fotajn ecojn';
+$lang['The whole gallery'] = 'la tuta fotaro';
+$lang['Upload Permissions'] = 'alŝut-permeso ';
+$lang['Which level of trust?'] = 'Kia nivelo de fido ?';
+$lang['a group'] = 'grupo';
+$lang['a specific user'] = 'specifa uzanto';
+$lang['any registered user'] = 'ĉiuj registritaj uzantoj';
+$lang['any visitor'] = 'ĉiuj vizitantoj';
+$lang['high trust'] = 'granda fido';
+$lang['low trust'] = 'malgranda fido';
+$lang['uploaded photos are directly displayed in the gallery'] = 'alŝutaitaj fotoj tuj videblas en la fotaro';
+$lang['uploaded photos must be validated by an administrator'] = 'alŝutitajn fotojn validigu administranto';
 ?>
