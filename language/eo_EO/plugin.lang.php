@@ -39,4 +39,15 @@ $lang['high trust'] = 'granda fido';
 $lang['low trust'] = 'malgranda fido';
 $lang['uploaded photos are directly displayed in the gallery'] = 'alŝutaitaj fotoj tuj videblas en la fotaro';
 $lang['uploaded photos must be validated by an administrator'] = 'alŝutitajn fotojn validigu administranto';
+$lang['Cancel'] = 'Nuligi';
+$lang['Delete permission'] = 'Forigi permeson';
+$lang['Edit a permission'] = 'Agordi permeson';
+$lang['Hi administrators,'] = 'Saluton kara administranto,';
+$lang['No album, this photo is orphan'] = 'Neniu albumo, tiu foto estas orfo';
+$lang['Permission updated'] = 'Permeso ĝisdatigita';
+$lang['Validation page: %s'] = 'Validiga paĝo : %s';
+$lang['Zoom'] = 'Zumo';
+$lang['ability to create sub-albums'] = 'Eblecigi por krei sub-fotarojn';
+$lang['sub-albums creation'] = 'Sub-fotara kreado';
+$lang['web size'] = 'Reteja grandeco';
 ?>
