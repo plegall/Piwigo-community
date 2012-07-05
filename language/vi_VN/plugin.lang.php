@@ -62,4 +62,5 @@ $lang['Level 16'] = 'Đang chờ xử lý';
 $lang['Edit a permission'] = 'Điều chỉnh quyền hạn';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Ảnh của bạn đang đợi để xác nhận, Quản trị viên đã được thông báo về điều này';
 
+$lang['Set Photo Properties'] = 'Đặt thuộc tính cho hình';
 ?>
