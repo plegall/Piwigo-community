@@ -50,4 +50,13 @@ $lang['Zoom'] = 'Zumo';
 $lang['ability to create sub-albums'] = 'Eblecigi por krei sub-fotarojn';
 $lang['sub-albums creation'] = 'Sub-fotara kreado';
 $lang['web size'] = 'Reteja grandeco';
+$lang['%d photos rejected'] = '%d fotoj forĵetitaj';
+$lang['%d photos uploaded by %s'] = '%d fotoj aldonitaj de %s';
+$lang['%d photos uploaded into album "%s"'] = '%d fotoj aldonitaj al la fotaro "%s"';
+$lang['%d photos validated'] = '%fotoj validigitaj';
+$lang['%u pending photos'] = '%u pritraktotaj fotoj';
+$lang['Level 16'] = 'atendante';
+$lang['Pending Photos'] = 'Pritraktotaj fotoj';
+$lang['Upload your own photos'] = 'Aldoni viajn proprajn fotojn';
+$lang['Your photos are waiting for validation, administrators have been notified'] = 'Viajn fotojn validigos la administrantoj, ili jam ricevis averton.';
 ?>
