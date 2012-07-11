@@ -118,7 +118,7 @@ function community_index()
   }
 }
 
-add_event_handler('blockmanager_apply' , 'community_gallery_menu');
+add_event_handler('blockmanager_apply' , 'community_gallery_menu', EVENT_HANDLER_PRIORITY_NEUTRAL+10);
 function community_gallery_menu($menu_ref_arr)
 {
   global $conf, $user;

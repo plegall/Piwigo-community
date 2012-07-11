@@ -376,7 +376,7 @@ p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
   <legend>{'Uploaded Photos'|@translate}</legend>
   <div>
   {foreach from=$thumbnails item=thumbnail}
-    <a href="{$thumbnail.link}" class="externalLink">
+    <a href="{$thumbnail.link}"  class="{if isset($thumbnail.lightbox)}colorboxThumb{else}externalLink{/if}">
       <img src="{$thumbnail.src}" alt="{$thumbnail.file}" title="{$thumbnail.title}" class="thumbnail">
     </a>
   {/foreach}
@@ -522,3 +522,15 @@ p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
 {/if} {* $setup_errors *}
 
 </div> <!-- photosAddContent -->
+
+{* Community specific *}
+{footer_script}{literal}
+jQuery(document).ready(function(){
+  jQuery("a.colorboxThumb").colorbox({rel:"colorboxThumb"});
+
+  jQuery("a.externalLink").click(function() {
+    window.open($(this).attr("href"));
+    return false;
+  });
+});
+{/literal}{/footer_script}

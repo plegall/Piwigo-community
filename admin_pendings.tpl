@@ -1,3 +1,6 @@
+{combine_script id='jquery.colorbox' load='footer' require='jquery' path='themes/default/js/plugins/jquery.colorbox.min.js'}
+{combine_css path="themes/default/js/plugins/colorbox/style2/colorbox.css"}
+
 {literal}
 <style>
 .rowSelected {background-color:#C2F5C2 !important}
@@ -9,7 +12,9 @@
 
 {literal}
 <script type="text/javascript">
-$(document).ready(function(){
+jQuery(document).ready(function(){
+
+  jQuery("a.zoom").colorbox({rel:"zoom"});
 
   function checkSelectedRows() {
     $(".checkPhoto").each(function() {
@@ -77,7 +82,7 @@ $(document).ready(function(){
     </td>
     <td>
   <div class="comment">
-    <p class="commentAction" style="float:left;margin:0.5em 0 0 0.5em"><a href="{$photo.WEBSIZE_SRC}" class="externalLink">{'Zoom'|@translate}</a> &middot; <a href="{$photo.U_EDIT}" class="externalLink">{'Edit'|@translate}</a></p>
+    <p class="commentAction" style="float:left;margin:0.5em 0 0 0.5em"><a href="{$photo.MEDIUM_SRC}" class="zoom">{'Zoom'|@translate}</a> &middot; <a href="{$photo.U_EDIT}" class="externalLink">{'Edit'|@translate}</a></p>
     <p class="commentHeader"><strong>{$photo.ADDED_BY}</strong> - <em>{$photo.ADDED_ON}</em></p>
     <table>
       <tr>

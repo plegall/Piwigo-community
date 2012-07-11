@@ -130,7 +130,6 @@ SELECT
 
     i.id,
     path,
-    tn_ext,
     date_creation,
     name,
     comment,
@@ -140,8 +139,7 @@ SELECT
     filesize,
     width,
     height,
-    has_high,
-    high_filesize,
+    rotation,
 
     '.$conf['user_fields']['username'].' AS username
 
@@ -191,14 +189,10 @@ SELECT
 
 foreach ($rows as $row)
 {
-  $thumb = get_thumbnail_url(
-    array(
-      'id' => $row['image_id'],
-      'path' => $row['path'],
-      'tn_ext' => @$row['tn_ext']
-      )
-    );
-
+  $src_image = new SrcImage($row);
+  $thumb_url = DerivativeImage::url(IMG_THUMB, $src_image);
+  $medium_url = DerivativeImage::url(IMG_MEDIUM, $src_image);
+  
   // file properties
   $dimensions = null;
   $websize_props = $row['width'].'x'.$row['height'].' '.l10n('pixels').', '.sprintf(l10n('%d Kb'), $row['filesize']);
@@ -230,11 +224,11 @@ foreach ($rows as $row)
     array(
       'U_EDIT' => get_root_url().'admin.php?page=picture_modify&amp;image_id='.$row['image_id'],
       'ID' => $row['image_id'],
-      'TN_SRC' => $thumb,
-      'WEBSIZE_SRC' => $row['path'],
+      'TN_SRC' => $thumb_url,
+      'MEDIUM_SRC' => $medium_url,
       'ADDED_BY' => $row['username'],
       'ADDED_ON' => format_date($row['added_on'], true),
-      'NAME' => get_image_name($row['name'], $row['file']),
+      'NAME' => $row['name'],
       'DIMENSIONS' => $dimensions,
       'FILE' => $row['file'],
       'DATE_CREATION' => format_date($row['date_creation']),

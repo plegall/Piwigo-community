@@ -192,13 +192,25 @@ SELECT
       $inserts
       );
 
-    // the link on thumbnail must go to the websize photo
-    foreach ($page['thumbnails'] as $idx => $thumbnail)
+    // find the url to the medium size
+    $page['thumbnails'] = array();
+
+    $query = '
+SELECT *
+  FROM '.IMAGES_TABLE.'
+  WHERE id IN ('.implode(',', $image_ids).')
+;';
+    $result = pwg_query($query);
+    while ($row = pwg_db_fetch_assoc($result))
     {
-      $page['thumbnails'][$idx]['link'] = str_replace(
-        'thumbnail/'.$conf['prefix_thumbnail'],
-        '',
-        $thumbnail['src']
+      $src_image = new SrcImage($row);
+
+      $page['thumbnails'][] = array(
+        'file' => $row['file'],
+        'src' => DerivativeImage::url(IMG_THUMB, $src_image),
+        'title' => $row['name'],
+        'link' => $image_url = DerivativeImage::url(IMG_MEDIUM, $src_image),
+        'lightbox' => true,
         );
     }
 
