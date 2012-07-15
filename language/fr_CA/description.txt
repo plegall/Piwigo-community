@@ -1,0 +1,1 @@
+Permet aux utilisateurs d'ajouter des photos sans être administrateur
