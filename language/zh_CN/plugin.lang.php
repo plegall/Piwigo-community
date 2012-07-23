@@ -58,5 +58,5 @@ $lang['low trust'] = '低级';
 $lang['sub-albums creation'] = '创建子相册';
 $lang['uploaded photos are directly displayed in the gallery'] = '上传图片后直接显示于相册';
 $lang['uploaded photos must be validated by an administrator'] = '上传图片后须经管理员审核';
-$lang['web size'] = '网页大小';
+$lang['web size'] = '调整至网页大小';
 ?>
