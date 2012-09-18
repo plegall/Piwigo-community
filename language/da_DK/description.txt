@@ -1,1 +1,1 @@
-Ikke admin brugere kan tilf&oslash;je fotos
+Andre end administratorer kan tilføje fotoer
