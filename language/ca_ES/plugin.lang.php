@@ -20,33 +20,33 @@
 // | Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, |
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
-$lang['%d photos rejected'] = '%d imatges rebutjades';
-$lang['%d photos uploaded by %s'] = '%d imatges penjades per %s';
-$lang['%d photos uploaded into album "%s"'] = '%d imatges penjades a l\'àlbum %s';
-$lang['%d photos validated'] = '%d imatges validades';
+$lang['%d photos rejected'] = '%d fotos rebutjades';
+$lang['%d photos uploaded by %s'] = '%d fotos penjades per %s';
+$lang['%d photos uploaded into album "%s"'] = '%d fotos penjades a l\'àlbum %s';
+$lang['%d photos validated'] = '%d fotos validades';
 $lang['%s (the group)'] = '%s (el grup)';
 $lang['%s (the user)'] = '%s (l\'usuari)';
-$lang['%u pending photos'] = '%u imatges pendents';
+$lang['%u pending photos'] = '%u fotos pendents';
 $lang['Add a permission'] = 'Afegeix permisos';
 $lang['Cancel'] = 'Cancel·la';
 $lang['Delete permission'] = 'Eliminar permís';
 $lang['Edit a permission'] = 'Editar permisos';
 $lang['Hi administrators,'] = 'Hola administradors,';
 $lang['Level 16'] = 'Pendent';
-$lang['No album, this photo is orphan'] = 'No existeix cap àlbum. Aquesta imatge quedarà orfe.';
-$lang['Pending Photos'] = 'Imatges pendents';
+$lang['No album, this photo is orphan'] = 'No existeix cap àlbum. Aquesta foto quedarà òrfena.';
+$lang['Pending Photos'] = 'Fotos pendents';
 $lang['Permission added'] = 'Permís afegit';
 $lang['Permission removed'] = 'Permís denegat';
 $lang['Permission updated'] = 'Permís actualitzat';
-$lang['Set Photo Properties'] = 'Estableix les propietats de la imatge';
+$lang['Set Photo Properties'] = 'Estableix les propietats de la foto';
 $lang['The whole gallery'] = 'La galeria completa';
 $lang['Upload Permissions'] = 'Pujar Permisos';
-$lang['Upload your own photos'] = 'Puja les teves pròpies imatges';
+$lang['Upload your own photos'] = 'Puja les teves pròpies fotos';
 $lang['Validation page: %s'] = 'Pàgina de validació: %s';
 $lang['Where?'] = 'On?';
 $lang['Which level of trust?'] = 'Quin nivell de confiança?';
 $lang['Who?'] = 'Qui?';
-$lang['Your photos are waiting for validation, administrators have been notified'] = 'Les imatges estan a l\'espera de ser validades. Els administradors han estat notificats.';
+$lang['Your photos are waiting for validation, administrators have been notified'] = 'Les fotos estan a l\'espera de ser validades. Els administradors han estat notificats.';
 $lang['Zoom'] = 'Ampliar';
 $lang['a group'] = 'un grup';
 $lang['a specific user'] = 'usuari específic';
@@ -56,7 +56,7 @@ $lang['any visitor'] = 'qualsevol visitant';
 $lang['high trust'] = 'alta confiança';
 $lang['low trust'] = 'baixa confiança';
 $lang['sub-albums creation'] = 'creació de subàlbums';
-$lang['uploaded photos are directly displayed in the gallery'] = 'Les imatges pujades es visualitzen directament a la galeria';
-$lang['uploaded photos must be validated by an administrator'] = 'Les imatges pujades han de ser validades per un administrador';
+$lang['uploaded photos are directly displayed in the gallery'] = 'Les fotos penjades es mostraran directament a la galeria';
+$lang['uploaded photos must be validated by an administrator'] = 'Les fotos penjades s\'han de validar per un administrador';
 $lang['web size'] = 'mida del web';
 ?>
