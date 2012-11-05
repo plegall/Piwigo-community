@@ -237,8 +237,8 @@ function community_ws_replace_methods($arr)
   }
   
   // the plugin Community is activated, the user has upload permissions, we
-  // use a specific function to list available categories, assuming the use
-  // want to list categories where upload is possible for him
+  // use a specific function to list available categories, assuming the user
+  // wants to list categories where upload is possible for him
   
   $service->addMethod(
     'pwg.categories.getList',
@@ -247,6 +247,7 @@ function community_ws_replace_methods($arr)
       'cat_id' => array('default'=>0),
       'recursive' => array('default'=>false),
       'public' => array('default'=>false),
+      'fullname' => array('default'=>false),
       ),
     'retrieves a list of categories'
     );
