@@ -208,7 +208,8 @@ function community_switch_user_to_admin($res, $methodName, $params)
 
   if ('pwg.categories.add' == $methodName)
   {
-    if (in_array($params['parent'], $user_permissions['create_categories']))
+    if (in_array($params['parent'], $user_permissions['create_categories'])
+        or $user_permissions['create_whole_gallery'])
     {
       $user['status'] = 'admin';
     }
