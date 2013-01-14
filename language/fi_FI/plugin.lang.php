@@ -50,4 +50,5 @@ $lang['Level 16'] = 'Jonossa';
 $lang['Pending Photos'] = 'Jonossa olevat kuvat';
 $lang['%u pending photos'] = '%u kuvaa jonossa';
 $lang['%d photos rejected'] = '%d kuvaa hylätty';
+$lang['Upload Permissions'] = 'Latausoikeudet';
 ?>
