@@ -51,4 +51,12 @@ $lang['Pending Photos'] = 'Jonossa olevat kuvat';
 $lang['%u pending photos'] = '%u kuvaa jonossa';
 $lang['%d photos rejected'] = '%d kuvaa hylätty';
 $lang['Upload Permissions'] = 'Latausoikeudet';
+$lang['Permission added'] = 'Oikeus lisätty';
+$lang['Permission removed'] = 'Oikeus poistettu';
+$lang['Permission updated'] = 'Oikeus päivitetty';
+$lang['Set Photo Properties'] = 'Aseta kuvan ominaisuudet';
+$lang['Validation page: %s'] = 'Validointisivu: %s';
+$lang['Your photos are waiting for validation, administrators have been notified'] = 'Kuvasi odottavat hyväksyntää. Ylläpitoa on tiedotettu';
+$lang['Zoom'] = 'Zoomaus';
+$lang['web size'] = 'koko verkossa';
 ?>
