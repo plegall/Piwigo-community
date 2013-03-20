@@ -245,10 +245,11 @@ function community_ws_replace_methods($arr)
     'pwg.categories.getList',
     'community_ws_categories_getList',
     array(
-      'cat_id' => array('default'=>0),
-      'recursive' => array('default'=>false),
-      'public' => array('default'=>false),
-      'fullname' => array('default'=>false),
+      'cat_id' =>       array('default'=>0),
+      'recursive' =>    array('default'=>false),
+      'public' =>       array('default'=>false),
+      'tree_output' =>  array('default'=>false),
+      'fullname' =>     array('default'=>false),
       ),
     'retrieves a list of categories'
     );
@@ -268,6 +269,22 @@ function community_ws_categories_getList($params, &$service)
 {
   global $user, $conf;
 
+  if ($params['tree_output'])
+  {
+    if (!isset($_GET['format']) or !in_array($_GET['format'], array('php', 'json')))
+    {
+      // the algorithm used to build a tree from a flat list of categories
+      // keeps original array keys, which is not compatible with
+      // PwgNamedArray.
+      //
+      // PwgNamedArray is useful to define which data is an attribute and
+      // which is an element in the XML output. The "hierarchy" output is
+      // only compatible with json/php output.
+
+      return new PwgError(405, "The tree_output option is only compatible with json/php output formats");
+    }
+  }
+  
   $where = array('1=1');
   $join_type = 'LEFT';
   $join_user = $user['id'];
@@ -363,21 +380,29 @@ SELECT
     array_push($cats, $row);
   }
   usort($cats, 'global_rank_compare');
-  return array(
-    'categories' => new PwgNamedArray(
-      $cats,
-      'category',
-      array(
-        'id',
-        'url',
-        'nb_images',
-        'total_nb_images',
-        'nb_categories',
-        'date_last',
-        'max_date_last',
+
+  if ($params['tree_output'])
+  {
+    return categories_flatlist_to_tree($cats);
+  }
+  else
+  {
+    return array(
+      'categories' => new PwgNamedArray(
+        $cats,
+        'category',
+        array(
+          'id',
+          'url',
+          'nb_images',
+          'total_nb_images',
+          'nb_categories',
+          'date_last',
+          'max_date_last',
+          )
         )
-      )
-    );
+      );
+  }
 }
 
 function community_ws_tags_getAdminList($params, &$service)
