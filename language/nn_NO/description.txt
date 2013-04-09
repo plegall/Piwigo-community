@@ -1,0 +1,1 @@
+Brukarar som ikkje er administratorar kan legge til bilete
