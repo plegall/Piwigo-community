@@ -467,7 +467,7 @@ p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
       <input type="checkbox" name="set_photo_properties" style="display:none">
 
       <p>
-        {'Name'|@translate}<br>
+        {'Title'|@translate}<br>
         <input type="text" class="large" name="name" value="{$NAME}">
       </p>
 
