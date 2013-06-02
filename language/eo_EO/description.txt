@@ -1,1 +1,1 @@
-Uzantoj kiuj ne estas administrantoj rajtas aldoni fotojn.
+Ne-administrantaj uzantoj rajtas aldoni fotojn.
