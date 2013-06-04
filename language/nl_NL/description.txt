@@ -1,1 +1,1 @@
-Niet-admin gebruikers kun foto's toevoegen
+Niet-admin gebruikers kunnen nu ook foto's toevoegen

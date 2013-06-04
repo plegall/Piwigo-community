@@ -21,47 +21,59 @@
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
 
-$lang['Add a permission'] = 'Voeg een permissie toe';
+$lang['Add a permission'] = 'Voeg een toestemming toe';
 $lang['Who?'] = 'Wie?';
 $lang['any visitor'] = 'iedere bezoeker';
-$lang['any registered user'] = 'ieder geregistreerde gebruiker';
+$lang['any registered user'] = 'iedere geregistreerde gebruiker';
 $lang['a specific user'] = 'een specifieke gebruiker';
 $lang['a group'] = 'een groep';
 $lang['Where?'] = 'Waar?';
 $lang['The whole gallery'] = 'De hele galerij';
-$lang['ability to create sub-albums'] = 'mogelijkheid om subalbums te maken';
+$lang['ability to create sub-albums'] = 'Mogelijkheid om subalbums te maken';
 $lang['Which level of trust?'] = 'Welk niveau van vertrouwen?';
-$lang['sub-albums creation'] = 'het aanmaken van subalbums ';
-$lang['Upload Permissions'] = 'Upload Permissies';
-$lang['Pending Photos'] = 'Foto\'s in de wachtrij';
-$lang['Permission added'] = 'Permissie toegevoegd';
-$lang['Permission removed'] = 'Permissie verwijderd';
+$lang['sub-albums creation'] = 'aanmaken van subalbums ';
+$lang['Upload Permissions'] = 'Werk toestemmingen bij';
+$lang['Pending Photos'] = 'Afbeeldingen in de wachtrij';
+$lang['Permission added'] = 'Toestemming toegevoegd';
+$lang['Permission removed'] = 'Toestemming verwijderd';
 $lang['%s (the user)'] = '%s (de gebruiker)';
 $lang['%s (the group)'] = '%s (de groep)';
 $lang['low trust'] = 'laag vertrouwen';
-$lang['uploaded photos must be validated by an administrator'] = 'geüploade foto\'s moeten worden bevestigd door een administrator';
+$lang['uploaded photos must be validated by an administrator'] = 'geuploade afbeeldingen moeten worden bevestigd door een administrator';
 $lang['high trust'] = 'hoog vertrouwen';
-$lang['uploaded photos are directly displayed in the gallery'] = 'geüploade foto\'s worden meteen weergegeven in de galerij';
-$lang['%d photos validated'] = '%d foto\'s bevestigd';
-$lang['%d photos rejected'] = '%d foto\'s geweigerd';
-$lang['web size'] = 'web formaat';
+$lang['uploaded photos are directly displayed in the gallery'] = 'geuploade afbeeldingen worden meteen weergegeven in de galerij';
+$lang['%d photos validated'] = '%d afbeeldingen bevestigd';
+$lang['%d photos rejected'] = '%d afbeeldingen geweigerd';
+$lang['web size'] = 'webformaat';
 $lang['Zoom'] = 'Zoom';
-$lang['Upload your own photos'] = 'Upload uw eigen foto\'s';
-$lang['%d photos uploaded by %s'] = '%d foto\'s geüpload door %s';
+$lang['Upload your own photos'] = 'Upload uw eigen afbeeldingen';
+$lang['%d photos uploaded by %s'] = '%d afbeeldingen geupload door %s';
 $lang['Validation page: %s'] = 'Bevestigingspagina: %s';
-$lang['%d photos uploaded into album "%s"'] = '%d foto\'s geüpload in album "%s"';
-$lang['Hi administrators,'] = 'Hoi administrators,';
+$lang['%d photos uploaded into album "%s"'] = '%d afbeeldingen geupload in album "%s"';
+$lang['Hi administrators,'] = 'Hallo administrators,';
 
-$lang['No album, this photo is orphan'] = 'Geen album, deze foto is wees';
+$lang['No album, this photo is orphan'] = 'Geen album, deze afbeelding is wees';
 
 $lang['Cancel'] = 'Annuleer';
-$lang['Permission updated'] = 'Permissie geüpdate';
+$lang['Permission updated'] = 'Toestemming bijgewerkt';
 $lang['Delete permission'] = 'Verwijder permissie';
-$lang['%u pending photos'] = '%u foto\'s in de wachtrij';
+$lang['%u pending photos'] = '%u afbeeldingen in de wachtrij';
 $lang['Level 16'] = 'In de wachtrij';
-$lang['Edit a permission'] = 'Wijzig een permissie';
-$lang['Your photos are waiting for validation, administrators have been notified'] = 'Uw foto\'s wachten op goedkeuring, administrators hebben daarvan bericht ontvangen';
+$lang['Edit a permission'] = 'Wijzig een toestemming';
+$lang['Your photos are waiting for validation, administrators have been notified'] = 'Uw foto\'s wachten op goedkeuring, de administrators zijn geinformeerd';
 
 
-$lang['Set Photo Properties'] = 'Stel de foto-eigenschappen in';
+$lang['Set Photo Properties'] = 'Stel eigenschappen van afbeelding in';
+$lang['Available quota %s.'] = 'Beschikbaar quotum %s.';
+$lang['%s out of %s'] = '%s van de %s';
+$lang['Maximum number of photos reached (%u)'] = 'Maximum aantal afbeeldingen bereikt (%u)';
+$lang['no limit'] = 'geen limiet';
+$lang['up to %d photos (for each user)'] = 'tot %d afbeeldingen (voor elke gebruiker)';
+$lang['up to %dMB (for each user)'] = 'tot %dMB (voor elke gebruiker)';
+$lang['Available %s.'] = 'Beschikbaar %s.';
+$lang['Disk usage quota reached (%uMB)'] = 'Schijfgebruik-quotum bereikt (%uMB)';
+$lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Bestand %s te groot (%uMB), quotum van %uMB bereikt';
+$lang['How many photos?'] = 'Hoeveel afbeeldingen?';
+$lang['How much disk space?'] = 'Hoeveel schijfruimte?';
+$lang['Photo %s rejected.'] = 'Afbeelding %s afgewezen.';
 ?>
