@@ -222,7 +222,7 @@ foreach ($rows as $row)
   $template->append(
     'photos',
     array(
-      'U_EDIT' => get_root_url().'admin.php?page=picture_modify&amp;image_id='.$row['image_id'],
+      'U_EDIT' => get_root_url().'admin.php?page=photo-'.$row['image_id'],
       'ID' => $row['image_id'],
       'TN_SRC' => $thumb_url,
       'MEDIUM_SRC' => $medium_url,
