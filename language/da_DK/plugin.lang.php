@@ -59,4 +59,16 @@ $lang['sub-albums creation'] = 'oprettelse af underalbummer';
 $lang['uploaded photos are directly displayed in the gallery'] = 'uploadede fotografier vises direkte i galleriet';
 $lang['uploaded photos must be validated by an administrator'] = 'uploadede fotografier skal godkendes af en administrator';
 $lang['web size'] = 'webstørrelse';
+$lang['%s out of %s'] = '%s ud af %s';
+$lang['Available %s.'] = 'Tilgængelig %s.';
+$lang['Available quota %s.'] = 'Tilgængelig kvote %s.';
+$lang['Disk usage quota reached (%uMB)'] = 'Diskforbrugskvoten er nået (%uMB)';
+$lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Filen %s er for stor (%uMB), kvote på %uMB overskredet';
+$lang['How many photos?'] = 'Hvor mange fotografier?';
+$lang['How much disk space?'] = 'Hvor megen diskplads?';
+$lang['Maximum number of photos reached (%u)'] = 'Maksimalt antal fotografier er nået (%u)';
+$lang['Photo %s rejected.'] = 'Fotografiet %s er afvist.';
+$lang['no limit'] = 'ingen grænse';
+$lang['up to %d photos (for each user)'] = 'op til %d fotografier (for hver bruger)';
+$lang['up to %dMB (for each user)'] = 'op til %dMB (for hver bruger)';
 ?>
