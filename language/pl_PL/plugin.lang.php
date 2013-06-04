@@ -61,4 +61,15 @@ $lang['Edit a permission'] = 'Edytuj uprawnienie';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Twoje zdjęcia oczekują na zatwierdzenie, administratorzy zostali powiadomieni.';
 
 $lang['Set Photo Properties'] = 'Zmień właściwości zdjęcia';
+$lang['Available %s.'] = 'Dostępne %s.';
+$lang['Available quota %s.'] = 'Dostępna przestrzeń %s.';
+$lang['Disk usage quota reached (%uMB)'] = 'Dostępna przestrzeń dyskowa przekroczona (%uMB)';
+$lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Plik %s jest za duży (%uMB), quota %uMB przekroczona';
+$lang['How many photos?'] = 'Ile zdjęć?';
+$lang['How much disk space?'] = 'Ile przestrzeni dyskowej?';
+$lang['Maximum number of photos reached (%u)'] = 'Przekroczono maksymalną liczbę zdjęć (%u)';
+$lang['Photo %s rejected.'] = 'Zdjęcie %s zostało odrzucone.';
+$lang['no limit'] = 'brak limitu';
+$lang['up to %d photos (for each user)'] = 'do %d zdjęć (dla każdego użytkownika)';
+$lang['up to %dMB (for each user)'] = 'do %dMB (dla każdego użytkownika)';
 ?>
