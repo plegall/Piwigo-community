@@ -63,4 +63,16 @@ $lang['Level 16'] = 'проверка';
 $lang['Edit a permission'] = 'создать разрешение';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Вы загрузили фото, администратор скоро их проверит, так как письмо о ваших фотографиях ему уже выслано';
 $lang['Set Photo Properties'] = 'Свойства фото';
+$lang['up to %dMB (for each user)'] = 'увеличить до %dMB (для каждого пользователя)';
+$lang['%s out of %s'] = '%s из %s';
+$lang['Available %s.'] = 'Доступно %s.';
+$lang['Available quota %s.'] = 'Доступная квота %s.';
+$lang['Disk usage quota reached (%uMB)'] = 'Квота использования диска достигнута (%uMB)';
+$lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Файл %s слишком большой (%uMB), установленная квота %uMB превышена';
+$lang['How many photos?'] = 'Сколько изображений?';
+$lang['How much disk space?'] = 'Какой объем диска?';
+$lang['Maximum number of photos reached (%u)'] = 'Достигнуто максимальное количество изображений (%u)';
+$lang['Photo %s rejected.'] = 'Изображение %s отклонено.';
+$lang['no limit'] = 'безлимит';
+$lang['up to %d photos (for each user)'] = 'увеличить до %d изображений (для каждого пользователя)';
 ?>
