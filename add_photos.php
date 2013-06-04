@@ -72,8 +72,93 @@ if (isset($_GET['processed']))
 
 include_once(PHPWG_ROOT_PATH.'admin/include/photos_add_direct_process.inc.php');
 
+// +-----------------------------------------------------------------------+
+// | limits                                                                |
+// +-----------------------------------------------------------------------+
+
+// has the user reached its limits?
+$user['community_usage'] = community_get_user_limits($user['id']);
+// echo '<pre>'; print_r($user['community_usage']); echo '</pre>';
+
+// +-----------------------------------------------------------------------+
+// | set properties, moderate, notify                                      |
+// +-----------------------------------------------------------------------+
+
 if (isset($image_ids) and count($image_ids) > 0)
 {
+  $query = '
+SELECT
+    id,
+    file,
+    filesize
+  FROM '.IMAGES_TABLE.'
+  WHERE id IN ('.implode(',', $image_ids).')
+  ORDER BY id DESC
+;';
+  $images = array_from_query($query);
+
+  $nb_images_deleted = 0;
+  
+  // upload has just happened, maybe the user is over quota
+  if ($user_permissions['storage'] > 0 and $user['community_usage']['storage'] > $user_permissions['storage'])
+  {
+    foreach ($images as $image)
+    {
+      array_push(
+        $page['errors'],
+        sprintf(l10n('Photo %s rejected.'), $image['file'])
+        .' '.sprintf(l10n('Disk usage quota reached (%uMB)'), $user_permissions['storage'])
+        );
+      
+      delete_elements(array($image['id']), true);
+      foreach ($page['thumbnails'] as $tn_idx => $thumbnail)
+      {
+        if ($thumbnail['file'] == $image['file'])
+        {
+          unset($page['thumbnails'][$idx]);
+        }
+      }
+
+      $user['community_usage'] = community_get_user_limits($user['id']);
+      
+      if ($user['community_usage']['storage'] <= $user_permissions['storage'])
+      {
+        // we stop the deletions
+        break;
+      }
+    }
+  }
+
+  if ($user_permissions['nb_photos'] > 0 and $user['community_usage']['nb_photos'] > $user_permissions['nb_photos'])
+  {
+    foreach ($images as $image)
+    {
+      array_push(
+        $page['errors'],
+        sprintf(l10n('Photo %s rejected.'), $image['file'])
+        .' '.sprintf(l10n('Maximum number of photos reached (%u)'), $user_permissions['nb_photos'])
+        );
+      
+      delete_elements(array($image['id']), true);
+      foreach ($page['thumbnails'] as $tn_idx => $thumbnail)
+      {
+        if ($thumbnail['file'] == $image['file'])
+        {
+          unset($page['thumbnails'][$idx]);
+        }
+      }
+
+      $user['community_usage'] = community_get_user_limits($user['id']);
+      
+      if ($user['community_usage']['nb_photos'] <= $user_permissions['nb_photos'])
+      {
+        // we stop the deletions
+        break;
+      }
+    }
+  }
+     
+  
   // reinitialize the informations to display on the result page
   $page['infos'] = array();
 
@@ -111,19 +196,22 @@ if (isset($image_ids) and count($image_ids) > 0)
       $updates
       );
   }
-  
-  // $category_id is set in the photos_add_direct_process.inc.php included script
-  $category_infos = get_cat_info($category_id);
-  $category_name = get_cat_display_name($category_infos['upper_names']);
 
-  array_push(
-    $page['infos'],
-    sprintf(
-      l10n('%d photos uploaded into album "%s"'),
-      count($page['thumbnails']),
-      '<em>'.$category_name.'</em>'
-      )
-    );
+  if (count($page['thumbnails']) > 0)
+  {
+    // $category_id is set in the photos_add_direct_process.inc.php included script
+    $category_infos = get_cat_info($category_id);
+    $category_name = get_cat_display_name($category_infos['upper_names']);
+
+    array_push(
+      $page['infos'],
+      sprintf(
+        l10n('%d photos uploaded into album "%s"'),
+        count($page['thumbnails']),
+        '<em>'.$category_name.'</em>'
+        )
+      );
+  }
 
   // should the photos be moderated?
   //
@@ -185,39 +273,42 @@ SELECT
           )
         );
     }
-    
-    mass_inserts(
-      COMMUNITY_PENDINGS_TABLE,
-      array_keys($inserts[0]),
-      $inserts
-      );
 
-    // find the url to the medium size
-    $page['thumbnails'] = array();
+    if (count($inserts) > 0)
+    {
+      mass_inserts(
+        COMMUNITY_PENDINGS_TABLE,
+        array_keys($inserts[0]),
+        $inserts
+        );
+      
+      // find the url to the medium size
+      $page['thumbnails'] = array();
 
-    $query = '
+      $query = '
 SELECT *
   FROM '.IMAGES_TABLE.'
   WHERE id IN ('.implode(',', $image_ids).')
 ;';
-    $result = pwg_query($query);
-    while ($row = pwg_db_fetch_assoc($result))
-    {
-      $src_image = new SrcImage($row);
-
-      $page['thumbnails'][] = array(
-        'file' => $row['file'],
-        'src' => DerivativeImage::url(IMG_THUMB, $src_image),
-        'title' => $row['name'],
-        'link' => $image_url = DerivativeImage::url(IMG_MEDIUM, $src_image),
-        'lightbox' => true,
+      $result = pwg_query($query);
+      while ($row = pwg_db_fetch_assoc($result))
+      {
+        $src_image = new SrcImage($row);
+        
+        $page['thumbnails'][] = array(
+          'file' => $row['file'],
+          'src' => DerivativeImage::url(IMG_THUMB, $src_image),
+          'title' => $row['name'],
+          'link' => $image_url = DerivativeImage::url(IMG_MEDIUM, $src_image),
+          'lightbox' => true,
+          );
+      }
+      
+      array_push(
+        $page['infos'],
+        l10n('Your photos are waiting for validation, administrators have been notified')
         );
     }
-
-    array_push(
-      $page['infos'],
-      l10n('Your photos are waiting for validation, administrators have been notified')
-      );
   }
   else
   {
@@ -246,36 +337,39 @@ UPDATE '.IMAGES_TABLE.'
   }
 
   invalidate_user_cache();
-
-  // let's notify administrators
-  include_once(PHPWG_ROOT_PATH.'include/functions_mail.inc.php');
-
-  $keyargs_content = array(
-    get_l10n_args('Hi administrators,', ''),
-    get_l10n_args('', ''),
-    get_l10n_args('Album: %s', get_cat_display_name($category_infos['upper_names'], null, false)),
-    get_l10n_args('User: %s', $user['username']),
-    get_l10n_args('Email: %s', $user['email']),
-    );
-
-  if ($moderate)
+  
+  if (count($page['thumbnails']))
   {
-    $keyargs_content[] = get_l10n_args('', '');
-    
-    array_push(
+    // let's notify administrators
+    include_once(PHPWG_ROOT_PATH.'include/functions_mail.inc.php');
+
+    $keyargs_content = array(
+      get_l10n_args('Hi administrators,', ''),
+      get_l10n_args('', ''),
+      get_l10n_args('Album: %s', get_cat_display_name($category_infos['upper_names'], null, false)),
+      get_l10n_args('User: %s', $user['username']),
+      get_l10n_args('Email: %s', $user['email']),
+      );
+
+    if ($moderate)
+    {
+      $keyargs_content[] = get_l10n_args('', '');
+      
+      array_push(
+        $keyargs_content,
+        get_l10n_args(
+          'Validation page: %s',
+          get_absolute_root_url().'admin.php?page=plugin-community-pendings'
+          )
+        );
+    }
+
+    pwg_mail_notification_admins(
+      get_l10n_args('%d photos uploaded by %s', array(count($image_ids), $user['username'])),
       $keyargs_content,
-      get_l10n_args(
-        'Validation page: %s',
-        get_absolute_root_url().'admin.php?page=plugin-community-pendings'
-        )
+      false
       );
   }
-
-  pwg_mail_notification_admins(
-    get_l10n_args('%d photos uploaded by %s', array(count($image_ids), $user['username'])),
-    $keyargs_content,
-    false
-    );
 }
 
 // +-----------------------------------------------------------------------+
@@ -285,6 +379,94 @@ UPDATE '.IMAGES_TABLE.'
 $template->set_filenames(array('add_photos' => dirname(__FILE__).'/add_photos.tpl'));
 
 include_once(PHPWG_ROOT_PATH.'admin/include/photos_add_direct_prepare.inc.php');
+
+$quota_available = array(
+  'summary' => array(),
+  'details' => array(),
+  );
+
+// there is a limit on storage for this user
+if ($user_permissions['storage'] > 0)
+{
+  $remaining_storage = $user_permissions['storage'] - $user['community_usage']['storage'];
+  
+  if ($remaining_storage <= 0)
+  {
+    echo 'limit storage reached<br>';
+    // limit reached
+    $setup_errors[] = sprintf(
+      l10n('Disk usage quota reached (%uMB)'),
+      $user_permissions['storage']
+      );
+  }
+  else
+  {
+    $quota_available['summary'][] = $remaining_storage.'MB';
+    
+    $quota_available['details'][] = sprintf(
+      l10n('%s out of %s'),
+      $remaining_storage.'MB',
+      $user_permissions['storage']
+      );
+    
+    $template->assign(
+      array(
+        'limit_storage' => $remaining_storage*1024*1024,
+        'limit_storage_total_mb' => $user_permissions['storage'],
+        )
+      );
+  }
+}
+
+// there is a limit on number of photos for this user
+if ($user_permissions['nb_photos'] > 0)
+{
+  $remaining_nb_photos = $user_permissions['nb_photos'] - $user['community_usage']['nb_photos'];
+  
+  if ($remaining_nb_photos <= 0)
+  {
+    echo 'limit nb_photos reached<br>';
+    // limit reached
+    $setup_errors[] = sprintf(
+      l10n('Maximum number of photos reached (%u)'),
+      $user_permissions['nb_photos']
+      );
+  }
+  else
+  {
+    $quota_available['summary'][] = l10n_dec('%d photo', '%d photos', $remaining_nb_photos);
+    
+    $quota_available['details'][] = sprintf(
+      l10n('%s out of %s'),
+      l10n_dec('%d photo', '%d photos', $remaining_nb_photos),
+      $user_permissions['nb_photos']
+      );
+    
+    $template->assign('limit_nb_photos', $remaining_nb_photos);
+  }
+}
+
+if (count($quota_available['details']) > 0)
+{
+  $template->assign(
+    array(
+      'quota_summary' => sprintf(
+        l10n('Available %s.'),
+        implode(', ', $quota_available['summary'])
+        ),
+      'quota_details' => sprintf(
+        l10n('Available quota %s.'),
+        implode(', ', $quota_available['details'])
+        ),
+      )
+    );
+}
+
+$template->assign(
+  array(
+    'setup_errors'=> $setup_errors,
+    )
+  );
 
 // we have to change the list of uploadable albums
 $upload_categories = $user_permissions['upload_categories'];

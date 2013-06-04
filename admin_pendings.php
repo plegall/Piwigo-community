@@ -179,7 +179,7 @@ SELECT
   {
     $category_for_image[ $row['image_id'] ] = get_cat_display_name_cache(
       $row['uppercats'],
-      'admin.php?page=cat_modify&amp;cat_id=',
+      'admin.php?page=album-',
       false,
       true,
       'externalLink'

@@ -13,13 +13,56 @@ if (!defined('PHPWG_ROOT_PATH'))
   die('Hacking attempt!');
 }
 
-define('COMMUNITY_PATH' , PHPWG_PLUGINS_PATH.basename(dirname(__FILE__)).'/');
-
 global $prefixeTable;
+
+// +-----------------------------------------------------------------------+
+// | Define plugin constants                                               |
+// +-----------------------------------------------------------------------+
+
+defined('COMMUNITY_ID') or define('COMMUNITY_ID', basename(dirname(__FILE__)));
+define('COMMUNITY_PATH' , PHPWG_PLUGINS_PATH.basename(dirname(__FILE__)).'/');
 define('COMMUNITY_PERMISSIONS_TABLE', $prefixeTable.'community_permissions');
 define('COMMUNITY_PENDINGS_TABLE', $prefixeTable.'community_pendings');
+define('COMMUNITY_VERSION', 'auto');
 
 include_once(COMMUNITY_PATH.'include/functions_community.inc.php');
+
+// init the plugin
+add_event_handler('init', 'community_init');
+/**
+ * plugin initialization
+ *   - check for upgrades
+ *   - unserialize configuration
+ *   - load language
+ */
+function community_init()
+{
+  global $conf, $pwg_loaded_plugins;
+
+  // apply upgrade if needed
+  if (
+    COMMUNITY_VERSION == 'auto' or
+    $pwg_loaded_plugins[COMMUNITY_ID]['version'] == 'auto' or
+    version_compare($pwg_loaded_plugins[COMMUNITY_ID]['version'], COMMUNITY_VERSION, '<')
+  )
+  {
+    // call install function
+    include_once(COMMUNITY_PATH.'include/install.inc.php');
+    community_install();
+
+    // update plugin version in database
+    if ( $pwg_loaded_plugins[COMMUNITY_ID]['version'] != 'auto' and COMMUNITY_VERSION != 'auto' )
+    {
+      $query = '
+UPDATE '. PLUGINS_TABLE .'
+SET version = "'. COMMUNITY_VERSION .'"
+WHERE id = "'. COMMUNITY_ID .'"';
+      pwg_query($query);
+
+      $pwg_loaded_plugins[COMMUNITY_ID]['version'] = COMMUNITY_VERSION;
+    }
+  }
+}
 
 /* Plugin admin */
 add_event_handler('get_admin_plugin_menu_links', 'community_admin_menu');

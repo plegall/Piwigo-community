@@ -72,6 +72,16 @@ if (isset($_POST['submit_add']))
 
   check_input_parameter('moderated', $_POST, false, '/^(true|false)$/');
 
+  if (-1 != $_POST['nb_photos'])
+  {
+    check_input_parameter('nb_photos', $_POST, false, PATTERN_ID);
+  }
+
+  if (-1 != $_POST['storage'])
+  {
+    check_input_parameter('storage', $_POST, false, PATTERN_ID);
+  }
+
   // creating the permission
   $insert = array(
     'type' => $_POST['who'],
@@ -81,6 +91,8 @@ if (isset($_POST['submit_add']))
     'recursive' => isset($_POST['recursive']) ? 'true' : 'false',
     'create_subcategories' => isset($_POST['create_subcategories']) ? 'true' : 'false',
     'moderated' => $_POST['moderated'],
+    'nb_photos' => $_POST['nb_photos'],
+    'storage' => $_POST['storage'],
     );
 
   // does this permission already exist?
@@ -221,6 +233,8 @@ SELECT
         'recursive' => get_boolean($row['recursive']),
         'create_subcategories' => get_boolean($row['create_subcategories']),
         'moderated' => get_boolean($row['moderated']),
+        'nb_photos' => empty($row['nb_photos']) ? -1 : $row['nb_photos'],
+        'storage' => empty($row['storage']) ? -1 : $row['storage'],
         )
       );
   }
@@ -230,6 +244,8 @@ else
   $template->assign(
     array(
       'moderated' => true,
+      'nb_photos' => -1,
+      'storage' => -1,
       )
     );
 }
@@ -444,7 +460,29 @@ foreach ($permissions as $permission)
   {
     $highlight = true;
   }
-  
+
+  $nb_photos = false;
+  $nb_photos_tooltip = null;
+  if (!empty($permission['nb_photos']) and $permission['nb_photos'] > 0)
+  {
+    $nb_photos = $permission['nb_photos'];
+    $nb_photos_tooltip = sprintf(
+      l10n('up to %d photos (for each user)'),
+      $nb_photos
+      );
+  }
+
+  $storage = false;
+  $storage_tooltip = null;
+  if (!empty($permission['storage']) and $permission['storage'] > 0)
+  {
+    $storage = $permission['storage'];
+    $storage_tooltip = sprintf(
+      l10n('up to %dMB (for each user)'),
+      $storage
+      );
+  }
+
   
   $template->append(
     'permissions',
@@ -455,6 +493,10 @@ foreach ($permissions as $permission)
       'TRUST_TOOLTIP' => $trust_tooltip,
       'RECURSIVE' => get_boolean($permission['recursive']),
       'RECURSIVE_TOOLTIP' => l10n('Apply to sub-albums'),
+      'NB_PHOTOS' => $nb_photos,
+      'NB_PHOTOS_TOOLTIP' => $nb_photos_tooltip,
+      'STORAGE' => $storage,
+      'STORAGE_TOOLTIP' => $storage_tooltip,
       'CREATE_SUBCATEGORIES' => get_boolean($permission['create_subcategories']),
       'U_DELETE' => $admin_base_url.'&amp;delete='.$permission['id'],
       'U_EDIT' => $admin_base_url.'&amp;edit='.$permission['id'],

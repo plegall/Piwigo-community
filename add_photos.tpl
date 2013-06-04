@@ -11,6 +11,48 @@
 
 {footer_script}{literal}
 jQuery(document).ready(function(){
+function sprintf() {
+        var i = 0, a, f = arguments[i++], o = [], m, p, c, x, s = '';
+        while (f) {
+                if (m = /^[^\x25]+/.exec(f)) {
+                        o.push(m[0]);
+                }
+                else if (m = /^\x25{2}/.exec(f)) {
+                        o.push('%');
+                }
+                else if (m = /^\x25(?:(\d+)\$)?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-fosuxX])/.exec(f)) {
+                        if (((a = arguments[m[1] || i++]) == null) || (a == undefined)) {
+                                throw('Too few arguments.');
+                        }
+                        if (/[^s]/.test(m[7]) && (typeof(a) != 'number')) {
+                                throw('Expecting number but found ' + typeof(a));
+                        }
+                        switch (m[7]) {
+                                case 'b': a = a.toString(2); break;
+                                case 'c': a = String.fromCharCode(a); break;
+                                case 'd': a = parseInt(a); break;
+                                case 'e': a = m[6] ? a.toExponential(m[6]) : a.toExponential(); break;
+                                case 'f': a = m[6] ? parseFloat(a).toFixed(m[6]) : parseFloat(a); break;
+                                case 'o': a = a.toString(8); break;
+                                case 's': a = ((a = String(a)) && m[6] ? a.substring(0, m[6]) : a); break;
+                                case 'u': a = Math.abs(a); break;
+                                case 'x': a = a.toString(16); break;
+                                case 'X': a = a.toString(16).toUpperCase(); break;
+                        }
+                        a = (/[def]/.test(m[7]) && m[2] && a >= 0 ? '+'+ a : a);
+                        c = m[3] ? m[3] == '0' ? '0' : m[3].charAt(1) : ' ';
+                        x = m[5] - String(a).length - s.length;
+                        p = m[5] ? str_repeat(c, x) : '';
+                        o.push(s + (m[4] ? a + p : p + a));
+                }
+                else {
+                        throw('Huh ?!');
+                }
+                f = f.substring(m[0].length);
+        }
+        return o.join('');
+}
+
   function checkUploadStart() {
     var nbErrors = 0;
     jQuery("#formErrors").hide();
@@ -166,15 +208,32 @@ jQuery(document).ready(function(){
 
 {/literal}
 {if $upload_mode eq 'html'}
+  {if isset($limit_nb_photos)}
+  var limit_nb_photos = {$limit_nb_photos};
+  {/if}
 {literal}
+
   function addUploadBox() {
     var uploadBox = '<p class="file"><input type="file" size="60" name="image_upload[]"></p>';
     jQuery(uploadBox).appendTo("#uploadBoxes");
+
+    if (typeof limit_nb_photos != 'undefined') {
+      if (jQuery("input[name^=image_upload]").size() >= limit_nb_photos) {
+        jQuery("#addUploadBox").hide();
+      }
+    }
   }
 
   addUploadBox();
 
   jQuery("#addUploadBox A").click(function () {
+    if (typeof limit_nb_photos != 'undefined') {
+      if (jQuery("input[name^=image_upload]").size() >= limit_nb_photos) {
+        alert('tu rigoles mon gaillard !');
+        return false;
+      }
+    }
+
     addUploadBox();
   });
 
@@ -190,6 +249,10 @@ var session_id = '{$session_id}';
 var pwg_token = '{$pwg_token}';
 var buttonText = "{'Select files'|@translate}";
 var sizeLimit = Math.round({$upload_max_filesize} / 1024); /* in KBytes */
+var sumQueueFilesize = 0;
+  {if isset($limit_storage)}
+var limit_storage = {$limit_storage};
+  {/if}
 
 {literal}
   jQuery("#uploadify").uploadify({
@@ -208,9 +271,44 @@ var sizeLimit = Math.round({$upload_max_filesize} / 1024); /* in KBytes */
     'fileTypeExts'   : '*.jpg;*.JPG;*.jpeg;*.JPEG;*.png;*.PNG;*.gif;*.GIF',
     'fileSizeLimit'  : sizeLimit,
     'progressData'   : 'percentage',
+{/literal}
+  {if isset($limit_nb_photos)}
+    'queueSizeLimit' : {$limit_nb_photos},
+  {/if}
+{literal}
     requeueErrors   : false,
-    'onSelect'       : function(event,ID,fileObj) {
+    'onSelect'       : function(file) {
+      console.log('filesize = '+file.size+'bytes');
+
+      if (typeof limit_storage != 'undefined') {
+        if (sumQueueFilesize + file.size > limit_storage) {
+          jQuery.jGrowl(
+            '<p></p>'+sprintf(
+              '{/literal}{'File %s too big (%uMB), quota of %uMB exceeded'|@translate}{literal}',
+              file.name,
+              Math.round(file.size/(1024*1024)),
+              limit_storage/(1024*1024)
+            ),
+            {
+              theme:  'error',
+              header: 'ERROR',
+              life:   4000,
+              sticky: false
+            }
+          );
+
+          jQuery('#uploadify').uploadifyCancel(file.id);
+          return false;
+        }
+        else {
+          sumQueueFilesize += file.size;
+        }
+      }
+
       jQuery("#fileQueue").show();
+    },
+    'onCancel' : function(file) {
+      console.log('The file ' + file.name + ' was cancelled ('+file.size+')');
     },
     'onQueueComplete'  : function(stats) {
       jQuery("input[name=submit_upload]").click();
@@ -431,7 +529,8 @@ p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
     <fieldset>
       <legend>{'Select files'|@translate}</legend>
 
-    <p id="uploadWarningsSummary">{$upload_max_filesize_shorthand}B. {$upload_file_types}. {if isset($max_upload_resolution)}{$max_upload_resolution}Mpx{/if} <a class="showInfo" title="{'Learn more'|@translate}">i</a></p>
+    <p id="uploadWarningsSummary">{$upload_max_filesize_shorthand}B. {$upload_file_types}. {if isset($max_upload_resolution)}{$max_upload_resolution}Mpx.{/if} {$quota_summary}
+<a class="showInfo" title="{'Learn more'|@translate}">i</a></p>
 
     <p id="uploadWarnings">
 {'Maximum file size: %sB.'|@translate|@sprintf:$upload_max_filesize_shorthand}
@@ -439,6 +538,7 @@ p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
   {if isset($max_upload_resolution)}
 {'Approximate maximum resolution: %dM pixels (that\'s %dx%d pixels).'|@translate|@sprintf:$max_upload_resolution:$max_upload_width:$max_upload_height}
   {/if}
+{$quota_details}
     </p>
 
 {if $upload_mode eq 'html'}

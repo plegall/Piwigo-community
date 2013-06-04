@@ -1,38 +1,17 @@
 <?php
+defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
 if (!defined("COMMUNITY_PATH"))
 {
   define('COMMUNITY_PATH', PHPWG_PLUGINS_PATH.basename(dirname(__FILE__)));
 }
 
+include_once(COMMUNITY_PATH.'/include/install.inc.php');
+
 function plugin_install()
 {
-  global $conf, $prefixeTable;
-
-  $query = '
-CREATE TABLE '.$prefixeTable.'community_permissions (
-  id int(11) NOT NULL AUTO_INCREMENT,
-  type varchar(255) NOT NULL,
-  group_id smallint(5) unsigned DEFAULT NULL,
-  user_id smallint(5) DEFAULT NULL,
-  category_id smallint(5) unsigned DEFAULT NULL,
-  recursive enum(\'true\',\'false\') NOT NULL DEFAULT \'true\',
-  create_subcategories enum(\'true\',\'false\') NOT NULL DEFAULT \'false\',
-  moderated enum(\'true\',\'false\') NOT NULL DEFAULT \'true\',
-  PRIMARY KEY (id)
-) ENGINE=MyISAM DEFAULT CHARACTER SET utf8
-;';
-  pwg_query($query);
-
-  $query = '
-CREATE TABLE '.$prefixeTable.'community_pendings (
-  image_id mediumint(8) unsigned NOT NULL,
-  state varchar(255) NOT NULL,
-  added_on datetime NOT NULL,
-  validated_by smallint(5) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARACTER SET utf8
-;';
-  pwg_query($query);
+  community_install();
+  define('community_installed', true);
 }
 
 function plugin_uninstall()
@@ -49,22 +28,10 @@ function plugin_uninstall()
 function plugin_activate()
 {
   global $prefixeTable;
-
-  $are_new_tables_installed = false;
   
-  $query = 'SHOW TABLES;';
-  $result = pwg_query($query);
-  while ($row = pwg_db_fetch_row($result))
+  if (!defined('community_installed')) // a plugin is activated just after its installation
   {
-    if ($prefixeTable.'community_permissions' == $row[0])
-    {
-      $are_new_tables_installed = true;
-    }
-  }
-
-  if (!$are_new_tables_installed)
-  {
-    plugin_install();
+    community_install();
   }
 
   community_get_data_from_core21();

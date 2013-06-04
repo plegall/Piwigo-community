@@ -51,6 +51,8 @@ function community_get_user_permissions($user_id)
     'create_categories' => array(),
     'upload_categories' => array(),
     'permission_ids' => array(),
+    'nb_photos' => 0,
+    'storage' => 0,
     );
   
   // what are the user groups?
@@ -67,7 +69,9 @@ SELECT
     id,
     category_id,
     recursive,
-    create_subcategories
+    create_subcategories,
+    nb_photos,
+    storage
   FROM '.COMMUNITY_PERMISSIONS_TABLE.'
   WHERE (type = \'any_visitor\')';
 
@@ -119,12 +123,40 @@ SELECT
         array_push($return['create_categories'], $row['category_id']);
       }
     }
+
+    if ($return['nb_photos'] != -1)
+    {
+      if (empty($row['nb_photos']) or -1 == $row['nb_photos'])
+      {
+        // that means "no limit"
+        $return['nb_photos'] = -1;
+      }
+      elseif ($row['nb_photos'] > $return['nb_photos'])
+      {
+        $return['nb_photos'] = $row['nb_photos'];
+      }
+    }
+    
+    if ($return['storage'] != -1)
+    {
+      if (empty($row['storage']) or -1 == $row['storage'])
+      {
+        // that means "no limit"
+        $return['storage'] = -1;
+      }
+      elseif ($row['storage'] > $return['storage'])
+      {
+        $return['storage'] = $row['storage'];
+      }
+    }
   }
 
   if (is_admin())
   {
     $return ['upload_whole_gallery'] = true;
     $return ['create_whole_gallery'] = true;
+    $return['nb_photos'] = -1;
+    $return['storage'] = -1;
   }
 
   // these are categories with access permission but considering the user
@@ -268,5 +300,18 @@ function community_get_cache_key()
   {
     return null;
   }
+}
+
+function community_get_user_limits($user_id)
+{
+  // how many photos and storage for this user?
+  $query = '
+SELECT
+    COUNT(id) AS nb_photos,
+    IFNULL(FLOOR(SUM(filesize)/1024), 0) AS storage
+  FROM '.IMAGES_TABLE.'
+  WHERE added_by = '.$user_id.'
+;';
+  return pwg_db_fetch_assoc(pwg_query($query));
 }
 ?>
