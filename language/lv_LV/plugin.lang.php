@@ -59,4 +59,11 @@ $lang['Edit a permission'] = 'Rediģēt atļauju';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Jūsu fotogrāfijas gaida validāciju, administratoriem ir paziņots';
 
 $lang['Set Photo Properties'] = 'Iestatīt Foto īpašības';
+$lang['Maximum number of photos reached (%u)'] = 'Sasniegts maksimālais fotogrāfiju daudzums (%u) ';
+$lang['Available %s.'] = 'Pieejams %s.';
+$lang['Available quota %s.'] = 'Pieejamā kvota %s.';
+$lang['Photo %s rejected.'] = '%s fotogrāfiju noraidīts.';
+$lang['no limit'] = 'bez limita';
+$lang['How much disk space?'] = 'Cik daudz diska vietas?';
+$lang['How many photos?'] = 'Cik daudz fotogrāfiju?';
 ?>
