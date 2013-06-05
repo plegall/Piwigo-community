@@ -63,4 +63,16 @@ $lang['Level 16'] = 'In attesa';
 $lang['Edit a permission'] = 'Modificare un permesso';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Le vostre foto sono in attesa di convalida, gli amministratori sono stati avvisati';
 $lang['Set Photo Properties'] = 'Imposta proprietà immagine';
+$lang['up to %dMB (for each user)'] = 'fino a %dMB (per ogni utente)';
+$lang['up to %d photos (for each user)'] = 'fino a %d foto (per ogni utente)';
+$lang['no limit'] = 'nessun limite';
+$lang['Photo %s rejected.'] = 'Foto %s respinta.';
+$lang['Maximum number of photos reached (%u)'] = 'Numero massimo di foto raggiunto (%u)';
+$lang['How much disk space?'] = 'Quanto spazio su disco?';
+$lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'File %s troppo grande (%uMB), quota di %uMB superata';
+$lang['How many photos?'] = 'Quante foto?';
+$lang['Disk usage quota reached (%uMB)'] = 'Quota di utilizzo del disco ha raggiunto (%uMB)';
+$lang['Available quota %s.'] = 'Quota disponibile %s.';
+$lang['%s out of %s'] = '%s fuori da %s';
+$lang['Available %s.'] = 'Disponibile %s.';
 ?>
