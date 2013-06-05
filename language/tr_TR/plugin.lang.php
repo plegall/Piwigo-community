@@ -59,4 +59,16 @@ $lang['Edit a permission'] = 'Bir izni düzenle';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Fotoğraflarınız onay için bekliyor, yöneticiler bilgilendirildi';
 
 $lang['Set Photo Properties'] = 'Fotoğraf Özelliklerini Ayarla';
+$lang['%s out of %s'] = '%s / %s';
+$lang['up to %dMB (for each user)'] = '%dMB \'a kadar (her kullanıcı için)';
+$lang['up to %d photos (for each user)'] = '%d adet fotoğrafa kadar (her kullanıcı için)';
+$lang['Maximum number of photos reached (%u)'] = 'Azami fotoğraf sayısına ulaşıldı (%u)';
+$lang['no limit'] = 'limitsiz';
+$lang['Photo %s rejected.'] = '%s fotoğrafı red edildi.';
+$lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Dosya %s çok büyük (%uMB), %uMB kotasını aşıyor';
+$lang['How much disk space?'] = 'Disk alanı nedir?';
+$lang['How many photos?'] = 'Kaç adet fotoğraf?';
+$lang['Disk usage quota reached (%uMB)'] = 'Disk kullanım kotasına ulaşıldı (%uMB)';
+$lang['Available quota %s.'] = 'Mevcut kota %s.';
+$lang['Available %s.'] = 'Mevcut %s.';
 ?>
