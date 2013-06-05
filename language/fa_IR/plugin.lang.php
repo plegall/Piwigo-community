@@ -59,4 +59,10 @@ $lang['sub-albums creation'] = 'ساخت زیر آلبوم';
 $lang['uploaded photos are directly displayed in the gallery'] = 'عکس های آپلود شده بطور مستقیم در گالری نمایش داده می شوند';
 $lang['uploaded photos must be validated by an administrator'] = 'عکس های آپلود شده باید بوسیله ی یک مدیر پذیرفته شوند';
 $lang['web size'] = 'وب سایز (Websize)';
+$lang['%s out of %s'] = '%s از %s';
+$lang['How many photos?'] = 'چه تعداد عکس؟';
+$lang['How much disk space?'] = 'چه مقدار فضای دیسک؟';
+$lang['Maximum number of photos reached (%u)'] = 'به بیشترین عداد عکس رسیدید (%u)';
+$lang['Photo %s rejected.'] = 'عکس %s قبول نشد.';
+$lang['no limit'] = 'بدون محدودیت';
 ?>
