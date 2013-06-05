@@ -59,4 +59,16 @@ $lang['sub-albums creation'] = 'alam-albumid tekitatud';
 $lang['uploaded photos are directly displayed in the gallery'] = 'üles laaditud fotod on kohe kuvatud galeriis';
 $lang['uploaded photos must be validated by an administrator'] = 'üles laaditud fotod peavad kinnituse saama administraatorilt';
 $lang['web size'] = 'veebi-suurus';
+$lang['%s out of %s'] = '%s %s-st';
+$lang['Available %s.'] = 'Saadaval %s.';
+$lang['Available quota %s.'] = 'Saadaval piir %s.';
+$lang['Disk usage quota reached (%uMB)'] = 'Ketta kasutuse limiit saavutatud (%uMB)';
+$lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Fail %s on liiga suur (%uMB), %uMB limiit ületatud';
+$lang['How many photos?'] = 'Kui palju pilte?';
+$lang['How much disk space?'] = 'Kui palju ketta ruumi?';
+$lang['Maximum number of photos reached (%u)'] = 'Maksimaalse piltide arvuni (%u)';
+$lang['Photo %s rejected.'] = '%s pilti tagasi lükatu';
+$lang['no limit'] = 'ei ole limiiti';
+$lang['up to %d photos (for each user)'] = 'kuni %d pilti kasutaja kohta';
+$lang['up to %dMB (for each user)'] = 'kuni %dMB kasutaja kohta';
 ?>
