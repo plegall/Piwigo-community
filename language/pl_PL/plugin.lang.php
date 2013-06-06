@@ -72,4 +72,5 @@ $lang['Photo %s rejected.'] = 'Zdjęcie %s zostało odrzucone.';
 $lang['no limit'] = 'brak limitu';
 $lang['up to %d photos (for each user)'] = 'do %d zdjęć (dla każdego użytkownika)';
 $lang['up to %dMB (for each user)'] = 'do %dMB (dla każdego użytkownika)';
+$lang['%s out of %s'] = '%s z %s';
 ?>
