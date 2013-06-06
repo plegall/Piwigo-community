@@ -59,4 +59,16 @@ $lang['Edit a permission'] = 'Edit a permission';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Vaše fotografie čakajú na schválenie, administrátor ich musí schváliť';
 $lang['Edit a permission'] = 'Upraviť prístup';
 $lang['Set Photo Properties'] = 'Nastaviť vlastnosti fotky';
+$lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Súbor %s je príliš veľký (%uMB), kvóta prekročená o %uMB';
+$lang['Disk usage quota reached (%uMB)'] = 'Využitie kvóty disku dosiahne (%uMB)';
+$lang['Available quota %s.'] = 'K dispozícii kvóta %s.';
+$lang['Available %s.'] = 'K dispozícii %s.';
+$lang['%s out of %s'] = '%s z %s';
+$lang['How many photos?'] = 'Koľko fotografií?';
+$lang['up to %dMB (for each user)'] = 'až %dMB (pre každého používateľa)';
+$lang['up to %d photos (for each user)'] = 'až %d fotografií (pre každého používateľa)';
+$lang['Maximum number of photos reached (%u)'] = 'Maximálny počet fotografií dosiahol (% u)';
+$lang['Photo %s rejected.'] = 'Fotka %s odmietnutá.';
+$lang['no limit'] = 'bez limitu';
+$lang['How much disk space?'] = 'Koľko voľného diskového priestoru?';
 ?>
