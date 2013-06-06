@@ -66,4 +66,9 @@ $lang['Photo %s rejected.'] = '%s fotogrāfiju noraidīts.';
 $lang['no limit'] = 'bez limita';
 $lang['How much disk space?'] = 'Cik daudz diska vietas?';
 $lang['How many photos?'] = 'Cik daudz fotogrāfiju?';
+$lang['%s out of %s'] = '%s no %s';
+$lang['Disk usage quota reached (%uMB)'] = 'Sasniegta Diska izmantošanas kvota (%uMB)';
+$lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Fails %s pārāk liels (%uMB),  %uMB kvota pārsniegta';
+$lang['up to %d photos (for each user)'] = 'līdz %d fotogrāfiju (katram lietotājam)';
+$lang['up to %dMB (for each user)'] = 'līdz %dMB (katram lietotājam)';
 ?>
