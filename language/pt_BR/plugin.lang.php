@@ -59,4 +59,16 @@ $lang['sub-albums creation'] = 'Criação de sub-categorias';
 $lang['uploaded photos are directly displayed in the gallery'] = 'Fotos enviadas são  mostradas diretamente na galeria';
 $lang['uploaded photos must be validated by an administrator'] = 'Fotos enviadas devem ser validadas por um administrador';
 $lang['web size'] = 'tamanho para web';
+$lang['%s out of %s'] = '%s fora de %s';
+$lang['Available %s.'] = 'Disponível %s';
+$lang['Available quota %s.'] = 'Cota disponível %s';
+$lang['Disk usage quota reached (%uMB)'] = 'Cota de uso do disco alcançada (%uMB)';
+$lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Arquivo %s muito grande, cota de %uMB excedida';
+$lang['How many photos?'] = 'Quantas fotos?';
+$lang['How much disk space?'] = 'Quanto de espaço em disco?';
+$lang['Maximum number of photos reached (%u)'] = 'Número máximo de fotos alcançada (%u)';
+$lang['Photo %s rejected.'] = 'Foto %s rejeitada.';
+$lang['no limit'] = 'sem limite';
+$lang['up to %d photos (for each user)'] = 'até %d fotos (para cada usuário)';
+$lang['up to %dMB (for each user)'] = 'até %dMB (para cada usuário)';
 ?>
