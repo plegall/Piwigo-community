@@ -71,4 +71,10 @@ $lang['How many photos?'] = 'Kaç adet fotoğraf?';
 $lang['Disk usage quota reached (%uMB)'] = 'Disk kullanım kotasına ulaşıldı (%uMB)';
 $lang['Available quota %s.'] = 'Mevcut kota %s.';
 $lang['Available %s.'] = 'Mevcut %s.';
+$lang['Where should Piwigo create user albums?'] = 'Piwigo kullanıcı albümlerini nerede oluştursun?';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo ilk bağlantı sırasında her kullanıcı için otomatik olarak bir albüm oluşturur';
+$lang['(in addition to user album)'] = '(kullanıcı abümlerine ek olarak)';
+$lang['User albums'] = 'Kullanıcı albümleri';
+$lang['User album only'] = 'Sadece kullanıcı albümü';
+$lang['Gallery root'] = 'Galeri kök alanı';
 ?>
