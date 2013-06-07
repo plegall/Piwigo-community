@@ -73,4 +73,7 @@ $lang['no limit'] = 'brak limitu';
 $lang['up to %d photos (for each user)'] = 'do %d zdjęć (dla każdego użytkownika)';
 $lang['up to %dMB (for each user)'] = 'do %dMB (dla każdego użytkownika)';
 $lang['%s out of %s'] = '%s z %s';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo automatycznie tworzy album dla każdego użytkownika przy pierwszym połączeniu';
+$lang['User albums'] = 'ALbumy użytkownika';
+$lang['Where should Piwigo create user albums?'] = 'Gdzie Piwigo ma tworzyć albumy użytkownika?';
 ?>
