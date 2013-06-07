@@ -31,9 +31,9 @@ include_once(COMMUNITY_PATH.'include/functions_community.inc.php');
 
 define('PHOTOS_ADD_BASE_URL', make_index_url(array('section' => 'add_photos')));
 
-$user_permissions = community_get_user_permissions($user['id']);
+$user_permissions = $user['community_permissions'];
 
-if (count($user_permissions['upload_categories']) == 0 and !$user_permissions ['create_whole_gallery'])
+if (!$user_permissions['community_enabled'])
 {
   redirect(make_index_url());
 }
@@ -392,7 +392,6 @@ if ($user_permissions['storage'] > 0)
   
   if ($remaining_storage <= 0)
   {
-    echo 'limit storage reached<br>';
     // limit reached
     $setup_errors[] = sprintf(
       l10n('Disk usage quota reached (%uMB)'),
@@ -425,7 +424,6 @@ if ($user_permissions['nb_photos'] > 0)
   
   if ($remaining_nb_photos <= 0)
   {
-    echo 'limit nb_photos reached<br>';
     // limit reached
     $setup_errors[] = sprintf(
       l10n('Maximum number of photos reached (%u)'),

@@ -27,9 +27,10 @@ if( !defined("PHPWG_ROOT_PATH") )
 }
 
 include_once(PHPWG_ROOT_PATH.'admin/include/functions.php');
-include_once(PHPWG_ROOT_PATH.'admin/include/tabsheet.class.php');
+include_once(PHPWG_ROOT_PATH.'include/functions_picture.inc.php');
+load_language('plugin.lang', COMMUNITY_PATH);
 
-define('COMMUNITY_BASE_URL', get_root_url().'admin.php?page=plugin-community');
+$admin_base_url = get_root_url().'admin.php?page=plugin-community-config';
 
 // +-----------------------------------------------------------------------+
 // | Check Access and exit when user status is not ok                      |
@@ -38,69 +39,81 @@ define('COMMUNITY_BASE_URL', get_root_url().'admin.php?page=plugin-community');
 check_status(ACCESS_ADMINISTRATOR);
 
 // +-----------------------------------------------------------------------+
-// | Tabs                                                                  |
+// |                                actions                                |
 // +-----------------------------------------------------------------------+
 
-$pendings_label = l10n('Pending Photos');
-if ($page['community_nb_pendings'] > 0)
+if (!empty($_POST))
 {
-  $pendings_label.= ' ('.$page['community_nb_pendings'].')';
+  check_input_parameter('user_albums_parent', $_POST, false, PATTERN_ID);
+
+  $conf['community'] = array(
+    'user_albums' => !empty($_POST['user_albums']),
+    'user_albums_parent' => $_POST['user_albums_parent'],
+    );
+
+  conf_update_param('community', serialize($conf['community']));
+  
+  array_push($page['infos'], l10n('Information data registered in database'));
 }
 
-$tabs = array(
-  array(
-    'code' => 'permissions',
-    'label' => l10n('Upload Permissions'),
-    ),
-  array(
-    'code' => 'pendings',
-    'label' => $pendings_label,
-    ),
-  array(
-    'code' => 'config',
-    'label' => l10n('Configuration'),
-    ),
-  );
+// +-----------------------------------------------------------------------+
+// | template init                                                         |
+// +-----------------------------------------------------------------------+
 
-$tab_codes = array_map(
-  create_function('$a', 'return $a["code"];'),
-  $tabs
-  );
+$template->set_filename('plugin_admin_content', dirname(__FILE__).'/admin_config.tpl');
 
-if (isset($_GET['tab']) and in_array($_GET['tab'], $tab_codes))
+// +-----------------------------------------------------------------------+
+// | form options                                                          |
+// +-----------------------------------------------------------------------+
+
+$template->assign('user_albums', $conf['community']['user_albums']);
+
+if (isset($conf['community']['user_albums_parent']))
 {
-  $page['tab'] = $_GET['tab'];
+  $category_options_selected = $conf['community']['user_albums_parent'];
 }
 else
 {
-  $page['tab'] = $tabs[0]['code'];
+  // is there a "Community" album?
+  $query = '
+SELECT
+    id
+  FROM '.CATEGORIES_TABLE.'
+  WHERE name = \'Community\'
+;';
+  $result = pwg_query($query);
+  while ($row = pwg_db_fetch_assoc($result))
+  {
+    $category_options_selected = $row['id'];
+    break;
+  }
 }
 
-$tabsheet = new tabsheet();
-foreach ($tabs as $tab)
-{
-  $tabsheet->add(
-    $tab['code'],
-    $tab['label'],
-    COMMUNITY_BASE_URL.'-'.$tab['code']
-    );
-}
-$tabsheet->select($page['tab']);
-$tabsheet->assign();
+// list of albums
+$query = '
+SELECT id,name,uppercats,global_rank
+  FROM '.CATEGORIES_TABLE.'
+;';
 
-// +-----------------------------------------------------------------------+
-// |                             template init                             |
-// +-----------------------------------------------------------------------+
+display_select_cat_wrapper(
+  $query,
+  isset($category_options_selected) ? $category_options_selected : array(),
+  'category_options'
+  );
 
-$template->set_filenames(
-  array(
-    'photos_add' => 'photos_add_'.$page['tab'].'.tpl'
+// image level options
+$selected_level = isset($_POST['level']) ? $_POST['level'] : 0;
+$template->assign(
+    array(
+      'level_options'=> get_privacy_level_options(),
+      'level_options_selected' => array($selected_level)
     )
   );
 
+
 // +-----------------------------------------------------------------------+
-// |                             Load the tab                              |
+// | sending html code                                                     |
 // +-----------------------------------------------------------------------+
 
-include(COMMUNITY_PATH.'admin_'.$page['tab'].'.php');
+$template->assign_var_from_handle('ADMIN_CONTENT', 'plugin_admin_content');
 ?>

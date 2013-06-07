@@ -37,7 +37,7 @@ add_event_handler('init', 'community_init');
  */
 function community_init()
 {
-  global $conf, $pwg_loaded_plugins;
+  global $conf, $user, $pwg_loaded_plugins;
 
   // apply upgrade if needed
   if (
@@ -61,6 +61,16 @@ WHERE id = "'. COMMUNITY_ID .'"';
 
       $pwg_loaded_plugins[COMMUNITY_ID]['version'] = COMMUNITY_VERSION;
     }
+  }
+
+  // prepare plugin configuration
+  $conf['community'] = unserialize($conf['community']);
+
+  // TODO: generate permissions in $user['community_permissions'] if ws.php
+  // + remove all calls of community_get_user_permissions related to webservices
+  if (!defined('IN_ADMIN') or !IN_ADMIN)
+  {
+    $user['community_permissions'] = community_get_user_permissions($user['id']);
   }
 }
 
@@ -87,7 +97,7 @@ SELECT
     $style.= 'padding:1px 5px;';
     $style.= '-moz-border-radius:10px;';
     $style.= '-webkit-border-radius:10px;';
-    $style.= '-border-radius:10px;';
+    $style.= 'border-radius:10px;';
     $style.= 'margin-left:5px;';
     
     $name.= '<span style="'.$style.'">'.$page['community_nb_pendings'].'</span>';
@@ -168,9 +178,9 @@ function community_gallery_menu($menu_ref_arr)
 
   // conditional : depending on community permissions, display the "Add
   // photos" link in the gallery menu
-  $user_permissions = community_get_user_permissions($user['id']);
+  $user_permissions = $user['community_permissions'];
 
-  if (count($user_permissions['upload_categories']) == 0 and !$user_permissions ['create_whole_gallery'])
+  if (!$user_permissions['community_enabled'])
   {
     return;
   }

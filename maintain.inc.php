@@ -23,6 +23,12 @@ function plugin_uninstall()
 
   $query = 'DROP TABLE '.$prefixeTable.'community_pendings;';
   pwg_query($query);
+
+  $query = 'ALTER TABLE '.$prefixeTable.'categories drop column community_user;';
+  pwg_query($query);
+
+  // delete configuration
+  pwg_query('DELETE FROM `'. CONFIG_TABLE .'` WHERE param IN ("community", "community_cache_key");');
 }
 
 function plugin_activate()
@@ -240,13 +246,31 @@ SELECT
 function community_create_default_permission()
 {
   global $prefixeTable;
-  
-  // create an album "Community"
-  $category_info = create_virtual_category('Community');
+
+  // is there a "Community" album?
+  $query = '
+SELECT
+    id
+  FROM '.CATEGORIES_TABLE.'
+  WHERE name = \'Community\'
+;';
+  $result = pwg_query($query);
+  while ($row = pwg_db_fetch_assoc($result))
+  {
+    $category_id = $row['id'];
+    break;
+  }
+
+  if (!isset($category_id))
+  {
+    // create an album "Community"
+    $category_info = create_virtual_category('Community');
+    $category_id = $category_info['id'];
+  }
 
   $insert = array(
     'type' => 'any_registered_user',
-    'category_id' => $category_info['id'],
+    'category_id' => $category_id,
     'recursive' => 'true',
     'create_subcategories' => 'true',
     'moderated' => 'true',

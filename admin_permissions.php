@@ -50,6 +50,7 @@ check_status(ACCESS_ADMINISTRATOR);
 
 if (isset($_POST['submit_add']))
 {
+  // echo '<pre>'; print_r($_POST); echo '</pre>';
   if (!in_array($_POST['who'], array_keys($who_options)))
   {
     die('hacking attempt: invalid "who" option');
@@ -82,12 +83,25 @@ if (isset($_POST['submit_add']))
     check_input_parameter('storage', $_POST, false, PATTERN_ID);
   }
 
+  // it is already blocked by Javascript, but an extra check is usefull
+  if ('any_visitor' == $_POST['who'] and -1 == $_POST['category'])
+  {
+    die('hacking attempt: invalid "where" option for this user');
+  }
+
+  if (-1 == $_POST['category'])
+  {
+    unset($_POST['recursive']);
+    unset($_POST['create_subcategories']);
+  }
+
   // creating the permission
   $insert = array(
     'type' => $_POST['who'],
     'group_id' => ('group' == $_POST['who']) ? $_POST['who_group'] : null,
     'user_id' => ('user' == $_POST['who']) ? $_POST['who_user'] : null,
     'category_id' => ($_POST['category'] > 0) ? $_POST['category'] : null,
+    'user_album' => boolean_to_string(-1 == $_POST['category']),
     'recursive' => isset($_POST['recursive']) ? 'true' : 'false',
     'create_subcategories' => isset($_POST['create_subcategories']) ? 'true' : 'false',
     'moderated' => $_POST['moderated'],
@@ -106,6 +120,7 @@ SELECT
     AND user_id '.(isset($insert['user_id']) ? '= '.$insert['user_id'] : 'is null').'
     AND group_id '.(isset($insert['group_id']) ? '= '.$insert['group_id'] : 'is null').'
     AND category_id '.(isset($insert['category_id']) ? '= '.$insert['category_id'] : 'is null').'
+    AND user_album = \''.$insert['user_album'].'\'
 ;';
   $result = pwg_query($query);
   $row = pwg_db_fetch_assoc($result);
@@ -230,6 +245,8 @@ SELECT
         'who_options_selected' => $row['type'],
         'user_options_selected' => $row['user_id'],
         'group_options_selected' => $row['group_id'],
+        'whole_gallery_selected' => empty($row['category_id']) and !get_boolean($row['user_album']),
+        'user_album_selected' => get_boolean($row['user_album']),
         'recursive' => get_boolean($row['recursive']),
         'create_subcategories' => get_boolean($row['create_subcategories']),
         'moderated' => get_boolean($row['moderated']),
@@ -243,6 +260,8 @@ else
 {
   $template->assign(
     array(
+      'whole_gallery_selected' => !$conf['community']['user_albums'],
+      'user_album_selected' => $conf['community']['user_albums'],
       'moderated' => true,
       'nb_photos' => -1,
       'storage' => -1,
@@ -309,6 +328,7 @@ $template->assign(
 $template->assign(
   array(
     'F_ADD_ACTION' => COMMUNITY_BASE_URL.'-'.$page['tab'],
+    'community_conf' => $conf['community'],
     )
   );
 
@@ -417,10 +437,14 @@ SELECT
 
 foreach ($permissions as $permission)
 {
-  $where = l10n('The whole gallery');
-  if (isset($permission['category_id']))
+  $where = l10n('User album only');
+  if (!get_boolean($permission['user_album']))
   {
-    $where = $name_of_category[ $permission['category_id'] ];
+    $where = l10n('The whole gallery');
+    if (isset($permission['category_id']))
+    {
+      $where = $name_of_category[ $permission['category_id'] ];
+    }
   }
 
   $who = l10n('any visitor');

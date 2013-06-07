@@ -23,6 +23,8 @@
 
 function community_get_user_permissions($user_id)
 {
+  // echo __FUNCTION__.' => call for user '.$user_id.'<br>';
+  
   global $conf, $user;
 
   $cache_key = community_get_cache_key();
@@ -48,6 +50,7 @@ function community_get_user_permissions($user_id)
   $return = array(
     'upload_whole_gallery' => false,
     'create_whole_gallery' => false,
+    'user_album' => false,
     'create_categories' => array(),
     'upload_categories' => array(),
     'permission_ids' => array(),
@@ -67,7 +70,9 @@ SELECT
   $query = '
 SELECT
     id,
+    type,
     category_id,
+    user_album,
     recursive,
     create_subcategories,
     nb_photos,
@@ -97,18 +102,21 @@ SELECT
   while ($row = pwg_db_fetch_assoc($result))
   {
     array_push($return['permission_ids'], $row['id']);
-    
-    if (empty($row['category_id']))
-    {
-      $return ['upload_whole_gallery'] = true;
-    }
-    else
-    {
-      array_push($return['upload_categories'], $row['category_id']);
 
-      if ('true' == $row['recursive'])
+    if ('false' == $row['user_album'])
+    {
+      if (empty($row['category_id']))
       {
-        array_push($recursive_categories, $row['category_id']);
+        $return['upload_whole_gallery'] = true;
+      }
+      else
+      {
+        array_push($return['upload_categories'], $row['category_id']);
+
+        if ('true' == $row['recursive'])
+        {
+          array_push($recursive_categories, $row['category_id']);
+        }
       }
     }
 
@@ -148,6 +156,11 @@ SELECT
       {
         $return['storage'] = $row['storage'];
       }
+    }
+
+    if ($conf['community']['user_albums'] and 'any_visitor' != $row['type'])
+    {
+      $return['user_album'] = true;
     }
   }
 
@@ -236,11 +249,79 @@ SELECT
       );
   }
 
+  if ($return['user_album'])
+  {
+    $user_album_category_id = community_get_user_album($user_id);
+
+    if (!empty($user_album_category_id) and !in_array($user_album_category_id, $return['upload_categories']))
+    {
+      array_push($return['upload_categories'], $user_album_category_id);
+    }
+  }
+
+  // is the user allowed to use community upload?
+  if (count($return['upload_categories']) > 0 or $return['create_whole_gallery'] or $return['user_album'])
+  {
+    $return['community_enabled'] = true;
+  }
+  else
+  {
+    $return['community_enabled'] = false;
+  }
+
   $_SESSION['community_user_permissions'] = $return;
   $_SESSION['community_cache_key'] = $cache_key;
   $_SESSION['community_user_id'] = $user_id;
 
+  // echo __FUNCTION__.' => cache reset for user '.$user_id.'<br>';
+  
   return $_SESSION['community_user_permissions'];
+}
+
+/**
+ * return the user album category_id. The album is automatically created if
+ * it does not exist (or has been deleted)
+ */
+function community_get_user_album($user_id)
+{
+  global $conf;
+  
+  $user_album_category_id = null;
+  
+  $query = '
+SELECT *
+  FROM '.CATEGORIES_TABLE.'
+  WHERE community_user = '.$user_id.'
+;';
+  $result = pwg_query($query);
+  while ($row = pwg_db_fetch_assoc($result))
+  {
+    $user_album_category_id = $row['id'];
+    break;
+  }
+
+  if (!isset($user_album_category_id))
+  {
+    $user_infos = getuserdata($user_id, false);
+
+    include_once(PHPWG_ROOT_PATH.'admin/include/functions.php');
+    $category_info = create_virtual_category($user_infos['username'], $conf['community']['user_albums_parent']);
+
+    single_update(
+      CATEGORIES_TABLE,
+      array('community_user' => $user_id),
+      array('id' => $category_info['id'])
+      );
+
+    $user_album_category_id = $category_info['id'];
+
+    // in functions_html::get_cat_display_name_cache we use a cache and this
+    // cache must be reset so that new album is included inside it.
+    global $cache;
+    unset($cache['cat_names']);
+  }
+
+  return $user_album_category_id;
 }
 
 function community_reject_pendings($image_ids)

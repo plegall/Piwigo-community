@@ -59,7 +59,25 @@ $(document).ready(function() {
   $("select[name=who]").change(function () {
     $("[name^=who_]").hide();
     $("[name=who_"+$(this).attr("value")+"]").show();
+    checkWhoOptions();
   });
+
+  function checkWhoOptions() {
+    if ('any_visitor' == $("select[name=who] option:selected").val()) {
+      $("#userAlbumOption").attr("disabled", true);
+      $("#userAlbumInfo").hide();
+
+      if (-1 == $("select[name=category] option:selected").val()) {
+        $("select[name=category]").val("0");
+        checkWhereOptions();
+      }
+    }
+    else {
+      $("#userAlbumOption").attr("disabled", false);
+      $("#userAlbumInfo").show();
+    }
+  }
+  checkWhoOptions();
 
   function checkWhereOptions() {
     var recursive = $("input[name=recursive]");
@@ -68,6 +86,11 @@ $(document).ready(function() {
     if ($("select[name=category] option:selected").val() == 0) {
       $(recursive).attr("disabled", true);
       $(recursive).attr('checked', true);
+    }
+    else if ($("select[name=category] option:selected").val() == -1) {
+      /* user upload only */
+      $(recursive).attr("disabled", true).attr('checked', false);
+      $(create).attr("disabled", true).attr('checked', false);
     }
     else {
       $(recursive).removeAttr("disabled");
@@ -206,10 +229,13 @@ $(document).ready(function() {
     </p>
 
     <p>
-      <strong>{'Where?'|@translate}</strong>
+      <strong>{'Where?'|@translate}</strong> {if $community_conf.user_albums}<em id="userAlbumInfo">{'(in addition to user album)'|@translate}</em>{/if}
       <br>
       <select class="categoryDropDown" name="category">
-        <option value="0" {if not isset($category_options_selected)}selected="selected"{/if}>{'The whole gallery'|@translate}</option>
+{if $community_conf.user_albums}
+        <option value="-1"{if $user_album_selected} selected="selected"{/if} id="userAlbumOption">{'User album only'|@translate}</option>
+{/if}
+        <option value="0"{if $whole_gallery_selected} selected="selected"{/if}>{'The whole gallery'|@translate}</option>
         <option disabled="disabled">------------</option>
         {html_options options=$category_options selected=$category_options_selected}
       </select>

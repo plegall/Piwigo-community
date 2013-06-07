@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS '.$prefixeTable.'community_permissions (
   group_id smallint(5) unsigned DEFAULT NULL,
   user_id smallint(5) DEFAULT NULL,
   category_id smallint(5) unsigned DEFAULT NULL,
+  user_album enum(\'true\',\'false\') NOT NULL DEFAULT \'false\',
   recursive enum(\'true\',\'false\') NOT NULL DEFAULT \'true\',
   create_subcategories enum(\'true\',\'false\') NOT NULL DEFAULT \'false\',
   moderated enum(\'true\',\'false\') NOT NULL DEFAULT \'true\',
@@ -64,6 +65,32 @@ CREATE TABLE IF NOT EXISTS '.$prefixeTable.'community_pendings (
   if (!pwg_db_num_rows($result))
   {     
     pwg_query('ALTER TABLE `'.$prefixeTable .'community_permissions` ADD `storage` INT DEFAULT NULL;');
+  }
+
+  // column community_permissions.user_album added for version 2.5.d
+  $result = pwg_query('SHOW COLUMNS FROM `'.$prefixeTable.'community_permissions` LIKE "user_album";');
+  if (!pwg_db_num_rows($result))
+  {     
+    pwg_query('ALTER TABLE `'.$prefixeTable .'community_permissions` ADD `user_album` enum(\'true\',\'false\') NOT NULL DEFAULT \'false\' after `category_id`;');
+  }
+
+  // column categories.community_user added for version 2.5.d
+  $result = pwg_query('SHOW COLUMNS FROM `'.$prefixeTable.'categories` LIKE "community_user";');
+  if (!pwg_db_num_rows($result))
+  {     
+    pwg_query('ALTER TABLE `'.$prefixeTable .'categories` ADD `community_user`  smallint(5) DEFAULT NULL;');
+  }
+
+  if (!isset($conf['community']))
+  {
+    $community_default_config = serialize(
+      array(
+        'user_albums' => false,
+        )
+      );
+    
+    conf_update_param('community', $community_default_config);
+    $conf['community'] = $community_default_config;
   }
 }
 ?>

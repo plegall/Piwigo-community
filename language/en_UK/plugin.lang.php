@@ -74,4 +74,10 @@ $lang['up to %d photos (for each user)'] = 'up to %d photos (for each user)';
 $lang['up to %dMB (for each user)'] = 'up to %dMB (for each user)';
 $lang['How much disk space?'] = 'How much disk space?';
 $lang['How many photos?'] = 'How many photos?';
+$lang['User albums'] = 'User albums';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo automatically creates an album for each user, on first connection';
+$lang['Where should Piwigo create user albums?'] = 'Where should Piwigo create user albums?';
+$lang['Gallery root'] = 'Gallery root';
+$lang['(in addition to user album)'] = '(in addition to user album)';
+$lang['User album only'] = 'User album only';
 ?>
