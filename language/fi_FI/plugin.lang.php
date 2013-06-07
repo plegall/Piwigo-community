@@ -59,4 +59,15 @@ $lang['Validation page: %s'] = 'Validointisivu: %s';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Kuvasi odottavat hyväksyntää. Ylläpitoa on tiedotettu';
 $lang['Zoom'] = 'Zoomaus';
 $lang['web size'] = 'koko verkossa';
+$lang['(in addition to user album)'] = '(käyttäjän albumin lisäksi)';
+$lang['How many photos?'] = 'Montako kuvaa?';
+$lang['How much disk space?'] = 'Paljonko levytilaa?';
+$lang['Maximum number of photos reached (%u)'] = 'Enimmäismäärä kuvia saavutettu (%u)';
+$lang['Photo %s rejected.'] = 'Kuva %s hylätty.';
+$lang['User album only'] = 'Vain käyttäjän albumi.';
+$lang['User albums'] = 'Käyttäjän albumit';
+$lang['Where should Piwigo create user albums?'] = 'Mihin Piwigon tulee luoda käyttäjien albumit?';
+$lang['no limit'] = 'ei rajoitusta';
+$lang['up to %d photos (for each user)'] = 'enintään %d kuvaa (käyttäjää kohden)';
+$lang['up to %dMB (for each user)'] = 'enintään %dMB (käyttäjää kohden)';
 ?>
