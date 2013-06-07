@@ -71,4 +71,10 @@ $lang['Photo %s rejected.'] = 'Fotografiet %s er afvist.';
 $lang['no limit'] = 'ingen grænse';
 $lang['up to %d photos (for each user)'] = 'op til %d fotografier (for hver bruger)';
 $lang['up to %dMB (for each user)'] = 'op til %dMB (for hver bruger)';
+$lang['(in addition to user album)'] = '(ud over brugeralbum)';
+$lang['Gallery root'] = 'Gallerirod';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo opretter automatisk et album til hver bruger, første gang de logger på';
+$lang['User album only'] = 'Kun brugeralbum';
+$lang['User albums'] = 'Brugeralbum';
+$lang['Where should Piwigo create user albums?'] = 'Hvor skal Piwigo oprette brugeralbum?';
 ?>
