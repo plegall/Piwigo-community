@@ -73,4 +73,10 @@ $lang['How much disk space?'] = '¿Cuánto espacio en disco?';
 $lang['Maximum number of photos reached (%u)'] = 'El número máximo de fotos alcanzado (%u)';
 $lang['Photo %s rejected.'] = 'Foto %s rechazada.';
 $lang['no limit'] = 'sin límite';
+$lang['(in addition to user album)'] = '(además del álbum de usuario)';
+$lang['Gallery root'] = 'Raíz de la galería';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo crea automáticamente un álbum para cada usuario, durante la primera conexión';
+$lang['User album only'] = 'Sólo el álbum de usuario';
+$lang['User albums'] = 'Álbumes de usuarios';
+$lang['Where should Piwigo create user albums?'] = '¿Dónde Piwigo debe crear los álbumes de usuario?';
 ?>
