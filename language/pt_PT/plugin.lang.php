@@ -67,4 +67,22 @@ $lang['Edit a permission'] = 'Editar uma permissão';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Suas fotos estão esperando validação, os administradores foram notificados';
 
 $lang['Set Photo Properties'] = 'Definir as propriedades da foto';
+$lang['%s out of %s'] = '%s de %s';
+$lang['(in addition to user album)'] = '(em adição ao album do utilizador)';
+$lang['Available %s.'] = 'Disponível %s';
+$lang['Available quota %s.'] = 'Quota disponível %s';
+$lang['Disk usage quota reached (%uMB)'] = 'Quota de utilização do disco atingida (%uMB)';
+$lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Arquivo %s muito grande (%uMB), quota de %uMB excedida.';
+$lang['Gallery root'] = 'Caminho da galeria';
+$lang['How many photos?'] = 'Quantas fotos?';
+$lang['How much disk space?'] = 'Quanto espaço em disco?';
+$lang['Maximum number of photos reached (%u)'] = 'Atingido o máximo de fotos (%u)';
+$lang['Photo %s rejected.'] = 'Foto %s rejeitada.';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo , na primeira ligação,cria automáticamente um album para cada utilizador.';
+$lang['User album only'] = 'Apenas o utilizador do album';
+$lang['User albums'] = 'Albuns do utilizador';
+$lang['Where should Piwigo create user albums?'] = 'Onde poderá Piwigo criar albuns do utilizador?';
+$lang['no limit'] = 'sem limite';
+$lang['up to %d photos (for each user)'] = 'até %d fotos (por utilizador)';
+$lang['up to %dMB (for each user)'] = 'até %dMB (por utilizador)';
 ?>

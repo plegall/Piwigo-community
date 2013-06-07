@@ -1,1 +1,1 @@
-Usuários comuns podem adicionar fotos e
+Utilizadores não administradores podem adicionar fotos 
