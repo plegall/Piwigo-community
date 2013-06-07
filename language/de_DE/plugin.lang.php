@@ -74,4 +74,10 @@ $lang['Photo %s rejected.'] = 'Foto %s abgelehnt.';
 $lang['no limit'] = 'Kein Limit';
 $lang['up to %d photos (for each user)'] = 'bis zu %d Fotos (für jeden Benutzer)';
 $lang['up to %dMB (for each user)'] = 'bis zu %dMB (für jeden Benutzer)';
+$lang['(in addition to user album)'] = '(zusätzlich zum Benutzeralbum)';
+$lang['Gallery root'] = 'Galerie Hauptverzeichnis';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Bei der ersten Anmeldung erstellt Piwigo für jeden Benutzer ein Album';
+$lang['User album only'] = 'Nur Benutzeralbum';
+$lang['User albums'] = 'Benutzeralben';
+$lang['Where should Piwigo create user albums?'] = 'Wo soll Piwigo Benutzeralben anlegen?';
 ?>
