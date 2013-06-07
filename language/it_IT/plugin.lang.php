@@ -75,4 +75,10 @@ $lang['Disk usage quota reached (%uMB)'] = 'Quota di utilizzo del disco ha raggi
 $lang['Available quota %s.'] = 'Quota disponibile %s.';
 $lang['%s out of %s'] = '%s fuori da %s';
 $lang['Available %s.'] = 'Disponibile %s.';
+$lang['Where should Piwigo create user albums?'] = 'Dove dovrebbe Piwigo creare albums degli utenti?';
+$lang['User albums'] = 'Albums utente';
+$lang['User album only'] = 'Album utente solamente';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo crea automaticamente un album per ogni utente, al primo collegamento';
+$lang['Gallery root'] = 'Root Galleria';
+$lang['(in addition to user album)'] = '(in aggiunta all\'album utente)';
 ?>
