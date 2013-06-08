@@ -71,4 +71,10 @@ $lang['Disk usage quota reached (%uMB)'] = 'Diska uzokvoto atingiĝis (%uMB)';
 $lang['How many photos?'] = 'Kiom da fotoj?';
 $lang['How much disk space?'] = 'Kiom da diskospaco?';
 $lang['%s out of %s'] = '%s el %s';
+$lang['(in addition to user album)'] = '(krom la uzanta fotaro)';
+$lang['Gallery root'] = 'Galeria radiko';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo aŭtomate kreas fotaron por ĉiu uzanto, je la unua kontekto';
+$lang['User album only'] = 'Nur uzanta fotaro';
+$lang['User albums'] = 'Uzantaj fotaroj';
+$lang['Where should Piwigo create user albums?'] = 'Kie Piwigo kreu uzantajn fotarojn?';
 ?>
