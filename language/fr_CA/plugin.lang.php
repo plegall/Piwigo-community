@@ -63,5 +63,23 @@ $lang['Level 16'] = 'En attente';
 $lang['Edit a permission'] = 'Éditer une permission';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Vos photos sont en attente de validation, les administrateurs sont prévenus';
 
-$lang['Set Photo Properties'] = 'Définir les propriétés de la photo'; 
+$lang['Set Photo Properties'] = 'Définir les propriétés de la photo';
+$lang['Available %s.'] = 'Disponible %s.';
+$lang['Available quota %s.'] = 'Quota disponible %s.';
+$lang['%s out of %s'] = '%s sur %s';
+$lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Fichier %s trop gros (%uMB), quota de %uMB dépassé';
+$lang['Disk usage quota reached (%uMB)'] = 'Quota d\'utilisation disque atteint (%uMB)';
+$lang['Maximum number of photos reached (%u)'] = 'Nombre maximum de photos atteint (%u)';
+$lang['Photo %s rejected.'] = 'Photo %s rejetée.';
+$lang['no limit'] = 'pas de limite';
+$lang['up to %d photos (for each user)'] = 'jusqu\'à %d photos (pour chaque utilisateur)';
+$lang['up to %dMB (for each user)'] = 'jusqu\'à %dMB (pour chaque utilisateur)';
+$lang['How much disk space?'] = 'Combien d\'espace disque ?';
+$lang['How many photos?'] = 'Combien de photos ?';
+$lang['User albums'] = 'Albums utilisateur';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo créée automatiquement un album pour chaque utilisateur, lors de sa première connexion';
+$lang['Where should Piwigo create user albums?'] = 'Où Piwigo doit-il créer les albums utilisateur ?';
+$lang['Gallery root'] = 'Racine de la galerie';
+$lang['(in addition to user album)'] = '(en plus de l\'album utilisateur)';
+$lang['User album only'] = 'Uniquement l\'album utilisateur';
 ?>
