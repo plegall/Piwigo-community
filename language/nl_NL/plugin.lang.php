@@ -76,4 +76,10 @@ $lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Bestand %s te groot (
 $lang['How many photos?'] = 'Hoeveel afbeeldingen?';
 $lang['How much disk space?'] = 'Hoeveel schijfruimte?';
 $lang['Photo %s rejected.'] = 'Afbeelding %s afgewezen.';
+$lang['(in addition to user album)'] = '(in aanvulling op gebruikersalbum)';
+$lang['Gallery root'] = 'Galerie-basis (root)';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo maakt automatisch een album voor elke gebruiker, bij de eerste verbinding';
+$lang['User album only'] = 'Alleen gebruikersalbum';
+$lang['User albums'] = 'Gebruikersalbums';
+$lang['Where should Piwigo create user albums?'] = 'Waar moet Piwigo de gebruikersalbums plaatsen?';
 ?>
