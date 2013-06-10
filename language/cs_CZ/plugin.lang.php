@@ -70,4 +70,10 @@ $lang['Disk usage quota reached (%uMB)'] = 'Využití kvóty disku dosaženo (%u
 $lang['Available quota %s.'] = 'Kvóta k dispozici %s.';
 $lang['Available %s.'] = 'K dispozici %s.';
 $lang['%s out of %s'] = '%s z %s';
+$lang['(in addition to user album)'] = '(kromě alba uživatele)';
+$lang['Gallery root'] = 'Kořen galerie';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo automaticky vytvoří album pro každého uživatele po prvním připojení';
+$lang['User album only'] = 'Pouze uživatelské album';
+$lang['User albums'] = 'Uživatelská alba';
+$lang['Where should Piwigo create user albums?'] = 'Kde má Piwigo vytvářet uživatelská alba?';
 ?>
