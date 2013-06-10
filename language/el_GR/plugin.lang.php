@@ -59,4 +59,22 @@ $lang['Your photos are waiting for validation, administrators have been notified
 $lang['Zoom'] = 'Ζοομ';
 $lang['uploaded photos are directly displayed in the gallery'] = 'Οι φωτογραφίες που ανέβηκαν εμφανίζονται άμεσα στη γκαλερί';
 $lang['web size'] = 'μέγεθος για διαδίκτυο';
+$lang['up to %dMB (for each user)'] = 'έως %dMB (για κάθε χρήστη)';
+$lang['up to %d photos (for each user)'] = 'έως %d φωτογραφίες (για κάθε χρήστη)';
+$lang['no limit'] = 'κανένα όριο';
+$lang['Where should Piwigo create user albums?'] = 'Πού θέλετε το Piwigo να δημιουργήσει λευκώματα χρήστη;';
+$lang['User albums'] = 'Λευκώματα χρήστη';
+$lang['User album only'] = 'Λεύκωμα χρήστη μόνο';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Το Piwigo δημιουργεί αυτόματα ένα άλμπουμ για κάθε χρήστη, στη πρώτη σύνδεση';
+$lang['Photo %s rejected.'] = 'Η Φωτογραφία %s απορρίφθηκε.';
+$lang['Maximum number of photos reached (%u)'] = 'Ο Μέγιστος αριθμός φωτογραφιών επιτεύχθηκε (%u)';
+$lang['How much disk space?'] = 'Πόσο χώρο στο δίσκο;';
+$lang['How many photos?'] = 'Πόσες φωτογραφίες;';
+$lang['Gallery root'] = 'Η Βάση της Γκαλερύ';
+$lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Το αρχείο %s είναι πολύ μεγάλο (%uMB), υπέρβαση ποσόστωσης των %uMB';
+$lang['Available quota %s.'] = 'Διαθέσιμη ποσόστωση %s.';
+$lang['Disk usage quota reached (%uMB)'] = 'Το όριο χρήσης δίσκου ανήλθε σε (%uMB)';
+$lang['Available %s.'] = 'Διαθέσιμο %s.';
+$lang['(in addition to user album)'] = '(πέραν από το λεύκωμα χρήστη)';
+$lang['%s out of %s'] = '%s από τα %s';
 ?>
