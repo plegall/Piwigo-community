@@ -71,4 +71,10 @@ $lang['Disk usage quota reached (%uMB)'] = 'Sasniegta Diska izmantošanas kvota 
 $lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Fails %s pārāk liels (%uMB),  %uMB kvota pārsniegta';
 $lang['up to %d photos (for each user)'] = 'līdz %d fotogrāfiju (katram lietotājam)';
 $lang['up to %dMB (for each user)'] = 'līdz %dMB (katram lietotājam)';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Pirmajā savienošanās reize Piwigo automātiski izveigo albūmu katram lietotājam';
+$lang['Where should Piwigo create user albums?'] = 'Kur Piwigo būtu jāveido lietotāja albūmi?';
+$lang['(in addition to user album)'] = '(pielikumā priekš lietotāja albūma)';
+$lang['User albums'] = 'Lietotāja albūmi';
+$lang['User album only'] = 'Tikai lietotāja albūmi';
+$lang['Gallery root'] = 'Galerijas pamatkatalogs';
 ?>
