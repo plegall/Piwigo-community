@@ -70,4 +70,11 @@ $lang['Where should Piwigo create user albums?'] = 'Mihin Piwigon tulee luoda k�
 $lang['no limit'] = 'ei rajoitusta';
 $lang['up to %d photos (for each user)'] = 'enintään %d kuvaa (käyttäjää kohden)';
 $lang['up to %dMB (for each user)'] = 'enintään %dMB (käyttäjää kohden)';
+$lang['%s out of %s'] = '%s %s:sta';
+$lang['Available %s.'] = 'Vapaana %s.';
+$lang['Available quota %s.'] = 'Kiintiöstä vapaana %s.';
+$lang['Disk usage quota reached (%uMB)'] = 'Levynkäytön kiintiö täynnä (%uMB)';
+$lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Tiedosto %s liian suuri (%uMB), %uMB kiintiö ylitetty';
+$lang['Gallery root'] = 'Gallerian juuritaso';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo luo automaattisesti gallerian jokaiselle käyttäjälle käytön aloituksen yhteydessä';
 ?>
