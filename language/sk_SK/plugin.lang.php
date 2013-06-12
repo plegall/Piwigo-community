@@ -71,4 +71,10 @@ $lang['Maximum number of photos reached (%u)'] = 'Maximálny počet fotografií 
 $lang['Photo %s rejected.'] = 'Fotka %s odmietnutá.';
 $lang['no limit'] = 'bez limitu';
 $lang['How much disk space?'] = 'Koľko voľného diskového priestoru?';
+$lang['Where should Piwigo create user albums?'] = 'Kde Piwigo vytvára albumy používateľa?';
+$lang['User albums'] = 'Albumy používateľa';
+$lang['User album only'] = 'Len album používateľa';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo automaticky vytvorí album pre používateľa pri prvom pripojení';
+$lang['Gallery root'] = 'Hlavný adresár galérie';
+$lang['(in addition to user album)'] = '(okrem albumu používateľa)';
 ?>
