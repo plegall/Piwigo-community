@@ -59,4 +59,5 @@ $lang['%d photos validated'] = '%d 張照片經過驗證';
 $lang['%d photos uploaded into album "%s"'] = '%d 張照片上傳到專輯 "%s"';
 $lang['%d photos uploaded by %s'] = '%d 張照片由 %s 上傳';
 $lang['%d photos rejected'] = '%d 照片被拒絕接受';
+$lang['How much disk space?'] = '有多少磁盤空間？';
 ?>
