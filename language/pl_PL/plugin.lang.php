@@ -76,4 +76,6 @@ $lang['%s out of %s'] = '%s z %s';
 $lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo automatycznie tworzy album dla każdego użytkownika przy pierwszym połączeniu';
 $lang['User albums'] = 'ALbumy użytkownika';
 $lang['Where should Piwigo create user albums?'] = 'Gdzie Piwigo ma tworzyć albumy użytkownika?';
+$lang['Gallery root'] = 'Korzeń galerii';
+$lang['User album only'] = 'Tylko album użytkownika';
 ?>
