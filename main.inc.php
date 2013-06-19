@@ -95,8 +95,6 @@ SELECT
     $style = 'background-color:#666;';
     $style.= 'color:white;';
     $style.= 'padding:1px 5px;';
-    $style.= '-moz-border-radius:10px;';
-    $style.= '-webkit-border-radius:10px;';
     $style.= 'border-radius:10px;';
     $style.= 'margin-left:5px;';
     
