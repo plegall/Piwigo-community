@@ -71,4 +71,10 @@ $lang['Photo %s rejected.'] = '%s pilti tagasi lükatu';
 $lang['no limit'] = 'ei ole limiiti';
 $lang['up to %d photos (for each user)'] = 'kuni %d pilti kasutaja kohta';
 $lang['up to %dMB (for each user)'] = 'kuni %dMB kasutaja kohta';
+$lang['(in addition to user album)'] = '(lisaks kasutaja albumile)';
+$lang['Gallery root'] = 'Galerii juurkataloog';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo loob automaatselt esimesel ühendusel iga kasutaja jaoks galerii';
+$lang['User album only'] = 'Ainult kasutaja album';
+$lang['User albums'] = 'Kasutaja albumind';
+$lang['Where should Piwigo create user albums?'] = 'Kuhu Piwigo peaks looma kasutaja albumi?';
 ?>
