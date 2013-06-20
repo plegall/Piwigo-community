@@ -68,7 +68,7 @@ jQuery(document).ready(function(){
 </div>
 
 {if !empty($photos) }
-<form method="post" action="{$F_ACTION}">
+<form method="post" action="">
   
   <fieldset>
 

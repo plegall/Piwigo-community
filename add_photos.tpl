@@ -203,7 +203,7 @@ function sprintf() {
   jQuery("#showPhotoProperties").click(function() {
     jQuery(this).parent(".showFieldset").hide();
     jQuery("#photoProperties").show();
-    jQuery("input[name=set_photo_properties]").attr('checked', true);
+    jQuery("input[name=set_photo_properties]").prop('checked', true);
   });
 
 {/literal}
@@ -529,7 +529,7 @@ p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
     <fieldset>
       <legend>{'Select files'|@translate}</legend>
 
-    <p id="uploadWarningsSummary">{$upload_max_filesize_shorthand}B. {$upload_file_types}. {if isset($max_upload_resolution)}{$max_upload_resolution}Mpx.{/if} {$quota_summary}
+    <p id="uploadWarningsSummary">{$upload_max_filesize_shorthand}B. {$upload_file_types}. {if isset($max_upload_resolution)}{$max_upload_resolution}Mpx.{/if} {if isset($quota_summary)}{$quota_summary}{/if}
 <a class="showInfo" title="{'Learn more'|@translate}">i</a></p>
 
     <p id="uploadWarnings">
@@ -568,32 +568,20 @@ p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
 
       <p>
         {'Title'|@translate}<br>
-        <input type="text" class="large" name="name" value="{$NAME}">
+        <input type="text" class="large" name="name" value="">
       </p>
 
       <p>
         {'Author'|@translate}<br>
-        <input type="text" class="large" name="author" value="{$AUTHOR}">
+        <input type="text" class="large" name="author" value="">
       </p>
 
       <p>
         {'Description'|@translate}<br>
-        <textarea name="description" id="description" class="description" style="margin:0">{$DESCRIPTION}</textarea>
+        <textarea name="description" id="description" class="description" style="margin:0"></textarea>
       </p>
 
     </fieldset>
-
-{if $enable_permissions}
-    <p class="showFieldset"><a id="showPermissions" href="#">{'Manage Permissions'|@translate}</a></p>
-
-    <fieldset id="permissions" style="display:none">
-      <legend>{'Who can see these photos?'|@translate}</legend>
-
-      <select name="level" size="1">
-        {html_options options=$level_options selected=$level_options_selected}
-      </select>
-    </fieldset>
-{/if}
 
 {if $upload_mode eq 'html'}
     <p>
