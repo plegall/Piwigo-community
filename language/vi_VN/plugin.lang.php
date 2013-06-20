@@ -63,4 +63,9 @@ $lang['Edit a permission'] = 'Điều chỉnh quyền hạn';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Ảnh của bạn đang đợi để xác nhận, Quản trị viên đã được thông báo về điều này';
 
 $lang['Set Photo Properties'] = 'Đặt thuộc tính cho hình';
+$lang['How many photos?'] = 'Bao nhiêu ảnh?';
+$lang['Photo %s rejected.'] = 'Ảnh %s bị từ chối.';
+$lang['User albums'] = 'Bộ ảnh người dùng';
+$lang['Where should Piwigo create user albums?'] = 'Piwigo tạo bộ ảnh người dùng ở đâu?';
+$lang['no limit'] = 'không hạn chế';
 ?>
