@@ -34,26 +34,26 @@ jQuery(document).ready(function(){
   $(".checkPhoto").click(function(event) {
     if (event.target.type !== 'checkbox') {
       var checkbox = $(this).children("input[type=checkbox]");
-      $(checkbox).attr('checked', !$(checkbox).is(':checked'));
+      jQuery(checkbox).prop('checked', !jQuery(checkbox).prop('checked'));
     }
     checkSelectedRows();
   });
 
   $("#selectAll").click(function () {
-    $(".checkPhoto input[type=checkbox]").attr('checked', true);
+    $(".checkPhoto input[type=checkbox]").prop('checked', true);
     checkSelectedRows();
     return false;
   });
 
   $("#selectNone").click(function () {
-    $(".checkPhoto input[type=checkbox]").attr('checked', false);
+    $(".checkPhoto input[type=checkbox]").prop('checked', false);
     checkSelectedRows();
     return false;
   });
 
   $("#selectInvert").click(function () {
     $(".checkPhoto input[type=checkbox]").each(function() {
-      $(this).attr('checked', !$(this).is(':checked'));
+      jQuery(this).prop('checked', !jQuery(this).prop('checked'));
     });
     checkSelectedRows();
     return false;
