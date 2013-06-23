@@ -78,4 +78,5 @@ $lang['User albums'] = 'ALbumy użytkownika';
 $lang['Where should Piwigo create user albums?'] = 'Gdzie Piwigo ma tworzyć albumy użytkownika?';
 $lang['Gallery root'] = 'Korzeń galerii';
 $lang['User album only'] = 'Tylko album użytkownika';
+$lang['(in addition to user album)'] = 'dodatkowo do albumu użytkownika';
 ?>
