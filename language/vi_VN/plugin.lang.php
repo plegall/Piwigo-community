@@ -68,4 +68,17 @@ $lang['Photo %s rejected.'] = 'Ảnh %s bị từ chối.';
 $lang['User albums'] = 'Bộ ảnh người dùng';
 $lang['Where should Piwigo create user albums?'] = 'Piwigo tạo bộ ảnh người dùng ở đâu?';
 $lang['no limit'] = 'không hạn chế';
+$lang['%s out of %s'] = '%s trong số %s';
+$lang['(in addition to user album)'] = '(thêm vào album người dùng)';
+$lang['Available %s.'] = 'Còn có thể dùng %s.';
+$lang['Available quota %s.'] = 'Mức còn có thể dùng %s.';
+$lang['Disk usage quota reached (%uMB)'] = 'Đã đến giới hạn về dung lượng (%uMB)';
+$lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'File %s quá lớn (%uMB), vượt quá giới hạn %uMB';
+$lang['Gallery root'] = 'Gốc thư viện ảnh';
+$lang['How much disk space?'] = 'Cần bao nhiêu dung lượng?';
+$lang['Maximum number of photos reached (%u)'] = 'Số ảnh đã đạt mức tối đa (%u)';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo tự động tạo một album cho mỗi người dùng vào lần kết nối đầu tiên';
+$lang['User album only'] = 'Chỉ album người dùng';
+$lang['up to %d photos (for each user)'] = 'tới %d ảnh (cho mỗi người dùng)';
+$lang['up to %dMB (for each user)'] = 'tới %MB (cho mỗi người dùng)';
 ?>
