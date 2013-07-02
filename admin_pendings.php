@@ -140,6 +140,7 @@ SELECT
     width,
     height,
     rotation,
+    representative_ext,
 
     '.$conf['user_fields']['username'].' AS username
 
