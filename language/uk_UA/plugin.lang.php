@@ -59,4 +59,9 @@ $lang['Which level of trust?'] = 'Який рівень довіри?';
 $lang['Who?'] = 'Хто?';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Ваші фотографії чекають перевірки, адміністратори були повідомлені';
 $lang['Zoom'] = 'Збільшити';
+$lang['Available %s.'] = 'Доступно %s';
+$lang['Available quota %s.'] = 'Доступна квота %s';
+$lang['Gallery root'] = 'Корінь галереї';
+$lang['%s out of %s'] = '%s з %s';
+$lang['(in addition to user album)'] = '(на додаток до альбому)';
 ?>
