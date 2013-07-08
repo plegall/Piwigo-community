@@ -64,4 +64,17 @@ $lang['Available quota %s.'] = 'Доступна квота %s';
 $lang['Gallery root'] = 'Корінь галереї';
 $lang['%s out of %s'] = '%s з %s';
 $lang['(in addition to user album)'] = '(на додаток до альбому)';
+$lang['Disk usage quota reached (%uMB)'] = 'Дискову квоту досягнуто (%u Мбайт)';
+$lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Файл %s занадто великий (%u Мбайт), квоту %u Мбайт перевищено';
+$lang['Maximum number of photos reached (%u)'] = 'Максимальну кількість фотографій досягнуто (%u)';
+$lang['How many photos?'] = 'Скільки фотографій?';
+$lang['How much disk space?'] = 'Скільки місця на диску?';
+$lang['User album only'] = 'Лише альбом користувача';
+$lang['User albums'] = 'Альбоми користувача';
+$lang['Where should Piwigo create user albums?'] = 'Де Piwigo має створити альбоми користувача?';
+$lang['up to %d photos (for each user)'] = 'до %d фотографій (для кожного користувача)';
+$lang['up to %dMB (for each user)'] = 'до %d Мбайт (для кожного користувача)';
+$lang['Photo %s rejected.'] = 'Фото %s відхилено';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'При першому з’єднанні Piwigo автоматично створює альбом для кожного користувача';
+$lang['no limit'] = 'без обмежень';
 ?>
