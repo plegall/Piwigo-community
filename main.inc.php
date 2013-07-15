@@ -657,4 +657,98 @@ function community_uploadify_privacy_level()
     $_POST['level'] = 16;
   }
 }
+
+// +-----------------------------------------------------------------------+
+// | User Albums                                                           |
+// +-----------------------------------------------------------------------+
+
+add_event_handler('loc_end_cat_modify', 'community_set_prefilter_cat_modify', 50);
+// add_event_handler('loc_begin_admin_page', 'community_cat_modify_submit', 45);
+
+// Change the variables used by the function that changes the template
+// add_event_handler('loc_begin_admin_page', 'community_cat_modify_add_vars_to_template');
+
+function community_set_prefilter_cat_modify()
+{
+	global $template, $conf, $category;
+
+  if (!isset($conf['community']['user_albums']) or !$conf['community']['user_albums'])
+  {
+    return;
+  }
+  
+  $template->set_prefilter('album_properties', 'community_cat_modify_prefilter');
+
+  $query = '
+SELECT
+    '.$conf['user_fields']['id'].' AS id,
+    '.$conf['user_fields']['username'].' AS username
+  FROM '.USERS_TABLE.' AS u
+    INNER JOIN '.USER_INFOS_TABLE.' AS uf ON uf.user_id = id
+  WHERE uf.status IN (\'normal\',\'generic\')
+;';
+  $result = pwg_query($query);
+  $users = array();
+  while ($row = pwg_db_fetch_assoc($result))
+  {
+    $users[$row['id']] = $row['username'];
+  }
+
+  $template->assign(
+    array(
+      'community_user_options' => $users,
+      'community_user_selected' => $category['community_user'],
+      )
+    );
+}
+
+function community_cat_modify_prefilter($content, &$smarty)
+{
+	$search = "#<strong>{'Name'#";
+
+	// We use the <tr> from the Creation date, and give them a new <tr>
+	$replacement = '<strong>(Community) {\'Album of user\'|@translate}</strong>
+		<br>
+			<select name="community_user">
+				<option value="">--</option>
+				{html_options options=$community_user_options selected=$community_user_selected}
+			</select>
+      <em>{\'a user can own only one album\'|@translate}</em>
+		</p>
+	
+	</p>
+  <p>
+		<strong>{\'Name\'';
+
+  return preg_replace($search, $replacement, $content);
+}
+
+add_event_handler('loc_begin_cat_modify', 'community_cat_modify_submit');
+function community_cat_modify_submit()
+{
+  global $category, $conf;
+
+  if (!isset($conf['community']['user_albums']) or !$conf['community']['user_albums'])
+  {
+    return;
+  }
+  
+  if (isset($_POST['community_user']))
+  {
+    // echo '<pre>'; print_r($_POST); echo '</pre>'; exit();
+    // only one album for each user, first we remove ownership on any other album
+    single_update(
+      CATEGORIES_TABLE,
+      array('community_user' => null),
+      array('community_user' => $_POST['community_user'])
+      );
+
+    // then we give the album to the user
+    single_update(
+      CATEGORIES_TABLE,
+      array('community_user' => $_POST['community_user']),
+      array('id' => $category['id'])
+      );
+  }
+}
 ?>
