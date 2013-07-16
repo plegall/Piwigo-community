@@ -81,4 +81,6 @@ $lang['User album only'] = 'Album utente solamente';
 $lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo crea automaticamente un album per ogni utente, al primo collegamento';
 $lang['Gallery root'] = 'Root Galleria';
 $lang['(in addition to user album)'] = '(in aggiunta all\'album utente)';
+$lang['a user can own only one album'] = 'un utente può avere un solo album';
+$lang['Album of user'] = 'Album degli utenti';
 ?>
