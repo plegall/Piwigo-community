@@ -77,4 +77,6 @@ $lang['Piwigo automatically creates an album for each user, on first connection'
 $lang['User album only'] = 'Nur uzanta fotaro';
 $lang['User albums'] = 'Uzantaj fotaroj';
 $lang['Where should Piwigo create user albums?'] = 'Kie Piwigo kreu uzantajn fotarojn?';
+$lang['Album of user'] = 'Fotaro de la uzanto';
+$lang['a user can own only one album'] = 'uzanto povas posedi nur unu fotaron';
 ?>
