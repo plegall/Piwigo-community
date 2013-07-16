@@ -81,4 +81,6 @@ $lang['Piwigo automatically creates an album for each user, on first connection'
 $lang['User album only'] = 'Только альбом пользователя';
 $lang['User albums'] = 'Альбомы пользователя';
 $lang['Where should Piwigo create user albums?'] = 'Где Piwigo требуется создать альбомы пользователя?';
+$lang['a user can own only one album'] = 'у пользователя может быть только один собственный альбом';
+$lang['Album of user'] = 'Альбом пользователя';
 ?>
