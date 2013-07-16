@@ -77,4 +77,6 @@ $lang['(in addition to user album)'] = '(pielikumā priekš lietotāja albūma)'
 $lang['User albums'] = 'Lietotāja albūmi';
 $lang['User album only'] = 'Tikai lietotāja albūmi';
 $lang['Gallery root'] = 'Galerijas pamatkatalogs';
+$lang['a user can own only one album'] = 'lietotājam var būt tikai viens albūms';
+$lang['Album of user'] = 'Lietotāja Albūms';
 ?>
