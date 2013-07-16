@@ -28,7 +28,7 @@ $lang['any registered user'] = 'iedere geregistreerde gebruiker';
 $lang['a specific user'] = 'een specifieke gebruiker';
 $lang['a group'] = 'een groep';
 $lang['Where?'] = 'Waar?';
-$lang['The whole gallery'] = 'De hele galerij';
+$lang['The whole gallery'] = 'De hele galerie';
 $lang['ability to create sub-albums'] = 'Mogelijkheid om subalbums te maken';
 $lang['Which level of trust?'] = 'Welk niveau van vertrouwen?';
 $lang['sub-albums creation'] = 'aanmaken van subalbums ';
@@ -41,7 +41,7 @@ $lang['%s (the group)'] = '%s (de groep)';
 $lang['low trust'] = 'laag vertrouwen';
 $lang['uploaded photos must be validated by an administrator'] = 'geuploade afbeeldingen moeten worden bevestigd door een administrator';
 $lang['high trust'] = 'hoog vertrouwen';
-$lang['uploaded photos are directly displayed in the gallery'] = 'geuploade afbeeldingen worden meteen weergegeven in de galerij';
+$lang['uploaded photos are directly displayed in the gallery'] = 'geuploade afbeeldingen worden meteen weergegeven in de galerie';
 $lang['%d photos validated'] = '%d afbeeldingen bevestigd';
 $lang['%d photos rejected'] = '%d afbeeldingen geweigerd';
 $lang['web size'] = 'webformaat';
@@ -56,7 +56,7 @@ $lang['No album, this photo is orphan'] = 'Geen album, deze afbeelding is wees';
 
 $lang['Cancel'] = 'Annuleer';
 $lang['Permission updated'] = 'Toestemming bijgewerkt';
-$lang['Delete permission'] = 'Verwijder permissie';
+$lang['Delete permission'] = 'Verwijder toestemming';
 $lang['%u pending photos'] = '%u afbeeldingen in de wachtrij';
 $lang['Level 16'] = 'In de wachtrij';
 $lang['Edit a permission'] = 'Wijzig een toestemming';
@@ -82,4 +82,6 @@ $lang['Piwigo automatically creates an album for each user, on first connection'
 $lang['User album only'] = 'Alleen gebruikersalbum';
 $lang['User albums'] = 'Gebruikersalbums';
 $lang['Where should Piwigo create user albums?'] = 'Waar moet Piwigo de gebruikersalbums plaatsen?';
+$lang['Album of user'] = 'Album van gebruiker';
+$lang['a user can own only one album'] = 'Een gebruiker kan maar van één album eigenaar zijn';
 ?>
