@@ -77,4 +77,6 @@ $lang['(in addition to user album)'] = '(kullanıcı abümlerine ek olarak)';
 $lang['User albums'] = 'Kullanıcı albümleri';
 $lang['User album only'] = 'Sadece kullanıcı albümü';
 $lang['Gallery root'] = 'Galeri kök alanı';
+$lang['Album of user'] = 'Kullanıcının albümü';
+$lang['a user can own only one album'] = 'bir kullanıcı sadece bir albüme sahip olabilir';
 ?>
