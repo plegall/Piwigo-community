@@ -77,4 +77,6 @@ $lang['Disk usage quota reached (%uMB)'] = 'Το όριο χρήσης δίσκ�
 $lang['Available %s.'] = 'Διαθέσιμο %s.';
 $lang['(in addition to user album)'] = '(πέραν από το λεύκωμα χρήστη)';
 $lang['%s out of %s'] = '%s από τα %s';
+$lang['a user can own only one album'] = 'Ο χρήστης μπορεί να έχει μόνο ένα λεύκωμα';
+$lang['Album of user'] = 'Λεύκωμα του χρήστη';
 ?>
