@@ -77,4 +77,6 @@ $lang['User album only'] = 'Len album používateľa';
 $lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo automaticky vytvorí album pre používateľa pri prvom pripojení';
 $lang['Gallery root'] = 'Hlavný adresár galérie';
 $lang['(in addition to user album)'] = '(okrem albumu používateľa)';
+$lang['a user can own only one album'] = 'používateľ môže mať len jeden album';
+$lang['Album of user'] = 'Album používateľa';
 ?>
