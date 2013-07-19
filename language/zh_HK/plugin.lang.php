@@ -78,4 +78,6 @@ $lang['File %s too big (%uMB), quota of %uMB exceeded'] = '檔案 %s 太大 (%uM
 $lang['Gallery root'] = '圖片庫主目錄';
 $lang['Hi administrators,'] = '管理員你好，';
 $lang['How many photos?'] = '幾多張相片？';
+$lang['Album of user'] = '用戶相簿';
+$lang['a user can own only one album'] = '用戶只可擁有一個相簿';
 ?>
