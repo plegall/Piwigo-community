@@ -77,4 +77,6 @@ $lang['%s out of %s'] = '%d de %s';
 $lang['Available %s.'] = 'Disponible %s.';
 $lang['Available quota %s.'] = 'Quota disponible %s.';
 $lang['Disk usage quota reached (%uMB)'] = 'Quota d\'ús de disc aconseguida (%u MB)';
+$lang['Album of user'] = 'Àlbum d\'usuari';
+$lang['a user can own only one album'] = 'un usuari només pot tenir un àlbum';
 ?>
