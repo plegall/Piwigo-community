@@ -76,4 +76,6 @@ $lang['no limit'] = 'без лимит';
 $lang['(in addition to user album)'] = '(в допълнение към потребителския албум)';
 $lang['Available quota %s.'] = 'Налични части %s.';
 $lang['Available %s.'] = 'Налични %s.';
+$lang['a user can own only one album'] = 'потребителя може да има само един албум';
+$lang['Album of user'] = 'Албум на потребителя';
 ?>
