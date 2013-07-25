@@ -81,4 +81,6 @@ $lang['Piwigo automatically creates an album for each user, on first connection'
 $lang['User album only'] = 'Chỉ album người dùng';
 $lang['up to %d photos (for each user)'] = 'tới %d ảnh (cho mỗi người dùng)';
 $lang['up to %dMB (for each user)'] = 'tới %MB (cho mỗi người dùng)';
+$lang['Album of user'] = 'Album của người dùng';
+$lang['a user can own only one album'] = 'một người dùng chỉ có thể sở hữu một album';
 ?>
