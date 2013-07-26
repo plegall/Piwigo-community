@@ -53,8 +53,8 @@ $lang['a specific user'] = '特定的用户';
 $lang['ability to create sub-albums'] = '允许创建子相册';
 $lang['any registered user'] = '任何注册用户';
 $lang['any visitor'] = '任何访问者';
-$lang['high trust'] = '高级';
-$lang['low trust'] = '低级';
+$lang['high trust'] = '高信任级';
+$lang['low trust'] = '低信任级';
 $lang['sub-albums creation'] = '创建子相册';
 $lang['uploaded photos are directly displayed in the gallery'] = '上传图片后直接显示于相册';
 $lang['uploaded photos must be validated by an administrator'] = '上传图片后须经管理员审核';
@@ -77,4 +77,6 @@ $lang['Available quota %s.'] = '可用配额 %s.';
 $lang['Disk usage quota reached (%uMB)'] = '已达磁盘配额限制(%uMB)';
 $lang['File %s too big (%uMB), quota of %uMB exceeded'] = '文件 %s 过大 (%uMB)，超过了 %uMB 的限制';
 $lang['Gallery root'] = '相册根目录';
+$lang['a user can own only one album'] = '一个用户只能拥有一个相册';
+$lang['Album of user'] = '用户相册';
 ?>
