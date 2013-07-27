@@ -77,4 +77,6 @@ $lang['Where should Piwigo create user albums?'] = '您想要 Piwigo 將使用�
 $lang['no limit'] = '無限制';
 $lang['up to %d photos (for each user)'] = '最多 %d 張照片 (每位使用者)';
 $lang['up to %dMB (for each user)'] = '最多 %dMB (每位使用者)';
+$lang['Album of user'] = '用戶相冊';
+$lang['a user can own only one album'] = '一個用戶只能擁有一個相冊';
 ?>
