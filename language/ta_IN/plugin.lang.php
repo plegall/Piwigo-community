@@ -59,4 +59,5 @@ $lang['Permission removed'] = 'அனுமதி நீக்கப்பட்
 $lang['Permission updated'] = 'அனுமதி புதுப்பிக்கப்பட்டது';
 $lang['Set Photo Properties'] = 'புகைப்பட பண்புகள் அமைக்க';
 $lang['The whole gallery'] = 'முழு காட்சியகத் தொகுப்பு';
+$lang['Album of user'] = 'பயனரின் ஆல்பம்';
 ?>
