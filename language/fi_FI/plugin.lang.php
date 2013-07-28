@@ -77,4 +77,6 @@ $lang['Disk usage quota reached (%uMB)'] = 'Levynkäytön kiintiö täynnä (%uM
 $lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Tiedosto %s liian suuri (%uMB), %uMB kiintiö ylitetty';
 $lang['Gallery root'] = 'Gallerian juuritaso';
 $lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo luo automaattisesti gallerian jokaiselle käyttäjälle käytön aloituksen yhteydessä';
+$lang['Album of user'] = 'Albumin omistaja';
+$lang['a user can own only one album'] = 'käyttäjä voi omistaa vain yhden albumin';
 ?>
