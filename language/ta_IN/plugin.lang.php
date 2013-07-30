@@ -60,4 +60,24 @@ $lang['Permission updated'] = 'அனுமதி புதுப்பிக்
 $lang['Set Photo Properties'] = 'புகைப்பட பண்புகள் அமைக்க';
 $lang['The whole gallery'] = 'முழு காட்சியகத் தொகுப்பு';
 $lang['Album of user'] = 'பயனரின் ஆல்பம்';
+$lang['Available %s.'] = 'கிடைக்கும் %கள்.';
+$lang['up to %d photos (for each user)'] = 'வரை% d புகைப்படங்கள் (ஒவ்வொரு பயனர்) செய்ய';
+$lang['up to %dMB (for each user)'] = 'வரை% d எம்பி வேண்டும் (ஒவ்வொரு பயனர்)';
+$lang['no limit'] = 'இல்லை வரம்பு';
+$lang['a user can own only one album'] = 'ஒரு பயனர் ஒரே ஒரு ஆல்பத்தை சொந்தமாக முடியும்';
+$lang['Where should Piwigo create user albums?'] = 'எங்கே Piwigo பயனரின் ஆல்பங்களை உருவாக்க வேண்டும்?';
+$lang['User albums'] = 'பயனர் ஆல்பங்கள்';
+$lang['User album only'] = 'பயனர் ஆல்பம் மட்டுமே';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo தன்னியக்கமாக முதல் இணைப்பின் மீது, ஒவ்வொரு பயனருக்கு ஒரு ஆல்பத்தை உருவாக்குகிறது';
+$lang['Photo %s rejected.'] = 'புகைப்படம் %s  நிராகரிக்கப்பட்டது.';
+$lang['How much disk space?'] = 'எவ்வளவு வட்டு, இடம்?';
+$lang['Maximum number of photos reached (%u)'] = 'புகைப்படங்கள் அதிகபட்ச எண்ணிக்கையான (% u) எட்டியது';
+$lang['How many photos?'] = 'எத்தனை புகைப்படங்கள்?';
+$lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'கோப்பு% கள் மிக பெரிய (% u எம்பி),% u எம்பி என்ற வரம்பை தாண்டியது';
+$lang['Gallery root'] = '
+கேலரி மூல';
+$lang['Disk usage quota reached (%uMB)'] = 'வட்டு பயன்பாடு ஒதுக்கீடு (% u எம்பி) எட்டியது';
+$lang['Available quota %s.'] = 'கிடைக்கும் ஒதுக்கீடு% கள்';
+$lang['%s out of %s'] = '% ரன் %';
+$lang['(in addition to user album)'] = '(பயனர் ஆல்பம் கூடுதலாக)';
 ?>
