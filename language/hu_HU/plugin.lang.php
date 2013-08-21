@@ -61,4 +61,19 @@ $lang['Edit a permission'] = 'Engedély módosítása';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'A kép közzétételét engedélyezni kell, az adminisztrátort értesítettük';
 
 $lang['Set Photo Properties'] = 'Kép adatainak megadása';
+$lang['Where should Piwigo create user albums?'] = 'Hol hozza létre Piwigo a felhasználói albumokat?';
+$lang['a user can own only one album'] = 'egy felhasználóhoz csak egy album tartozhat';
+$lang['up to %d photos (for each user)'] = 'legfeljebb %d kép (felhasználónként)';
+$lang['no limit'] = 'nincs határ';
+$lang['up to %dMB (for each user)'] = 'legfeljebb %dMB (felhasználónként)';
+$lang['User albums'] = 'Felhasználói albumok';
+$lang['Photo %s rejected.'] = 'Kép %s visszautasítva.';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo automatikusan létrehoz egy albumot minden felhasználónak az első bejelentkezés után.';
+$lang['Maximum number of photos reached (%u)'] = 'Elérte a maximálisan feltölthető képek számát (%u)';
+$lang['How much disk space?'] = 'Mekkora tárhely?';
+$lang['How many photos?'] = 'Hány darab kép?';
+$lang['Available %s.'] = 'Rendelkezésre álló %';
+$lang['Available quota %s.'] = 'Rendelkezésre álló kvóta %';
+$lang['Disk usage quota reached (%uMB)'] = 'A rendelkezére álló tárhely megtelt (%uMB)';
+$lang['%s out of %s'] = '% a %ból';
 ?>
