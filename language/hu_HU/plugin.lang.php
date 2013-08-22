@@ -76,4 +76,9 @@ $lang['Available %s.'] = 'Rendelkezésre álló %';
 $lang['Available quota %s.'] = 'Rendelkezésre álló kvóta %';
 $lang['Disk usage quota reached (%uMB)'] = 'A rendelkezére álló tárhely megtelt (%uMB)';
 $lang['%s out of %s'] = '% a %ból';
+$lang['(in addition to user album)'] = '(valamint a felhasználói albumhoz)';
+$lang['Gallery root'] = 'Galéria gyökérkönyvtára';
+$lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Fájl %s túl nagy (%uMB), %uMB kvóta túllépve';
+$lang['User album only'] = 'Csak felhasználói album';
+$lang['Album of user'] = 'Felhasználó albuma';
 ?>
