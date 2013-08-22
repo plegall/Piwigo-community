@@ -77,4 +77,6 @@ $lang['Where should Piwigo create user albums?'] = 'Kje lahko Piwigo kreira upor
 $lang['no limit'] = 'ni omejitev';
 $lang['up to %d photos (for each user)'] = 'do %d fotografij (na uporabnika)';
 $lang['up to %dMB (for each user)'] = 'do %dMB (na uporabnika)';
+$lang['Album of user'] = 'Album uporabnika';
+$lang['a user can own only one album'] = 'uporabnik ima lahko le en album';
 ?>
