@@ -76,4 +76,6 @@ $lang['Piwigo automatically creates an album for each user, on first connection'
 $lang['User album only'] = 'Pouze uživatelské album';
 $lang['User albums'] = 'Uživatelská alba';
 $lang['Where should Piwigo create user albums?'] = 'Kde má Piwigo vytvářet uživatelská alba?';
+$lang['Album of user'] = 'Album uživatele';
+$lang['a user can own only one album'] = 'uživatel může vlastnit pouze jedno album';
 ?>
