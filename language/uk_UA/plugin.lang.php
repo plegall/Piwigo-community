@@ -77,4 +77,6 @@ $lang['up to %dMB (for each user)'] = 'до %d Мбайт (для кожного
 $lang['Photo %s rejected.'] = 'Фото %s відхилено';
 $lang['Piwigo automatically creates an album for each user, on first connection'] = 'При першому з’єднанні Piwigo автоматично створює альбом для кожного користувача';
 $lang['no limit'] = 'без обмежень';
+$lang['Album of user'] = 'Альбом користувача';
+$lang['a user can own only one album'] = 'користувач може мати тільки одним альбомом';
 ?>
