@@ -77,4 +77,6 @@ $lang['Delete permission'] = 'Panaikinti leidimus';
 $lang['Disk usage quota reached (%uMB)'] = 'Viršyta disko kvota (%uMB)';
 $lang['Edit a permission'] = 'Redaguoti leidimus';
 $lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Failas %s per didelis (%uMB), kai kvota yra %uMB';
+$lang['Album of user'] = 'Vartotojo albumas';
+$lang['a user can own only one album'] = 'vartotojas gali turėti tik vieną albumą';
 ?>
