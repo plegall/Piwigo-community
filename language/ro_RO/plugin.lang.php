@@ -77,4 +77,6 @@ $lang['User albums'] = 'Albumele utilizatorilor';
 $lang['Available quota %s.'] = 'Cotă disponibilă %s.';
 $lang['Disk usage quota reached (%uMB)'] = 'Cota de utilizare de disc a fost atinsă (%uMB)';
 $lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Fișierul %s este prea mare (%uMB), cota de %uMB a fost depășită';
+$lang['Album of user'] = 'Albumul utilizatorului';
+$lang['a user can own only one album'] = 'un utilizator poate deține numai un singur album';
 ?>
