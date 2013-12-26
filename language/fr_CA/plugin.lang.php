@@ -82,4 +82,6 @@ $lang['Where should Piwigo create user albums?'] = 'Où Piwigo doit-il créer le
 $lang['Gallery root'] = 'Racine de la galerie';
 $lang['(in addition to user album)'] = '(en plus de l\'album utilisateur)';
 $lang['User album only'] = 'Uniquement l\'album utilisateur';
+$lang['Album of user'] = 'Album de l\'utilisateur';
+$lang['a user can own only one album'] = 'un utilisateur ne peut posséder qu\'un seul album';
 ?>
