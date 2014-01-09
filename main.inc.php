@@ -43,7 +43,7 @@ function community_init()
   if (
     COMMUNITY_VERSION == 'auto' or
     $pwg_loaded_plugins[COMMUNITY_ID]['version'] == 'auto' or
-    version_compare($pwg_loaded_plugins[COMMUNITY_ID]['version'], COMMUNITY_VERSION, '<')
+    safe_version_compare($pwg_loaded_plugins[COMMUNITY_ID]['version'], COMMUNITY_VERSION, '<')
   )
   {
     // call install function
