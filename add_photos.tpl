@@ -268,7 +268,7 @@ var limit_storage = {$limit_storage};
     'auto'           : false,
     'multi'          : true,
     'fileTypeDesc'   : 'Photo files',
-    'fileTypeExts'   : '*.jpg;*.JPG;*.jpeg;*.JPEG;*.png;*.PNG;*.gif;*.GIF',
+    'fileTypeExts'   : '{/literal}{$uploadify_fileTypeExts}{literal}',
     'fileSizeLimit'  : sizeLimit,
     'progressData'   : 'percentage',
 {/literal}

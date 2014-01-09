@@ -380,6 +380,44 @@ $template->set_filenames(array('add_photos' => dirname(__FILE__).'/add_photos.tp
 
 include_once(PHPWG_ROOT_PATH.'admin/include/photos_add_direct_prepare.inc.php');
 
+if (isset($conf['upload_form_all_types']) and $conf['upload_form_all_types'])
+{
+  $upload_file_types = $conf['file_ext'];
+}
+else
+{
+  $upload_file_types = $conf['picture_ext'];
+}
+
+$unique_exts = array_unique(array_map('strtolower', $upload_file_types));
+
+$is_windows = true;
+if (stripos($_SERVER['HTTP_USER_AGENT'], 'Win') === false)
+{
+  $is_windows = false;
+}
+
+$uploadify_exts = array();
+foreach ($unique_exts as $ext)
+{
+  $uploadify_exts[] = $ext;
+
+  // Windows is not case sensitive and there is a bug with Firefox on
+  // Windows: the list of extensions is truncated and last extensions are
+  // not taken into account, so we have to make it as short as possible.
+  if (!$is_windows)
+  {
+    $uploadify_exts[] = strtoupper($ext);
+  }
+}
+
+$template->assign(
+  array(
+    'upload_file_types' => implode(', ', $unique_exts),
+    'uploadify_fileTypeExts' => implode(';', prepend_append_array_items($uploadify_exts, '*.', '')),
+    )
+  );
+
 $quota_available = array(
   'summary' => array(),
   'details' => array(),
