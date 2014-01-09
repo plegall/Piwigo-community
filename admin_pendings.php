@@ -121,6 +121,28 @@ $template->set_filenames(
 // | pending photos list                                                   |
 // +-----------------------------------------------------------------------+
 
+// just in case (because we had a bug in Community plugin up to version
+// 2.5.c) let's remove rows in community_pendings table if related photos
+// has been deleted
+$query = '
+SELECT
+    image_id
+  FROM '.COMMUNITY_PENDINGS_TABLE.'
+    LEFT JOIN '.IMAGES_TABLE.' ON id = image_id
+  WHERE id IS NULL
+;';
+$to_delete = array_from_query($query, 'image_id');
+
+if (count($to_delete) > 0)
+{
+  $query = '
+DELETE
+  FROM '.COMMUNITY_PENDINGS_TABLE.'
+  WHERE image_id IN ('.implode(',', $to_delete).')
+;';
+  pwg_query($query);
+}
+
 $list = array();
 
 $query = '

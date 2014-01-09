@@ -84,6 +84,7 @@ function community_admin_menu($menu)
 SELECT
     COUNT(*)
   FROM '.COMMUNITY_PENDINGS_TABLE.'
+    JOIN '.IMAGES_TABLE.' ON image_id = id
   WHERE state = \'moderation_pending\'
 ;';
   $result = pwg_query($query);
@@ -641,6 +642,17 @@ DELETE
   pwg_query($query);
   
   community_update_cache_key();
+}
+
+add_event_handler('delete_elements', 'community_delete_elements');
+function community_delete_elements($image_ids)
+{
+  $query = '
+DELETE
+  FROM '.COMMUNITY_PENDINGS_TABLE.'
+  WHERE image_id IN ('.implode(',', $image_ids).')
+;';
+  pwg_query($query);
 }
 
 add_event_handler('invalidate_user_cache', 'community_refresh_cache_update_time');
