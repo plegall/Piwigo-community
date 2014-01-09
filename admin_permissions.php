@@ -284,7 +284,7 @@ SELECT
     '.$conf['user_fields']['id'].' AS id,
     '.$conf['user_fields']['username'].' AS username
   FROM '.USERS_TABLE.' AS u
-    INNER JOIN '.USER_INFOS_TABLE.' AS uf ON uf.user_id = id
+    INNER JOIN '.USER_INFOS_TABLE.' AS uf ON uf.user_id = u.'.$conf['user_fields']['id'].'
   WHERE uf.status IN (\'normal\',\'generic\')
 ;';
 $result = pwg_query($query);
