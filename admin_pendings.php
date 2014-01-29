@@ -254,7 +254,7 @@ foreach ($rows as $row)
       'NAME' => $row['name'],
       'DIMENSIONS' => $dimensions,
       'FILE' => $row['file'],
-      'DATE_CREATION' => format_date($row['date_creation']),
+      'DATE_CREATION' => empty($row['date_creation']) ? l10n('N/A') : format_date($row['date_creation']),
       'ALBUM' => $album,
       )
     );
