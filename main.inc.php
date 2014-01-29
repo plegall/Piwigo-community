@@ -206,26 +206,28 @@ function community_gallery_menu($menu_ref_arr)
 }
 
 
-add_event_handler('ws_invoke_allowed', 'community_switch_user_to_admin', EVENT_HANDLER_PRIORITY_NEUTRAL, 3);
-function community_switch_user_to_admin($res, $methodName, $params)
+add_event_handler('ws_add_methods', 'community_switch_user_to_admin', EVENT_HANDLER_PRIORITY_NEUTRAL+5);
+function community_switch_user_to_admin($arr)
 {
   global $user, $community;
 
+  $service = &$arr[0];
+
   if (is_admin())
   {
-    return $res;
+    return;
   }
   
-  $community = array('method' => $methodName);
+  $community = array('method' => $_REQUEST['method']);
 
   if ('pwg.images.addSimple' == $community['method'])
   {
-    $community['category'] = $params['category'];
+    $community['category'] = $_REQUEST['category'];
   }
   elseif ('pwg.images.add' == $community['method'])
   {
-    $community['category'] = $params['categories'];
-    $community['md5sum'] = $params['original_sum'];
+    $community['category'] = $_REQUEST['categories'];
+    $community['md5sum'] = $_REQUEST['original_sum'];
   }
 
   // $print_params = $params;
@@ -238,7 +240,7 @@ function community_switch_user_to_admin($res, $methodName, $params)
 
   if (count($user_permissions['upload_categories']) == 0 and !$user_permissions ['create_whole_gallery'])
   {
-    return $res;
+    return;
   }
 
   // if level of trust is low, then we have to set level to 16
@@ -253,21 +255,21 @@ function community_switch_user_to_admin($res, $methodName, $params)
   $methods[] = 'pwg.images.checkFiles';
   $methods[] = 'pwg.images.setInfo';
 
-  if (in_array($methodName, $methods))
+  if (in_array($community['method'], $methods))
   {
     $user['status'] = 'admin';
   }
 
-  if ('pwg.categories.add' == $methodName)
+  if ('pwg.categories.add' == $community['method'])
   {
-    if (in_array($params['parent'], $user_permissions['create_categories'])
+    if (in_array($_REQUEST['parent'], $user_permissions['create_categories'])
         or $user_permissions['create_whole_gallery'])
     {
       $user['status'] = 'admin';
     }
   }
 
-  return $res;
+  return;
 }
 
 add_event_handler('ws_add_methods', 'community_ws_replace_methods', EVENT_HANDLER_PRIORITY_NEUTRAL+5);
