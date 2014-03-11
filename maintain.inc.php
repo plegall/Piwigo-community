@@ -264,6 +264,7 @@ SELECT
   if (!isset($category_id))
   {
     // create an album "Community"
+    include_once(PHPWG_ROOT_PATH.'admin/include/functions.php');
     $category_info = create_virtual_category('Community');
     $category_id = $category_info['id'];
   }
