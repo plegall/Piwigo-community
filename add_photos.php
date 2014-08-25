@@ -323,7 +323,7 @@ UPDATE '.IMAGES_TABLE.'
     // the link on thumbnail must go to picture.php
     foreach ($page['thumbnails'] as $idx => $thumbnail)
     {
-      if (preg_match('/image_id=(\d+)/', $thumbnail['link'], $matches))
+      if (preg_match('/page=photo-(\d+)/', $thumbnail['link'], $matches))
       {
         $page['thumbnails'][$idx]['link'] = make_picture_url(
           array(
