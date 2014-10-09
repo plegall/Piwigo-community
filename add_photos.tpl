@@ -1,9 +1,9 @@
 {if $upload_mode eq 'multiple'}
 {combine_script id='jquery.jgrowl' load='footer' require='jquery' path='themes/default/js/plugins/jquery.jgrowl_minimized.js' }
-{combine_script id='jquery.uploadify' load='footer' require='jquery' path='admin/include/uploadify/jquery.uploadify.v3.0.0.min.js' }
+{combine_script id='jquery.uploadify' load='footer' require='jquery' path='plugins/community/uploadify/jquery.uploadify.v3.0.0.min.js' }
 {combine_script id='jquery.ui.progressbar' load='footer'}
 {combine_css path="themes/default/js/plugins/jquery.jgrowl.css"}
-{combine_css path="admin/include/uploadify/uploadify.css"}
+{combine_css path="plugins/community/uploadify/uploadify.css"}
 {/if}
 
 {combine_script id='jquery.colorbox' load='footer' require='jquery' path='themes/default/js/plugins/jquery.colorbox.min.js'}
@@ -259,6 +259,7 @@ var limit_storage = {$limit_storage};
     'uploader'       : uploadify_path + '/uploadify.php',
     'langFile'       : uploadify_path + '/uploadifyLang_en.js',
     'swf'            : uploadify_path + '/uploadify.swf',
+    'checkExisting'  : false,
 
     buttonCursor     : 'pointer',
     'buttonText'     : buttonText,
@@ -496,7 +497,9 @@ p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
     <form>
       {'Parent album'|@translate}<br>
       <select id ="category_parent" name="category_parent">
+{if $create_whole_gallery}
         <option value="0">------------</option>
+{/if}
         {html_options options=$category_parent_options selected=$category_parent_options_selected}
       </select>
 

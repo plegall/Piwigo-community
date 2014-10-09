@@ -70,7 +70,7 @@ if (isset($_GET['processed']))
   }
 }
 
-include_once(PHPWG_ROOT_PATH.'admin/include/photos_add_direct_process.inc.php');
+include_once(COMMUNITY_PATH.'include/photos_add_direct_process.inc.php');
 
 // +-----------------------------------------------------------------------+
 // | limits                                                                |
@@ -378,6 +378,33 @@ UPDATE '.IMAGES_TABLE.'
 
 $template->set_filenames(array('add_photos' => dirname(__FILE__).'/add_photos.tpl'));
 
+// +-----------------------------------------------------------------------+
+// | Uploaded photos                                                       |
+// +-----------------------------------------------------------------------+
+
+if (isset($page['thumbnails']))
+{
+  $template->assign(
+    array(
+      'thumbnails' => $page['thumbnails'],
+      )
+    );
+
+  // only display the batch link if we have more than 1 photo
+  if (count($page['thumbnails']) > 1)
+  {
+    $template->assign(
+      array(
+        'batch_link' => $page['batch_link'],
+        'batch_label' => sprintf(
+          l10n('Manage this set of %d photos'),
+          count($page['thumbnails'])
+          ),
+        )
+      );
+  }
+}
+
 include_once(PHPWG_ROOT_PATH.'admin/include/photos_add_direct_prepare.inc.php');
 
 if (isset($conf['upload_form_all_types']) and $conf['upload_form_all_types'])
@@ -411,10 +438,31 @@ foreach ($unique_exts as $ext)
   }
 }
 
+$upload_modes = array('html', 'multiple');
+$upload_mode = isset($conf['upload_mode']) ? $conf['upload_mode'] : 'multiple';
+
+if (isset($_GET['upload_mode']) and $upload_mode != $_GET['upload_mode'] and in_array($_GET['upload_mode'], $upload_modes))
+{
+  $upload_mode = $_GET['upload_mode'];
+  conf_update_param('upload_mode', $upload_mode);
+}
+
+// what is the upload switch mode
+$index_of_upload_mode = array_flip($upload_modes);
+$upload_mode_index = $index_of_upload_mode[$upload_mode];
+$upload_switch = $upload_modes[ ($upload_mode_index + 1) % 2 ];
+
 $template->assign(
   array(
+    'uploadify_path' => COMMUNITY_PATH.'uploadify',
     'upload_file_types' => implode(', ', $unique_exts),
     'uploadify_fileTypeExts' => implode(';', prepend_append_array_items($uploadify_exts, '*.', '')),
+    'upload_mode' => $upload_mode,
+    'form_action' => PHOTOS_ADD_BASE_URL.'&amp;upload_mode='.$upload_mode.'&amp;processed=1',
+    'switch_url' => PHOTOS_ADD_BASE_URL.'&amp;upload_mode='.$upload_switch,
+    'upload_id' => md5(rand()),
+    'session_id' => session_id(),
+    'another_upload_link' => PHOTOS_ADD_BASE_URL.'&amp;upload_mode='.$upload_mode,
     )
   );
 
