@@ -70,7 +70,7 @@ $lang['How many photos?'] = 'Koliko fotografij?';
 $lang['How much disk space?'] = 'Koliko prostora na disku?';
 $lang['Maximum number of photos reached (%u)'] = 'Prekoračeno max. število fotografij (%u)!';
 $lang['Photo %s rejected.'] = 'Fotografija %s zavrnjena.';
-$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo avtomatsko reira album za vsakega uporabnika ob prvi prijavi';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo avtomatsko kreira album za vsakega uporabnika ob prvi prijavi';
 $lang['User album only'] = 'Samo uporabniški albumi';
 $lang['User albums'] = 'Uporabniški albumi';
 $lang['Where should Piwigo create user albums?'] = 'Kje lahko Piwigo kreira uporabniške albume?';
@@ -79,4 +79,3 @@ $lang['up to %d photos (for each user)'] = 'do %d fotografij (na uporabnika)';
 $lang['up to %dMB (for each user)'] = 'do %dMB (na uporabnika)';
 $lang['Album of user'] = 'Album uporabnika';
 $lang['a user can own only one album'] = 'uporabnik ima lahko le en album';
-?>
