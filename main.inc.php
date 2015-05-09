@@ -199,10 +199,20 @@ function community_switch_user_to_admin($arr)
   {
     $community['category'] = $_REQUEST['category'];
   }
+  elseif ('pwg.images.upload' == $community['method'])
+  {
+    $community['category'] = $_REQUEST['category'];
+  }
   elseif ('pwg.images.add' == $community['method'])
   {
     $community['category'] = $_REQUEST['categories'];
     $community['md5sum'] = $_REQUEST['original_sum'];
+  }
+
+  if ('pwg.images.setInfo' == $community['method'] and !is_admin())
+  {
+    // prevent Community users to validate photos with setting level to 0
+    unset($_POST['level']);
   }
 
   // $print_params = $params;
@@ -226,9 +236,11 @@ function community_switch_user_to_admin($arr)
   $methods[] = 'pwg.images.add';
   $methods[] = 'pwg.images.addSimple';
   $methods[] = 'pwg.images.addChunk';
+  $methods[] = 'pwg.images.upload';
   $methods[] = 'pwg.images.checkUpload';
   $methods[] = 'pwg.images.checkFiles';
   $methods[] = 'pwg.images.setInfo';
+  $methods[] = 'pwg.session.getStatus';
 
   if (in_array($community['method'], $methods))
   {
@@ -490,6 +502,19 @@ function community_sendResponse($encodedResponse)
   {
     $response = json_decode($encodedResponse);
     $image_id = $response->result->image_id;
+  }
+  elseif ('pwg.images.upload' == $community['method'])
+  {
+    $response = json_decode($encodedResponse);
+
+    if (isset($response->result->image_id))
+    {
+      $image_id = $response->result->image_id;
+    }
+    else
+    {
+      return;
+    }
   }
   elseif ('pwg.images.add' == $community['method'])
   {    
