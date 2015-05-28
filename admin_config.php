@@ -49,6 +49,7 @@ if (!empty($_POST))
   $conf['community'] = array(
     'user_albums' => !empty($_POST['user_albums']),
     'user_albums_parent' => $_POST['user_albums_parent'],
+    'hardcoded_author' => $_POST['hardcoded_author'],
     );
 
   conf_update_param('community', serialize($conf['community']));
@@ -67,6 +68,7 @@ $template->set_filename('plugin_admin_content', dirname(__FILE__).'/admin_config
 // +-----------------------------------------------------------------------+
 
 $template->assign('user_albums', $conf['community']['user_albums']);
+$template->assign('hardcoded_author', $conf['community']['hardcoded_author']);
 
 if (isset($conf['community']['user_albums_parent']))
 {
