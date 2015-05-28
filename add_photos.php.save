@@ -161,7 +161,7 @@ SELECT
   
   // reinitialize the informations to display on the result page
   $page['infos'] = array();
-echo $_POST;
+
   if (isset($_POST['set_photo_properties']) || isset($_POST['author']))
   {
     $data = array();

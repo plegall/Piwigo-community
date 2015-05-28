@@ -576,7 +576,7 @@ p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
 
       <p>
         {'Author'|@translate}<br>
-        <input type="text" class="large" name="author" value="{$user_name}">
+        <input type="text" class="large" name="author" {if $user_name neq ''} readonly {/if} value="{$user_name}">
       </p>
 
       <p>
