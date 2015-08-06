@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS '.$prefixeTable.'community_pendings (
       list($table, $column) = explode('.', $to_enlarge_id);
 
       $row = pwg_db_fetch_assoc(pwg_query('SHOW COLUMNS FROM `'.$table.'` LIKE "'.$column.'";'));
-      if ($row['Type'] != 'mediumint')
+      if (!preg_match('/^mediumint/i', $row['Type']))
       {
         $query = 'ALTER TABLE '.$table.' CHANGE '.$column.' '.$column.' MEDIUMINT UNSIGNED DEFAULT NULL;';
         pwg_query($query);
