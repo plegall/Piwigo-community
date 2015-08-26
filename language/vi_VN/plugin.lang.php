@@ -32,10 +32,10 @@ $lang['The whole gallery'] = 'Toàn bộ thư viện hình';
 $lang['ability to create sub-albums'] = 'khả năng tạo album con';
 $lang['Which level of trust?'] = 'Độ tin cậy mức độ nào?';
 $lang['sub-albums creation'] = 'tạo album con';
-$lang['Upload Permissions'] = 'Quyền uload hình';
+$lang['Upload Permissions'] = 'Quyền upload hình';
 $lang['Pending Photos'] = 'Hình đang chờ xử lý';
-$lang['Permission added'] = 'Quyền hạn đã được thêm';
-$lang['Permission removed'] = 'Quyền hạn đã được gỡ bỏ';
+$lang['Permission added'] = 'Quyền đã được thêm';
+$lang['Permission removed'] = 'Quyền đã được gỡ bỏ';
 $lang['%s (the user)'] = '%s (người dùng)';
 $lang['%s (the group)'] = '%s (nhóm)';
 $lang['low trust'] = 'độ tin cậy thấp';
@@ -55,7 +55,7 @@ $lang['Hi administrators,'] = 'Xin chào quản trị viên,';
 $lang['No album, this photo is orphan'] = 'Không có album nào, ảnh này là ảnh đơn';
 
 $lang['Cancel'] = 'Hủy bỏ';
-$lang['Permission updated'] = 'Quyền hạn đã được cập nhật';
+$lang['Permission updated'] = 'Quyền đã được cập nhật';
 $lang['Delete permission'] = 'Xóa quyền hạn';
 $lang['%u pending photos'] = 'có %u ảnh đang chờ xử lý';
 $lang['Level 16'] = 'Đang chờ xử lý';
@@ -83,4 +83,3 @@ $lang['up to %d photos (for each user)'] = 'tới %d ảnh (cho mỗi người d
 $lang['up to %dMB (for each user)'] = 'tới %MB (cho mỗi người dùng)';
 $lang['Album of user'] = 'Album của người dùng';
 $lang['a user can own only one album'] = 'một người dùng chỉ có thể sở hữu một album';
-?>
