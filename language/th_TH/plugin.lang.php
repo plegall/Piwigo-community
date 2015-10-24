@@ -59,4 +59,8 @@ $lang['Permission updated'] = 'อัพเดตการอนุญาต';
 $lang['Set Photo Properties'] = 'ตั้งค่าคุณสมบัติรูปถ่าย';
 $lang['The whole gallery'] = 'แกลเลอรี่ทั้งหมด';
 $lang['Cancel'] = 'ยกเลิก';
-?>
+$lang['Album of user'] = 'อัลบั้มของผู้ใช้งาน';
+$lang['Available %s.'] = 'พร้อมใช้งาน %s.';
+$lang['Gallery root'] = 'ที่ตั้งแกลลอรี่';
+$lang['User albums'] = 'อัลบั้มผู้ใช้งาน';
+$lang['no limit'] = 'ไม่จำกัด';
