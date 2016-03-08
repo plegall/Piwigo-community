@@ -405,6 +405,27 @@ if (isset($page['thumbnails']))
   }
 }
 
+$upload_max_filesize = min(
+  get_ini_size('upload_max_filesize'),
+  get_ini_size('post_max_size')
+  );
+
+if ($upload_max_filesize == get_ini_size('upload_max_filesize'))
+{
+  $upload_max_filesize_shorthand = get_ini_size('upload_max_filesize', false);
+}
+else
+{
+  $upload_max_filesize_shorthand = get_ini_size('post_max_filesize', false);
+}
+
+$template->assign(
+    array(
+      'upload_max_filesize' => $upload_max_filesize,
+      'upload_max_filesize_shorthand' => $upload_max_filesize_shorthand,
+    )
+  );
+
 include_once(PHPWG_ROOT_PATH.'admin/include/photos_add_direct_prepare.inc.php');
 
 if (isset($conf['upload_form_all_types']) and $conf['upload_form_all_types'])
