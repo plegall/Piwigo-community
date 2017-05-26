@@ -259,6 +259,25 @@ function community_switch_user_to_admin($arr)
   return;
 }
 
+add_event_handler('ws_add_methods', 'community_add_methods', EVENT_HANDLER_PRIORITY_NEUTRAL+5);
+function community_add_methods($arr)
+{
+  $service = &$arr[0];
+
+  $service->addMethod(
+    'community.categories.getList',
+    'community_ws_categories_getList',
+    array(
+      'cat_id' =>       array('default'=>0),
+      'recursive' =>    array('default'=>false),
+      'public' =>       array('default'=>false),
+      'tree_output' =>  array('default'=>false),
+      'fullname' =>     array('default'=>false),
+      ),
+    'retrieves the list of categories where the user has upload permission'
+    );
+}
+
 add_event_handler('ws_add_methods', 'community_ws_replace_methods', EVENT_HANDLER_PRIORITY_NEUTRAL+5);
 function community_ws_replace_methods($arr)
 {
@@ -277,7 +296,12 @@ function community_ws_replace_methods($arr)
   {
     return;
   }
-  
+
+  if (isset($_REQUEST['faked_by_community']) and $_REQUEST['faked_by_community'] == 'false')
+  {
+    return;
+  }
+
   // the plugin Community is activated, the user has upload permissions, we
   // use a specific function to list available categories, assuming the user
   // wants to list categories where upload is possible for him
