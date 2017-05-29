@@ -276,6 +276,13 @@ function community_add_methods($arr)
       ),
     'retrieves the list of categories where the user has upload permission'
     );
+
+  $service->addMethod(
+    'community.session.getStatus',
+    'community_ws_session_getStatus',
+    array(),
+    'Gets information about the current session, related to Community.'
+    );
 }
 
 add_event_handler('ws_add_methods', 'community_ws_replace_methods', EVENT_HANDLER_PRIORITY_NEUTRAL+5);
@@ -510,6 +517,29 @@ SELECT *
         )
       )
     );
+}
+
+/**
+ * API method
+ * Returns info about the current user, related to Community
+ * @param mixed[] $params
+ */
+function community_ws_session_getStatus($params, &$service)
+{
+  global $user, $conf;
+
+  $res['real_user_status'] = $user['status']; // this is the real user status, not the faked one
+
+  if (is_admin())
+  {
+    $res['upload_categories_getList_method'] = 'pwg.categories.getAdminList';
+  }
+  else
+  {
+    $res['upload_categories_getList_method'] = 'community.categories.getList';
+  }
+
+  return $res;
 }
 
 add_event_handler('sendResponse', 'community_sendResponse');
