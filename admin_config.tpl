@@ -38,6 +38,8 @@ jQuery(document).ready(function() {
     </select>
   </p>
 
+  <p><label><input type="checkbox" name="hardcoded_author"{if $hardcoded_author} checked="checked"{/if}> <strong>{'Hardcoded Author'|@translate}</strong> : <em>{'The user name will be used as author, and user would not be able to change it.'|@translate}</em></label></p>
+
 	<p class="formButtons">
 		<input type="submit" name="submit" value="{'Save Settings'|@translate}">
 	</p>

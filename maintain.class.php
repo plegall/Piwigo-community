@@ -93,6 +93,7 @@ CREATE TABLE IF NOT EXISTS '.$prefixeTable.'community_pendings (
     {
       $community_default_config = array(
         'user_albums' => false,
+        'hardcoded_author' => false,
         );
       
       conf_update_param('community', $community_default_config, true);
