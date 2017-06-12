@@ -1,57 +1,25 @@
-{if $upload_mode eq 'multiple'}
-{combine_script id='jquery.jgrowl' load='footer' require='jquery' path='themes/default/js/plugins/jquery.jgrowl_minimized.js' }
-{combine_script id='jquery.uploadify' load='footer' require='jquery' path='plugins/community/uploadify/jquery.uploadify.v3.0.0.min.js' }
-{combine_script id='jquery.ui.progressbar' load='footer'}
+{combine_script id='common' load='footer' require='jquery' path='admin/themes/default/js/common.js'}
+
+{combine_script id='jquery.jgrowl' load='footer' require='jquery' path='themes/default/js/plugins/jquery.jgrowl_minimized.js'}
+
+{combine_script id='jquery.plupload' load='footer' require='jquery' path='themes/default/js/plugins/plupload/plupload.full.min.js'}
+{combine_script id='jquery.plupload.queue' load='footer' require='jquery' path='themes/default/js/plugins/plupload/jquery.plupload.queue/jquery.plupload.queue.min.js'}
+
 {combine_css path="themes/default/js/plugins/jquery.jgrowl.css"}
-{combine_css path="plugins/community/uploadify/uploadify.css"}
+{combine_css path="themes/default/js/plugins/plupload/jquery.plupload.queue/css/jquery.plupload.queue.css"}
+
+{assign var="plupload_i18n" value="themes/default/js/plugins/plupload/i18n/`$lang_info.plupload_code`.js"}
+{if "PHPWG_ROOT_PATH"|@constant|@cat:$plupload_i18n|@file_exists}
+  {combine_script id="plupload_i18n-`$lang_info.plupload_code`" load="footer" path=$plupload_i18n require="jquery.plupload.queue"}
 {/if}
 
 {combine_script id='jquery.colorbox' load='footer' require='jquery' path='themes/default/js/plugins/jquery.colorbox.min.js'}
 {combine_css path="themes/default/js/plugins/colorbox/style2/colorbox.css"}
 
+{combine_script id='piecon' load='footer' path='themes/default/js/plugins/piecon.js'}
+
 {footer_script}{literal}
 jQuery(document).ready(function(){
-function sprintf() {
-        var i = 0, a, f = arguments[i++], o = [], m, p, c, x, s = '';
-        while (f) {
-                if (m = /^[^\x25]+/.exec(f)) {
-                        o.push(m[0]);
-                }
-                else if (m = /^\x25{2}/.exec(f)) {
-                        o.push('%');
-                }
-                else if (m = /^\x25(?:(\d+)\$)?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-fosuxX])/.exec(f)) {
-                        if (((a = arguments[m[1] || i++]) == null) || (a == undefined)) {
-                                throw('Too few arguments.');
-                        }
-                        if (/[^s]/.test(m[7]) && (typeof(a) != 'number')) {
-                                throw('Expecting number but found ' + typeof(a));
-                        }
-                        switch (m[7]) {
-                                case 'b': a = a.toString(2); break;
-                                case 'c': a = String.fromCharCode(a); break;
-                                case 'd': a = parseInt(a); break;
-                                case 'e': a = m[6] ? a.toExponential(m[6]) : a.toExponential(); break;
-                                case 'f': a = m[6] ? parseFloat(a).toFixed(m[6]) : parseFloat(a); break;
-                                case 'o': a = a.toString(8); break;
-                                case 's': a = ((a = String(a)) && m[6] ? a.substring(0, m[6]) : a); break;
-                                case 'u': a = Math.abs(a); break;
-                                case 'x': a = a.toString(16); break;
-                                case 'X': a = a.toString(16).toUpperCase(); break;
-                        }
-                        a = (/[def]/.test(m[7]) && m[2] && a >= 0 ? '+'+ a : a);
-                        c = m[3] ? m[3] == '0' ? '0' : m[3].charAt(1) : ' ';
-                        x = m[5] - String(a).length - s.length;
-                        p = m[5] ? str_repeat(c, x) : '';
-                        o.push(s + (m[4] ? a + p : p + a));
-                }
-                else {
-                        throw('Huh ?!');
-                }
-                f = f.substring(m[0].length);
-        }
-        return o.join('');
-}
 
   function checkUploadStart() {
     var nbErrors = 0;
@@ -64,16 +32,7 @@ function sprintf() {
     }
 
     var nbFiles = 0;
-    if (jQuery("#uploadBoxes").size() == 1) {
-      jQuery("input[name^=image_upload]").each(function() {
-        if (jQuery(this).val() != "") {
-          nbFiles++;
-        }
-      });
-    }
-    else {
-      nbFiles = jQuery(".uploadifyQueueItem").size();
-    }
+    nbFiles = jQuery(".uploadifyQueueItem").size();
 
     if (nbFiles == 0) {
       jQuery("#formErrors #noPhoto").show();
@@ -195,206 +154,180 @@ function sprintf() {
     jQuery("#uploadWarnings").show();
   });
 
-  jQuery("#showPermissions").click(function() {
-    jQuery(this).parent(".showFieldset").hide();
-    jQuery("#permissions").show();
-  });
-
   jQuery("#showPhotoProperties").click(function() {
     jQuery(this).parent(".showFieldset").hide();
     jQuery("#photoProperties").show();
     jQuery("input[name=set_photo_properties]").prop('checked', true);
+    return false;
   });
+
+Piecon.setOptions({
+  color: '#ff7700',
+  background: '#bbb',
+  shadow: '#fff',
+  fallback: 'force'
+});
 
 {/literal}
-{if $upload_mode eq 'html'}
-  {if isset($limit_nb_photos)}
-  var limit_nb_photos = {$limit_nb_photos};
-  {/if}
-{literal}
 
-  function addUploadBox() {
-    var uploadBox = '<p class="file"><input type="file" size="60" name="image_upload[]"></p>';
-    jQuery(uploadBox).appendTo("#uploadBoxes");
-
-    if (typeof limit_nb_photos != 'undefined') {
-      if (jQuery("input[name^=image_upload]").size() >= limit_nb_photos) {
-        jQuery("#addUploadBox").hide();
-      }
-    }
-  }
-
-  addUploadBox();
-
-  jQuery("#addUploadBox A").click(function () {
-    if (typeof limit_nb_photos != 'undefined') {
-      if (jQuery("input[name^=image_upload]").size() >= limit_nb_photos) {
-        alert('tu rigoles mon gaillard !');
-        return false;
-      }
-    }
-
-    addUploadBox();
-  });
-
-  jQuery("#uploadForm").submit(function() {
-    return checkUploadStart();
-  });
-{/literal}
-{elseif $upload_mode eq 'multiple'}
-
-var uploadify_path = '{$uploadify_path}';
-var upload_id = '{$upload_id}';
-var session_id = '{$session_id}';
 var pwg_token = '{$pwg_token}';
-var buttonText = "{'Select files'|@translate}";
+var photosUploaded_label = "{'%d photos uploaded into album "%s"'|translate|escape}";
+var batch_Label = "{'Manage this set of %d photos'|translate}";
+var albumSummary_label = "{'Album "%s" now contains %d photos'|translate|escape}";
+var uploadedPhotos = [];
+var uploadCategory = null;
+
 var sizeLimit = Math.round({$upload_max_filesize} / 1024); /* in KBytes */
 var sumQueueFilesize = 0;
-  {if isset($limit_storage)}
-var limit_storage = {$limit_storage};
-  {/if}
+{if isset($limit_storage)}
+varr limit_storage = {$limit_storage};
+{/if}
 
 {literal}
-  jQuery("#uploadify").uploadify({
-    'uploader'       : uploadify_path + '/uploadify.php',
-    'langFile'       : uploadify_path + '/uploadifyLang_en.js',
-    'swf'            : uploadify_path + '/uploadify.swf',
-    'checkExisting'  : false,
+	jQuery("#uploader").pluploadQueue({
+		// General settings
+    browse_button : 'addFiles',
+    container : 'uploadForm',
+    
+		// runtimes : 'html5,flash,silverlight,html4',
+		runtimes : 'html5',
 
-    buttonCursor     : 'pointer',
-    'buttonText'     : buttonText,
-    'width'          : 300,
-    'cancelImage'    : uploadify_path + '/cancel.png',
-    'queueID'        : 'fileQueue',
-    'auto'           : false,
-    'multi'          : true,
-    'fileTypeDesc'   : 'Photo files',
-    'fileTypeExts'   : '{/literal}{$uploadify_fileTypeExts}{literal}',
-    'fileSizeLimit'  : sizeLimit,
-    'progressData'   : 'percentage',
-{/literal}
-  {if isset($limit_nb_photos)}
-    'queueSizeLimit' : {$limit_nb_photos},
-  {/if}
-{literal}
-    requeueErrors   : false,
-    'onSelect'       : function(file) {
-      console.log('filesize = '+file.size+'bytes');
+		// url : '../upload.php',
+		url : 'ws.php?method=pwg.images.upload&format=json',
+		
+		chunk_size: '{/literal}{$chunk_size}{literal}kb',
+		
+		filters : {
+			// Maximum file size
+			max_file_size : '1000mb',
+			// Specify what files to browse for
+			mime_types: [
+				{title : "Image files", extensions : "{/literal}{$file_exts}{literal}"}
+			]
+		},
 
-      if (typeof limit_storage != 'undefined') {
-        if (sumQueueFilesize + file.size > limit_storage) {
-          jQuery.jGrowl(
-            '<p></p>'+sprintf(
-              '{/literal}{'File %s too big (%uMB), quota of %uMB exceeded'|@translate}{literal}',
-              file.name,
-              Math.round(file.size/(1024*1024)),
-              limit_storage/(1024*1024)
-            ),
-            {
-              theme:  'error',
-              header: 'ERROR',
-              life:   4000,
-              sticky: false
-            }
-          );
+		// Rename files by clicking on their titles
+		// rename: true,
 
-          jQuery('#uploadify').uploadifyCancel(file.id);
-          return false;
-        }
-        else {
-          sumQueueFilesize += file.size;
-        }
+		// Enable ability to drag'n'drop files onto the widget (currently only HTML5 supports that)
+		dragdrop: true,
+
+    preinit: {
+      Init: function (up, info) {
+        jQuery('#uploader_container').removeAttr("title"); //remove the "using runtime" text
+        
+        jQuery('#startUpload').on('click', function(e) {
+            e.preventDefault();
+            up.start();
+          });
+        
+        jQuery('#cancelUpload').on('click', function(e) {
+            e.preventDefault();
+            up.stop();
+            up.trigger('UploadComplete', up.files);
+          });
       }
+    },
 
-      jQuery("#fileQueue").show();
-    },
-    'onCancel' : function(file) {
-      console.log('The file ' + file.name + ' was cancelled ('+file.size+')');
-    },
-    'onQueueComplete'  : function(stats) {
-      jQuery("input[name=submit_upload]").click();
-    },
-    onUploadError: function (file,errorCode,errorMsg,errorString,swfuploadifyQueue) {
-      /* uploadify calls the onUploadError trigger when the user cancels a file! */
-      /* There no error so we skip it to avoid panic.                            */
-      if ("Cancelled" == errorString) {
-        return false;
+    init : {
+      // update custom button state on queue change
+      QueueChanged : function(up) {
+        jQuery('#startUpload').prop('disabled', up.files.length == 0);
+      },
+      
+      UploadProgress: function(up, file) {
+        jQuery('#uploadingActions .progressbar').width(up.total.percent+'%');
+        Piecon.setProgress(up.total.percent);
+      },
+      
+      BeforeUpload: function(up, file) {
+        //console.log('[BeforeUpload]', file);
+        
+        // hide buttons
+        jQuery('#startUpload, #addFiles').hide();
+        jQuery('#uploadingActions').show();
+
+        // warn user if she wants to leave page while upload is running
+        jQuery(window).bind('beforeunload', function() {
+          return "{/literal}{'Upload in progress'|translate|escape}{literal}";
+        });
+
+        // no more change on category/level
+        jQuery("select[name=level]").attr("disabled", "disabled");
+
+        // You can override settings before the file is uploaded
+        up.setOption(
+          'multipart_params',
+          {
+            category : jQuery("select[name=category] option:selected").val(),
+            level : jQuery("select[name=level] option:selected").val(),
+            pwg_token : pwg_token
+            // name : file.name
+          }
+        );
+      },
+
+      FileUploaded: function(up, file, info) {
+        // Called when file has finished uploading
+        // console.log('[FileUploaded] File:', file, "Info:", info);
+        
+        // hide item line
+        jQuery('#'+file.id).hide();
+      
+        var data = jQuery.parseJSON(info.response);
+        console.log(data);
+      
+        jQuery("#uploadedPhotos").parent("fieldset").show();
+      
+        html = '<a href="admin.php?page=photo-'+data.result.image_id+'" target="_blank">';
+        html += '<img src="'+data.result.src+'" class="thumbnail" title="'+data.result.name+'">';
+        html += '</a> ';
+      
+        jQuery("#uploadedPhotos").prepend(html);
+
+        // do not remove file, or it will reset the progress bar :-/
+        // up.removeFile(file);
+        uploadedPhotos.push(parseInt(data.result.image_id));
+        uploadCategory = data.result.category;
+      },
+
+      Error: function(up, error) {
+        // Called when file has finished uploading
+        //console.log('[Error] error: ', error);
+        var piwigoApiResponse = jQuery.parseJSON(error.response);
+
+        jQuery(".errors ul").append('<li>'+piwigoApiResponse.message+'</li>');
+        jQuery(".errors").show();
+      },
+
+      UploadComplete: function(up, files) {
+        // Called when all files are either uploaded or failed
+        //console.log('[UploadComplete]');
+        
+        Piecon.reset();
+
+        jQuery(".selectAlbum, .selectFiles, #photoProperties, .showFieldset").hide();
+
+        jQuery(".infos").append('<ul><li>'+sprintf(photosUploaded_label, uploadedPhotos.length, uploadCategory.label)+'</li></ul>');
+
+        jQuery(".infos").show();
+
+        jQuery(".afterUploadActions").show();
+        jQuery('#uploadingActions').hide();
+
+        // user can safely leave page without warning
+        jQuery(window).unbind('beforeunload');
       }
-
-      var msg = file.name+', '+errorString;
-
-      /* Let's put the error message in the form to display once the form is     */
-      /* performed, it makes support easier when user can copy/paste the error   */
-      /* thrown.                                                                 */
-      jQuery("#uploadForm").append('<input type="hidden" name="onUploadError[]" value="'+msg+'">');
-
-      jQuery.jGrowl(
-        '<p></p>onUploadError '+msg,
-        {
-          theme:  'error',
-          header: 'ERROR',
-          life:   4000,
-          sticky: false
-        }
-      );
-
-      return false;
-    },
-    onUploadSuccess: function (file,data,response) {
-      var data = jQuery.parseJSON(data);
-      jQuery("#uploadedPhotos").parent("fieldset").show();
-
-      /* Let's display the thumbnail of the uploaded photo, no need to wait the  */
-      /* end of the queue                                                        */
-      jQuery("#uploadedPhotos").prepend('<img src="'+data.thumbnail_url+'" class="thumbnail"> ');
-    },
-    onUploadComplete: function(file,swfuploadifyQueue) {
-      var max = parseInt(jQuery("#progressMax").text());
-      var next = parseInt(jQuery("#progressCurrent").text())+1;
-      var addToProgressBar = 2;
-      if (next <= max) {
-        jQuery("#progressCurrent").text(next);
-      }
-      else {
-        addToProgressBar = 1;
-      }
-
-      jQuery("#progressbar").progressbar({
-        value: jQuery("#progressbar").progressbar("option", "value") + addToProgressBar
-      });
     }
-  });
+	});
 
   jQuery("input[type=button]").click(function() {
     if (!checkUploadStart()) {
       return false;
     }
-
-    jQuery("#uploadify").uploadifySettings(
-      'postData',
-      {
-        'category_id' : jQuery("select[name=category] option:selected").val(),
-        'level' : jQuery("select[name=level] option:selected").val(),
-        'upload_id' : upload_id,
-        'session_id' : session_id,
-        'pwg_token' : pwg_token,
-      }
-    );
-
-    nb_files = jQuery(".uploadifyQueueItem").size();
-    jQuery("#progressMax").text(nb_files);
-    jQuery("#progressbar").progressbar({max: nb_files*2, value:1});
-    jQuery("#progressCurrent").text(1);
-
-    jQuery("#uploadProgress").show();
-
-    jQuery("#uploadify").uploadifyUpload();
   });
-
-{/literal}
-{/if}
 });
-{/footer_script}
+{/literal}{/footer_script}
 
 {literal}
 <style type="text/css">
@@ -402,12 +335,12 @@ var limit_storage = {$limit_storage};
 #photosAddContent form p {
   text-align:left;
 }
-*/
 
 #photosAddContent FIELDSET {
   width:650px;
   margin:20px auto;
 }
+*/
 
 #photosAddContent fieldset#photoProperties {padding-bottom:0}
 #photosAddContent fieldset#photoProperties p {text-align:left;margin:0 0 1em 0;line-height:20px;}
@@ -418,22 +351,12 @@ var limit_storage = {$limit_storage};
   margin:0;
 }
 
-#uploadBoxes P {
-  margin:0;
-  margin-bottom:2px;
-  padding:0;
-}
-
-#uploadBoxes .file {margin-bottom:5px;text-align:left;}
-#uploadBoxes {margin-top:20px;}
-#addUploadBox {margin-bottom:2em;}
-
 p#uploadWarningsSummary {text-align:left;margin-bottom:1em;font-size:90%;color:#999;}
 p#uploadWarningsSummary .showInfo {position:static;display:inline;padding:1px 6px;margin-left:3px;}
 p#uploadWarnings {display:none;text-align:left;margin-bottom:1em;font-size:90%;color:#999;}
 p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
 
-#photosAddContent p.showFieldset {text-align:left;margin: 0 auto 10px auto;width: 650px;}
+#photosAddContent p.showFieldset {text-align:left;margin: 0 auto 10px auto;}
 
 #uploadProgress {width:650px; margin:10px auto;font-size:90%;}
 #progressbar {border:1px solid #ccc; background-color:#eee;}
@@ -443,10 +366,70 @@ p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
 .showInfo:hover {cursor:pointer}
 .showInfo {color:#fff;background-color:#999; }
 .showInfo:hover {color:#fff;border:none;background-color:#333} 
+
+/* Upload Form */
+.plupload_header {display:none;}
+#uploadForm .plupload_container {padding:0}
+#uploadForm .plupload_scroll .plupload_filelist {height:250px;}
+#uploadForm li.plupload_droptext {line-height:230px;font-size:2em;}
+
+#uploadBoxes .file {margin-bottom:5px;text-align:left;}
+#uploadBoxes {margin-top:20px;}
+#addUploadBox {margin-bottom:2em;}
+
+p.uploadInfo {text-align:left;font-size:90%;color:#999;}
+p#uploadWarningsSummary {text-align:left;margin-bottom:1em;font-size:90%;color:#999;}
+p#uploadWarningsSummary .showInfo {margin-left:3px;}
+p#uploadWarnings {display:none;text-align:left;margin-bottom:1em;font-size:90%;color:#999;}
+p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
+
+#photosAddContent p.showFieldset {text-align:left;margin: 1em;}
+
+#uploadForm .plupload_buttons, #uploadForm .plupload_progress { display:none !important; }
+#uploadForm #startUpload { margin:5px 0 15px 15px; padding:5px 10px; font-size:1.1em; }
+#uploadForm #startUpload:before { margin-right:0.5em; }
+#uploadForm #addFiles { margin-right:10px; float:left; }
+#uploadForm #uploadingActions { margin:10px 10px 10px 15px; }
+#uploadForm .big-progressbar { vertical-align:middle; display:inline-block; margin-left:10px; }
+
+.big-progressbar {
+  width:100%;
+  max-width:600px;
+  background:#fff;
+  padding:0;
+  border-radius:5px;
+  position:relative;
+  height:18px;
+}
+
+@keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: 33px 0; }
+}
+
+@-webkit-keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: 33px 0; }
+}
+
+.big-progressbar .progressbar {
+  height:18px;
+  min-width:5px;
+  background:#444;
+  border-radius:5px 0 0 5px;
+  background-size:33px 25px;
+  animation: animatedBackground 1s linear infinite;
+  -webkit-animation: animatedBackground 1s linear infinite;
+}
 </style>
 {/literal}
 
 <div id="photosAddContent">
+
+<div class="infos" style="display:none"><i class="eiw-icon icon-ok"></i></div>
+<div class="errors" style="display:none"><i class="eiw-icon icon-cancel"></i><ul></ul></div>
+
+<p class="afterUploadActions" style="margin:10px; display:none;"><a href="{$another_upload_link}">{'Add another set of photos'|@translate}</a></p>
 
 {if count($setup_errors) > 0}
 <div class="errors">
@@ -514,7 +497,7 @@ p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
     <input name="upload_id" value="{$upload_id}" type="hidden">
 {/if}
 
-    <fieldset>
+    <fieldset class="selectAlbum">
       <legend>{'Drop into album'|@translate}</legend>
 
       <span class="albumSelection"{if count($category_options) == 0} style="display:none"{/if}>
@@ -529,8 +512,9 @@ p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
 {/if}      
     </fieldset>
 
-    <fieldset>
+    <fieldset class="selectFiles">
       <legend>{'Select files'|@translate}</legend>
+      <button id="addFiles" class="buttonLike icon-plus-circled">{'Add Photos'|translate}</button>
 
     <p id="uploadWarningsSummary">{$upload_max_filesize_shorthand}B. {$upload_file_types}. {if isset($max_upload_resolution)}{$max_upload_resolution}Mpx.{/if} {if isset($quota_summary)}{$quota_summary}{/if}
 <a class="showInfo" title="{'Learn more'|@translate}">i</a></p>
@@ -544,22 +528,9 @@ p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
 {$quota_details}
     </p>
 
-{if $upload_mode eq 'html'}
-      <div id="uploadBoxes"></div>
-      <div id="addUploadBox">
-        <a href="javascript:">{'+ Add an upload box'|@translate}</a>
+      <div id="uploader">
+        <p>Your browser doesn't have HTML5 support.</p>
       </div>
-
-    <p id="uploadModeInfos">{'You are using the Browser uploader. Try the <a href="%s">Flash uploader</a> instead.'|@translate|@sprintf:$switch_url}</p>
-
-{elseif $upload_mode eq 'multiple'}
-    <div id="uploadify">You've got a problem with your JavaScript</div> 
-
-    <div id="fileQueue" style="display:none"></div>
-
-    <p id="uploadModeInfos">{'You are using the Flash uploader. Problems? Try the <a href="%s">Browser uploader</a> instead.'|@translate|@sprintf:$switch_url}</p>
-
-{/if}
     </fieldset>
 
     <p class="showFieldset"><a id="showPhotoProperties" href="#">{'Set Photo Properties'|@translate}</a></p>
@@ -586,23 +557,17 @@ p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
 
     </fieldset>
 
-{if $upload_mode eq 'html'}
-    <p>
-      <input class="submit" type="submit" name="submit_upload" value="{'Start Upload'|@translate}">
-    </p>
-{elseif $upload_mode eq 'multiple'}
-    <p style="margin-bottom:1em">
-      <input class="submit" type="button" value="{'Start Upload'|@translate}">
-      <input type="submit" name="submit_upload" style="display:none">
-    </p>
-{/if}
-</form>
+    <div id="uploadingActions" style="display:none">
+      <button id="cancelUpload" class="buttonLike icon-cancel-circled">{'Cancel'|translate}</button>
+      
+      <div class="big-progressbar">
+        <div class="progressbar" style="width:0%"></div>
+      </div>
+    </div>
+      
+    <button id="startUpload" class="buttonLike icon-upload" disabled>{'Start Upload'|translate}</button>
 
-<div id="uploadProgress" style="display:none">
-{'Photo %s of %s'|@translate|@sprintf:'<span id="progressCurrent">1</span>':'<span id="progressMax">10</span>'}
-<br>
-<div id="progressbar"></div>
-</div>
+</form>
 
 <fieldset style="display:none">
   <legend>{'Uploaded Photos'|@translate}</legend>
