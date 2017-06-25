@@ -283,6 +283,17 @@ function community_add_methods($arr)
     array(),
     'Gets information about the current session, related to Community.'
     );
+
+  $service->addMethod(
+    'community.images.uploadCompleted',
+    'community_ws_images_uploadCompleted',
+    array(
+      'image_id' => array('flags'=>WS_PARAM_ACCEPT_ARRAY),
+      'pwg_token' => array(),
+      'category_id' => array('type'=>WS_TYPE_ID),
+      ),
+    'Notify Piwigo the upload of several photos is completed. Tells if some photos are under moderation.'
+    );
 }
 
 add_event_handler('ws_add_methods', 'community_ws_replace_methods', EVENT_HANDLER_PRIORITY_NEUTRAL+5);
@@ -542,6 +553,122 @@ function community_ws_session_getStatus($params, &$service)
   return $res;
 }
 
+/**
+ * notify the admins some photos have been uploaded
+ * returns the list of photos waiting for moderation
+ */
+function community_ws_images_uploadCompleted($params, &$service)
+{
+  global $user, $conf;
+
+  if (get_pwg_token() != $params['pwg_token'])
+  {
+    return new PwgError(403, 'Invalid security token');
+  }
+
+  if (!is_array($params['image_id']))
+  {
+    $params['image_id'] = preg_split(
+      '/[\s,;\|]/',
+      $params['image_id'],
+      -1,
+      PREG_SPLIT_NO_EMPTY
+      );
+  }
+  $params['image_id'] = array_map('intval', $params['image_id']);
+
+  $image_ids = array();
+  foreach ($params['image_id'] as $image_id)
+  {
+    if ($image_id > 0)
+    {
+      $image_ids[] = $image_id;
+    }
+  }
+
+  if (count($image_ids) == 0)
+  {
+    return;
+  }
+
+  $query = '
+SELECT
+    id,
+    level,
+    added_by,
+    state,
+    notified_on
+  FROM '.IMAGES_TABLE.'
+    LEFT JOIN '.COMMUNITY_PENDINGS_TABLE.' ON image_id = id
+  WHERE id IN ('.implode(',', $image_ids).')
+;';
+
+  $images = query2array($query);
+
+  $to_notify = array();
+  $to_notify_ids = array();
+  $pending = array();
+  foreach ($images as $image)
+  {
+    if (empty($image['notified_on']))
+    {
+      $to_notify[] = $image;
+      $to_notify_ids[] = $image['id'];
+    }
+
+    if ('moderation_pending' == $image['state'])
+    {
+      $pending[] = $image;
+    }
+  }
+
+  if (count($to_notify) > 0)
+  {
+    global $logger;
+    $logger->debug(__FUNCTION__." : enter notification part");
+    // time to notify admins
+    include_once(PHPWG_ROOT_PATH.'include/functions_mail.inc.php');
+
+    $category_infos = get_cat_info($params['category_id']);
+
+    $keyargs_content = array(
+      get_l10n_args('Hi administrators,', ''),
+      get_l10n_args('', ''),
+      get_l10n_args('Album: %s', get_cat_display_name($category_infos['upper_names'], null, false)),
+      get_l10n_args('User: %s', $user['username']),
+      get_l10n_args('Email: %s', $user['email']),
+      );
+
+    if (count($pending))
+    {
+      $keyargs_content[] = get_l10n_args('', '');
+
+      array_push(
+        $keyargs_content,
+        get_l10n_args(
+          'Validation page: %s',
+          get_absolute_root_url().'admin.php?page=plugin-community-pendings'
+          )
+        );
+    }
+
+    pwg_mail_notification_admins(
+      get_l10n_args('%d photos uploaded by %s', array(count($to_notify), $user['username'])),
+      $keyargs_content,
+      false
+      );
+
+    $query = '
+UPDATE '.COMMUNITY_PENDINGS_TABLE.'
+  SET notified_on = NOW()
+  WHERE image_id IN ('.implode(',', $to_notify_ids).')
+;';
+    pwg_query($query);
+  }
+
+  return array('pending' => $pending);
+}
+
 add_event_handler('sendResponse', 'community_sendResponse');
 function community_sendResponse($encodedResponse)
 {
@@ -624,48 +751,37 @@ SELECT
     }
   }
   
-  if ($moderate)
-  {
-    $inserts = array();
+  $inserts = array();
 
-    $query = '
+  $query = '
 SELECT
     id,
     date_available
   FROM '.IMAGES_TABLE.'
   WHERE id IN ('.implode(',', $image_ids).')
 ;';
-    $result = pwg_query($query);
-    while ($row = pwg_db_fetch_assoc($result))
-    {
-      array_push(
-        $inserts,
-        array(
-          'image_id' => $row['id'],
-          'added_on' => $row['date_available'],
-          'state' => 'moderation_pending',
-          )
-        );
-    }
-    
-    mass_inserts(
-      COMMUNITY_PENDINGS_TABLE,
-      array_keys($inserts[0]),
-      $inserts
-      );
-    
-    // the level of a user upload photo with moderation is 16
-    $level = 16;
-  }
-  else
+  $result = pwg_query($query);
+  while ($row = pwg_db_fetch_assoc($result))
   {
-    // the level of a user upload photo with no moderation is 0
-    $level = 0;
+    array_push(
+      $inserts,
+      array(
+        'image_id' => $row['id'],
+        'added_on' => $row['date_available'],
+        'state' =>   ($moderate ? 'moderation_pending' : 'validated'),
+        )
+      );
   }
+
+  mass_inserts(
+    COMMUNITY_PENDINGS_TABLE,
+    array_keys($inserts[0]),
+    $inserts
+    );
 
   $query = '
 UPDATE '.IMAGES_TABLE.'
-  SET level = '.$level.'
+  SET level = '.($moderate ? 16 : 0).'
   WHERE id IN ('.implode(',', $image_ids).')
 ;';
   pwg_query($query);

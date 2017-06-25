@@ -172,8 +172,7 @@ Piecon.setOptions({
 
 var pwg_token = '{$pwg_token}';
 var photosUploaded_label = "{'%d photos uploaded into album "%s"'|translate|escape}";
-var batch_Label = "{'Manage this set of %d photos'|translate}";
-var albumSummary_label = "{'Album "%s" now contains %d photos'|translate|escape}";
+var moderation_Label = "{'Your photos are waiting for validation, administrators have been notified'|translate|escape}";
 var uploadedPhotos = [];
 var uploadCategory = null;
 
@@ -279,10 +278,8 @@ varr limit_storage = {$limit_storage};
       
         jQuery("#uploadedPhotos").parent("fieldset").show();
       
-        html = '<a href="admin.php?page=photo-'+data.result.image_id+'" target="_blank">';
-        html += '<img src="'+data.result.src+'" class="thumbnail" title="'+data.result.name+'">';
-        html += '</a> ';
-      
+        html = '<img src="'+data.result.src+'" class="thumbnail" title="'+data.result.name+'">';
+
         jQuery("#uploadedPhotos").prepend(html);
 
         // do not remove file, or it will reset the progress bar :-/
@@ -309,6 +306,25 @@ varr limit_storage = {$limit_storage};
         jQuery(".selectAlbum, .selectFiles, #photoProperties, .showFieldset").hide();
 
         jQuery(".infos").append('<ul><li>'+sprintf(photosUploaded_label, uploadedPhotos.length, uploadCategory.label)+'</li></ul>');
+
+      jQuery.ajax({
+        url: "ws.php?format=json&method=community.images.uploadCompleted",
+        data: {
+          pwg_token: pwg_token,
+          image_id: uploadedPhotos.join(","),
+          category_id: uploadCategory.id
+        },
+        dataType: "json",
+        success:function(data) {
+          console.log(data);
+          if (data.result.pending.length > 0) {
+            jQuery(".infos ul").append('<li>'+moderation_Label+'</li>');
+          }
+        },
+        error:function(XMLHttpRequest, textStatus, errorThrows) {
+        }
+      });
+
 
         jQuery(".infos").show();
 

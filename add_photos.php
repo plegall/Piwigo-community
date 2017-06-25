@@ -483,7 +483,7 @@ $template->assign(
     'switch_url' => PHOTOS_ADD_BASE_URL.'&amp;upload_mode='.$upload_switch,
     'upload_id' => md5(rand()),
     'session_id' => session_id(),
-    'another_upload_link' => PHOTOS_ADD_BASE_URL.'&amp;upload_mode='.$upload_mode,
+    'another_upload_link' => PHOTOS_ADD_BASE_URL,
     )
   );
 

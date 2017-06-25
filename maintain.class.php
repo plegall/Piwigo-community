@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS '.$prefixeTable.'community_pendings (
   image_id mediumint(8) unsigned NOT NULL,
   state varchar(255) NOT NULL,
   added_on datetime NOT NULL,
+  notified_on datetime DEFAULT NULL,
   validated_by mediumint(8) unsigned DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8
 ;';
@@ -87,6 +88,19 @@ CREATE TABLE IF NOT EXISTS '.$prefixeTable.'community_pendings (
         $query = 'ALTER TABLE '.$table.' CHANGE '.$column.' '.$column.' MEDIUMINT UNSIGNED DEFAULT NULL;';
         pwg_query($query);
       }
+    }
+
+    // new column community_pendings.notified_on for version 2.9.a
+    $result = pwg_query('SHOW COLUMNS FROM `'.$prefixeTable.'community_pendings` LIKE "notified_on";');
+    if (!pwg_db_num_rows($result))
+    {
+      pwg_query('ALTER TABLE `'.$prefixeTable .'community_pendings` ADD `notified_on` DATETIME DEFAULT NULL;');
+
+      $query = '
+UPDATE '.$prefixeTable .'community_pendings
+  SET notified_on = added_on
+;';
+      pwg_query($query);
     }
 
     if (!isset($conf['community']))
