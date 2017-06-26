@@ -307,24 +307,23 @@ varr limit_storage = {$limit_storage};
 
         jQuery(".infos").append('<ul><li>'+sprintf(photosUploaded_label, uploadedPhotos.length, uploadCategory.label)+'</li></ul>');
 
-      jQuery.ajax({
-        url: "ws.php?format=json&method=community.images.uploadCompleted",
-        data: {
-          pwg_token: pwg_token,
-          image_id: uploadedPhotos.join(","),
-          category_id: uploadCategory.id
-        },
-        dataType: "json",
-        success:function(data) {
-          console.log(data);
-          if (data.result.pending.length > 0) {
-            jQuery(".infos ul").append('<li>'+moderation_Label+'</li>');
+        jQuery.ajax({
+          url: "ws.php?format=json&method=community.images.uploadCompleted",
+          data: {
+            pwg_token: pwg_token,
+            image_id: uploadedPhotos.join(","),
+            category_id: uploadCategory.id
+          },
+          dataType: "json",
+          success:function(data) {
+            console.log(data);
+            if (data.result.pending.length > 0) {
+              jQuery(".infos ul").append('<li>'+moderation_Label+'</li>');
+            }
+          },
+          error:function(XMLHttpRequest, textStatus, errorThrows) {
           }
-        },
-        error:function(XMLHttpRequest, textStatus, errorThrows) {
-        }
-      });
-
+        });
 
         jQuery(".infos").show();
 
