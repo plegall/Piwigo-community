@@ -184,7 +184,7 @@ function community_gallery_menu($menu_ref_arr)
 add_event_handler('ws_add_methods', 'community_switch_user_to_admin', EVENT_HANDLER_PRIORITY_NEUTRAL+5);
 function community_switch_user_to_admin($arr)
 {
-  global $user, $community;
+  global $user, $community, $conf;
 
   $service = &$arr[0];
 
@@ -213,6 +213,25 @@ function community_switch_user_to_admin($arr)
   {
     // prevent Community users to validate photos with setting level to 0
     unset($_POST['level']);
+
+    // prevent HTML in photo properties
+    $infos = array(
+      'name',
+      'author',
+      'comment',
+      'date_creation',
+      );
+
+    foreach ($infos as $info)
+    {
+      if (isset($_POST[$info]))
+      {
+        $_POST[$info] = strip_tags($_POST[$info], '<b><strong><em><i>');
+      }
+    }
+
+    // security level 2 : deactivate HTML description
+    $conf['allow_html_descriptions'] = false;
   }
 
   // $print_params = $params;

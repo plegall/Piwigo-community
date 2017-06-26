@@ -111,6 +111,7 @@ jQuery(document).ready(function(){
 
       jQuery.ajax({
         url: "ws.php?format=json&method=pwg.categories.add",
+        type:"POST",
         data: {
           parent: jQuery("select[name=category_parent] option:selected").val(),
           name: jQuery("input[name=category_name]").val(),
@@ -286,6 +287,24 @@ varr limit_storage = {$limit_storage};
         // up.removeFile(file);
         uploadedPhotos.push(parseInt(data.result.image_id));
         uploadCategory = data.result.category;
+
+        jQuery.ajax({
+          url: "ws.php?format=json&method=pwg.images.setInfo",
+          type:"POST",
+          data: {
+            single_value_mode: "replace",
+            image_id: data.result.image_id,
+            author: jQuery("input[name=author]").val(),
+            name: jQuery("input[name=name]").val(),
+            comment: jQuery("textarea[name=description]").val(),
+          },
+          dataType: "json",
+          success:function(data) {
+            console.log(data);
+          },
+          error:function(XMLHttpRequest, textStatus, errorThrows) {
+          }
+        });
       },
 
       Error: function(up, error) {
@@ -309,6 +328,7 @@ varr limit_storage = {$limit_storage};
 
         jQuery.ajax({
           url: "ws.php?format=json&method=community.images.uploadCompleted",
+          type:"POST",
           data: {
             pwg_token: pwg_token,
             image_id: uploadedPhotos.join(","),
