@@ -162,41 +162,6 @@ SELECT
   // reinitialize the informations to display on the result page
   $page['infos'] = array();
 
-  if (isset($_POST['set_photo_properties']))
-  {
-    $data = array();
-    
-    $data['name'] = $_POST['name'];
-    $data['author'] = $_POST['author'];
-    
-    if ($conf['allow_html_descriptions'])
-    {
-      $data['comment'] = @$_POST['description'];
-    }
-    else
-    {
-      $data['comment'] = strip_tags(@$_POST['description']);
-    }
-
-    $updates = array();
-    foreach ($image_ids as $image_id)
-    {
-      $update = $data;
-      $update['id'] = $image_id;
-
-      array_push($updates, $update);
-    }
-
-    mass_updates(
-      IMAGES_TABLE,
-      array(
-        'primary' => array('id'),
-        'update' => array_diff(array_keys($updates[0]), array('id'))
-        ),
-      $updates
-      );
-  }
-
   if (count($page['thumbnails']) > 0)
   {
     // $category_id is set in the photos_add_direct_process.inc.php included script
