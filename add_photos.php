@@ -184,7 +184,8 @@ SELECT
 // |                             prepare form                              |
 // +-----------------------------------------------------------------------+
 
-$template->set_filenames(array('add_photos' => dirname(__FILE__).'/add_photos.tpl'));
+$template->set_template_dir(realpath(dirname(__FILE__)));
+$template->set_filename('add_photos', 'add_photos.tpl');
 
 // +-----------------------------------------------------------------------+
 // | Uploaded photos                                                       |
