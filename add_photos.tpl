@@ -18,7 +18,9 @@
 
 {combine_script id='piecon' load='footer' path='themes/default/js/plugins/piecon.js'}
 
-{footer_script}{literal}
+{footer_script}
+var rootUrl = "{get_absolute_root_url()}";
+{literal}
 jQuery(document).ready(function(){
 
   function checkUploadStart() {
@@ -71,7 +73,7 @@ jQuery(document).ready(function(){
 
   function fillCategoryListbox(selectId, selectedValue) {
     jQuery.getJSON(
-      "ws.php?format=json&method=pwg.categories.getList",
+      rootUrl + "ws.php?format=json&method=pwg.categories.getList",
       {
         recursive: true,
         fullname: true,
@@ -110,7 +112,7 @@ jQuery(document).ready(function(){
       jQuery("#categoryNameError").text("");
 
       jQuery.ajax({
-        url: "ws.php?format=json&method=pwg.categories.add",
+        url: rootUrl + "ws.php?format=json&method=pwg.categories.add",
         type:"POST",
         data: {
           parent: jQuery("select[name=category_parent] option:selected").val(),
@@ -193,7 +195,7 @@ varr limit_storage = {$limit_storage};
 		runtimes : 'html5',
 
 		// url : '../upload.php',
-		url : 'ws.php?method=pwg.images.upload&format=json',
+		url : rootUrl + 'ws.php?method=pwg.images.upload&format=json',
 		
 		chunk_size: '{/literal}{$chunk_size}{literal}kb',
 		
@@ -289,7 +291,7 @@ varr limit_storage = {$limit_storage};
         uploadCategory = data.result.category;
 
         jQuery.ajax({
-          url: "ws.php?format=json&method=pwg.images.setInfo",
+          url: rootUrl + "ws.php?format=json&method=pwg.images.setInfo",
           type:"POST",
           data: {
             single_value_mode: "replace",
@@ -327,7 +329,7 @@ varr limit_storage = {$limit_storage};
         jQuery(".infos").append('<ul><li>'+sprintf(photosUploaded_label, uploadedPhotos.length, uploadCategory.label)+'</li></ul>');
 
         jQuery.ajax({
-          url: "ws.php?format=json&method=community.images.uploadCompleted",
+          url: rootUrl + "ws.php?format=json&method=community.images.uploadCompleted",
           type:"POST",
           data: {
             pwg_token: pwg_token,
