@@ -180,7 +180,7 @@ var uploadCategory = null;
 var sizeLimit = Math.round({$upload_max_filesize} / 1024); /* in KBytes */
 var sumQueueFilesize = 0;
 {if isset($limit_storage)}
-varr limit_storage = {$limit_storage};
+var limit_storage = {$limit_storage};
 {/if}
 
 {literal}
