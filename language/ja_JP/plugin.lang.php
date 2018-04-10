@@ -78,3 +78,4 @@ $lang['Delete permission'] = '権限を削除';
 $lang['Disk usage quota reached (%uMB)'] = 'ディスク使用量の制限に到達した(%uMB)';
 $lang['Edit a permission'] = '権限を編集';
 $lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'ファイル"%s"は大きすぎて（%uMB）、ディスク使用量の制限%uMBを超過します';
+$lang['Available %s.'] = '%sが利用可能です。';
