@@ -641,7 +641,7 @@ SELECT
     }
   }
 
-  if (count($to_notify) > 0)
+  if (count($to_notify) > 0 and (!isset($conf['community_notify_admins']) or $conf['community_notify_admins']))
   {
     global $logger;
     $logger->debug(__FUNCTION__." : enter notification part");
