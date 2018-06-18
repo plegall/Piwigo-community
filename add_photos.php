@@ -292,7 +292,7 @@ $template->assign(
     'switch_url' => PHOTOS_ADD_BASE_URL.'&amp;upload_mode='.$upload_switch,
     'upload_id' => md5(rand()),
     'session_id' => session_id(),
-    'another_upload_link' => PHOTOS_ADD_BASE_URL,
+    'another_upload_link' => PHOTOS_ADD_BASE_URL.(isset($_GET['category_id']) ? '&amp;category_id='.$_GET['category_id'] : ''),
     )
   );
 
@@ -425,8 +425,17 @@ display_select_cat_wrapper(
   'category_parent_options'
   );
 
+$category_options_selected = array();
+if (isset($_GET['category_id']))
+{
+  check_input_parameter('category_id', $_GET, false, PATTERN_ID);
+
+  $category_options_selected = array($_GET['category_id']);
+}
+
 $template->assign(
   array(
+    'category_options_selected' => $category_options_selected,
     'create_subcategories' => $create_subcategories,
     'create_whole_gallery' => $user_permissions['create_whole_gallery'],
     )

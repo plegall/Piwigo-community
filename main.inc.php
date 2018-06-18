@@ -148,7 +148,7 @@ function community_index()
 add_event_handler('blockmanager_apply' , 'community_gallery_menu', EVENT_HANDLER_PRIORITY_NEUTRAL+10);
 function community_gallery_menu($menu_ref_arr)
 {
-  global $conf, $user;
+  global $conf, $user, $page;
 
   // conditional : depending on community permissions, display the "Add
   // photos" link in the gallery menu
@@ -165,13 +165,19 @@ function community_gallery_menu($menu_ref_arr)
   {
     load_language('plugin.lang', COMMUNITY_PATH);
 
+    $url = make_index_url(array('section' => 'add_photos'));
+    if (isset($page['category']))
+    {
+      $url.= '&amp;category_id='.$page['category']['id'];
+    }
+
     array_splice(
       $block->data,
       count($block->data),
       0,
       array(
         '' => array(
-          'URL' => make_index_url(array('section' => 'add_photos')),
+          'URL' => $url,
           'TITLE' => l10n('Upload your own photos'),
           'NAME' => l10n('Upload Photos')
           )
