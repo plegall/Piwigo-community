@@ -69,14 +69,14 @@ SELECT
 
   $query = '
 SELECT
-    id,
-    type,
-    category_id,
-    user_album,
-    recursive,
-    create_subcategories,
-    nb_photos,
-    storage
+    `id`,
+    `type`,
+    `category_id`,
+    `user_album`,
+    `recursive`,
+    `create_subcategories`,
+    `nb_photos`,
+    `storage`
   FROM '.COMMUNITY_PERMISSIONS_TABLE.'
   WHERE (type = \'any_visitor\')';
 
