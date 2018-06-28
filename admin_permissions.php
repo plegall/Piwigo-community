@@ -102,7 +102,7 @@ if (isset($_POST['submit_add']))
     'user_id' => ('user' == $_POST['who']) ? $_POST['who_user'] : null,
     'category_id' => ($_POST['category'] > 0) ? $_POST['category'] : null,
     'user_album' => boolean_to_string(-1 == $_POST['category']),
-    'recursive' => isset($_POST['recursive']) ? 'true' : 'false',
+    '`recursive`' => isset($_POST['recursive']) ? 'true' : 'false',
     'create_subcategories' => isset($_POST['create_subcategories']) ? 'true' : 'false',
     'moderated' => $_POST['moderated'],
     'nb_photos' => $_POST['nb_photos'],

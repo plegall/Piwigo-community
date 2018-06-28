@@ -159,7 +159,7 @@ SELECT
         array(
           'type' => 'any_registered_user',
           'category_id' => $category_id,
-          'recursive' => 'true',
+          '`recursive`' => 'true',
           'create_subcategories' => 'true',
           'moderated' => 'true',
           )
