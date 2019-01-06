@@ -401,7 +401,7 @@ if (!function_exists('safe_version_compare'))
 {
   function safe_version_compare($a, $b, $cmp=null)
   {
-    $replace_chars = create_function('$m', 'return ord(strtolower($m[1]));');
+    $replace_chars = function ($m) { return ord(strtolower($m[1])); };
     $a = preg_replace('#([0-9]+)([a-z]+)#i', '$1.$2', $a);
     $b = preg_replace('#([0-9]+)([a-z]+)#i', '$1.$2', $b);
     $a = preg_replace_callback('#\b([a-z]{1})\b#i', $replace_chars, $a);
