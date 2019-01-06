@@ -63,7 +63,7 @@ $tabs = array(
   );
 
 $tab_codes = array_map(
-  create_function('$a', 'return $a["code"];'),
+  function ($a) { return $a["code"]; },
   $tabs
   );
 
