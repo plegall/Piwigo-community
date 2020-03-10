@@ -1,0 +1,103 @@
+.community-edit-user, .community-edit-album {
+    background-color: #555;
+    color: #999;
+}
+
+/* Batch Manager */
+#batchManagerGlobal legend {
+  color:#c1c1c1;
+}
+
+#batchManagerGlobal .thumbnails .font-checkbox [class*="icon-check"]::before {
+  color:#777;
+}
+
+#batchManagerGlobal .thumbnails li:hover .font-checkbox [class*="icon-check"]::before {
+  color: #3C3C3C; background-color: #fea744; border: 2px solid #3C3C3C;
+}
+
+#batchManagerGlobal li.thumbSelected .font-checkbox [class*="icon-check"]::before {
+  color: #3C3C3C; background-color: #fea744; border: 2px solid #3C3C3C; display: block;
+}
+
+#batchManagerGlobal UL.thumbnails li:hover .wrap2 {
+  color: white;
+}
+
+#batchManagerGlobal .thumbSelected { background-color:transparent !important }
+
+#batchManagerGlobal .thumbSelected .wrap2 {
+  background-color: #555 !important;
+}
+
+#batchManagerGlobal #selectedMessage {
+  color: #FFA646;
+  font-weight: bold;
+}
+
+/* TokenInput (with Facebook style for ROMA) */
+ul.token-input-list {border-color:#666 !important;background-color:#444 !important;}
+ul.token-input-list li input {background-color:#444 !important;}
+li.token-input-token span {color:#878787 !important;}
+div.token-input-dropdown {background-color:#eee !important;border-color:#666 !important;}
+div.token-input-dropdown ul li {background-color:#eee !important;}
+div.token-input-dropdown ul li.token-input-selected-dropdown-item {background-color:#FF7800 !important;}
+
+#batchManagerGlobal fieldset {margin: 0; margin-top: 30px;}
+#permitAction select {background: #3C3C3C; color: #C0C0C0;}
+#action_associate a:last-child {color: #C0C0C0; background-color: #464646;}
+#forbidAction, .selectionEmptyBlock {background-color: #5a5757; color: #c1c1c1;}
+#batchManagerGlobal .thumbSelected img {opacity: 1 !important;}
+#batchManagerGlobal UL.thumbnails IMG {opacity: 0.65;}
+
+#addFilter optgroup, #batchManagerGlobal option[disabled] {background-color: #555;}
+
+#batchManagerGlobal .ui-state-default, #batchManagerGlobal .ui-widget-content .ui-state-default,#batchManagerGlobal .ui-widget-header .ui-state-default {
+  border: 1px solid #ffaf58; background: #ffaf58;
+}
+#batchManagerGlobal .ui-state-hover,#batchManagerGlobal .ui-widget-content .ui-state-hover, #batchManagerGlobal .ui-widget-header .ui-state-hover {
+  background: #ffaf58;
+}
+#batchManagerGlobal .ui-state-focus, #batchManagerGlobal .ui-widget-content .ui-state-focus,#batchManagerGlobal .ui-widget-header .ui-state-focus {
+  border: 1px solid #ffaf58; background: #ffaf58;
+}
+#batchManagerGlobal .ui-state-active, #batchManagerGlobal .ui-widget-content .ui-state-active,#batchManagerGlobal .ui-widget-header .ui-state-active {
+  background: #ffaf58;
+}
+#batchManagerGlobal .ui-widget-content {background: #666; border: 1px solid #666;}
+#batchManagerGlobal .ui-slider .ui-slider-range {background-color: #aaaaaa;}
+#batchManagerGlobal .ui-slider-range.ui-widget-header.ui-corner-all {border: 1px solid #ffaf58; background-color: #ffaf58;}
+
+#batchManagerGlobal #checkActions a {background-color: #393939; color: #bbb;}
+
+/* navigation bar */
+.navigationBar, .thumbnailsActionsNumber, .navigationBar a,
+.navigationBar span, .thumbnailsActionsNumber a, .thumbnailsActionsNumber span {
+  color: #bbb;
+  background-color: #333;
+  border-radius: 10px;
+}
+.pageNumberSelected {background-color: #b4b4b4;}
+.navigationBar a:hover, .thumbnailsActionsNumber a:hover {color: #FFA646;}
+.navigationBar span.pageNumberSelected {color: #333; font-weight: bold;}
+.navigationBar span, .thumbnailsActionsNumber span, .thumbnailsActionsNumber span.thumbnailsActionsShow {
+  color: #777;
+}
+
+/* selectize */
+.selectize-control.multi .selectize-input [data-value] {
+  background-color: #FFA646;
+  background-image: none;
+  text-shadow: none;
+  box-shadow: none;
+  border:none;
+}
+
+.selectize-control.multi .selectize-input > div {
+  color:#555;
+  font-weight: bold;
+}
+
+.selectize-control.plugin-remove_button [data-value] .remove {
+  border-left-color: #555;
+}

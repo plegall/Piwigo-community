@@ -128,9 +128,9 @@ function community_section_init()
 {
   global $tokens, $page;
   
-  if ($tokens[0] == 'add_photos')
+  if (in_array($tokens[0], array('add_photos', 'edit_photos')))
   {
-    $page['section'] = 'add_photos';
+    $page['section'] = $tokens[0];
   }
 }
 
@@ -139,9 +139,9 @@ function community_index()
 {
   global $page;
   
-  if (isset($page['section']) and $page['section'] == 'add_photos')
+  if (isset($page['section']) and in_array($page['section'], array('add_photos', 'edit_photos')))
   {
-    include(COMMUNITY_PATH.'add_photos.php');
+    include(COMMUNITY_PATH.$page['section'].'.php');
   }
 }
 
@@ -165,10 +165,14 @@ function community_gallery_menu($menu_ref_arr)
   {
     load_language('plugin.lang', COMMUNITY_PATH);
 
-    $url = make_index_url(array('section' => 'add_photos'));
+    $add_url = make_index_url(array('section' => 'add_photos'));
+
+    $images_added = 0;
+
     if (isset($page['category']))
     {
-      $url.= '&amp;category_id='.$page['category']['id'];
+      $url_suffix = '&amp;category_id='.$page['category']['id'];
+      $add_url.= $url_suffix;
     }
 
     array_splice(
@@ -177,12 +181,63 @@ function community_gallery_menu($menu_ref_arr)
       0,
       array(
         '' => array(
-          'URL' => $url,
+          'URL' => $add_url,
           'TITLE' => l10n('Upload your own photos'),
           'NAME' => l10n('Upload Photos')
           )
         )
       );
+
+    // edit photos link
+    $edit_url = make_index_url(array('section' => 'edit_photos'));
+    $images_added = 0;
+
+    if (isset($page['category']))
+    {
+      // are there photos added by the current user in this album?
+      $query = '
+SELECT
+    COUNT(*) AS images_count
+  FROM '.IMAGES_TABLE.'
+    JOIN '.IMAGE_CATEGORY_TABLE.' ON image_id=id
+  WHERE `category_id` = '.$page['category']['id'].'
+    AND `added_by` = '.$user['id'].'
+;';
+      $results = query2array($query);
+      $images_added = $results[0]['images_count'];
+
+      if ($images_added > 0)
+      {
+        $edit_url.= $url_suffix;
+      }
+    }
+    else
+    {
+      $query = '
+SELECT
+    COUNT(*) AS images_count
+  FROM '.IMAGES_TABLE.'
+  WHERE `added_by` = '.$user['id'].'
+;';
+      $results = query2array($query);
+      $images_added = $results[0]['images_count'];
+    }
+
+    if ($images_added > 0)
+    {
+      array_splice(
+        $block->data,
+        count($block->data),
+        0,
+        array(
+          '' => array(
+          'URL' => $edit_url,
+          'TITLE' => l10n('Edit your photos'),
+          'NAME' => l10n('Edit photos')
+          )
+        )
+      );
+    }
   }
 }
 
@@ -264,8 +319,38 @@ function community_switch_user_to_admin($arr)
   $methods[] = 'pwg.images.upload';
   $methods[] = 'pwg.images.checkUpload';
   $methods[] = 'pwg.images.checkFiles';
-  $methods[] = 'pwg.images.setInfo';
   $methods[] = 'pwg.session.getStatus';
+
+  if (in_array($community['method'], array('pwg.images.delete', 'pwg.images.setInfo')) and !is_admin())
+  {
+    $image_ids = $_POST['image_id'];
+    if (!is_array($image_ids))
+    {
+      $image_ids = preg_split(
+        '/[\s,;\|]/',
+        $_POST['image_id'],
+        -1,
+        PREG_SPLIT_NO_EMPTY
+      );
+    }
+
+    $image_ids = array_map('intval', $image_ids);
+
+    $query = '
+SELECT
+    `id`
+  FROM '.IMAGES_TABLE.'
+  WHERE `added_by` = '.$user['id'].'
+    AND `id` IN ('.join(',', $image_ids).')
+;';
+    $image_ids = query2array($query, null, 'id');
+
+    if (count($image_ids) > 0)
+    {
+      $_POST['image_id'] = join(',', $image_ids);
+      $methods[] = $community['method'];
+    }
+  }
 
   if (in_array($community['method'], $methods))
   {

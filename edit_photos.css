@@ -1,0 +1,392 @@
+[class*="icon-"]:before{text-decoration:none !important}
+
+/* .font-checkbox */
+.font-checkbox [class*=icon-check]:before {
+  font-size:16px;
+  line-height:16px;
+  margin-right:0;
+  margin-left:0;
+}
+.font-checkbox .icon-check-empty {
+  position:relative;
+  left:-1px;
+}
+.font-checkbox input[type=checkbox], .font-checkbox input[type=radio] {
+  display:none;
+}
+
+.buttonLike, input[type="submit"], input[type="button"], input[type="reset"] {
+  font-size:12px; border:none; padding:13px 20px; margin-left:0; font-weight: bold; transition: all 125ms ease-out;
+}
+.buttonLike {padding: 8px 10px; margin-left: 5px;}
+
+
+/* Batch Manager, global mode */
+#batchManagerGlobal #action p {text-align:left;}
+#batchManagerGlobal .bulkAction {text-align:left; padding:0;}
+#batchManagerGlobal #action_del_tags ul.tagSelection {margin:0 !important; width:620px;}
+#batchManagerGlobal #checkActions {text-align:left; margin:0 0 20px 0;}
+#batchManagerGlobal #checkActions a {background-color: #E8E8E8; color: #3A3A3A; border-radius: 4px; padding: 4px 10px; margin: 2px;}
+#batchManagerGlobal ul.thumbnails div.actions {
+        display: none;
+        position: absolute;
+        top: 0;
+        color: #fff;
+        width: 98%;
+        justify-content: space-between;
+        background-color: #313234;
+        padding: 3px 0px;
+        margin-left: 1px;
+        z-index: 1;
+}
+#batchManagerGlobal ul.thumbnails div.actions a {color:#fff;}
+#batchManagerGlobal ul.thumbnails span.wrap1:hover div.actions {display:flex;}
+#batchManagerGlobal #selectedMessage {padding:5px; border-radius:5px; float: right;}
+#batchManagerGlobal #applyOnDetails {text-align: center; margin-top: 8px; color: #FFA646; font-weight: bold;}
+#batchManagerGlobal .actionButtons {text-align:left; margin: 0; display: flex; flex-direction: column;}
+#batchManagerGlobal #filterList {padding-left:5px; display: flex; flex-wrap: wrap; align-items: start; margin-top: -18px;}
+#batchManagerGlobal #filterList li {list-style-type:none;}
+#batchManagerGlobal a.removeFilter {color:#666;}
+#batchManagerGlobal a.removeFilter::before {margin-right:0; content: '\e822'; font-size: 9pt; color: #9f9f9f; margin-left: 6px;}
+#batchManagerGlobal a.removeFilter:hover::before {color: #ffa646;}
+#batchManagerGlobal a.removeFilter:hover {color:red;}
+#batchManagerGlobal .removeFilter span {display:none}
+#batchManagerGlobal #applyFilterBlock {margin-top:20px; width: 200px;}
+#batchManagerGlobal .useFilterCheckbox {display:none;}
+
+#batchManagerGlobal blockquote {margin:10px 0 0px 0;}
+#batchManagerGlobal .ui-slider-horizontal {width:280px; margin:10px 0 10px 9px;}
+#batchManagerGlobal #filter_dimension .ui-slider-horizontal {width:580px;}
+
+#batchManagerGlobal #duplicates_options label {margin-left:10px;}
+
+#batchManagerGlobal .thumbnails span.icon-check, #batchManagerGlobal .thumbnails span.icon-check-empty {
+  position: absolute;
+  left: 84px;
+  top: 84px;
+  font-size: 14px;
+  display: none;
+}
+
+#permitAction {display: flex;}
+#permitAction select {padding: 12px 10px; width: 280px; margin-bottom: 25px; -webkit-appearance: none;}
+#applyAction {padding: 10px 18px; margin-left: 0;}
+.permitActionItem {margin-left: 30px; width: 300px;}
+.permitActionItem .selectize-control.single.plugin-remove_button {width: auto !important;}
+.permitActionItem .selectize-input.items.full.has-options.has-items {width: 500px !important; line-height: 23px;}
+#action_associate {display: flex;}
+#action_associate a:last-child {margin-left: 15px; padding: 10px;}
+#applyAction i {margin-right: 15px;}
+#action_delete_derivatives, #action_generate_derivatives {display: flex; flex-wrap: wrap; margin-top: -20px;}
+.deleteDerivButtons a {border-radius: 4px; padding: 4px 10px; margin: 5px;}
+.deleteDerivButtons {margin-bottom: 15px; margin-right: 51px; width: 100%; text-align: center;}
+#action_delete_derivatives label, #action_generate_derivatives label {display: flex; margin-top: 4px; width: 50%;}
+#action_delete_derivatives input[name="del_derivatives_type[]"], #action_generate_derivatives input[name="generate_derivatives_type[]"] {margin-right: 3px;}
+.actionButtonsBlock .actionButtons:first-child::after,#filter_prefilter::before,#filter_category::before,#filter_level::before,
+.permitActionListButton div::before, #action_level::after, .pictureLevels::before {
+  content: '\e835'; font-size: 17px; position: absolute; font-family: "fontello"; color: #6E6E6E; pointer-events: none;
+}
+.permitActionListButton div::before {margin-left: 250px; margin-top: 11px;}
+.pictureLevels::before {margin-left: 216px; margin-top: 10px;}
+.permitActionListButton div.hidden::after {display: none;}
+.actionButtonsBlock {width: 200px;}
+.actionButtonsBlock .actionButtons:first-child::after {margin-left: 169px; margin-top: 11px;}
+#filter_prefilter::before {margin-left: 257px; margin-top: 28px;}
+#filter_category .selectize-control.single .selectize-input::after {content: none;}
+#filter_category {width: 600px;}
+#filter_category::before {margin-left: 579px; margin-top: 28px; z-index: 2;}
+#filter_level::before {margin-top: 28px; margin-left: 260px;}
+#action_level::after {margin-top: -56px; margin-left: 254px;}
+#filter_search input {width: 300px; box-sizing: border-box; padding: 11px 18px;}
+#addFilter, #filterList select, #filter_tags .selectize-input.items.not-full.has-options, .pictureLevels select {
+        font-size: 12px;
+        font-family: "Open Sans", "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;
+        -webkit-appearance: none;
+        font-weight: 700;
+}
+#action_date_creation input, #action_title input, #action_author input {margin-right: 4px;}
+#set_date_creation {margin-top: 5px; margin-left: -2px;}
+#action_title .large, #action_author .large {padding: 12px 10px; border: 1px solid #787777a6;margin-bottom: 8px;}
+#action_add_tags .selectize-input.items.not-full.has-options,
+#action_add_tags .selectize-input.items.not-full.has-options.focus.input-active.dropdown-active, .selectize-input.items.not-full {
+        padding: 12px 10px; box-shadow: none; border-radius: 0px; border: 1px solid #787777a6;
+}
+
+#batchManagerGlobal UL.thumbnails {display: flex; flex-wrap: wrap; justify-content: flex-start; margin-left: 30px;}
+#batchManagerGlobal ul.thumbnails .actions .icon-plus.cboxElement {
+        background-color: transparent; padding: 0; box-shadow: none; font-size: initial; margin-bottom: 0;
+}
+#batchManagerGlobal UL.thumbnails .wrap2 {width: 110px !important; height: 110px !important;}
+#batchManagerGlobal UL.thumbnails IMG {margin-top: 0; width: 110px; height: 110px; border: 1px solid transparent;}
+#batchManagerGlobal UL.thumbnails .wrap2 .icon-eye {font-size: 15px; margin-left: 4px;}
+#batchManagerGlobal UL.thumbnails .wrap2 .icon-plus {margin-right: 2px;}
+#batchManagerGlobal .thumbnails li:hover .font-checkbox [class*="icon-check"]::before,
+#batchManagerGlobal li.thumbSelected .font-checkbox [class*="icon-check"]::before {border-radius: 13px; padding: 1px; content: '\E819'; width:auto; display:none;}
+#batchManagerGlobal .thumbSelected span.icon-check {display: block; z-index: 1;}
+#batchManagerGlobal .thumbnails .wrap1:hover span.icon-check-empty {display: block;}
+#batchManagerGlobal .thumbnails .wrap1 .icon-check-empty:before {content: '\E823';}
+#batchManagerGlobal .thumbnails .font-checkbox [class*="icon-check"]::before {font-size: 17px; line-height: normal;}
+#batchManagerGlobal UL.thumbnails .wrap2 .icon-eye:hover, #batchManagerGlobal UL.thumbnails .wrap2 .icon-zoom-square:hover {color: #fea744;}
+#batchManagerGlobal .deleteDerivButtons a:hover, #batchManagerGlobal #checkActions a:hover {
+        background-color: #ffa646; color: initial; text-decoration: none;
+}
+.navigationBar a:hover, .thumbnailsActionsNumber a:hover {
+        color: #666; text-decoration: none; border-radius: 0;
+}
+#batchManagerGlobal .thumbSelected img {opacity: 0.35; border: 1px solid #fea744 !important;}
+#batchManagerGlobal li.thumbSelected:hover .font-checkbox [class*="icon-check"]::before {display: block;}
+#filter_category .selectize-input.items.full.has-options.has-items .item,
+#filter_category .selectize-input.items.not-full.has-options .item,
+#filter_category .selectize-input.items.not-full .item {width: 561px; text-overflow: ellipsis;}
+#filter_category .selectize-input.items.full.has-options.has-items,
+#filter_category .selectize-input.items.not-full.has-options,
+#filter_category .selectize-input.items.not-full {width: 610px;}
+#forbidAction {text-align: center; font-weight: 600; padding: 25px 0; background-color: #f3f3f3; color:#777;}
+.selectionEmptyBlock {text-align: center; font-weight: 600; padding: 90px 0;}
+#duplicates_options {display: flex; flex-direction: column;}
+#batchManagerGlobal .thumbnails .wrap2 .icon-zoom-square::before {font-size: 15px; margin-top: 2.9px; margin-right: 7px;}
+#progressBar_pbImage {
+        width: 300px !important; border-radius: 15px; height: 8px !important; margin-top: 5px !important; background-size: cover;
+        background-repeat: no-repeat; background-color: #f5f5f5;
+ }
+#regenerationMsg {width: 360px;}
+#progressBar {display: flex;}
+#progressBar_pbText {margin-left: 15px;}
+#filter_search .icon-help-circled::before {margin-right: 5px; color: #777;}
+.dimensionSlidersBlocks {display: flex; flex-direction: column; margin-bottom: 8px;}
+.dimensionSlidersTitleButtons, .dimensionSlidersRatioButtons {display: flex; justify-content: space-between;}
+.dimensionSlidersTitleButtons {margin-bottom: 5px;}
+.dimensionSlidersRatioButtons {margin-bottom: 15px;}
+#filter_dimension blockquote div:last-child .ui-slider-horizontal {margin-top: 5px;}
+#batchManagerGlobal .ui-slider-horizontal .ui-slider-handle {top: -.7em !important; width: 1.4em; height: 1.4em;}
+#batchManagerGlobal .ui-slider-handle.ui-state-default.ui-corner-all {border-radius: 10px;}
+#action_delete label {color: #4e4e4e;}
+#action_delete .errors {display: block; min-height: initial; margin: 10px 0px 0px 0px;}
+#batchManagerGlobal .ui-slider-horizontal .ui-slider-range {height: 2px;}
+#batchManagerGlobal .ui-slider-horizontal {height: 2px;}
+#batchManagerGlobal .ui-slider-range.ui-widget-header.ui-corner-all {margin-top: -1px;}
+#batchManagerGlobal .font-checkbox.selected span:first-child::before {content: '\f192';}
+
+/* thumbnails.css */
+UL.thumbnails {
+  margin: 0; padding: 0; list-style: none;
+  text-align: center;   /* to center the whole collection in .content */
+  float: left;
+}
+UL.thumbnails LI { display: inline }
+UL.thumbnails li.rank-of-image {
+  float: left;
+  background-color: #333;
+  color: #666;
+  border-radius: 5px;
+  display: block;
+  width: 120px;
+  height: 120px;
+  cursor: move;
+  margin: 4px;
+        overflow: hidden;
+}
+.clipwrapper {
+  position:relative;
+  width: 96px;
+  height: 96px;
+  margin: 3px;
+}
+.clip {
+  position:absolute;
+}
+
+UL.thumbnails SPAN.wrap1 {
+  margin: 5px;
+  display: table-cell; display: inline-table;
+  display: inline-block; /* Why 3 display option ??? */
+  vertical-align: top;          /* OK with Opera and IE6 not Geko */
+  text-align: center;           /* to center the thumbnail and legend in Geko/Opera */
+}
+UL.thumbnails SPAN.wrap2 {
+  margin: 0;                    /* important reset the margins */
+  display: table-cell;          /* block prevents vertical-align here */
+  vertical-align: middle;       /* Ok with Opera and Geko not IE6 */
+        border-radius: 4px;
+  border: none;
+}
+UL.thumbnails LABEL {
+        position: relative;
+        display: block;
+        border-bottom: none;
+}
+
+UL.thumbnails IMG {
+        vertical-align: middle;
+        margin-top: 12px;
+}
+
+UL.thumbnails INPUT {
+  position: absolute;
+  left: 2px; top: 2px;
+}
+UL.thumbnails .levelIndicatorB {
+display:block; position:absolute; z-index:100; padding:7px 0 0 2px; color:black; font-weight:bold; font-size:120%;
+}
+UL.thumbnails .levelIndicatorF {
+display:block; position:absolute; z-index:101; padding:8px 0 0 3px; color:white; font-weight:bold; font-size:120%;
+}
+
+/* filter */
+.edit-photos-filter p {
+  text-align: center;
+}
+.community-edit-user, .community-edit-album {
+  padding: 5px 8px;
+  font-weight: bold;
+  background-color:#f5f5f5;
+  text-align: center;
+  margin: 0 5px;
+  border-radius: 7px;
+  color: #666;
+}
+
+/* clear theme */
+/* Batch Manager */
+#batchManagerGlobal .thumbnails .font-checkbox [class*="icon-check"]::before {
+  color:#999;
+}
+
+#batchManagerGlobal .thumbnails li:hover .font-checkbox [class*="icon-check"]::before {
+  color: #3C3C3C; background-color: #fea744; border: 2px solid #3C3C3C;
+}
+
+#batchManagerGlobal li.thumbSelected .font-checkbox [class*="icon-check"]::before {
+  color: #3C3C3C; background-color: #fea744; border: 2px solid #3C3C3C; display: block;
+}
+
+#batchManagerGlobal UL.thumbnails li:hover .wrap2 {
+  background-color: transparent;
+  color: #999;
+}
+
+#batchManagerGlobal .thumbSelected {background-color:transparent !important}
+
+#batchManagerGlobal .thumbSelected .wrap2 {
+  background-color: transparent !important;
+}
+
+#batchManagerGlobal #selectedMessage {
+  color: #FFA646;
+  font-weight: bold;
+}
+
+/* beta-test begins: specific changes on Batch Manager */
+#batchManagerGlobal legend {
+  color:#555;
+  font-weight: bold;
+  font-style: normal;
+}
+
+#batchManagerGlobal fieldset {
+  margin: 0;
+  margin-top: 30px;
+}
+/* beta-test ends */
+
+.bigbutton {background:none;margin-right:-5px; padding: 10px;height:auto;position:static;width:auto;text-align:right;}
+.bigtext {display:none;position:static;}
+.bigbutton input[type="submit"] {display:inline;position:static;height:auto;width:auto;font-size:18px;padding:10px;}
+
+.buttonLike:hover {color: #3C3C3C;}
+
+.buttonLike, input[type="submit"], input[type="button"], input[type="reset"] {
+  background-color:#FFA646;
+  color:#3C3C3C;
+}
+
+.buttonLike:hover, input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover {
+        cursor: pointer;
+  background-color: #ff7700;
+        text-decoration: none;
+}
+
+.buttonLike i {
+  font-size:14px;
+}
+
+.buttonLike:disabled, input[type="submit"]:disabled, input[type="button"]:disabled, input[type="reset"]:disabled {
+  background-color: #ECECEC;
+  color: #D5D5D5;
+  cursor:not-allowed;
+}
+
+#permitAction select {background-color: #FFF; color: #4E4E4E; border: 1px solid #787777a6; border-radius: 0}
+#forbidAction, .selectionEmptyBlock {background-color: #f3f3f3;}
+#batchManagerGlobal option[disabled] {background-color: #EEE;}
+
+#batchManagerGlobal .ui-state-default, #batchManagerGlobal .ui-widget-content .ui-state-default,#batchManagerGlobal .ui-widget-header .ui-state-default {
+  border: 1px solid #ffaf58; background: #ffaf58;
+}
+#batchManagerGlobal .ui-state-hover,#batchManagerGlobal .ui-widget-content .ui-state-hover, #batchManagerGlobal .ui-widget-header .ui-state-hover {
+  background: #ffaf58;
+}
+#batchManagerGlobal .ui-state-focus, #batchManagerGlobal .ui-widget-content .ui-state-focus,#batchManagerGlobal .ui-widget-header .ui-state-focus {
+  border: 1px solid #ffaf58; background: #ffaf58;
+}
+#batchManagerGlobal .ui-state-active, #batchManagerGlobal .ui-widget-content .ui-state-active,#batchManagerGlobal .ui-widget-header .ui-state-active {
+  background: #ffaf58;
+}
+#batchManagerGlobal .ui-slider-range.ui-widget-header.ui-corner-all {border: 1px solid #ffaf58;}
+#batchManagerGlobal .font-checkbox.selected {color: #777;}
+
+#batchManagerGlobal .actionButtons {
+  background-color: transparent;
+}
+
+.navigationBar {margin: auto !important;}
+.navigationBarRow .navigationBar {width: 35%;}
+#batchManagerGlobal .navigationBar {margin-top: 30px !important; padding: 8px 10px;}
+.navigationBar {color:#999; margin: 10px 0; text-align: center; }
+.navigationBar {
+  border-radius: 5px;
+  display: flex;
+  font-size: 12px;
+  font-weight: 700;
+}
+.navigationBar a, .navigationBar span {
+  padding: 8px 9px;
+  border: none;
+  color: #3A3A3A;
+}
+.navigationBar span a {
+  padding: 0;
+}
+
+.navigationBar span.pageNumberSelected {background-color: #ffaf58; color: #fff; border: none !important; border-radius: 0 !important;}
+
+.navigationBar, .navigationBar a, .navigationBar span {
+  background-color: #f9f9f9;
+}
+.navigationBar a:hover {font-weight: bold; color:#ff7700;}
+.navigationBar span {
+  color: #BBB;
+}
+
+.thumbnailsActionsNumber {
+  float:right;
+  margin-top:30px;
+  margin-right: 46px;
+  background-color: #f9f9f9;
+  padding: 8px 10px;
+  border-radius: 5px;
+}
+
+.thumbnailsActionsNumber span, .thumbnailsActionsNumber a {
+  margin:0 5px;
+  font-weight: bold;
+}
+.thumbnailsActionsNumber span.thumbnailsActionsShow {
+  color: #bbb;
+}
+.thumbnailsActionsNumber a {
+  color: #3A3A3A;
+}
+.thumbnailsActionsNumber a:hover {
+  color: #ff7700;
+}
