@@ -31,6 +31,8 @@ include_once(PHPWG_ROOT_PATH.'admin/include/functions.php');
 // | Checks                                                                |
 // +-----------------------------------------------------------------------+
 
+check_status(ACCESS_CLASSIC);
+
 if (!empty($_POST))
 {
   check_pwg_token();

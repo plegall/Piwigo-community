@@ -189,6 +189,13 @@ function community_gallery_menu($menu_ref_arr)
       );
 
     // edit photos link
+
+    // only admins and normal users can use the edit photos feature
+    if (!is_autorize_status(ACCESS_CLASSIC))
+    {
+      return;
+    }
+
     $edit_url = make_index_url(array('section' => 'edit_photos'));
     $images_added = 0;
 
@@ -270,7 +277,7 @@ function community_switch_user_to_admin($arr)
     $community['md5sum'] = $_REQUEST['original_sum'];
   }
 
-  if ('pwg.images.setInfo' == $community['method'] and !is_admin())
+  if ('pwg.images.setInfo' == $community['method'])
   {
     // prevent Community users to validate photos with setting level to 0
     unset($_POST['level']);
@@ -321,7 +328,7 @@ function community_switch_user_to_admin($arr)
   $methods[] = 'pwg.images.checkFiles';
   $methods[] = 'pwg.session.getStatus';
 
-  if (in_array($community['method'], array('pwg.images.delete', 'pwg.images.setInfo')) and !is_admin())
+  if (in_array($community['method'], array('pwg.images.delete', 'pwg.images.setInfo')))
   {
     $image_ids = $_POST['image_id'];
     if (!is_array($image_ids))
@@ -344,6 +351,29 @@ SELECT
     AND `id` IN ('.join(',', $image_ids).')
 ;';
     $image_ids = query2array($query, null, 'id');
+
+    if (!is_autorize_status(ACCESS_CLASSIC))
+    {
+      // in this specific case (ie a user with status guest/generic) we only allow the user
+      // to edit/delete photos if they were added in the current session
+      if (version_compare(PHPWG_VERSION, '2.10', '>='))
+      {
+        $query = '
+SELECT
+    `object_id`
+  FROM '.ACTIVITY_TABLE.'
+  WHERE `object` = \'photo\'
+    AND `action` = \'add\'
+    AND `object_id` IN ('.join(',', $image_ids).')
+    AND `session_idx` = \''.session_id().'\'
+;';
+        $image_ids = query2array($query, null, 'object_id');
+      }
+      else
+      {
+        $image_ids = array();
+      }
+    }
 
     if (count($image_ids) > 0)
     {
