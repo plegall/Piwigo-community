@@ -1,0 +1,78 @@
+
+#uploadForm li.plupload_droptext{
+  background-color:#343434;
+}
+
+.plupload_filelist_footer{
+  background-color:#3c3939;
+  border-top:none;
+  color: #A5A5A5;
+}
+
+.plupload_file_action,
+.plupload_file_status span{
+  color: #A5A5A5;
+}
+
+fieldset legend{
+  color:#c1c1c1;
+}
+
+form.properties a{
+  color:#a5a5a5;
+  font-weight:700;
+}
+form.properties a:hover{
+  text-decoration:underline;
+}
+
+#albumSelect:focus{
+  outline:none;
+}
+
+.albumSelect option:hover{
+  background-color:#343434;
+}
+
+#albumSelect{
+  background-color: #343434;
+    background-image: -moz-linear-gradient(top, #363636, #303030);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#363636), to(#303030));
+    background-image: -webkit-linear-gradient(top, #363636, #303030);
+    background-image: -o-linear-gradient(top, #363636, #303030);
+    background-image: linear-gradient(to bottom, #363636, #303030);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff363636', endColorstr='#ff303030', GradientType=0);
+    border: 2px solid #FAC17E !important;
+    color: #D5D5D5;
+}
+
+p#uploadWarningsSummary .showInfo{
+  background-color:#343434;
+  border:none;
+}
+
+.plupload_droptext{
+  color:#777;
+}
+
+#linkToCreate{
+  color:#d5d5d5;
+}
+
+.plupload_scroll .plupload_filelist{
+  background-color:#444444;
+}
+
+.plupload_filelist li{
+  border-bottom: 1px solid #343434 !important;
+  color: #A5A5A5 !important;
+}
+
+#uploader_filelist .plupload_file_action a{
+  color:#a5a5a5;
+}
+
+#uploader_filelist .plupload_file_action a:hover{
+  color:#FAC17E
+}

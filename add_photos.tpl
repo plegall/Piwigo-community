@@ -7,6 +7,8 @@
 
 {combine_css path="themes/default/js/plugins/jquery.jgrowl.css"}
 {combine_css path="themes/default/js/plugins/plupload/jquery.plupload.queue/css/jquery.plupload.queue.css"}
+{combine_css id='UploadPhotos' path="plugins/community/add_photos.css"}
+{combine_css path="plugins/community/add_photos-{$themeconf.colorscheme}.css"}
 
 {assign var="plupload_i18n" value="themes/default/js/plugins/plupload/i18n/`$lang_info.plupload_code`.js"}
 {if "PHPWG_ROOT_PATH"|@constant|@cat:$plupload_i18n|@file_exists}
@@ -18,9 +20,9 @@
 
 {combine_script id='piecon' load='footer' path='themes/default/js/plugins/piecon.js'}
 
-{footer_script}
-var rootUrl = "{get_absolute_root_url()}";
-{literal}
+
+
+{footer_script}{literal}
 jQuery(document).ready(function(){
 
   function checkUploadStart() {
@@ -73,7 +75,7 @@ jQuery(document).ready(function(){
 
   function fillCategoryListbox(selectId, selectedValue) {
     jQuery.getJSON(
-      rootUrl + "ws.php?format=json&method=pwg.categories.getList",
+      "ws.php?format=json&method=pwg.categories.getList",
       {
         recursive: true,
         fullname: true,
@@ -112,7 +114,7 @@ jQuery(document).ready(function(){
       jQuery("#categoryNameError").text("");
 
       jQuery.ajax({
-        url: rootUrl + "ws.php?format=json&method=pwg.categories.add",
+        url: "ws.php?format=json&method=pwg.categories.add",
         type:"POST",
         data: {
           parent: jQuery("select[name=category_parent] option:selected").val(),
@@ -195,7 +197,7 @@ var limit_storage = {$limit_storage};
 		runtimes : 'html5',
 
 		// url : '../upload.php',
-		url : rootUrl + 'ws.php?method=pwg.images.upload&format=json',
+		url : 'ws.php?method=pwg.images.upload&format=json',
 		
 		chunk_size: '{/literal}{$chunk_size}{literal}kb',
 		
@@ -291,7 +293,7 @@ var limit_storage = {$limit_storage};
         uploadCategory = data.result.category;
 
         jQuery.ajax({
-          url: rootUrl + "ws.php?format=json&method=pwg.images.setInfo",
+          url: "ws.php?format=json&method=pwg.images.setInfo",
           type:"POST",
           data: {
             single_value_mode: "replace",
@@ -329,7 +331,7 @@ var limit_storage = {$limit_storage};
         jQuery(".infos").append('<ul><li>'+sprintf(photosUploaded_label, uploadedPhotos.length, uploadCategory.label)+'</li></ul>');
 
         jQuery.ajax({
-          url: rootUrl + "ws.php?format=json&method=community.images.uploadCompleted",
+          url: "ws.php?format=json&method=community.images.uploadCompleted",
           type:"POST",
           data: {
             pwg_token: pwg_token,

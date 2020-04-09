@@ -1,0 +1,147 @@
+#photosAddContent{
+  padding: 30px 0;
+}
+
+#uploadForm #addFiles{
+  background-color: #FFA646;
+  color: #3C3C3C;
+  padding: 15px 10px;
+  font-size: 12px;
+  border: none;
+  font-weight: bold;
+  transition: all 125ms ease-out;
+  cursor:pointer;
+}
+#uploadForm #addFiles:hover,
+#uploadForm #startUpload:hover{
+  background-color:#ff7700;
+}
+
+#uploadForm #addFiles:focus{
+  outline:none;
+}
+
+#uploader{
+  margin-top:50px;
+}
+
+p#uploadWarningsSummary{
+  margin:15px!important;
+}
+
+.plupload_filelist_header {
+  font-size:12px;
+  padding:10px 15px;
+}
+
+#uploadForm li.plupload_droptext{
+  font-size: 2em;
+  font-weight:700;
+}
+
+LEGEND{
+  font-style:normal;
+}
+
+fieldset legend{
+  font-weight:700;
+}
+
+#albumSelect{
+  width:300px;
+  border-radius:0;
+}
+
+#linkToCreate{
+  display:inline-block;
+  margin-left:10px;
+}
+#linkToCreate a,
+#photosAddContent p.showFieldset a{
+  border:none!important;
+}
+#linkToCreate a:hover{
+  text-decoration:underline;
+}
+
+#photosAddContent p.showFieldset a{
+  margin-left:5px;
+}
+
+.selectFiles LEGEND{
+  margin:15px 0;
+}
+
+.plupload_filelist li{
+  background:none;
+}
+
+#uploader_filelist .plupload_file_action a{
+  padding:0;
+  border:none;
+  margin-top:11px;
+}
+
+li.plupload_delete a {
+  background: url(/piwigo/admin/themes/clear/images/cancel.svg) !important;
+  background-size: cover !important;
+  width: 10px;
+  height: 10px;
+  margin-top: 3px;
+}
+
+.plupload_filelist li{
+  padding:10px 8px;;
+  margin:0;
+}
+
+.plupload_filelist_header{
+  display:none;
+}
+
+.plupload_filelist_footer{
+  border-top: 1px solid #FFF;
+  height: 22px;
+  line-height: 20px;
+  vertical-align: middle;
+}
+
+#uploadForm #startUpload{
+  background-color: #FFA646;
+  color: #3C3C3C;
+  border: none;
+  font-weight: bold;
+  transition: all 125ms ease-out;
+  cursor:pointer;
+  padding:8px 10px!important;
+  margin: 10px 0 15px 20px!important;
+}
+
+.plupload_file_status{
+  margin-right:45px;
+}
+
+.selectize-input.dropdown-active::before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    background: #555555;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.selectize-control.single .selectize-input:after{
+  content: ' ';
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  margin-top: -3px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 5px 0 5px;
+  border-color: #808080 transparent transparent transparent;
+}
