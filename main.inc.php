@@ -131,6 +131,18 @@ function community_section_init()
   if (in_array($tokens[0], array('add_photos', 'edit_photos')))
   {
     $page['section'] = $tokens[0];
+    $page['is_homepage'] = false;
+  }
+}
+
+add_event_handler('loc_begin_page_header', 'community_loc_begin_page_header');
+function community_loc_begin_page_header()
+{
+  global $tokens, $page;
+
+  if (in_array($tokens[0], array('add_photos', 'edit_photos')))
+  {
+    $page['body_id'] = 'community_'.$tokens[0];
   }
 }
 
