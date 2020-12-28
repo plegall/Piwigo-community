@@ -94,7 +94,13 @@ $tabsheet->assign();
 
 $template->set_filenames(
   array(
-    'photos_add' => 'photos_add_'.$page['tab'].'.tpl'
+    'photos_add' => 'photos_add_'.$page['tab'].'.tpl',
+    )
+  );
+
+$template->assign(
+    array(
+      'ADMIN_PAGE_TITLE' => 'Community',
     )
   );
 

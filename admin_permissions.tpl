@@ -160,11 +160,6 @@ $(document).ready(function() {
 });
 {/literal}{/footer_script}
 
-
-<div class="titrePage">
-  <h2>{'Upload Permissions'|@translate} - {'Community'|@translate}</h2>
-</div>
-
 {if not isset($edit)}
 <a id="displayForm" href="#">{'Add a permission'|@translate}</a>
 {/if}

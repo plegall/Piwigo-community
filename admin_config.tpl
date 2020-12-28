@@ -20,10 +20,6 @@ jQuery(document).ready(function() {
 </script>
 {/literal}
 
-<div class="titrePage">
-  <h2>{'Configuration'|@translate} - {'Community'|@translate}</h2>
-</div>
-
 <form method="post" action="{$F_ACTION}">
 
   <p><label><input type="checkbox" name="user_albums"{if $user_albums} checked="checked"{/if}> <strong>{'User albums'|@translate}</strong> : <em>{'Piwigo automatically creates an album for each user, on first connection'|@translate}</em></label></p>

@@ -6,6 +6,7 @@ Description: Non admin users can add photos
 Plugin URI: http://piwigo.org/ext/extension_view.php?eid=303
 Author: plg
 Author URI: http://piwigo.wordpress.com
+Has Settings: true
 */
 
 if (!defined('PHPWG_ROOT_PATH'))
@@ -50,11 +51,11 @@ function community_init()
 }
 
 /* Plugin admin */
-add_event_handler('get_admin_plugin_menu_links', 'community_admin_menu');
-function community_admin_menu($menu)
+add_event_handler('loc_begin_admin_page', 'community_loc_begin_admin_page');
+function community_loc_begin_admin_page()
 {
   global $page;
-  
+
   $query = '
 SELECT
     COUNT(*)
@@ -64,51 +65,23 @@ SELECT
 ;';
   $result = pwg_query($query);
   list($page['community_nb_pendings']) = pwg_db_fetch_row($result);
-
-  $name = 'Community';
-  if ($page['community_nb_pendings'] > 0)
-  {
-    $style = 'background-color:#666;';
-    $style.= 'color:white;';
-    $style.= 'padding:1px 5px;';
-    $style.= 'border-radius:10px;';
-    $style.= 'margin-left:5px;';
-    
-    $name.= '<span style="'.$style.'">'.$page['community_nb_pendings'].'</span>';
-
-    if (defined('IN_ADMIN') and IN_ADMIN and $page['page'] == 'intro')
-    {
-      global $template;
-      
-      $template->set_prefilter('intro', 'community_pendings_on_intro');
-      $template->assign(
-        array(
-          'COMMUNITY_PENDINGS' => sprintf(
-            '<a href="%s">'.l10n('%u pending photos').'</a>',
-            get_root_url().'admin.php?page=plugin-community-pendings',
-            $page['community_nb_pendings']
-            ),
-          )
-        );
-    }
-  }
-
-  array_push(
-    $menu,
-    array(
-      'NAME' => $name,
-      'URL'  => get_root_url().'admin.php?page=plugin-community'
-      )
-    );
-
-  return $menu;
 }
 
-function community_pendings_on_intro($content, &$smarty)
+add_event_handler('loc_end_intro', 'community_loc_end_intro');
+function community_loc_end_intro()
 {
-  $pattern = '#<li>\s*{\$DB_ELEMENTS\}#ms';
-  $replacement = '<li>{$COMMUNITY_PENDINGS}</li><li>{$DB_ELEMENTS}';
-  return preg_replace($pattern, $replacement, $content);
+  global $page;
+
+  if ($page['community_nb_pendings'] > 0)
+  {
+    $message = sprintf(
+      'Community <i class="icon-picture"></i> <a href="%s">'.l10n('%u pending photos').' <i class="icon-right"></i></a>',
+      get_root_url().'admin.php?page=plugin-community-pendings',
+      $page['community_nb_pendings']
+    );
+  
+    $page['messages'][] = $message;
+  }
 }
 
 add_event_handler('init', 'community_load_language');

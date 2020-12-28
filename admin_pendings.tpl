@@ -63,10 +63,6 @@ jQuery(document).ready(function(){
 </script>
 {/literal}
 
-<div class="titrePage">
-  <h2>{'Pending Photos'|@translate} - {'Community'|@translate}</h2>
-</div>
-
 {if !empty($photos) }
 <form method="post" action="">
   
