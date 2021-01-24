@@ -113,7 +113,7 @@ function community_loc_begin_page_header()
 {
   global $tokens, $page;
 
-  if (isset($page['section']) and in_array($tokens[0], array('add_photos', 'edit_photos')))
+  if (isset($tokens[0]) and in_array($tokens[0], array('add_photos', 'edit_photos')))
   {
     $page['body_id'] = 'community_'.$tokens[0];
   }
