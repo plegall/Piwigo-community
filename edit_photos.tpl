@@ -14,6 +14,7 @@
 {combine_css id='batchManagerGlobal' path="plugins/community/edit_photos.css"}
 {combine_css path="plugins/community/edit_photos-{$themeconf.colorscheme}.css"}
 {combine_css id='jquery.colorbox' path="themes/default/js/plugins/colorbox/style2/colorbox.css"}
+{combine_css path="themes/default/js/plugins/jquery-confirm.min.css"}
 
 {footer_script}
 var lang = {
@@ -198,6 +199,55 @@ $(document).ready(function() {
 
 });
 
+// Based on add_photos.tpl
+// Create album for "move to album" action
+jQuery(".addAlbumOpen").colorbox({
+  inline:true,
+  href:"#addAlbumForm",
+  onComplete:function(){
+    jQuery("input[name=category_name]").focus();
+  }
+});
+
+jQuery("#addAlbumForm form").submit(function(){
+    jQuery("#categoryNameError").text("");
+
+    jQuery.ajax({
+      url: rootUrl + "ws.php?format=json&method=pwg.categories.add",
+      type:"POST",
+      data: {
+        parent: jQuery("select[name=category_parent] option:selected").val(),
+        name: jQuery("input[name=category_name]").val(),
+      },
+      beforeSend: function() {
+        jQuery("#albumCreationLoading").show();
+      },
+      success:function(html) {
+        jQuery("#albumCreationLoading").hide();
+
+        var newAlbum = jQuery.parseJSON(html).result.id;
+        jQuery(".addAlbumOpen").colorbox.close();
+
+        jQuery("#albumSelect").find("option").remove();
+        fillCategoryListbox("albumSelect", newAlbum);
+
+        jQuery(".albumSelection").show();
+
+        /* we hide the ability to create another album, this is different from the admin upload form */
+        /* in Community, it's complicated to refresh the list of parent albums                       */
+        jQuery("#linkToCreate").hide();
+
+        return true;
+      },
+      error:function(XMLHttpRequest, textStatus, errorThrows) {
+          jQuery("#albumCreationLoading").hide();
+          jQuery("#categoryNameError").text(errorThrows).css("color", "red");
+      }
+    });
+
+    return false;
+});
+
 {/footer_script}
 
 <div id="batchManagerGlobal">
@@ -206,6 +256,9 @@ $(document).ready(function() {
   <input type="hidden" name="start" value="{$START}">
   <input type="hidden" name="pwg_token" value="{$PWG_TOKEN}">
 
+{* show block when user is only permitted to edit photos uploaded by user *}
+{* ie. scope permissions are set to false *}
+{if !$user_filters.scope.value}
   <fieldset class="edit-photos-filter">
 {assign var="username_display" value='<span class="community-edit-user"><i class="icon-user"></i>'|cat:$USERNAME|cat:'</span>'}
 
@@ -216,6 +269,123 @@ $(document).ready(function() {
     <p>{'Photos posted by %s'|translate:$username_display}</p>
 {/if}
   </fieldset>
+{/if}
+
+
+<!-- Filters -->
+{if $user_filters.enable}
+<fieldset>
+    <legend>{'Filter'|@translate}</legend>
+
+    <div class="filterBlock">
+      <ul id="filterList">
+
+      {if $user_filters.scope.value}
+        <li id="filter_scope">
+          <input type="checkbox" name="filter_scope_use" class="useFilterCheckbox" {if isset($filter.scope)}checked="checked"{/if}>
+          <p>{'Scope'|@translate}</p>
+          <select name="filter_scope">
+            <option value="user" class="{$optionClass}" {if $scope_selected=="user"}selected="selected"{/if}>{'Photos posted by %s'|translate:$USERNAME}</option>
+            <option value="all" class="{$optionClass}" {if $scope_selected=="all"}selected="selected"{/if}>{'All photos'|@translate}</option>
+          </select>
+        </li>
+      {/if}
+
+      {if $user_filters.prefilter.value}
+        <li id="filter_prefilter" {if !isset($filter.prefilter)}style="display:none"{/if}>
+          <input type="checkbox" name="filter_prefilter_use" class="useFilterCheckbox" {if isset($filter.prefilter)}checked="checked"{/if}>
+          <p>{'Predefined filter'|@translate}</p>
+          <a href="#" class="removeFilter" title="{'remove this filter'|@translate}"><span>[x]</span></a>
+          <select name="filter_prefilter">
+            {foreach from=$prefilters item=prefilter}
+              <option value="{$prefilter.ID}"  class="{$optionClass}" {if isset($filter.prefilter) && $filter.prefilter eq $prefilter.ID}selected="selected"{/if}>{$prefilter.NAME}</option>
+            {/foreach}
+          </select>
+  {if $NB_ORPHANS > 0}
+          <a id="delete_orphans" href="#" style="{if !isset($filter.prefilter) or $filter.prefilter ne 'no_album'}display:none{/if}" class="icon-trash">{'Delete %d orphan photos'|translate:$NB_ORPHANS}</a>
+  {/if}
+
+          <span id="orphans_deletion" style="display:none">
+            <img class="loading" src="themes/default/images/ajax-loader-small.gif">
+            <span id="orphans_deleted">0</span>% -
+            <span id="orphans_to_delete" data-origin="{$NB_ORPHANS}">{$NB_ORPHANS}</span>
+            {'orphans to delete'|translate}
+          </span>
+
+          <span id="orphans_deletion_error" class="errors" style="display:none"></span>
+        </li>
+      {/if}
+
+      {if $user_filters.album.value}
+        <li id="filter_category" {if !isset($filter.category)}style="display:none"{/if}>
+          <input type="checkbox" name="filter_category_use" class="useFilterCheckbox" {if isset($filter.category)}checked="checked"{/if}>
+          <p>{'Album'|@translate}</p>
+      <select name="filter_category">
+        {html_options options=$category_options selected=$category_options_selected}
+      </select>
+          <a href="#" class="removeFilter" title="{'remove this filter'|translate}"><span>[x]</span></a>
+          <label class="font-checkbox"><span class="icon-check"></span><input type="checkbox" name="filter_category_recursive" {if isset($filter.category_recursive)}checked="checked"{/if}> {'include child albums'|@translate}</label>
+        </li>
+      {/if}
+
+      {if $user_filters.tags.value}
+        <li id="filter_tags" {if !isset($filter.tags)}style="display:none"{/if}>
+          <input type="checkbox" name="filter_tags_use" class="useFilterCheckbox" {if isset($filter.tags)}checked="checked"{/if}>
+          <p>{'Tags'|@translate}</p>
+          <a href="#" class="removeFilter" title="{'remove this filter'|translate}"><span>[x]</span></a>
+          <select data-selectize="tags" data-value="{$filter_tags|@json_encode|escape:html}"
+            placeholder="{'Type in a search term'|translate}"
+            name="filter_tags[]" multiple></select>
+          <label class="font-checkbox"><span class="icon-circle-empty"></span><span><input type="radio" name="tag_mode" value="AND" {if !isset($filter.tag_mode) or $filter.tag_mode eq 'AND'}checked="checked"{/if}> {'All tags'|@translate}</span></label>
+          <label class="font-checkbox"><span class="icon-circle-empty"></span><span><input type="radio" name="tag_mode" value="OR" {if isset($filter.tag_mode) and $filter.tag_mode eq 'OR'}checked="checked"{/if}> {'Any tag'|@translate}</span></label>
+        </li>
+      {/if}
+
+      {if $user_filters.q.value}
+        <li id="filter_search"{if !isset($filter.search)} style="display:none"{/if}>
+          <input type="checkbox" name="filter_search_use" class="useFilterCheckbox"{if isset($filter.search)} checked="checked"{/if}>
+          <p>{'Search'|@translate}</p>
+          <a href="#" class="removeFilter" title="{'remove this filter'|translate}"><span>[x]</span></a>
+          <input name="q" size=40 value="{$filter.search.q|stripslashes|htmlspecialchars}">
+          {combine_script id='core.scripts' load='async' path='themes/default/js/scripts.js'}
+  {if (isset($no_search_results))}
+  <div>{'No results for'|@translate} :
+    <em><strong>
+    {foreach $no_search_results as $res}
+    {if !$res@first} &mdash; {/if}
+    {$res}
+    {/foreach}
+    </strong></em>
+  </div>
+  {/if}
+        </li>
+      {/if}
+      </ul>
+
+      <div class='noFilter'>{'No filter, add one'|@translate}</div>
+
+      <div class="filterActions">
+        <div id="addFilter">
+          <div class="addFilter-button icon-plus" onclick="$('.addFilter-dropdown').slideToggle()">{'Add a filter'|@translate}</div>
+          <div class="addFilter-dropdown">
+            {if $user_filters.scope.value}<a data-value="filter_scope" {if isset($filter.scope)}class="disabled"{/if}>{'Scope'|@translate}</a>{/if}
+            {if $user_filters.prefilter.value}<a data-value="filter_prefilter" {if isset($filter.prefilter)}class="disabled"{/if}>{'Predefined filter'|@translate}</a>{/if}
+            {if $user_filters.album.value}<a data-value="filter_category" {if isset($filter.category)}class="disabled"{/if}>{'Album'|@translate}</a>{/if}
+            {if $user_filters.tags.value}<a data-value="filter_tags" {if isset($filter.tags)}class="disabled"{/if}>{'Tags'|@translate}</a>{/if}
+            {if $user_filters.q.value}<a data-value="filter_search"{if isset($filter.search)} class="disabled"{/if}>{'Search'|@translate}</a>{/if}
+          </div>
+          <a id="removeFilters" class="icon-cancel" style="display: none;">{'Remove all filters'|@translate}</a>
+        </div>
+
+        <button id="applyFilter" name="submitFilter" type="submit">
+          <i class="icon-arrows-cw"></i> {'Refresh photo set'|@translate}
+        </button>
+      </div>
+    </div>
+
+  </fieldset>
+{/if} <!-- filters -->
+
 
   <fieldset>
 
@@ -296,20 +466,38 @@ UL.thumbnails SPAN.wrap2 {ldelim}
     <legend>{'Action'|@translate}</legend>
       <div id="forbidAction"{if count($selection) != 0} style="display:none"{/if}>{'No photo selected, no action possible.'|@translate}</div>
       <div id="permitAction"{if count($selection) == 0} style="display:none"{/if}>
-    
+
     <div class="permitActionListButton">
       <div>
         <select name="selectAction">
+{* hide option if action.value==0 (ie. action disbled); not applicable for del and tags *}
+{* hide option scope filter is enabled set to 'all' and action.value==1 *}
           <option value="-1">{'Choose an action'|@translate}</option>
           <option disabled="disabled">------------------</option>
+{if !($user_filters.scope.value and $scope_selected=='all' and $user_actions.delete.value<2)}
           <option value="delete" class="icon-trash">{'Delete selected photos'|@translate}</option>
+{/if}
+{if !($user_filters.scope.value and $scope_selected=='all' and $user_actions.tags.value<2)}
           <option value="add_tags">{'Add tags'|@translate}</option>
-{if !empty($associated_tags)}
+  {if !empty($associated_tags)}
           <option value="del_tags">{'remove tags'|@translate}</option>
+  {/if}
+{/if}
+{if $user_actions.move.value>0 and !($user_filters.scope.value and $scope_selected=='all' and $user_actions.move.value<2)}
+          <option value="move">{'Move to album'|@translate}</option>
+{/if}
+{if $user_actions.favorites.value>0 and !($user_filters.scope.value and $scope_selected=='all' and $user_actions.favorites.value<2)}
+          <option value="add_fav">{'Add to favorites'|@translate}</option>
+  {if isset($filter.prefilter) && $filter.prefilter eq 'favorites'}
+          <option value="del_fav">{'Remove from favorites'|@translate}</option>
+  {/if}
+{/if}
+{if $user_actions.download.value>0 and !($user_filters.scope.value and $scope_selected=='all' and $user_actions.download.value<2)}
+          <option value="download">{' Download'|@translate}</option>
 {/if}
         </select>
       </div>
-      
+    
       <p id="applyActionBlock" style="display:none" class="actionButtons">
         <button id="applyAction" name="submit" type="submit" class="buttonLike">
           <i class="icon-cog-alt"></i> {'Apply action'|translate}
@@ -340,6 +528,24 @@ UL.thumbnails SPAN.wrap2 {ldelim}
   {/if}
       </div>
 
+      <!-- move -->
+      <div id="action_associate" class="bulkAction">
+        <select name="associate">
+          {html_options options=$category_options selected=$category_options_selected}
+        </select>
+{if $create_subcategories}
+        <div id="linkToCreate" style="padding:14px 0">
+          <a href="#" title="{'create a new album'|@translate}" class="icon-plus addAlbumOpen"></a>
+        </div>
+{/if}
+      </div>
+
+      <!-- download -->
+      <div id="action_download" class="bulkAction">
+        <label style="margin-bottom:0"><input type="radio" name="download_type" value="single">&nbsp;{'Download files individually'|@translate}</label><br>
+        <label><input type="radio" name="download_type" value="all" checked="checked">&nbsp;{'Download all in ZIP file'|@translate}</label><br>
+      </div>
+
       <!-- progress bar -->
       <div id="regenerationMsg" class="bulkAction" style="display:none">
         <p id="regenerationText" style="margin-bottom:10px;">Nice placeholder</p>
@@ -355,3 +561,22 @@ UL.thumbnails SPAN.wrap2 {ldelim}
   </form>
 
 </div> <!-- #batchManagerGlobal -->
+
+
+{* Create album form for "move to album" action *}
+<div style="display:none">
+  <div id="addAlbumForm" style="text-align:left;padding:1em;">
+    <form>
+      {'Parent album'|@translate}<br>
+      <select id ="category_parent" name="category_parent">
+{if $create_whole_gallery}
+        <option value="0">------------</option>
+{/if}
+        {html_options options=$category_parent_options selected=$category_parent_options_selected}
+      </select>
+
+      <br><br>{'Album name'|@translate}<br><input name="category_name" type="text"> <span id="categoryNameError"></span>
+      <br><br><br><input type="submit" value="{'Create'|@translate}"> <span id="albumCreationLoading" style="display:none"><img src="themes/default/images/ajax-loader-small.gif"></span>
+    </form>
+  </div>
+</div>
