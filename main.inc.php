@@ -24,6 +24,7 @@ defined('COMMUNITY_ID') or define('COMMUNITY_ID', basename(dirname(__FILE__)));
 define('COMMUNITY_PATH' , PHPWG_PLUGINS_PATH.basename(dirname(__FILE__)).'/');
 define('COMMUNITY_PERMISSIONS_TABLE', $prefixeTable.'community_permissions');
 define('COMMUNITY_PENDINGS_TABLE', $prefixeTable.'community_pendings');
+define('COMMUNITY_DOWNLOAD_LOCAL',   PHPWG_ROOT_PATH . $conf['data_location'] . 'community_downloads/'); // path for zip download action
 
 include_once(COMMUNITY_PATH.'include/functions_community.inc.php');
 
@@ -184,8 +185,37 @@ function community_gallery_menu($menu_ref_arr)
     $edit_url = make_index_url(array('section' => 'edit_photos'));
     $images_added = 0;
 
+    // query suffixes for additional filters: prefilter, tags, qsearch
+    // only add suffixes if filter is enabled
+    if ($user_permissions['filters']['enable']) {
+
+      // prefilters query
+      if ($user_permissions['filters']['prefilter']['value']) {
+        if (isset($page['section']) && $page['section']=='favorites') {
+          $url_suffix = '&amp;favorites';
+        } elseif (isset($page['section']) && $page['section']=='recent_pics') {
+          $url_suffix = '&amp;recent_pics';
+        }
+      }
+
+      // tags query
+      if ($user_permissions['filters']['tags']['value'] and isset($page['tag_ids'])) {
+        $s = base64_encode(serialize($page['tag_ids'])); // serialize tag ids for POST retrieval
+        $url_suffix = '&amp;tag_ids='.$s;
+      }
+
+      // qsearch query
+      if ($user_permissions['filters']['q']['value'] and isset($page['qsearch_details'])) {
+        $s = base64_encode(serialize($page['qsearch_details']['q'])); // serialize qsearch details for POST retrieval
+        $url_suffix = '&amp;q='.$s;
+      }
+    }
+
     if (isset($page['category']))
     {
+      clearFilters(); // clear all filters when moving to different page
+                      // so that user won't have to constantly delete previous filters
+
       // are there photos added by the current user in this album?
       $query = '
 SELECT
@@ -198,10 +228,25 @@ SELECT
       $results = query2array($query);
       $images_added = $results[0]['images_count'];
 
-      if ($images_added > 0)
+      // $url_suffix generation conditions modified
+      // if album filter is enabled, album query will be added even if $images_added=0
+      // album filter allows for inclusion of child albums; user may want to edit photos in subalbums
+      if ($images_added > 0  or $user_permissions['filters']['album']['value'])
       {
         $edit_url.= $url_suffix;
       }
+    }
+    elseif (isset($page['tag_ids']) or isset($page['qsearch_details']) or  // tag and search filters
+              (isset($page['section']) && $page['section']=='favorites') or //favorites page
+              (isset($page['section']) && $page['section']=='recent_pics')) //recent pics page
+    {
+      clearFilters();
+      $images_added = count($page['items']);
+      $edit_url.= isset($url_suffix) ? $url_suffix : ''; // url suffix will not be generated if filter not enabled
+    }
+    elseif (isset($page['section']) && $page['section']=='categories') // also clear filters when user navigates to homepage
+    {
+      clearFilters();
     }
     else
     {
@@ -215,7 +260,9 @@ SELECT
       $images_added = $results[0]['images_count'];
     }
 
-    if ($images_added > 0)
+    if ($images_added > 0 or $user_permissions['filters']['scope']['value']) // the scope filter being enabled means that
+                                                                             // user can perform at least one action for the whole gallery
+                                                                             // $edit_url will be shown if so)
     {
       array_splice(
         $block->data,
@@ -231,6 +278,18 @@ SELECT
       );
     }
   }
+}
+
+/**
+ * Clears all existing prefilters
+ * so that user won't have to constantly delete previous filters
+ */
+function clearFilters() {
+  unset($_SESSION['bulk_manager_filter']['scope']);
+  unset($_SESSION['bulk_manager_filter']['prefilter']);
+  unset($_SESSION['bulk_manager_filter']['category']);
+  unset($_SESSION['bulk_manager_filter']['tags']);
+  unset($_SESSION['bulk_manager_filter']['search']);
 }
 
 
