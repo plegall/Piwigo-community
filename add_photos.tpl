@@ -458,6 +458,8 @@ p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
   animation: animatedBackground 1s linear infinite;
   -webkit-animation: animatedBackground 1s linear infinite;
 }
+
+div#linkToCreate { margin-top:0.5em; }
 </style>
 {/literal}
 
