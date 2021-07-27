@@ -366,7 +366,7 @@ DELETE
     if ($_POST['download_type'] == 'single') {
       $datas = array();
       $str_click_download = l10n('Click the image to download it');
-      $str = '<style>img.thumb:hover { border: 1px solid rgb(231,231,231) !important; }</style>';
+      $str = '<style>img.download-single:hover { border: 1px solid rgb(231,231,231) !important; }</style>';
       $str .= '<div style="margin-bottom:1em">' .$str_click_download. '</div>';
       foreach ($collection as $img_id) {
         $query = 'SELECT * FROM ' . IMAGES_TABLE . ' WHERE id = ' . $img_id . ';';
@@ -381,11 +381,11 @@ DELETE
                   ;
 
           $src_image = new SrcImage($img);
-          $thumb_url = DerivativeImage::thumb_url($src_image);
-          $str .= '"><img class="thumb" 
+          $img_url = DerivativeImage::url(IMG_XXSMALL,$src_image);
+          $str .= '"><img class="download-single" 
                           style="margin:0 5px 5px 0; border:1px solid rgb(128,128,128); border-radius:4px;" 
                           height="70px" 
-                          src="' .$thumb_url .'"
+                          src="' .$img_url .'"
                     ></a></span>';
         }
       } // foreach $collection as $img_id
