@@ -460,6 +460,23 @@ p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
 }
 
 div#linkToCreate { margin-top:0.5em; }
+.properties li { margin: 0; }
+.plupload_file_action a {
+    padding: 0;
+    border: 0;
+}
+.plupload_content { color: #777; }
+.plupload_file_action a {
+    display: inline-block !important;
+    padding: 0 !important;
+    border: 0 !important;
+    vertical-align: middle;
+}
+#uploadForm li.plupload_droptext { color: #bfbfbf !important; }
+#uploadForm legend.clear { color: black; }
+#uploadForm legend.dark { color: white; }
+#addAlbumForm { color: #777; }
+.big-progressbar.clear { background: #ddd; }
 </style>
 {/literal}
 
@@ -494,7 +511,7 @@ div#linkToCreate { margin-top:0.5em; }
 
 {if !empty($thumbnails)}
 <fieldset>
-  <legend>{'Uploaded Photos'|@translate}</legend>
+  <legend class="{$themeconf.colorscheme}">{'Uploaded Photos'|@translate}</legend>
   <div>
   {foreach from=$thumbnails item=thumbnail}
     <a href="{$thumbnail.link}"  class="{if isset($thumbnail.lightbox)}colorboxThumb{else}externalLink{/if}">
@@ -537,7 +554,7 @@ div#linkToCreate { margin-top:0.5em; }
 {/if}
 
     <fieldset class="selectAlbum">
-      <legend>{'Drop into album'|@translate}</legend>
+      <legend class="{$themeconf.colorscheme}">{'Drop into album'|@translate}</legend>
 
       <span class="albumSelection"{if count($category_options) == 0} style="display:none"{/if}>
       <select id="albumSelect" name="category">
@@ -552,7 +569,7 @@ div#linkToCreate { margin-top:0.5em; }
     </fieldset>
 
     <fieldset class="selectFiles">
-      <legend>{'Select files'|@translate}</legend>
+      <legend class="{$themeconf.colorscheme}">{'Select files'|@translate}</legend>
       <button id="addFiles" class="buttonLike icon-plus-circled">{'Add Photos'|translate}</button>
 
     <p id="uploadWarningsSummary">{$upload_max_filesize_shorthand}B. {$upload_file_types}. {if isset($max_upload_resolution)}{$max_upload_resolution}Mpx.{/if} {if isset($quota_summary)}{$quota_summary}{/if}
@@ -575,7 +592,7 @@ div#linkToCreate { margin-top:0.5em; }
     <p class="showFieldset"><a id="showPhotoProperties" href="#">{'Set Photo Properties'|@translate}</a></p>
 
     <fieldset id="photoProperties" style="display:none">
-      <legend>{'Photo Properties'|@translate}</legend>
+      <legend class="{$themeconf.colorscheme}">{'Photo Properties'|@translate}</legend>
 
       <input type="checkbox" name="set_photo_properties" style="display:none">
 
