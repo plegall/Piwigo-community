@@ -38,6 +38,7 @@ $who_options = array(
   'group' => l10n('a group'),
   );
 
+/*
 // Default filter permissions array
 // Enabled if value=1 and disabled if value=0
 $filters = array(
@@ -58,6 +59,7 @@ $actions = array(
   'favorites' => array('label'=>l10n('Add and remove favorites'), 'value'=>0),
   'move' => array('label'=>l10n('Move to album'), 'value'=>0),
   );
+*/
 
 // +-----------------------------------------------------------------------+
 // | Check Access and exit when user status is not ok                      |
@@ -117,7 +119,7 @@ if (isset($_POST['submit_add']))
   }
 
   // create filter permissions
-  $filters_form = $filters; // copy
+  $filters_form = $conf['community']['filters']; // copy
   $filters_form['enable'] = 0;
   $filters_form['scope']['value'] = $_POST['enable_filter']['scope'];
   foreach ($filters as $filter=>$permission) { // filter options
@@ -137,7 +139,7 @@ if (isset($_POST['submit_add']))
 
   // create action permissions
   // 0=disabled, 1=only edit photos uploaded by user, 2=edit all photos
-  $actions_form = $actions; // copy
+  $actions_form = $conf['community']['actions']; // copy
   foreach ($actions as $action=>$permission) {
     if ($action == 'delete' or $action == 'tags') {
       $actions_form[$action]['value'] = ($_POST['scope_action'][$action] == 'user') ? 1 : 2;
@@ -309,7 +311,7 @@ SELECT
         'nb_photos' => empty($row['nb_photos']) ? -1 : $row['nb_photos'],
         'storage' => empty($row['storage']) ? -1 : $row['storage'],
         'filters' => safe_unserialize($row['filters']),
-        'actions' => safe_unserialize($row['actions']),       
+        'actions' => safe_unserialize($row['actions']),
         )
       );
   }
@@ -323,8 +325,8 @@ else
       'moderated' => true,
       'nb_photos' => -1,
       'storage' => -1,
-      'filters' => safe_unserialize($filters),
-      'actions' => safe_unserialize($actions),     
+      'filters' => safe_unserialize($conf['community']['filters']),
+      'actions' => safe_unserialize($conf['community']['actions']),
       )
     );
 }
