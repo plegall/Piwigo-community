@@ -303,7 +303,7 @@ $(document).ready(function() {
       <tbody>
         <tr class="row2">
           <th></th>
-          <th>Filters</th>
+          <th>{'Filters'|@translate}</th>
         </tr>
 
         {foreach from=$filters key=key item=filter}
@@ -311,7 +311,7 @@ $(document).ready(function() {
         <tr>
           <td><input type="checkbox" name="enable_filter[{$key}{if $key=='scope'}_dummy{/if}]" {if $filter.value}checked="checked"{/if} {if $key=='scope'}disabled="disabled"{/if} /></td>
           <td>
-            {$filter.label}
+            {$filter.label|@translate}
             {if isset($filter.desc)}
               {if $key == 'scope'}
                 <a class="icon-info-circled-1 showInfo" style="display:inline" title="{{'Users can filter photos posted by themselves or all photos. Only enabled when the permission of at least one action is set to "The whole gallery".'|@translate}|@escape:'html'}"></a>
@@ -335,14 +335,14 @@ $(document).ready(function() {
       <tbody>
         <tr class="row2">
           <th></th>
-          <th>Action</th>
-          <th>Permissions</th>
+          <th>{'Action'|@translate}</th>
+          <th>{'Permissions'|@translate}</th>
         </tr>
 
        {foreach from=$actions key=key item=action}
         <tr>
           <td><input type="checkbox" name="enable_action[{$key}]" {if $action.value>0}checked="checked"{/if} {if $key=='delete' or $key=='tags'}disabled="disabled"{/if}></td>
-          <td>{$action.label}</td>
+          <td>{$action.label|@translate}</td>
           <td>
             <select name="scope_action[{$key}]">
               <option value="user" {if $action.value<=1}selected{/if}>{'Only photos uploaded by user'|@translate}</option>
