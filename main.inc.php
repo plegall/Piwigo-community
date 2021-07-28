@@ -14,7 +14,7 @@ if (!defined('PHPWG_ROOT_PATH'))
   die('Hacking attempt!');
 }
 
-global $prefixeTable;
+global $prefixeTable, $conf;
 
 // +-----------------------------------------------------------------------+
 // | Define plugin constants                                               |
