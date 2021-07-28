@@ -78,7 +78,7 @@ SELECT
     `recursive`,
     `create_subcategories`,
     `nb_photos`,
-    `storage`
+    `storage`,
     `filters`,
     `actions`
   FROM '.COMMUNITY_PERMISSIONS_TABLE.'
