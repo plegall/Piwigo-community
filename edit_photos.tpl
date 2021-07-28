@@ -534,7 +534,7 @@ UL.thumbnails SPAN.wrap2 {ldelim}
           {html_options options=$category_options selected=$category_options_selected}
         </select>
 {if $create_subcategories}
-        <div id="linkToCreate" style="padding:14px 0">
+        <div id="linkToCreate">
           <a href="#" title="{'create a new album'|@translate}" class="icon-plus addAlbumOpen"></a>
         </div>
 {/if}
