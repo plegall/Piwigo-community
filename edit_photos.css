@@ -75,7 +75,7 @@
 .permitActionItem .selectize-control.single.plugin-remove_button {width: auto !important;}
 .permitActionItem .selectize-input.items.full.has-options.has-items {width: 500px !important; line-height: 23px;}
 #action_associate {display: flex;}
-#action_associate a:last-child {margin-left: 15px; padding: 10px;}
+#action_associate a:last-child {margin-left: 15px; padding: 12px;}
 #applyAction i {margin-right: 15px;}
 #action_delete_derivatives, #action_generate_derivatives {display: flex; flex-wrap: wrap; margin-top: -20px;}
 .deleteDerivButtons a {border-radius: 4px; padding: 4px 10px; margin: 5px;}
@@ -91,15 +91,12 @@
 .permitActionListButton div.hidden::after {display: none;}
 .actionButtonsBlock {width: 200px;}
 .actionButtonsBlock .actionButtons:first-child::after {margin-left: 169px; margin-top: 11px;}
-#filter_prefilter::before {margin-left: 257px; margin-top: 28px;}
+#filter_prefilter::before, #filter_category::before, #filter_scope::before, #action_associate select::before {margin-left: 257px; margin-top: 33px;}
 #filter_category .selectize-control.single .selectize-input::after {content: none;}
-#filter_category {width: 600px;}
-#filter_category::before {margin-left: 579px; margin-top: 28px; z-index: 2;}
 #filter_level::before {margin-top: 28px; margin-left: 260px;}
 #action_level::after {margin-top: -56px; margin-left: 254px;}
-#filter_search input {width: 300px; box-sizing: border-box; padding: 11px 18px;}
+#filter_search input {width: 100%; box-sizing: border-box; padding: 10px 18px;}
 #addFilter, #filterList select, #filter_tags .selectize-input.items.not-full.has-options, .pictureLevels select {
-        font-size: 12px;
         font-family: "Open Sans", "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;
         -webkit-appearance: none;
         font-weight: 700;
@@ -346,7 +343,7 @@ display:block; position:absolute; z-index:101; padding:8px 0 0 3px; color:white;
 .navigationBar {
   border-radius: 5px;
   display: flex;
-  font-size: 12px;
+/*  font-size: 12px; */ /* Changed to fit same size as "display" bar */
   font-weight: 700;
 }
 .navigationBar a, .navigationBar span {
