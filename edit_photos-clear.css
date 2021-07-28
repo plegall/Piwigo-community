@@ -1,0 +1,113 @@
+/* Added from admin.themes.clear.theme.css */
+
+/* Batch Manager */
+#batchManagerGlobal .thumbnails .font-checkbox [class*="icon-check"]::before {
+  color:#999;
+}
+
+#batchManagerGlobal li.thumbSelected .font-checkbox [class*="icon-check"]::before {
+  color: white; 
+  display: block;
+}
+
+#batchManagerGlobal UL.thumbnails li:hover .wrap2 {
+  background-color: transparent;
+  color: #999;
+}
+
+#batchManagerGlobal .thumbSelected { background-color:transparent !important }
+
+#batchManagerGlobal .thumbSelected .wrap2 {
+  background-color: transparent !important;
+}
+
+#batchManagerGlobal #selectedMessage {
+  color: #FFA646;
+  font-weight: bold;
+}
+
+#batchManagerGlobal #applyFilter,#batchManagerGlobal .addFilter-button {
+  color: #3C3C3C;
+  background-color: #ececec;
+}
+
+#batchManagerGlobal #applyFilter:hover, #batchManagerGlobal .addFilter-button:hover {
+  color: #111;
+  background-color: #ff9b32 ;
+}
+
+#batchManagerGlobal .addFilter-button.highlight {
+  color: #3C3C3C;
+  background-color: #ffc17e;
+}
+
+#batchManagerGlobal .addFilter-button.highlight:hover {
+  background-color: #ff7700;
+  color: white;
+  text-decoration: none;
+}
+
+
+.selectize-control.single .selectize-input {border: 2px solid #FFA646!important; color: #3C3C3C;}
+.selectize-control.single .selectize-input:hover {border-color: #FAC17E!important;}
+
+
+#filterList select, .pictureLevels select, #permitAction select {background-color: #FFF; color: #4E4E4E; border: 2px solid #7070704f !important; outline: none !important;}
+#filter_category .selectize-input.items.full.has-options.has-items, #filter_tags .selectize-input.items.not-full.has-options,
+#filter_tags .selectize-input.items.not-full, #filter_search input, #action_associate .selectize-input.items.full.has-options.has-items,
+#action_dissociate .selectize-input.items.full.has-options.has-items {
+  border: 2px solid #7070704f !important;
+  background: #FFF !important; 
+  color: #3C3C3CBD !important;
+}
+#forbidAction, .selectionEmptyBlock, .noFilter {background-color: #f3f3f3;}
+#action_title .large, #action_author .large {background-color: #FFF; color: #4E4E4E;}
+
+#filterList .ui-slider .ui-slider-range {background: rgba(255,166,70, 0.9); margin-top: -1px; border: 1px solid #ffaf58;}
+#filterList .ui-widget-content {border: 1px solid #EEE; background: #DDD;}
+
+#batchManagerGlobal option[disabled] {background-color: #EEE;}
+
+#batchManagerGlobal .ui-state-default, #batchManagerGlobal .ui-widget-content .ui-state-default,#batchManagerGlobal .ui-widget-header .ui-state-default {
+  border: 1px solid #ffaf58; background: #ffaf58;
+}
+#batchManagerGlobal .ui-state-hover,#batchManagerGlobal .ui-widget-content .ui-state-hover, #batchManagerGlobal .ui-widget-header .ui-state-hover {
+  background: #ffaf58;
+}
+#batchManagerGlobal .ui-state-focus, #batchManagerGlobal .ui-widget-content .ui-state-focus,#batchManagerGlobal .ui-widget-header .ui-state-focus {
+  border: 1px solid #ffaf58; background: #ffaf58;
+}
+#batchManagerGlobal .ui-state-active, #batchManagerGlobal .ui-widget-content .ui-state-active,#batchManagerGlobal .ui-widget-header .ui-state-active {
+  background: #ffaf58;
+}
+#batchManagerGlobal .font-checkbox.selected {color: #777;}
+
+/* input for add and del tags action */
+.selectize-input, .selectize-control.single .selectize-input.input-active {
+    background-color: rgb(255, 255, 255) !important;
+    cursor: text;
+}
+
+#action_add_tags .selectize-input.items.not-full.has-options, #action_add_tags .selectize-input.items.not-full.has-options.focus.input-active.dropdown-active, 
+.selectize-input.items.not-full, .selectize-input.items.full {
+    padding: 12px 10px;
+    box-shadow: none;
+    border-radius: 0px !important;
+    border: 1px solid #787777a6 !important;
+}
+
+.selectize-input, .selectize-input.focus, .selectize-dropdown, .selectize-input input {
+    cursor: text;
+}
+
+#linkToCreate a:hover { color: #ff7700; }
+
+#batchManagerGlobal .thumbSelected img { 
+    opacity: 0.6;
+    border: 1px solid transparent !important;
+    filter: brightness(60%);
+    -webkit-filter: brightness(60%);
+    -moz-filter: brightness(60%);
+    -o-filter: brightness(60%);
+    -ms-filter: brightness(60%);
+}
