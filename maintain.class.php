@@ -172,7 +172,7 @@ SELECT
         'tags' => array('label'=>l10n('Tags'), 'value'=>0),
         'q' => array('label'=>l10n('Search'), 'value'=>0),
       );
-      $filters = safe_serialize($filters);
+      $filters = serialize($filters);
 
       // Default actions permissions array
       // 0=disabled, 1=only edit photos uploaded by user, 2=edit all photos
@@ -183,7 +183,7 @@ SELECT
         'favorites' => array('label'=>l10n('Add and remove favorites'), 'value'=>0),
         'move' => array('label'=>l10n('Move to album'), 'value'=>0),
       );
-      $actions = safe_serialize($actions);
+      $actions = serialize($actions);
 
       single_insert(
         $prefixeTable.'community_permissions',
@@ -193,8 +193,8 @@ SELECT
           '`recursive`' => 'true',
           'create_subcategories' => 'true',
           'moderated' => 'true',
-          'filters' => pwg_db_real_escape_string($filters),
-          'actions' => pwg_db_real_escape_string($actions),
+          'filters' => $filters,
+          'actions' => $actions,
           )
         );
     }
