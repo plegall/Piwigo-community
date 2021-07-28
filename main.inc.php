@@ -244,12 +244,13 @@ SELECT
       $images_added = count($page['items']);
       $edit_url.= isset($url_suffix) ? $url_suffix : ''; // url suffix will not be generated if filter not enabled
     }
-    elseif (isset($page['section']) && $page['section']=='categories') // also clear filters when user navigates to homepage
-    {
-      clearFilters();
-    }
     else
     {
+      // also clear filters when user navigates to homepage
+      if (isset($page['section']) && $page['section']=='categories') {
+        clearFilters();
+      }
+
       $query = '
 SELECT
     COUNT(*) AS images_count
@@ -260,10 +261,9 @@ SELECT
       $images_added = $results[0]['images_count'];
     }
 
-    if ($images_added > 0 or $user_permissions['filters']['scope']['value']) // the scope filter being enabled means that
-                                                                             // user can perform at least one action for the whole gallery
-                                                                             // $edit_url will be shown if so)
-    {
+    // $edit_url shown if user can perform at least one action for the whole gallery (scope filter enabled)
+    // or album filter enabled (user may wish to include child albums in the filter)
+    if ($images_added > 0 or $user_permissions['filters']['scope']['value'] or $user_permissions['filters']['album']['value']) {
       array_splice(
         $block->data,
         count($block->data),
