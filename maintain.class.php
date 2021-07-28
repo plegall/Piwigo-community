@@ -109,6 +109,8 @@ UPDATE '.$prefixeTable .'community_pendings
     {
       $community_default_config = array(
         'user_albums' => false,
+        'filters' => $filters,
+        'actions' => $actions,
         );
       
       conf_update_param('community', $community_default_config, true);
@@ -162,29 +164,6 @@ SELECT
         $category_id = $category_info['id'];
       }
 
-      // Default filter permissions array
-      // Enabled if value=1 and disabled if value=0
-      $filters = array(
-        'enable' => 0,
-        'scope' => array('label'=>l10n('Scope'),'value'=>0, 'desc'=>1),
-        'prefilter' => array('label'=>l10n('Predefined filter'),'value' => 0,'desc'=>1),
-        'album' => array('label'=>l10n('Album'), 'value'=>0),
-        'tags' => array('label'=>l10n('Tags'), 'value'=>0),
-        'q' => array('label'=>l10n('Search'), 'value'=>0),
-      );
-      $filters = serialize($filters);
-
-      // Default actions permissions array
-      // 0=disabled, 1=only edit photos uploaded by user, 2=edit all photos
-      $actions = array(
-        'delete' => array('label'=>l10n('Delete photos'), 'value'=>1),
-        'tags' => array('label'=>l10n('Add and remove tags'), 'value'=>1),
-        'download' => array('label'=>l10n('Download photos'), 'value'=>0),
-        'favorites' => array('label'=>l10n('Add and remove favorites'), 'value'=>0),
-        'move' => array('label'=>l10n('Move to album'), 'value'=>0),
-      );
-      $actions = serialize($actions);
-
       single_insert(
         $prefixeTable.'community_permissions',
         array(
@@ -229,4 +208,29 @@ SELECT
     pwg_query('DELETE FROM `'. CONFIG_TABLE .'` WHERE param IN ("community", "community_cache_key");');
   }
 }
+
+/* global variables for function {install, activate} */
+// Default filter permissions array
+// Enabled if value=1 and disabled if value=0
+$filters = array(
+  'enable' => 0,
+  'scope' => array('label'=>l10n('Scope'),'value'=>0, 'desc'=>1),
+  'prefilter' => array('label'=>l10n('Predefined filter'),'value' => 0,'desc'=>1),
+  'album' => array('label'=>l10n('Album'), 'value'=>0),
+  'tags' => array('label'=>l10n('Tags'), 'value'=>0),
+  'q' => array('label'=>l10n('Search'), 'value'=>0),
+);
+$filters = serialize($filters);
+
+// Default actions permissions array
+// 0=disabled, 1=only edit photos uploaded by user, 2=edit all photos
+$actions = array(
+  'delete' => array('label'=>l10n('Delete photos'), 'value'=>1),
+  'tags' => array('label'=>l10n('Add and remove tags'), 'value'=>1),
+  'download' => array('label'=>l10n('Download photos'), 'value'=>0),
+  'favorites' => array('label'=>l10n('Add and remove favorites'), 'value'=>0),
+  'move' => array('label'=>l10n('Move to album'), 'value'=>0),
+);
+$actions = serialize($actions);
+
 ?>
