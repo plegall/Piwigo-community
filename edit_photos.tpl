@@ -201,6 +201,36 @@ $(document).ready(function() {
 
 // Based on add_photos.tpl
 // Create album for "move to album" action
+<!-- Data to album prefilter -->
+function fillCategoryListbox(selectId, selectedValue) {
+  jQuery.getJSON(
+    rootUrl + "ws.php?format=json&method=pwg.categories.getList",
+    {
+      recursive: true,
+      fullname: true,
+      format: "json",
+    },
+    function(data) {
+      jQuery.each(
+        data.result.categories,
+        function(i,category) {
+          var selected = null;
+          if (category.id == selectedValue) {
+            selected = "selected";
+          }
+          
+          jQuery("<option/>")
+            .attr("value", category.id)
+            .attr("selected", selected)
+            .text(category.name)
+            .appendTo("#"+selectId)
+            ;
+        }
+      );
+    }
+  );
+}
+
 jQuery(".addAlbumOpen").colorbox({
   inline:true,
   href:"#addAlbumForm",
@@ -209,7 +239,10 @@ jQuery(".addAlbumOpen").colorbox({
   }
 });
 
+var rootUrl = "{get_absolute_root_url()}";
 jQuery("#addAlbumForm form").submit(function(){
+    e.preventDefault(); // added to prevent reload
+
     jQuery("#categoryNameError").text("");
 
     jQuery.ajax({
@@ -530,14 +563,16 @@ UL.thumbnails SPAN.wrap2 {ldelim}
 
       <!-- move -->
       <div id="action_associate" class="bulkAction">
-        <select name="associate">
-          {html_options options=$category_options selected=$category_options_selected}
-        </select>
-{if $create_subcategories}
+        <span class="albumSelection"{if count($category_options) == 0} style="display:none"{/if}>
+          <select id="albumSelect" name="associate">
+            {html_options options=$category_options selected=$category_options_selected}
+          </select>
+        </span>
+        {if $create_subcategories}
         <div id="linkToCreate">
-          <a href="#" title="{'create a new album'|@translate}" class="icon-plus addAlbumOpen"></a>
+            <a href="#" title="{'create a new album'|@translate}" class="icon-plus addAlbumOpen albumSelection"></a>
         </div>
-{/if}
+        {/if}      
       </div>
 
       <!-- download -->

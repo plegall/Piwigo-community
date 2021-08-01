@@ -431,6 +431,8 @@ DELETE
     } // end if download_type
   } // end elseif download==action
 
+  invalidate_user_cache();
+
   if ($redirect)
   {
     redirect($redirect_url);
