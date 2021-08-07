@@ -451,6 +451,7 @@ UL.thumbnails SPAN.wrap2 {ldelim}
     {/html_style}
     {foreach from=$thumbnails item=thumbnail}
     {assign var='isSelected' value=$thumbnail.id|@in_array:$selection}
+    {assign var="ext" value="{{$thumbnail.path|substr:-4}|strtolower}"}
     <li{if $isSelected} class="thumbSelected"{/if}>
       <span class="wrap1">
         <label class="font-checkbox">
@@ -458,13 +459,13 @@ UL.thumbnails SPAN.wrap2 {ldelim}
           <span class="wrap2">
           <div class="actions">
             <a href="{$thumbnail.U_JUMPTO}" target="_blank" class="icon-eye" title="{'jump to photo'|@translate}"></a>
-            <a href="{$thumbnail.FILE_SRC}" class="preview-box icon-zoom-square" title="{'Zoom'|@translate}"></a>
+            <a href="{if $ext=='.svg'}{$thumbnail.path}{else}{$thumbnail.FILE_SRC}{/if}" class="preview-box icon-zoom-square" title="{'Zoom'|@translate}"></a>
           </div>
             {if $thumbnail.level > 0}
             <em class="levelIndicatorB">{'Level %d'|@sprintf:$thumbnail.level|@translate}</em>
             <em class="levelIndicatorF" title="{'Who can see these photos?'|@translate} : ">{'Level %d'|@sprintf:$thumbnail.level|@translate}</em>
             {/if}
-            <img src="{$thumbnail.thumb->get_url()}" alt="{$thumbnail.file}" title="{$thumbnail.TITLE|@escape:'html'}" {$thumbnail.thumb->get_size_htm()}>
+            <img src="{if $ext=='.svg'}{$thumbnail.path}{else}{$thumbnail.thumb->get_url()}{/if}" alt="{$thumbnail.file}" title="{$thumbnail.TITLE|@escape:'html'}" {$thumbnail.thumb->get_size_htm()}{if $ext=='.svg'} style="object-fit:cover"{/if}>
           </span>
         </label>
       </span>
