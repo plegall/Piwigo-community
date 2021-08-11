@@ -240,7 +240,7 @@ jQuery(".addAlbumOpen").colorbox({
 });
 
 var rootUrl = "{get_absolute_root_url()}";
-jQuery("#addAlbumForm form").submit(function(){
+jQuery("#addAlbumForm form").submit(function(e){
     e.preventDefault(); // added to prevent reload
 
     jQuery("#categoryNameError").text("");
