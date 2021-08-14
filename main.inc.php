@@ -187,6 +187,7 @@ function community_gallery_menu($menu_ref_arr)
 
     // query suffixes for additional filters: prefilter, tags, qsearch
     // only add suffixes if filter is enabled
+    global $prefixeTable;
     if ($user_permissions['filters']['enable']) {
 
       // prefilters query
@@ -195,7 +196,33 @@ function community_gallery_menu($menu_ref_arr)
           $url_suffix = '&amp;favorites';
         } elseif (isset($page['section']) && $page['section']=='recent_pics') {
           $url_suffix = '&amp;recent_pics';
+        } elseif (isset($page['col_id'])) {
+//            $query = '
+//                SELECT image_id
+//                FROM '.$prefixeTable.'collections
+//                JOIN '.$prefixeTable.'collection_images ON id=col_id
+//                WHERE col_id='.$page["col_id"].'
+//            ;';
+//            $col_ids = query2array($query);
+//            $col_ids = array_map(function ($arr) { return $arr['image_id']; }, $col_ids);
+//            $s = base64_encode(serialize($col_ids)); // serialize user collection ids for POST retrieval
+            $url_suffix = '&amp;col_id='.$page["col_id"];
         }
+//add_event_handler('loc_end_index','myfunc'); // User Collections $page variables defined
+//function myfunc() {
+//    global $prefixeTable, $conf, $page;
+//    if (isset($page['col_id'])) {
+//        $query = '
+//            SELECT image_id 
+//            FROM '.$prefixeTable.'collections 
+//            JOIN '.$prefixeTable.'collection_images ON id=col_id
+//            WHERE col_id='.$page["col_id"].'
+//        ;';
+//        print_r(query2array($query));
+//        echo "<br><br>";
+//        print_r(count(query2array($query)));
+//    }
+//}
       }
 
       // tags query
@@ -208,6 +235,17 @@ function community_gallery_menu($menu_ref_arr)
       if ($user_permissions['filters']['q']['value'] and isset($page['qsearch_details'])) {
         $s = base64_encode(serialize($page['qsearch_details']['q'])); // serialize qsearch details for POST retrieval
         $url_suffix = '&amp;q='.$s;
+      }
+
+      // search.php query
+      if (($user_permissions['filters']['album']['value'] or
+        $user_permissions['filters']['q']['value'] or
+        $user_permissions['filters']['tags']['value']) and
+        isset($page['search'])
+      ){
+        $url_suffix = '&amp;search_id='.$page['search'];
+//        $res = query2array('SELECT * FROM '.SEARCH_TABLE.' WHERE id='.$page["search"].';');
+//        print_r(safe_unserialize($res[0]['rules']));
       }
     }
 
@@ -236,10 +274,12 @@ SELECT
         $edit_url.= $url_suffix;
       }
     }
-    elseif (isset($page['tag_ids']) or isset($page['qsearch_details']) or  // tag and search filters
+    elseif (isset($page['tag_ids']) or isset($page['qsearch_details']) or  // tag and qsearch filters
               (isset($page['section']) && $page['section']=='favorites') or //favorites page
-              (isset($page['section']) && $page['section']=='recent_pics')) //recent pics page
-    {
+              (isset($page['section']) && $page['section']=='recent_pics') or //recent pics page
+              (isset($page['search'])) or // search.php
+              (isset($page['col_id'])) // user collections page
+    ){
       clearFilters();
       $images_added = count($page['items']);
       $edit_url.= isset($url_suffix) ? $url_suffix : ''; // url suffix will not be generated if filter not enabled

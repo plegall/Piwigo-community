@@ -116,6 +116,16 @@ if ($user_permissions['filters']['enable']) {
       $_SESSION['bulk_manager_filter']['search']['q'] = $url_q;
     }
 
+    // init search filters: album, tag, and/or qsearch
+    elseif (isset($_GET['search_id']))
+    {
+      $search_id = $_GET['search_id'];
+      $res = query2array('SELECT * FROM '.SEARCH_TABLE.' WHERE id='.$search_id.';');
+//      echo "<pre>"; print_r(safe_unserialize($res[0]['rules'])); echo "<post>";
+//      $url_q = unserialize(base64_decode($_GET['q']));
+//      $_SESSION['bulk_manager_filter']['search']['q'] = $url_q;
+    }
+
     // init prefilter:favorites
     elseif (isset($_GET['favorites']))
     {
