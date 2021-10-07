@@ -256,6 +256,10 @@ function community_switch_user_to_admin($arr)
   {
     $community['category'] = $_REQUEST['category'];
   }
+  elseif ('pwg.images.uploadAsync' == $community['method'])
+  {
+    $community['category'] = $_REQUEST['category'];
+  }
   elseif ('pwg.images.add' == $community['method'])
   {
     $community['category'] = $_REQUEST['categories'];
@@ -312,6 +316,8 @@ function community_switch_user_to_admin($arr)
   $methods[] = 'pwg.images.checkUpload';
   $methods[] = 'pwg.images.checkFiles';
   $methods[] = 'pwg.session.getStatus';
+  $methods[] = 'pwg.images.uploadCompleted';
+  $methods[] = 'pwg.images.uploadAsync';
 
   if (in_array($community['method'], array('pwg.images.delete', 'pwg.images.setInfo')))
   {
@@ -816,6 +822,19 @@ function community_sendResponse($encodedResponse)
     if (isset($response->result->image_id))
     {
       $image_id = $response->result->image_id;
+    }
+    else
+    {
+      return;
+    }
+  }
+  elseif ('pwg.images.uploadAsync' == $community['method'])
+  {
+    $response = json_decode($encodedResponse);
+
+    if (isset($response->result->id))
+    {
+      $image_id = $response->result->id;
     }
     else
     {
