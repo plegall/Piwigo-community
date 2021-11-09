@@ -1030,7 +1030,7 @@ SELECT
     );
 }
 
-function community_cat_modify_prefilter($content, &$smarty)
+function community_cat_modify_prefilter($content)
 {
 	$search = "#<strong>{'Name'#";
 
