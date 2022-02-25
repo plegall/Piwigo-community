@@ -264,6 +264,11 @@ SELECT id,path,representative_ext,file,filesize,level,name,width,height,rotation
     $query.= '
     JOIN '.IMAGE_CATEGORY_TABLE.' ON id = image_id';
   }
+  else
+  {
+    // we must be sure we don't use "rank" because it's in the image_category table only
+    $conf['order_by'] = str_replace('`rank`', 'id', $conf['order_by']);
+  }
 
   $query.= '
   WHERE id IN ('.implode(',', $page['cat_elements_id']).')';
