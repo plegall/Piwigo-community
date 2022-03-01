@@ -82,4 +82,10 @@ $lang['(in addition to user album)'] = '(in addition to user album)';
 $lang['User album only'] = 'User album only';
 $lang['Album of user'] = 'Album of user';
 $lang['a user can own only one album'] = 'a user can own only one album';
+
+$lang['No photo selected, no action possible.'] = 'No photo selected, no action possible.';
+$lang['Photos posted by %s'] = 'Photos posted by %s';
+$lang['Edit Photos'] = 'Edit Photos';
+$lang['Edit photos'] = 'Edit photos';
+$lang['Drag files here.'] = 'Drag files here.';
 ?>
