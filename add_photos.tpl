@@ -420,6 +420,10 @@ p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
 #uploadForm .plupload_scroll .plupload_filelist {height:250px;}
 #uploadForm li.plupload_droptext {line-height:230px;font-size:2em;}
 
+#uploadForm fieldset#selectAlbum div#linkToCreate {
+  margin-top: 1rem;
+}
+
 #uploadBoxes .file {margin-bottom:5px;text-align:left;}
 #uploadBoxes {margin-top:20px;}
 #addUploadBox {margin-bottom:2em;}
