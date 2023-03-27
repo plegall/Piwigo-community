@@ -1,0 +1,1 @@
+Los usuarios no administradores pueden agregar fotos. 
