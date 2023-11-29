@@ -93,4 +93,5 @@ $lang['Select at least one photo'] = 'Select at least one photo';
 $lang['No photo can be deleted'] = 'No photo can be deleted';
 $lang['You need to confirm deletion'] = 'You need to confirm deletion';
 $lang['No photo selected, no action possible.'] = 'No photo selected, no action possible.';
+$lang['Drag files here.'] = 'Drag files here.';
 ?>
