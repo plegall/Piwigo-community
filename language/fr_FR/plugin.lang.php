@@ -84,4 +84,16 @@ $lang['(in addition to user album)'] = '(en plus de l\'album utilisateur)';
 $lang['User album only'] = 'Uniquement l\'album utilisateur';
 $lang['Album of user'] = 'Album de l\'utilisateur';
 $lang['a user can own only one album'] = 'un utilisateur ne peut posséder qu\'un seul album';
+
+$lang['Edit photos'] = 'Éditer les photos';
+$lang['Edit Photos'] = 'Éditer les photos';
+$lang['Edit your photos'] = 'Editez vos photos';
+$lang['Photos posted by %s'] = 'Photos ajoutées par %s';
+$lang['Photos posted by %s in album %s'] = 'Photos ajoutées par %s dans l\'album %s';
+$lang['Select at least one tag'] = 'Sélectionnez au moins un tag';
+$lang['Select at least one photo'] = 'Sélectionnez au moins une photo';
+$lang['No photo can be deleted'] = 'Aucune photo ne peut être supprimée';
+$lang['You need to confirm deletion'] = 'Vous devez confirmer la suppression';
+$lang['No photo selected, no action possible.'] = 'Aucune photo sélectionnée, aucune action possible.';
+$lang['Drag files here.'] = 'Déposez vos fichiers ici.';
 ?>
