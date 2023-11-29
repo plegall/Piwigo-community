@@ -265,6 +265,8 @@ else
       'moderated' => true,
       'nb_photos' => -1,
       'storage' => -1,
+      'recursive' => false,
+      'create_subcategories' => false,
       )
     );
 }
