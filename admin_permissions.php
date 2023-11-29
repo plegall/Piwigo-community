@@ -38,6 +38,29 @@ $who_options = array(
   'group' => l10n('a group'),
   );
 
+/*
+// Default filter permissions array
+// Enabled if value=1 and disabled if value=0
+$filters = array(
+  'enable' => 0,
+  'scope' => array('label'=>l10n('Scope'),'value'=>0, 'desc'=>1),
+  'prefilter' => array('label'=>l10n('Predefined filter'),'value' => 0,'desc'=>1),
+  'album' => array('label'=>l10n('Album'), 'value'=>0),
+  'tags' => array('label'=>l10n('Tags'), 'value'=>0),
+  'q' => array('label'=>l10n('Search'), 'value'=>0),
+  );
+
+// Default actions permissions array
+// 0=disabled, 1=only edit photos uploaded by user, 2=edit all photos
+$actions = array(
+  'delete' => array('label'=>l10n('Delete photos'), 'value'=>1),
+  'tags' => array('label'=>l10n('Add and remove tags'), 'value'=>1),
+  'download' => array('label'=>l10n('Download photos'), 'value'=>0),
+  'favorites' => array('label'=>l10n('Add and remove favorites'), 'value'=>0),
+  'move' => array('label'=>l10n('Move to album'), 'value'=>0),
+  );
+*/
+
 // +-----------------------------------------------------------------------+
 // | Check Access and exit when user status is not ok                      |
 // +-----------------------------------------------------------------------+
@@ -95,6 +118,39 @@ if (isset($_POST['submit_add']))
     unset($_POST['create_subcategories']);
   }
 
+  // create filter permissions
+  $filters_form = $conf['community']['filters']; // copy
+  $filters_form['enable'] = 0;
+  $filters_form['scope']['value'] = $_POST['enable_filter']['scope'];
+  foreach ($filters as $filter=>$permission) { // filter options
+    if ($filter != 'enable') {
+      if ($filter != 'scope') {
+        $filters_form[$filter]['value'] = isset($_POST['enable_filter'][$filter]) ? 1 : 0;  // input type checkbox
+      }
+      if ($filters_form[$filter]['value']) {
+        $filters_form['enable'] = 1; // only enable filters if there is at least one filter enabled
+      }
+    }
+  }
+  if ($_POST['user_filters_hidden']) {
+    $filters_form['enable'] = 0; // override enable value if user has deliberately chosen not to enable
+  }
+  $filters_form = serialize($filters_form);
+
+  // create action permissions
+  // 0=disabled, 1=only edit photos uploaded by user, 2=edit all photos
+  $actions_form = $conf['community']['actions']; // copy
+  foreach ($actions as $action=>$permission) {
+    if ($action == 'delete' or $action == 'tags') {
+      $actions_form[$action]['value'] = ($_POST['scope_action'][$action] == 'user') ? 1 : 2;
+    } else {
+      $actions_form[$action]['value'] = !isset($_POST['enable_action'][$action]) ? 0 : (
+                                      ($_POST['scope_action'][$action]=='user') ? 1 : 2
+                                      );
+    }
+  }
+  $actions_form = serialize($actions_form);
+
   // creating the permission
   $insert = array(
     'type' => $_POST['who'],
@@ -107,6 +163,8 @@ if (isset($_POST['submit_add']))
     'moderated' => $_POST['moderated'],
     'nb_photos' => $_POST['nb_photos'],
     'storage' => $_POST['storage'],
+    'filters' => $filters_form,
+    'actions' => $actions_form,
     );
 
   // does this permission already exist?
@@ -252,6 +310,8 @@ SELECT
         'moderated' => get_boolean($row['moderated']),
         'nb_photos' => empty($row['nb_photos']) ? -1 : $row['nb_photos'],
         'storage' => empty($row['storage']) ? -1 : $row['storage'],
+        'filters' => safe_unserialize($row['filters']),
+        'actions' => safe_unserialize($row['actions']),
         )
       );
   }
@@ -265,6 +325,8 @@ else
       'moderated' => true,
       'nb_photos' => -1,
       'storage' => -1,
+      'filters' => safe_unserialize($conf['community']['filters']),
+      'actions' => safe_unserialize($conf['community']['actions']),
       )
     );
 }

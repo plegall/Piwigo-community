@@ -75,7 +75,7 @@
 .permitActionItem .selectize-control.single.plugin-remove_button {width: auto !important;}
 .permitActionItem .selectize-input.items.full.has-options.has-items {width: 500px !important; line-height: 23px;}
 #action_associate {display: flex;}
-#action_associate a:last-child {margin-left: 15px; padding: 10px;}
+#action_associate a:last-child {margin-left: 15px; padding: 12px;}
 #applyAction i {margin-right: 15px;}
 #action_delete_derivatives, #action_generate_derivatives {display: flex; flex-wrap: wrap; margin-top: -20px;}
 .deleteDerivButtons a {border-radius: 4px; padding: 4px 10px; margin: 5px;}
@@ -83,23 +83,20 @@
 #action_delete_derivatives label, #action_generate_derivatives label {display: flex; margin-top: 4px; width: 50%;}
 #action_delete_derivatives input[name="del_derivatives_type[]"], #action_generate_derivatives input[name="generate_derivatives_type[]"] {margin-right: 3px;}
 .actionButtonsBlock .actionButtons:first-child::after,#filter_prefilter::before,#filter_category::before,#filter_level::before,
-.permitActionListButton div::before, #action_level::after, .pictureLevels::before {
+.permitActionListButton div::before, #action_level::after, .pictureLevels::before, #filter_scope::before, div#action_associate::before {
   content: '\e835'; font-size: 17px; position: absolute; font-family: "fontello"; color: #6E6E6E; pointer-events: none;
 }
-.permitActionListButton div::before {margin-left: 250px; margin-top: 11px;}
+.permitActionListButton div::before, div#action_associate::before {margin-left: 250px; margin-top: 11px;}
 .pictureLevels::before {margin-left: 216px; margin-top: 10px;}
 .permitActionListButton div.hidden::after {display: none;}
 .actionButtonsBlock {width: 200px;}
 .actionButtonsBlock .actionButtons:first-child::after {margin-left: 169px; margin-top: 11px;}
-#filter_prefilter::before {margin-left: 257px; margin-top: 28px;}
+#filter_prefilter::before, #filter_category::before, #filter_scope::before, #action_associate select::before {margin-left: 257px; margin-top: 33px;}
 #filter_category .selectize-control.single .selectize-input::after {content: none;}
-#filter_category {width: 600px;}
-#filter_category::before {margin-left: 579px; margin-top: 28px; z-index: 2;}
 #filter_level::before {margin-top: 28px; margin-left: 260px;}
 #action_level::after {margin-top: -56px; margin-left: 254px;}
-#filter_search input {width: 300px; box-sizing: border-box; padding: 11px 18px;}
+#filter_search input {width: 100%; box-sizing: border-box; padding: 10px 18px;}
 #addFilter, #filterList select, #filter_tags .selectize-input.items.not-full.has-options, .pictureLevels select {
-        font-size: 12px;
         font-family: "Open Sans", "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;
         -webkit-appearance: none;
         font-weight: 700;
@@ -346,7 +343,7 @@ display:block; position:absolute; z-index:101; padding:8px 0 0 3px; color:white;
 .navigationBar {
   border-radius: 5px;
   display: flex;
-  font-size: 12px;
+/*  font-size: 12px; */ /* Changed to fit same size as "display" bar */
   font-weight: 700;
 }
 .navigationBar a, .navigationBar span {
@@ -390,3 +387,123 @@ display:block; position:absolute; z-index:101; padding:8px 0 0 3px; color:white;
 .thumbnailsActionsNumber a:hover {
   color: #ff7700;
 }
+
+
+/* Added from admin.themes.default.theme.css */
+/* Selectize */
+.selectize-dropdown [data-selectable], .selectize-dropdown .optgroup-header {
+    padding: 0px 5px !important;
+}
+
+#batchManagerGlobal #filterList {padding-left:0px; display: flex; flex-wrap: wrap; align-items: start; margin-top: 0px;}
+#batchManagerGlobal #filterList li {
+  list-style-type:none;
+  background-color: #fafafa;
+  padding: 10px;
+  margin: 0px 10px 10px 0px;
+  box-shadow: 0px 2px 1px #00000024;
+  border-radius: 5px;
+  position: relative;
+}
+#batchManagerGlobal #filterList li p {font-weight: bold;display: block;margin: 0;margin-bottom: 5px;}
+#batchManagerGlobal a.removeFilter {color: #AAA;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+#batchManagerGlobal a.removeFilter::before {margin-right:0; content: '\e822'; font-size: 11pt; color: #3C3C3C; margin-left: 6px; font-size: 12pt;color: #777;}
+#batchManagerGlobal #applyFilterBlock {width: 200px;}
+
+.noFilter {
+  text-align: center;
+  font-weight: 600;
+  padding: 27px 0;
+  margin-bottom: 30px;
+  display: none;
+}
+
+.filterActions {
+  display: flex;
+}
+
+.filterActions #addFilter {
+  position: relative;
+  margin-right: 10px;
+}
+
+.addFilter-dropdown {
+  z-index: 1500; /* Bootstrap Darkroom navbar z-index is 1020 */
+  padding: 5px 0px;
+  border-radius: 10px 10px 0px 0px;
+  background: linear-gradient(130deg, #ff7700 0%, #ffa744 100%);
+  color: white;
+  position: absolute;
+  bottom:100%;
+  overflow: hidden;
+  width: 100%;
+  display: none;
+}
+
+.addFilter-dropdown a {
+  display: block;
+  text-align: initial;
+  padding: 5px 10px;
+  padding-right: 15px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.addFilter-dropdown a:hover {
+  text-decoration: none;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.123)
+}
+
+.addFilter-dropdown a.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.filterBlock {display: flex; flex-direction: column;}
+.filterBlock li {width: 300px; height: auto;}
+#filterList #permitAction select {display: block; padding: 10px 18px; margin-bottom: 5px; width: 290px;}
+#filterList li {margin-left: 25px; margin-bottom: 15px;}
+#filter_tags .selectize-input.items.not-full.has-options, #filter_tags .selectize-input.items.not-full {padding: 10px 18px;}
+#filter_tags .selectize-input {width: 100%; box-shadow: none; border-radius: inherit;}
+#filter_category select, #filter_prefilter select, #filter_scope select {padding: 10px 18px; width: 100%; margin-bottom: 5px;}
+#filterList .selectize-input.items.not-full.has-options {margin-bottom: 5px;}
+#applyFilter, .addFilter-button {margin-left: 0;float: left;height: 45.6px;font-size: 1em;border: none;cursor: pointer;transition: ease 0.2s;display: flex;align-items: center;justify-content: center; padding: 0px 10px;}
+#applyFilter.activated {background-color: #FFA646; color: #3C3C3C;}
+#removeFilters {margin-top: 20px; margin-left: 13px;}
+.filter_search_input {padding: 10px 0px; width: 300px;}
+
+#applyFilter, #addFilter,#filterList select, #filter_tags .selectize-input.items.not-full.has-options, .pictureLevels select, #permitAction select{
+    font-family: "Open Sans", "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;
+    -webkit-appearance: none;
+    font-weight: 700;
+}
+
+div#action_associate { width: 350px; }
+
+div#linkToCreate { 
+    display: flex;
+    height: fit-content;
+}
+#linkToCreate a {
+    background: #FFF;
+    border: 1px solid #787777a6;
+    box-shadow: none;
+}
+#linkToCreate a:hover { color: #ff7700; }
+
+/* Modified from themes.default.js.plugins.selectize.*colorscheme*.css */
+.selectize-dropdown,
+.selectize-input,
+.selectize-input input {
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
+/* colorbox */
+#addAlbumForm { color: #777; }

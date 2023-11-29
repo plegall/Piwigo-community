@@ -101,3 +101,61 @@ div.token-input-dropdown ul li.token-input-selected-dropdown-item {background-co
 .selectize-control.plugin-remove_button [data-value] .remove {
   border-left-color: #555;
 }
+
+
+/* Added from admin.themes.roma.theme.css */
+
+#filterList p, #filterList label { color:#BFBFBF; }
+
+fieldset { border: none; }
+
+INPUT, SELECT, TEXTAREA {
+    border: 1px solid #666;
+}
+
+#batchManagerGlobal #applyFilter {
+  color: #3C3C3C;
+  background-color: #ececec;
+}
+
+#batchManagerGlobal #applyFilter:hover {
+  color: white;
+  background-color: #ffc17e;
+}
+
+#batchManagerGlobal #filterList li {
+  background-color: #3C3C3C;
+}
+
+input:checked + .slider {
+  background-color: #ff8c27;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #FFC27F;
+}
+
+
+.selectize-control.single .selectize-input {border: 2px solid #FAC17E!important; color: #D5D5D5;}
+.selectize-control.single .selectize-input:hover {border-color: #FFA646!important;}
+
+
+#addFilter, #filterList select, .pictureLevels select, #permitAction select {background-color: #444444; color: #BFBFBF}
+#filter_category .selectize-input.items.full.has-options.has-items, #filter_tags .selectize-input.items.not-full.has-options, 
+#filter_tags .selectize-input.items.not-full, #filter_search input, #action_associate .selectize-input.items.full.has-options.has-items,
+
+#permitAction select {background: #3C3C3C; color: #C0C0C0;}
+
+#addFilter optgroup, #batchManagerGlobal option[disabled] {background-color: #555;}
+.pageNumberSelected {color: #777 !important; font-weight: bold;}
+
+#batchManagerGlobal #applyFilter {
+  color: #BFBFBF;
+  background-color: #3c3c3c;
+}
+
+#batchManagerGlobal #applyFilter:hover {
+  background-color: #202020;
+}
+
+#linkToCreate a:hover { color: #FFA646; }

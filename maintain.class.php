@@ -1,6 +1,30 @@
 <?php
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
+/* Default permission arrays for filters and actions in edit page */
+// Enabled if value=1 and disabled if value=0
+$filters = array(
+  'enable' => 0,
+  'scope' => array('label'=>l10n('Scope'),'value'=>0, 'desc'=>1),
+  'prefilter' => array('label'=>l10n('Predefined filter'),'value' => 0,'desc'=>1),
+  'album' => array('label'=>l10n('Album'), 'value'=>0),
+  'tags' => array('label'=>l10n('Tags'), 'value'=>0),
+  'q' => array('label'=>l10n('Search'), 'value'=>0),
+);
+
+// 0=disabled, 1=only edit photos uploaded by user, 2=edit all photos
+$actions = array(
+  'delete' => array('label'=>l10n('Delete photos'), 'value'=>1),
+  'tags' => array('label'=>l10n('Add and remove tags'), 'value'=>1),
+  'download' => array('label'=>l10n('Download photos'), 'value'=>0),
+  'favorites' => array('label'=>l10n('Add and remove favorites'), 'value'=>0),
+  'move' => array('label'=>l10n('Move to album'), 'value'=>0),
+);
+
+$GLOBALS['filters'] = $filters;
+$GLOBALS['actions'] = $actions;
+
+
 class community_maintain extends PluginMaintain
 {
   private $installed = false;
@@ -12,8 +36,8 @@ class community_maintain extends PluginMaintain
 
   function install($plugin_version, &$errors=array())
   {
-    global $conf, $prefixeTable;
-    
+    global $conf, $prefixeTable, $filters, $actions;
+
     $query = '
 CREATE TABLE IF NOT EXISTS '.$prefixeTable.'community_permissions (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -27,6 +51,8 @@ CREATE TABLE IF NOT EXISTS '.$prefixeTable.'community_permissions (
   `moderated` enum(\'true\',\'false\') NOT NULL DEFAULT \'true\',
   `nb_photos` int DEFAULT NULL,
   `storage` int DEFAULT NULL,
+  `filters` varchar(511) NOT NULL,
+  `actions` varchar(511) NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8
 ;';
@@ -107,17 +133,25 @@ UPDATE '.$prefixeTable .'community_pendings
     {
       $community_default_config = array(
         'user_albums' => false,
+        'filters' => $filters,
+        'actions' => $actions,
         );
       
       conf_update_param('community', $community_default_config, true);
     }
-    
+
+    // download archives directory for download action
+    if (!file_exists(PHPWG_ROOT_PATH . $conf['data_location'] . 'community_downloads/'))
+    {
+      mkgetdir(PHPWG_ROOT_PATH . $conf['data_location'] . 'community_downloads/', MKGETDIR_DEFAULT&~MKGETDIR_DIE_ON_ERROR);
+    }
+
     $this->installed = true;
   }
 
   function activate($plugin_version, &$errors=array())
   {
-    global $prefixeTable;
+    global $prefixeTable, $conf, $filters, $actions;
     
     if (!$this->installed)
     {
@@ -162,6 +196,8 @@ SELECT
           '`recursive`' => 'true',
           'create_subcategories' => 'true',
           'moderated' => 'true',
+          'filters' => serialize($filters),
+          'actions' => serialize($actions),
           )
         );
     }
@@ -196,4 +232,5 @@ SELECT
     pwg_query('DELETE FROM `'. CONFIG_TABLE .'` WHERE param IN ("community", "community_cache_key");');
   }
 }
+
 ?>

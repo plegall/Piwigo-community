@@ -11,6 +11,13 @@ form fieldset p {text-align:left;margin:0 0 1.5em 0;line-height:20px;}
 .permissionActions img {margin-bottom:-2px}
 .rowSelected {background-color:#C2F5C2 !important}
 #community_nb_photos, #community_storage {width:400px; display:inline-block; margin-right:10px;}
+
+h4 {
+    text-align: left !important;
+    padding: 0px !important;
+    margin-top: 30px !important;
+    text-decoration: underline;
+}
 </style>
 {/literal}
 
@@ -157,6 +164,69 @@ $(document).ready(function() {
     }
   });
 
+  /* toggle filter options display */
+  var $disableFilter = $("input[name=user_filters_hidden]"); // boolean true when user deliberately unchecks "enable filter"
+  var $enableFilter = $("input[name=user_filters]");
+  $enableFilter.change(function() {
+    if ($(this).is(":checked")) {
+      $("#filter_options").show();
+      $disableFilter.val(0);
+    } else {
+      $("#filter_options").hide();
+      $disableFilter.val(1);
+    }
+  });
+
+  /* check "scope" filter if any action permission is set to "whole gallery" */
+  var actions = {/literal}{$actions|@json_encode}{literal};
+  function toggleScopeFilter() {
+    var checkScopeFilter = false;
+    jQuery.each(actions, function(key, action) {
+      if ($("select[name='scope_action[" +key+ "]'] option:selected").val() == 'all') {
+        checkScopeFilter = true;
+      }
+    });
+
+    var $scopeFilterDummy = $("input[name='enable_filter[scope_dummy]']"); // dummy disabled checkbox
+    var $scopeFilter = $("input[name='enable_filter[scope]']"); // actual input
+
+    if (checkScopeFilter) {
+
+      // if user allowed to perform at least one action on whole gallery, filters are enabled
+      // user can choose to edit his own photos or the whole gallery, with the permitted actions shown accordingly
+      $enableFilter.prop('checked','checked');
+      $enableFilter.prop('disabled','disabled');
+      $disableFilter.val(0);
+      $("#filter_options").show();
+
+      $scopeFilterDummy.prop('checked', 'checked');
+      $scopeFilter.val(1);
+
+    } else {
+
+      $enableFilter.removeAttr('disabled'); // admin can add filters without upgrading any edit permissions
+                                            // users can further filter photos they uploaded
+      $disableFilter.val($enableFilter.is(":checked") ? 0 : 1 ); // inverted value
+                                                                 // value true when user chooses to disable filters
+      $scopeFilterDummy.removeAttr('checked');
+      $scopeFilter.val(0);
+
+    }
+  }
+  
+  toggleScopeFilter(); // init
+  $("select[name^='scope_action']").change(toggleScopeFilter); // onchange
+
+  /* show filter description on click */
+  jQuery('.showInfo').tipTip({
+    'delay' : 0,
+    'fadeIn' : 200,
+    'fadeOut' : 200,
+    'maxWidth':'300px',
+    'keepAlive':true,
+    'activation':'click'
+  });
+
 });
 {/literal}{/footer_script}
 
@@ -183,6 +253,8 @@ $(document).ready(function() {
 {html_options options=$group_options selected=$group_options_selected}
       </select>
     </p>
+
+    <h4>{'Upload Permissions'|@translate}</h4>
 
     <p>
       <strong>{'Where?'|@translate}</strong> {if $community_conf.user_albums}<em id="userAlbumInfo">{'(in addition to user album)'|@translate}</em>{/if}
@@ -220,6 +292,68 @@ $(document).ready(function() {
     <div id="community_storage"></div>
     <span id="community_storage_info">{'no limit'|@translate}</span>
     <input type="hidden" name="storage" value="{$storage}">
+
+    <h4>{'Edit Permissions'|@translate}</h4>
+
+    <p id="filters" style="margin-bottom: 0">
+      <label><input type="checkbox" name="user_filters" {if $filters.enable}checked="checked"{/if}> <strong>{'Enable filters'|@translate}</strong> : <em>{'Allow users to sort photos by filters like in Batch Manager'|@translate}</em></label>
+      <input type="hidden" name="user_filters_hidden" value="{!$filters.enable}">
+    </p>
+    <table class="table2" style="margin:0;{if !$filters.enable}display:none;{/if}" id="filter_options">
+      <tbody>
+        <tr class="row2">
+          <th></th>
+          <th>{'Filters'|@translate}</th>
+        </tr>
+
+        {foreach from=$filters key=key item=filter}
+        {if $key != 'enable'}
+        <tr>
+          <td><input type="checkbox" name="enable_filter[{$key}{if $key=='scope'}_dummy{/if}]" {if $filter.value}checked="checked"{/if} {if $key=='scope'}disabled="disabled"{/if} /></td>
+          <td>
+            {$filter.label|@translate}
+            {if isset($filter.desc)}
+              {if $key == 'scope'}
+                <a class="icon-info-circled-1 showInfo" style="display:inline" title="{{'Users can filter photos posted by themselves or all photos. Only enabled when the permission of at least one action is set to "The whole gallery".'|@translate}|@escape:'html'}"></a>
+              {elseif $key == 'prefilter'}
+                <a class="icon-info-circled-1 showInfo" style="display:inline" title="{{'Users can filter favorites, recent photos, orphan photos (no album) or photos without tags.'|@translate}|@escape:'html'}"></a>
+              {/if}
+            {/if}
+          </td>
+          <input type="hidden" name="enable_filter[scope]"/>
+        </tr>
+        {/if}
+        {/foreach}
+
+      </tbody>
+    </table>
+
+    <p style="margin:1.5em 0 0">
+      <strong>{'Set user actions'|@translate}</strong>
+    </p>
+    <table class="table2" style="margin:0 0 2em">
+      <tbody>
+        <tr class="row2">
+          <th></th>
+          <th>{'Action'|@translate}</th>
+          <th>{'Permissions'|@translate}</th>
+        </tr>
+
+       {foreach from=$actions key=key item=action}
+        <tr>
+          <td><input type="checkbox" name="enable_action[{$key}]" {if $action.value>0}checked="checked"{/if} {if $key=='delete' or $key=='tags'}disabled="disabled"{/if}></td>
+          <td>{$action.label|@translate}</td>
+          <td>
+            <select name="scope_action[{$key}]">
+              <option value="user" {if $action.value<=1}selected{/if}>{'Only photos uploaded by user'|@translate}</option>
+              <option value="all" {if $action.value==2}selected{/if}>{'The whole gallery'|@translate}</option>
+            </select>
+          </td>
+        </tr>
+      {/foreach}
+
+      </tbody>
+    </table>
 
     {if isset($edit)}
       <input type="hidden" name="edit" value="{$edit}">

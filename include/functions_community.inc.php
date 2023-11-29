@@ -56,6 +56,8 @@ function community_get_user_permissions($user_id)
     'permission_ids' => array(),
     'nb_photos' => 0,
     'storage' => 0,
+    'filters' => array(),
+    'actions' => array(),
     );
   
   // what are the user groups?
@@ -76,7 +78,9 @@ SELECT
     `recursive`,
     `create_subcategories`,
     `nb_photos`,
-    `storage`
+    `storage`,
+    `filters`,
+    `actions`
   FROM '.COMMUNITY_PERMISSIONS_TABLE.'
   WHERE (`type` = \'any_visitor\')';
 
@@ -157,6 +161,9 @@ SELECT
         $return['storage'] = $row['storage'];
       }
     }
+
+    $return['filters'] = safe_unserialize($row['filters']);
+    $return['actions'] = safe_unserialize($row['actions']);
 
     if ($conf['community']['user_albums'] and 'any_visitor' != $row['type'])
     {
