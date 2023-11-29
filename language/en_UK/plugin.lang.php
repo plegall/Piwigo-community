@@ -83,9 +83,16 @@ $lang['User album only'] = 'User album only';
 $lang['Album of user'] = 'Album of user';
 $lang['a user can own only one album'] = 'a user can own only one album';
 
-$lang['No photo selected, no action possible.'] = 'No photo selected, no action possible.';
-$lang['Photos posted by %s'] = 'Photos posted by %s';
-$lang['Edit Photos'] = 'Edit Photos';
 $lang['Edit photos'] = 'Edit photos';
+$lang['Edit Photos'] = 'Edit Photos';
+$lang['Edit your photos'] = 'Edit your photos';
+$lang['Photos posted by %s'] = 'Photos posted by %s';
+$lang['Photos posted by %s in album %s'] = 'Photos posted by %s in album %s';
+$lang['Select at least one tag'] = 'Select at least one tag';
+$lang['Select at least one photo'] = 'Select at least one photo';
+$lang['No photo can be deleted'] = 'No photo can be deleted';
+$lang['You need to confirm deletion'] = 'You need to confirm deletion';
+$lang['No photo selected, no action possible.'] = 'No photo selected, no action possible.';
 $lang['Drag files here.'] = 'Drag files here.';
+
 ?>
