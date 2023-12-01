@@ -93,3 +93,4 @@ $lang['Select at least one photo'] = 'Mindestens ein Foto muss ausgewählt sein'
 $lang['No photo can be deleted'] = 'Es kann kein Foto gelöscht werden';
 $lang['You need to confirm deletion'] = 'Der Löschvorgang muss bestätigt werden';
 $lang['No photo selected, no action possible.'] = 'Kein Foto ausgewählt, keine Aktion möglich.';
+$lang['Drag files here.'] = 'Ziehen Sie die Dateien hierher.';
