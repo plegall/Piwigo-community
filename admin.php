@@ -41,72 +41,27 @@ check_status(ACCESS_ADMINISTRATOR);
 // | Tabs                                                                  |
 // +-----------------------------------------------------------------------+
 
-$pendings_label = l10n('Pending Photos');
-if ($page['community_nb_pendings'] > 0)
+$page['tab'] = (isset($_GET['tab'])) ? $_GET['tab'] : 'permissions';
+
+if ('album' == $page['tab'])
 {
-  $pendings_label.= ' ('.$page['community_nb_pendings'].')';
-}
-
-$tabs = array(
-  array(
-    'code' => 'permissions',
-    'label' => l10n('Upload Permissions'),
-    ),
-  array(
-    'code' => 'pendings',
-    'label' => $pendings_label,
-    ),
-  array(
-    'code' => 'config',
-    'label' => l10n('Configuration'),
-    ),
-  );
-
-$tab_codes = array_map(
-  function ($a) { return $a["code"]; },
-  $tabs
-  );
-
-if (isset($_GET['tab']) and in_array($_GET['tab'], $tab_codes))
-{
-  $page['tab'] = $_GET['tab'];
+  include(COMMUNITY_PATH.'admin_album.php');
 }
 else
 {
-  $page['tab'] = $tabs[0]['code'];
-}
+  $tabsheet = new tabsheet();
+  $tabsheet->add('permissions', l10n('Upload Permissions'), COMMUNITY_BASE_URL.'-permissions');
+  $tabsheet->add('pendings', l10n('Pending Photos').($page['community_nb_pendings'] > 0 ? ' ('.$page['community_nb_pendings'].')' : ''), COMMUNITY_BASE_URL.'-pendings');
+  $tabsheet->add('config', l10n('Configuration'), COMMUNITY_BASE_URL.'-config');
+  $tabsheet->select($page['tab']);
+  $tabsheet->assign();
 
-$tabsheet = new tabsheet();
-foreach ($tabs as $tab)
-{
-  $tabsheet->add(
-    $tab['code'],
-    $tab['label'],
-    COMMUNITY_BASE_URL.'-'.$tab['code']
-    );
-}
-$tabsheet->select($page['tab']);
-$tabsheet->assign();
-
-// +-----------------------------------------------------------------------+
-// |                             template init                             |
-// +-----------------------------------------------------------------------+
-
-$template->set_filenames(
-  array(
-    'photos_add' => 'photos_add_'.$page['tab'].'.tpl',
-    )
-  );
-
-$template->assign(
+  $template->assign(
     array(
       'ADMIN_PAGE_TITLE' => 'Community',
     )
   );
 
-// +-----------------------------------------------------------------------+
-// |                             Load the tab                              |
-// +-----------------------------------------------------------------------+
-
-include(COMMUNITY_PATH.'admin_'.$page['tab'].'.php');
+  include(COMMUNITY_PATH.'admin_'.$page['tab'].'.php');
+}
 ?>

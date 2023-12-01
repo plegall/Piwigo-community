@@ -96,4 +96,6 @@ $lang['No photo can be deleted'] = 'Aucune photo ne peut être supprimée';
 $lang['You need to confirm deletion'] = 'Vous devez confirmer la suppression';
 $lang['No photo selected, no action possible.'] = 'Aucune photo sélectionnée, aucune action possible.';
 $lang['Drag files here.'] = 'Déposez vos fichiers ici.';
+$lang[' (owns this album)'] = ' (possède cet album)';
+$lang[' (already owns album "%s")'] = ' (possède déjà l\'album "%s")';
 ?>

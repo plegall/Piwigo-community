@@ -94,5 +94,6 @@ $lang['No photo can be deleted'] = 'No photo can be deleted';
 $lang['You need to confirm deletion'] = 'You need to confirm deletion';
 $lang['No photo selected, no action possible.'] = 'No photo selected, no action possible.';
 $lang['Drag files here.'] = 'Drag files here.';
-
+$lang[' (owns this album)'] = ' (owns this album)';
+$lang[' (already owns album "%s")'] = ' (already owns album "%s")';
 ?>
