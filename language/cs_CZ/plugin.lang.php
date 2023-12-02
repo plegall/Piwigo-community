@@ -78,4 +78,16 @@ $lang['User albums'] = 'Uživatelská alba';
 $lang['Where should Piwigo create user albums?'] = 'Kde má Piwigo vytvářet uživatelská alba?';
 $lang['Album of user'] = 'Album uživatele';
 $lang['a user can own only one album'] = 'uživatel může vlastnit pouze jedno album';
-?>
+$lang['Edit your photos'] = 'Upravte své fotografie';
+$lang['No photo can be deleted'] = 'Žádnou fotografii nelze smazat';
+$lang['No photo selected, no action possible.'] = 'Nebyla vybrána žádná fotografie, není možná žádná akce.';
+$lang['Photos posted by %s'] = 'Fotografie zveřejnil(a) %s';
+$lang['Photos posted by %s in album %s'] = 'Fotografie zveřejnil(a) %s v albu %s';
+$lang['Select at least one photo'] = 'Vyberte alespoň jednu fotografii';
+$lang['Select at least one tag'] = 'Vyberte alespoň jeden tag';
+$lang['You need to confirm deletion'] = 'Musíte potvrdit smazání';
+$lang[' (already owns album "%s")'] = '(již vlastní album "%s")';
+$lang[' (owns this album)'] = '(vlastní toto album)';
+$lang['Drag files here.'] = 'Přetáhněte soubory sem.';
+$lang['Edit Photos'] = 'Upravovat Fotografie';
+$lang['Edit photos'] = 'Upravovat fotografie';
