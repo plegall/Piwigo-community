@@ -79,4 +79,16 @@ $lang['a user can own only one album'] = 'en bruker kan kun eie ett album';
 $lang['no limit'] = 'ingen begrensninger';
 $lang['up to %d photos (for each user)'] = 'inntil %d bilder (pr bruker)';
 $lang['up to %dMB (for each user)'] = 'inntil %dMB (pr bruker)';
-?>
+$lang[' (already owns album "%s")'] = ' (alerede eier av album "%s")';
+$lang[' (owns this album)'] = ' (eier dette album)';
+$lang['Drag files here.'] = 'Dra filene her.';
+$lang['Edit Photos'] = 'Rediger Bilder';
+$lang['Edit photos'] = 'Rediger bilder';
+$lang['Edit your photos'] = 'Rediger dine bilder';
+$lang['No photo can be deleted'] = 'Ingen bilder kan slettes';
+$lang['No photo selected, no action possible.'] = 'Ingen bilder er valgt, ingen handling mulig.';
+$lang['Photos posted by %s'] = 'Bilder lagt ut av %s';
+$lang['Photos posted by %s in album %s'] = 'Bilder lagt ut av %s i album %s';
+$lang['Select at least one photo'] = 'Velg minst ett bilde';
+$lang['Select at least one tag'] = 'Velg minst et bokmerke';
+$lang['You need to confirm deletion'] = 'Du må bekrefte sletting';
