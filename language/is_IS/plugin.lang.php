@@ -75,3 +75,5 @@ $lang['Photos posted by %s in album %s'] = 'Myndir settar inn af %s í albúmið
 $lang['Select at least one photo'] = 'Veldu að minnsta kosti eina mynd';
 $lang['Select at least one tag'] = 'Veldu að minnsta kosti eitt merki';
 $lang['You need to confirm deletion'] = 'Þú þarft að staðfesta eyðingu';
+$lang[' (already owns album "%s")'] = '(á nú þegar albúmið "%s")';
+$lang[' (owns this album)'] = '(á þetta albúm)';
