@@ -79,4 +79,16 @@ $lang['User album only'] = 'Sadece kullanıcı albümü';
 $lang['Gallery root'] = 'Galeri kök alanı';
 $lang['Album of user'] = 'Kullanıcının albümü';
 $lang['a user can own only one album'] = 'bir kullanıcı sadece bir albüme sahip olabilir';
-?>
+$lang[' (already owns album "%s")'] = '(zaten "%s" albümünün sahibi)';
+$lang[' (owns this album)'] = '(bu albümün sahibi)';
+$lang['Photos posted by %s'] = '%s tarafından gönderilen fotoğraflar';
+$lang['Photos posted by %s in album %s'] = '%s tarafından %s albümünde yayınlanan fotoğraflar';
+$lang['Select at least one tag'] = 'En az bir etiket seçin';
+$lang['You need to confirm deletion'] = 'Silme işlemini onaylamanız gerekiyor';
+$lang['Select at least one photo'] = 'En az bir fotoğraf seçin';
+$lang['No photo selected, no action possible.'] = 'Fotoğraf seçilmedi, herhangi bir işlem mümkün değil.';
+$lang['No photo can be deleted'] = 'Hiçbir fotoğraf silinemez';
+$lang['Edit your photos'] = 'Fotoğraflarınızı düzenleyin';
+$lang['Edit photos'] = 'Fotoğrafları düzenle';
+$lang['Edit Photos'] = 'Fotoğrafları Düzenle';
+$lang['Drag files here.'] = 'Dosyaları buraya sürükleyin.';
