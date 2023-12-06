@@ -79,4 +79,16 @@ $lang['up to %d photos (for each user)'] = '最多 %d 張照片 (每位使用者
 $lang['up to %dMB (for each user)'] = '最多 %dMB (每位使用者)';
 $lang['Album of user'] = '用戶相冊';
 $lang['a user can own only one album'] = '一個用戶只能擁有一個相冊';
-?>
+$lang[' (already owns album "%s")'] = '（已擁有 "%s" 這本相簿）';
+$lang[' (owns this album)'] = '（擁有這本相簿）';
+$lang['Drag files here.'] = '將檔案拉放至此。';
+$lang['Edit Photos'] = '編輯照片';
+$lang['Edit photos'] = '編輯照片';
+$lang['Edit your photos'] = '編輯你的照片';
+$lang['No photo can be deleted'] = '無法刪除任何照片';
+$lang['No photo selected, no action possible.'] = '沒有選定照片，無法進行任何動作。';
+$lang['Photos posted by %s'] = '由 %s 張貼的照片';
+$lang['Photos posted by %s in album %s'] = '由 %s 張貼的照片，於相簿 %s 中';
+$lang['Select at least one photo'] = '請至少選擇一張照片';
+$lang['Select at least one tag'] = '請至少選擇一個標籤';
+$lang['You need to confirm deletion'] = '刪除動作需要您確認';
