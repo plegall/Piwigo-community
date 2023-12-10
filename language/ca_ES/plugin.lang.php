@@ -79,4 +79,16 @@ $lang['Available quota %s.'] = 'Quota disponible %s.';
 $lang['Disk usage quota reached (%uMB)'] = 'Quota d\'ús de disc aconseguida (%u MB)';
 $lang['Album of user'] = 'Àlbum d\'usuari';
 $lang['a user can own only one album'] = 'un usuari només pot tenir un àlbum';
-?>
+$lang[' (already owns album "%s")'] = '(ja poseeix l\'àlbum "%s")';
+$lang[' (owns this album)'] = '(poseeix aquest àlbum)';
+$lang['Drag files here.'] = 'Arrossegueu els fitxers aquí';
+$lang['Edit Photos'] = 'Edita Fotos';
+$lang['Edit photos'] = 'Edita fotos';
+$lang['Edit your photos'] = 'Editeu les vostres fotos';
+$lang['No photo can be deleted'] = 'No es pot suprimir cap foto';
+$lang['No photo selected, no action possible.'] = 'No s\'ha seleccionat cap foto, no hi ha acció possible';
+$lang['Photos posted by %s'] = 'Fotos publicades per %s';
+$lang['Photos posted by %s in album %s'] = 'Fotos publicades per %s en l\'àlbum %s';
+$lang['Select at least one photo'] = 'Seleccioneu almenys una foto';
+$lang['Select at least one tag'] = 'Seleccioneu almenys una etiqueta';
+$lang['You need to confirm deletion'] = 'Necessiteu confirmar la supressió';

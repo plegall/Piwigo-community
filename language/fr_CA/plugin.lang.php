@@ -84,4 +84,4 @@ $lang['(in addition to user album)'] = '(en plus de l\'album utilisateur)';
 $lang['User album only'] = 'Uniquement l\'album utilisateur';
 $lang['Album of user'] = 'Album de l\'utilisateur';
 $lang['a user can own only one album'] = 'un utilisateur ne peut posséder qu\'un seul album';
-?>
+$lang['Select at least one tag'] = 'Sélectionnez au moins un mot-clé';

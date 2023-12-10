@@ -79,4 +79,16 @@ $lang['Gallery root'] = 'Hlavný adresár galérie';
 $lang['(in addition to user album)'] = '(okrem albumu používateľa)';
 $lang['a user can own only one album'] = 'používateľ môže mať len jeden album';
 $lang['Album of user'] = 'Album používateľa';
-?>
+$lang[' (already owns album "%s")'] = ' (už vlastní album "%s")';
+$lang[' (owns this album)'] = ' (vlastní tento album)';
+$lang['Drag files here.'] = 'Pritiahnite sem súbory.';
+$lang['Edit Photos'] = 'Úprava fotografií';
+$lang['Edit photos'] = 'Úprava fotografií';
+$lang['Edit your photos'] = 'Úprava vašich fotografií';
+$lang['No photo can be deleted'] = 'Žiadnu fotografiu nie je možné vymazať';
+$lang['No photo selected, no action possible.'] = 'Nie je vybratá žiadna fotografia, nie je možná žiadna akcia.';
+$lang['Photos posted by %s'] = 'Fotografie, ktoré uverejnil %s';
+$lang['Photos posted by %s in album %s'] = 'Fotografie, ktoré uverejnil %s v albume %s';
+$lang['Select at least one photo'] = 'Vyberte aspoň jednu fotografiu';
+$lang['Select at least one tag'] = 'Vyberte aspoň jednu značku';
+$lang['You need to confirm deletion'] = 'Musíte potvrdiť vymazanie';

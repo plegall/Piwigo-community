@@ -265,6 +265,8 @@ else
       'moderated' => true,
       'nb_photos' => -1,
       'storage' => -1,
+      'recursive' => false,
+      'create_subcategories' => false,
       )
     );
 }
@@ -308,7 +310,7 @@ $query = '
 SELECT
     id,
     name
-  FROM '.GROUPS_TABLE.'
+  FROM `'.GROUPS_TABLE.'`
 ;';
 $result = pwg_query($query);
 while ($row = pwg_db_fetch_assoc($result))
@@ -404,7 +406,7 @@ if (!empty($group_ids))
 SELECT
     id,
     name
-  FROM '.GROUPS_TABLE.'
+  FROM `'.GROUPS_TABLE.'`
   WHERE id IN ('.implode(',', $group_ids).')
 ;';
   $result = pwg_query($query);

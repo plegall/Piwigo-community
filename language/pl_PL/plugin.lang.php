@@ -81,4 +81,16 @@ $lang['User album only'] = 'Tylko album użytkownika';
 $lang['(in addition to user album)'] = 'dodatkowo do albumu użytkownika';
 $lang['Album of user'] = 'Album użytkownika';
 $lang['a user can own only one album'] = 'użytkownik może posiadać tylko jeden album';
-?>
+$lang[' (already owns album "%s")'] = '(już jest właścicielem albumu "%s")';
+$lang[' (owns this album)'] = '(jest właścicielem tego albumu)';
+$lang['Drag files here.'] = 'Przeciągnij pliki tutaj';
+$lang['Edit Photos'] = 'Edycja zdjęć';
+$lang['Edit photos'] = 'Edycja zdjęć';
+$lang['Edit your photos'] = 'Edytuj swoje zdjęcia';
+$lang['No photo can be deleted'] = 'Nie można usunąć żadnego zdjęcia';
+$lang['No photo selected, no action possible.'] = 'Nie wybrano żadnego zdjęcia, nie można wykonać żadnego działania';
+$lang['Photos posted by %s'] = 'Zdjęcia przesłane przez %s';
+$lang['Photos posted by %s in album %s'] = 'Zdjęcia przesłane przez %s w albumie %s';
+$lang['Select at least one photo'] = 'Wybierz przynajmniej jedno zdjęcie';
+$lang['Select at least one tag'] = 'Wybierz przynajmniej jeden tag';
+$lang['You need to confirm deletion'] = 'Musisz potwierdzić usuwanie';

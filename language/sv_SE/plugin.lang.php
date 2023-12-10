@@ -78,4 +78,16 @@ $lang['up to %d photos (for each user)'] = 'up till %d bilder (för var använda
 $lang['up to %dMB (for each user)'] = 'up till %dMB (för var användare)';
 $lang['Album of user'] = 'Album av användare';
 $lang['a user can own only one album'] = 'en användare kan bara äga ett album';
-?>
+$lang[' (already owns album "%s")'] = '(äger redan album "%s")';
+$lang[' (owns this album)'] = '(äger detta album)';
+$lang['Drag files here.'] = 'Dra filer hit.';
+$lang['Edit Photos'] = 'Redigera foton';
+$lang['Edit photos'] = 'Redigera foton';
+$lang['Edit your photos'] = 'Redigera dina foton';
+$lang['No photo can be deleted'] = 'Inget foto kan raderas';
+$lang['No photo selected, no action possible.'] = 'Inget foto valt, ingen åtgärd möjlig.';
+$lang['Photos posted by %s'] = 'Foton postade av %s';
+$lang['Photos posted by %s in album %s'] = 'Foton postade av %s i album %s';
+$lang['Select at least one photo'] = 'Välj minst ett foto';
+$lang['Select at least one tag'] = 'Välj minst en tagg';
+$lang['You need to confirm deletion'] = 'Du måste bekräfta radering';

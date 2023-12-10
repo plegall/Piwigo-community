@@ -83,4 +83,16 @@ $lang['Gallery root'] = 'Root Galleria';
 $lang['(in addition to user album)'] = '(in aggiunta all\'album utente)';
 $lang['a user can own only one album'] = 'un utente può avere un solo album';
 $lang['Album of user'] = 'Album degli utenti';
-?>
+$lang[' (already owns album "%s")'] = '(possiede già l\'album "%s")';
+$lang[' (owns this album)'] = '(possiede questo album)';
+$lang['Drag files here.'] = 'Trascina qui i file.';
+$lang['Edit Photos'] = 'Modifica fotografie.';
+$lang['Edit photos'] = 'Modifica fotografie.';
+$lang['Edit your photos'] = 'Modifica le tue fotografie.';
+$lang['No photo can be deleted'] = 'Nessuna fotografia può essere cancellata.';
+$lang['No photo selected, no action possible.'] = 'nessuna fotografia selezionata, nessun azione possibile.';
+$lang['Photos posted by %s'] = 'Fotografie inserite da %s';
+$lang['Photos posted by %s in album %s'] = 'Fotografie inserite da %s nell\'album %s';
+$lang['Select at least one photo'] = 'Selezionare almeno una fotografia.';
+$lang['Select at least one tag'] = 'Selezionare almeno un tag.';
+$lang['You need to confirm deletion'] = 'Devi confermare la cancellazione.';

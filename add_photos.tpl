@@ -201,7 +201,7 @@ var limit_storage = {$limit_storage};
 		
 		filters : {
 			// Maximum file size
-			max_file_size : '1000mb',
+			max_file_size : '{/literal}{$upload_max_filesize}{literal}',
 			// Specify what files to browse for
 			mime_types: [
 				{title : "Image files", extensions : "{/literal}{$file_exts}{literal}"}
@@ -419,6 +419,10 @@ p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
 #uploadForm .plupload_container {padding:0}
 #uploadForm .plupload_scroll .plupload_filelist {height:250px;}
 #uploadForm li.plupload_droptext {line-height:230px;font-size:2em;}
+
+form#uploadForm fieldset.selectAlbum div#linkToCreate {
+  margin-top: 1rem;
+}
 
 #uploadBoxes .file {margin-bottom:5px;text-align:left;}
 #uploadBoxes {margin-top:20px;}

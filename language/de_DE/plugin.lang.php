@@ -61,7 +61,7 @@ $lang['Edit a permission'] = 'Eine Zugriffsberechtigung ändern';
 $lang['Your photos are waiting for validation, administrators have been notified'] = 'Ihre Fotos müssen zuerst freigeschaltet werden, die Administratoren wurden benachrichtigt.';
 
 
-$lang['Set Photo Properties'] = 'Bildeigenschaften anpassen';
+$lang['Set Photo Properties'] = 'Fotoeigenschaften anpassen';
 $lang['%s out of %s'] = '%s von %s';
 $lang['Available %s.'] = 'Verfügbar %s.';
 $lang['Available quota %s.'] = 'Verfügbarer Speicherplatz %s.';
@@ -82,3 +82,17 @@ $lang['User albums'] = 'Benutzeralben';
 $lang['Where should Piwigo create user albums?'] = 'Wo soll Piwigo Benutzeralben anlegen?';
 $lang['Album of user'] = 'Album des Benutzers';
 $lang['a user can own only one album'] = 'ein Benutzer kann nur Besitzer eines Albums sein';
+
+$lang['Edit photos'] = 'Fotos bearbeiten';
+$lang['Edit Photos'] = 'Fotos bearbeiten';
+$lang['Edit your photos'] = 'Eigene Fotos bearbeiten';
+$lang['Photos posted by %s'] = 'Fotos veröffentlicht von %s';
+$lang['Photos posted by %s in album %s'] = 'Fotos veröffentlicht von %s im Album %s';
+$lang['Select at least one tag'] = 'Mindestens ein Tag muss ausgewählt sein';
+$lang['Select at least one photo'] = 'Mindestens ein Foto muss ausgewählt sein';
+$lang['No photo can be deleted'] = 'Es kann kein Foto gelöscht werden';
+$lang['You need to confirm deletion'] = 'Der Löschvorgang muss bestätigt werden';
+$lang['No photo selected, no action possible.'] = 'Kein Foto ausgewählt, keine Aktion möglich.';
+$lang['Drag files here.'] = 'Ziehen Sie die Dateien hierher.';
+$lang[' (already owns album "%s")'] = '(besitzt bereits das Album "%s")';
+$lang[' (owns this album)'] = '(besitzt dieses Album)';
