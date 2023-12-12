@@ -79,4 +79,16 @@ $lang['User albums'] = 'Álbuns de usuários';
 $lang['Where should Piwigo create user albums?'] = 'Onde o Piwigo deve criar os álbuns de usuários?';
 $lang['Album of user'] = 'Album de usuário';
 $lang['a user can own only one album'] = 'um usuário pode possuir apenas um álbum';
-?>
+$lang[' (already owns album "%s")'] = '(já possui o álbum "%s")';
+$lang[' (owns this album)'] = '(possui este álbum)';
+$lang['Drag files here.'] = 'Arraste os arquivos aqui.';
+$lang['Edit Photos'] = 'Editar fotos';
+$lang['Edit photos'] = 'Editar fotos';
+$lang['Edit your photos'] = 'Edite suas fotos';
+$lang['No photo can be deleted'] = 'Nenhuma foto pode ser excluída';
+$lang['No photo selected, no action possible.'] = 'Nenhuma foto selecionada, nenhuma ação possível.';
+$lang['Photos posted by %s'] = 'Fotos postadas por %s';
+$lang['Photos posted by %s in album %s'] = 'Fotos postadas por %s no álbum %s';
+$lang['Select at least one photo'] = 'Selecione pelo menos uma foto';
+$lang['Select at least one tag'] = 'Selecione pelo menos uma etiqueta';
+$lang['You need to confirm deletion'] = 'Você precisa confirmar a exclusão';
