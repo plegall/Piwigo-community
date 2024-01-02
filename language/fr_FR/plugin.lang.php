@@ -24,6 +24,7 @@
 $lang['Add a permission'] = 'Ajouter une permission';
 $lang['Who?'] = 'Qui ?';
 $lang['any visitor'] = 'n\'importe quel visiteur';
+$lang['Trust'] = 'Confiance';
 $lang['any registered user'] = 'n\'importe quel utilisateur enregistré';
 $lang['a specific user'] = 'un utilisateur en particulier';
 $lang['a group'] = 'un groupe';
@@ -98,4 +99,7 @@ $lang['No photo selected, no action possible.'] = 'Aucune photo sélectionnée, 
 $lang['Drag files here.'] = 'Déposez vos fichiers ici.';
 $lang[' (owns this album)'] = ' (possède cet album)';
 $lang[' (already owns album "%s")'] = ' (possède déjà l\'album "%s")';
+
+$lang['Validate or reject pending photos'] = 'Validez ou rejetez les photos en attente';
+$lang['Everyone'] = 'Tout le monde';
 ?>
