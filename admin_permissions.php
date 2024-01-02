@@ -213,7 +213,7 @@ DELETE
 
 $template->set_filenames(
   array(
-    'plugin_admin_content' => dirname(__FILE__).'/admin_permissions.tpl'
+    'plugin_admin_content' => dirname(__FILE__).'/template/admin_permissions.tpl'
     )
   );
 
@@ -366,6 +366,7 @@ $category_ids = array();
 
 while ($row = pwg_db_fetch_assoc($result))
 {
+  $row['id'] = $row['id'];
   array_push($permissions, $row);
 
   if (!empty($row['user_id']))
@@ -513,6 +514,7 @@ foreach ($permissions as $permission)
   $template->append(
     'permissions',
     array(
+      'ID' => $permission['id'],
       'WHO' => $who,
       'WHERE' => $where,
       'TRUST' => $trust,
