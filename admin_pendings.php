@@ -113,7 +113,7 @@ DELETE
 
 $template->set_filenames(
   array(
-    'plugin_admin_content' => dirname(__FILE__).'/admin_pendings.tpl'
+    'plugin_admin_content' => dirname(__FILE__).'/template/admin_pendings.tpl'
     )
   );
 
