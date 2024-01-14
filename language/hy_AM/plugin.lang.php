@@ -1,0 +1,79 @@
+<?php
+// +-----------------------------------------------------------------------+
+// | This file is part of Piwigo.                                          |
+// |                                                                       |
+// | For copyright and license information, please view the COPYING.txt    |
+// | file that was distributed with this source code.                      |
+// +-----------------------------------------------------------------------+
+$lang['ability to create sub-albums'] = 'ենթալբոմներ ստեղծելու ունակություն';
+$lang['any registered user'] = 'ցանկացած գրանցված օգտատեր';
+$lang['any visitor'] = 'ցանկացած այցելու';
+$lang['high trust'] = 'բարձր վստահություն';
+$lang['low trust'] = 'ցածր վստահություն';
+$lang['no limit'] = 'առանց սահմանափակումների';
+$lang['sub-albums creation'] = 'ենթալբոմների ստեղծում';
+$lang['up to %d photos (for each user)'] = 'մինչև %d լուսանկար (յուրաքանչյուր օգտատիրոջ համար)';
+$lang['up to %dMB (for each user)'] = 'մինչև %dՄԲ (յուրաքանչյուր օգտատիրոջ համար)';
+$lang['uploaded photos are directly displayed in the gallery'] = 'ներբեռնված լուսանկարներն ուղղակիորեն ցուցադրվում են պատկերասրահում';
+$lang['uploaded photos must be validated by an administrator'] = 'ներբեռնված լուսանկարները պետք է վավերացվեն ադմինիստրատորի կողմից';
+$lang['web size'] = 'վեբ չափը';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo-ն ավտոմատ կերպով ստեղծում է ալբոմ յուրաքանչյուր, առաջին անգամ միացող, օգտատիրոջ համար';
+$lang['Select at least one photo'] = 'Ընտրեք առնվազն մեկ լուսանկար';
+$lang['Select at least one tag'] = 'Ընտրեք առնվազն մեկ պիտակ';
+$lang['Set Photo Properties'] = 'Սահմանել լուսանկարների հատկությունները';
+$lang['The whole gallery'] = 'Ամբողջ պատկերասրահը';
+$lang['Upload Permissions'] = 'Ներբեռնման թույլտվություններ';
+$lang['Upload your own photos'] = 'Ներբեռնեք Ձեր լուսանկարները';
+$lang['User album only'] = 'Միայն օգտատիրոջ ալբոմ';
+$lang['User albums'] = 'Օգտատիրոջ ալբոմներ';
+$lang['Validation page: %s'] = 'Վավերացման էջ: %s';
+$lang['Where should Piwigo create user albums?'] = 'Որտե՞ղ պետք է Piwigo-ն ստեղծի օգտատիրոջ ալբոմներ:';
+$lang['Where?'] = 'Որտե՞ղ';
+$lang['Which level of trust?'] = 'Վստահության ի՞նչ մակարդակ';
+$lang['Who?'] = 'Ո՞վ';
+$lang['You need to confirm deletion'] = 'Դուք պետք է հաստատեք ջնջումը';
+$lang['Your photos are waiting for validation, administrators have been notified'] = 'Ձեր լուսանկարները սպասում են վավերացման, ադմինիստրատորները ծանուցվել են:';
+$lang['Zoom'] = 'Խոշորացնել';
+$lang['a group'] = 'խումբ';
+$lang['a specific user'] = 'կոնկրետ օգտատեր';
+$lang['a user can own only one album'] = 'օգտատերը կարող է ունենալ միայն մեկ ալբոմ';
+$lang['Edit a permission'] = 'Խմբագրել թուլտվությունները';
+$lang['Edit photos'] = 'Խմբագրել լուսանկարները';
+$lang['Edit your photos'] = 'Խմբագրել Ձեր լուսանկարները';
+$lang['File %s too big (%uMB), quota of %uMB exceeded'] = '%s ֆայլը չափից դուրս մեծ է (%uՄԲ), գերազանցվել է %uՄԲ քվոտան';
+$lang['Gallery root'] = 'Պատկերասրահի սկզբնաղբյուր';
+$lang['Hi administrators,'] = 'Ողջույն ադմինիստրատոր, ';
+$lang['How many photos?'] = 'Քանի՞ լուսանկար:';
+$lang['How much disk space?'] = 'Որքա՞ն սկավառակի տարածք:';
+$lang['Level 16'] = 'Ընթացքում';
+$lang['Maximum number of photos reached (%u)'] = 'Լուսանկարների առավելագույն թիվը հասել է (%u)';
+$lang['No album, this photo is orphan'] = 'Ալբոմ չկա, այս նկարը անտեր է';
+$lang['No photo can be deleted'] = 'Ոչ մի լուսանկար չի կարող ջնջվել';
+$lang['No photo selected, no action possible.'] = 'Լուսանկարը ընտրված չէ, գործողությունը հնարավոր չէ:';
+$lang['Pending Photos'] = 'Սպասվող լուսանկարներ';
+$lang['Permission added'] = 'Թույլտվությունն ավելացվեց';
+$lang['Permission removed'] = 'Թույլտվությունը ջնջվեց';
+$lang['Permission updated'] = 'Թույլտվությունը թարմացվեց';
+$lang['Photo %s rejected.'] = '%s լուսանկարը մերժվեց';
+$lang['Photos posted by %s'] = 'Լուսանկարները տեղադրված են %s-ի կողմից';
+$lang['Photos posted by %s in album %s'] = 'Լուսանկարները տեղադրված են %s-ի կողմից %s ալբոմում';
+$lang[' (already owns album "%s")'] = '(արդեն պատկանում է "%s" ալբոմին)';
+$lang[' (owns this album)'] = '(պատկանում է այս ալբոմին)';
+$lang['%d photos rejected'] = '%d լուսանկար մերժվել է';
+$lang['%d photos uploaded by %s'] = '%d լուսանկար ներբեռնվել է %s-ի կողմից';
+$lang['%d photos uploaded into album "%s"'] = '%d լուսանկար ներբեռնվել է "%s" ալբոմում';
+$lang['%d photos validated'] = '%d լուսանկար վավերացվել է';
+$lang['%s (the group)'] = '%s (խումբը)';
+$lang['%s (the user)'] = '%s (օգտատերը)';
+$lang['%s out of %s'] = '%s-ից %s-ը';
+$lang['%u pending photos'] = '%u սպասող լուսանկար';
+$lang['(in addition to user album)'] = '(ի հավելում օգտատիրոջ ալբոմին)';
+$lang['Add a permission'] = 'Ավելացնել թույլտվություն';
+$lang['Album of user'] = 'Օգտատիրոջ ալբոմ';
+$lang['Available %s.'] = 'Հասանելի է %s';
+$lang['Available quota %s.'] = 'Հասանելի քվոտա %s:';
+$lang['Cancel'] = 'Չեղարկել';
+$lang['Delete permission'] = 'Ջնջել թույլտվությունը';
+$lang['Disk usage quota reached (%uMB)'] = 'Սկավառակի օգտագործման չափը հասել է (%u ՄԲ)';
+$lang['Drag files here.'] = 'Բերել ֆայլերը այստեղ:';
+$lang['Edit Photos'] = 'Խմբագրել լուսանկարները';
