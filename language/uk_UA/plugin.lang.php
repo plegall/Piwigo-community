@@ -79,4 +79,16 @@ $lang['Piwigo automatically creates an album for each user, on first connection'
 $lang['no limit'] = 'без обмежень';
 $lang['Album of user'] = 'Альбом користувача';
 $lang['a user can own only one album'] = 'користувач може мати тільки одним альбомом';
-?>
+$lang[' (already owns album "%s")'] = ' (вже володіє альбомом "%s")';
+$lang[' (owns this album)'] = '(володіє цім альбомом)';
+$lang['Drag files here.'] = 'Перетягніть файли сюди.';
+$lang['Edit Photos'] = 'Редагувати фото';
+$lang['Edit photos'] = 'Редагувати фото';
+$lang['Edit your photos'] = 'Редагувати ваші фото';
+$lang['No photo can be deleted'] = 'Немає фото для видалення';
+$lang['No photo selected, no action possible.'] = 'Фото не обрано, немає дій';
+$lang['Photos posted by %s'] = 'Фото опубліковані  %s';
+$lang['Photos posted by %s in album %s'] = 'Фото опубліковані %s в альбомі %s';
+$lang['Select at least one photo'] = 'Оберіть одне чи більш фото ';
+$lang['Select at least one tag'] = 'Оберіть один чи більш тегів';
+$lang['You need to confirm deletion'] = 'Підтвердить видалення';
