@@ -60,7 +60,7 @@ if (!empty($_POST))
 // | template init                                                         |
 // +-----------------------------------------------------------------------+
 
-$template->set_filename('plugin_admin_content', dirname(__FILE__).'/admin_config.tpl');
+$template->set_filename('plugin_admin_content', dirname(__FILE__).'/template/admin_config.tpl');
 
 // +-----------------------------------------------------------------------+
 // | form options                                                          |
