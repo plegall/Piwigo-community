@@ -185,8 +185,7 @@ SELECT
 // +-----------------------------------------------------------------------+
 
 $template->set_template_dir(realpath(dirname(__FILE__)));
-$template->set_filename('add_photos', 'add_photos.tpl');
-
+$template->set_filename('add_photos', 'template/add_photos.tpl');
 // +-----------------------------------------------------------------------+
 // | Uploaded photos                                                       |
 // +-----------------------------------------------------------------------+

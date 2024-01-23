@@ -76,7 +76,7 @@ if (!empty($_POST))
 // | template init                                                         |
 // +-----------------------------------------------------------------------+
 
-$template->set_filename('plugin_admin_content', dirname(__FILE__).'/admin_album.tpl');
+$template->set_filename('plugin_admin_content', dirname(__FILE__).'/template/admin_album.tpl');
 
 // +-----------------------------------------------------------------------+
 // | Tabs                                                                  |
