@@ -79,4 +79,16 @@ $lang['User albums'] = 'Kasutaja albumind';
 $lang['Where should Piwigo create user albums?'] = 'Kuhu Piwigo peaks looma kasutaja albumi?';
 $lang['Album of user'] = 'Kasutaja album';
 $lang['a user can own only one album'] = 'kasutaja võib omada ainult ühte albumit';
-?>
+$lang['You need to confirm deletion'] = 'Peate kinnitama kustutamise';
+$lang['Select at least one tag'] = 'Valige vähemalt üks silt';
+$lang['Select at least one photo'] = 'Valige vähemalt üks foto';
+$lang['Photos posted by %s in album %s'] = 'Fotod postitas %s albumisse %s';
+$lang['Photos posted by %s'] = 'Fotod postitas %s';
+$lang['No photo selected, no action possible.'] = 'Ühtegi fotot pole valitud, tegevust pole võimalik teha.';
+$lang['No photo can be deleted'] = 'Ühtegi fotot ei saa kustutada';
+$lang[' (already owns album "%s")'] = '(omab juba albumit "%s")';
+$lang[' (owns this album)'] = '(omab seda albumit)';
+$lang['Drag files here.'] = 'Lohistage failid siia.';
+$lang['Edit your photos'] = 'Muutke oma fotosid';
+$lang['Edit photos'] = 'Redigeeri fotosid';
+$lang['Edit Photos'] = 'Redigeeri fotosid';
