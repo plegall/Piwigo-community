@@ -91,3 +91,6 @@ $lang['Photos posted by %s in album %s'] = 'Foton postade av %s i album %s';
 $lang['Select at least one photo'] = 'Välj minst ett foto';
 $lang['Select at least one tag'] = 'Välj minst en tagg';
 $lang['You need to confirm deletion'] = 'Du måste bekräfta radering';
+$lang['Everyone'] = 'Alla';
+$lang['Trust'] = 'Lita på';
+$lang['Validate or reject pending photos'] = 'Validera eller avvisa väntande foton';
