@@ -96,3 +96,6 @@ $lang['No photo selected, no action possible.'] = 'Kein Foto ausgewählt, keine 
 $lang['Drag files here.'] = 'Ziehen Sie die Dateien hierher.';
 $lang[' (already owns album "%s")'] = '(besitzt bereits das Album "%s")';
 $lang[' (owns this album)'] = '(besitzt dieses Album)';
+$lang['Validate or reject pending photos'] = 'Ausstehende Fotos überprüfen oder ablehnen';
+$lang['Everyone'] = 'Alle';
+$lang['Trust'] = 'Vertrauen';
