@@ -83,4 +83,9 @@ $lang['User albums'] = 'Альбомы пользователя';
 $lang['Where should Piwigo create user albums?'] = 'Где Piwigo требуется создать альбомы пользователя?';
 $lang['a user can own only one album'] = 'у пользователя может быть только один собственный альбом';
 $lang['Album of user'] = 'Альбом пользователя';
-?>
+$lang['Photos posted by %s in album %s'] = 'Фото опубликованы %s в альбоме %s';
+$lang['Photos posted by %s'] = 'Фото опубликованы %s';
+$lang['Drag files here.'] = 'Перетащите сюда файлы.';
+$lang['Edit Photos'] = 'Редактировать Фото';
+$lang['Edit photos'] = 'Редактировать фото';
+$lang['No photo selected, no action possible.'] = 'Не выбрано не одно фото, действия невозможны ';
