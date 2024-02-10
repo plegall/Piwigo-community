@@ -94,3 +94,6 @@ $lang['Photos posted by %s in album %s'] = 'Fotos publicadas por %s en el álbum
 $lang['Select at least one photo'] = 'Seleccione al menos una foto';
 $lang['Select at least one tag'] = 'Seleccione al menos una etiqueta';
 $lang['You need to confirm deletion'] = 'Necesita confirmar la supresión';
+$lang['Everyone'] = 'Todo el mundo';
+$lang['Trust'] = 'Confiar';
+$lang['Validate or reject pending photos'] = 'Validar o rechazar fotos pendientes';
