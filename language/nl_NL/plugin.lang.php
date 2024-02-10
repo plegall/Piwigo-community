@@ -97,3 +97,6 @@ $lang['Photos posted by %s in album %s'] = 'Foto\'s geplaatst door %s in album %
 $lang['Select at least one photo'] = 'Selecteer minimaal één foto';
 $lang['Select at least one tag'] = 'Selecteer ten minste één tag';
 $lang['You need to confirm deletion'] = 'U moet de verwijdering bevestigen';
+$lang['Everyone'] = 'Iedereen';
+$lang['Trust'] = 'Vertrouwen';
+$lang['Validate or reject pending photos'] = 'In afwachting zijnde foto\'s valideren of weigeren';
