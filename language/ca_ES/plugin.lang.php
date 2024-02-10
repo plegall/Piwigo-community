@@ -92,3 +92,6 @@ $lang['Photos posted by %s in album %s'] = 'Fotos publicades per %s en l\'àlbum
 $lang['Select at least one photo'] = 'Seleccioneu almenys una foto';
 $lang['Select at least one tag'] = 'Seleccioneu almenys una etiqueta';
 $lang['You need to confirm deletion'] = 'Necessiteu confirmar la supressió';
+$lang['Everyone'] = 'Tothom';
+$lang['Trust'] = 'Confia';
+$lang['Validate or reject pending photos'] = 'Valida o rebutja fotos pendents';
