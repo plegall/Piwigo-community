@@ -77,3 +77,6 @@ $lang['Select at least one tag'] = 'Veldu að minnsta kosti eitt merki';
 $lang['You need to confirm deletion'] = 'Þú þarft að staðfesta eyðingu';
 $lang[' (already owns album "%s")'] = '(á nú þegar albúmið "%s")';
 $lang[' (owns this album)'] = '(á þetta albúm)';
+$lang['Everyone'] = 'Allir';
+$lang['Trust'] = 'Traust';
+$lang['Validate or reject pending photos'] = 'Staðfesta eða hafna myndum sem bíða';
