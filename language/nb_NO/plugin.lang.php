@@ -92,3 +92,6 @@ $lang['Photos posted by %s in album %s'] = 'Bilder lagt ut av %s i album %s';
 $lang['Select at least one photo'] = 'Velg minst ett bilde';
 $lang['Select at least one tag'] = 'Velg minst et bokmerke';
 $lang['You need to confirm deletion'] = 'Du må bekrefte sletting';
+$lang['Everyone'] = 'Alle sammen';
+$lang['Trust'] = 'Tillit';
+$lang['Validate or reject pending photos'] = 'Bekreft eller avvis ventende bilder';
