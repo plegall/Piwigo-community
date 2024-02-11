@@ -77,3 +77,6 @@ $lang['Delete permission'] = 'Ջնջել թույլտվությունը';
 $lang['Disk usage quota reached (%uMB)'] = 'Սկավառակի օգտագործման չափը հասել է (%u ՄԲ)';
 $lang['Drag files here.'] = 'Բերել ֆայլերը այստեղ:';
 $lang['Edit Photos'] = 'Խմբագրել լուսանկարները';
+$lang['Everyone'] = 'Բոլորը';
+$lang['Trust'] = 'Վստահել';
+$lang['Validate or reject pending photos'] = 'Վավերացնել կամ մերժել սպասվող լուսանկարները';
