@@ -92,3 +92,6 @@ $lang['Edit your photos'] = 'Fotoğraflarınızı düzenleyin';
 $lang['Edit photos'] = 'Fotoğrafları düzenle';
 $lang['Edit Photos'] = 'Fotoğrafları Düzenle';
 $lang['Drag files here.'] = 'Dosyaları buraya sürükleyin.';
+$lang['Validate or reject pending photos'] = 'Bekleyen fotoğrafları onayla veya reddet';
+$lang['Trust'] = 'Güven';
+$lang['Everyone'] = 'Herkes';
