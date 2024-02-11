@@ -92,3 +92,6 @@ $lang['Photos posted by %s in album %s'] = 'Fotografie, ktoré uverejnil %s v al
 $lang['Select at least one photo'] = 'Vyberte aspoň jednu fotografiu';
 $lang['Select at least one tag'] = 'Vyberte aspoň jednu značku';
 $lang['You need to confirm deletion'] = 'Musíte potvrdiť vymazanie';
+$lang['Everyone'] = 'Každý';
+$lang['Trust'] = 'Dôveryhodnosť';
+$lang['Validate or reject pending photos'] = 'Potvrdenie alebo zamietnutie čakajúcich fotografií';
