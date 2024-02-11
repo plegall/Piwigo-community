@@ -92,3 +92,6 @@ $lang['Photos posted by %s in album %s'] = '由 %s 張貼的照片，於相簿 %
 $lang['Select at least one photo'] = '請至少選擇一張照片';
 $lang['Select at least one tag'] = '請至少選擇一個標籤';
 $lang['You need to confirm deletion'] = '刪除動作需要您確認';
+$lang['Everyone'] = '所有人';
+$lang['Trust'] = '信任';
+$lang['Validate or reject pending photos'] = '認可/拒絕待審核的照片';
