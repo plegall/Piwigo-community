@@ -92,3 +92,6 @@ $lang['Drag files here.'] = 'Lohistage failid siia.';
 $lang['Edit your photos'] = 'Muutke oma fotosid';
 $lang['Edit photos'] = 'Redigeeri fotosid';
 $lang['Edit Photos'] = 'Redigeeri fotosid';
+$lang['Validate or reject pending photos'] = 'Fotode kinnitamine või tagasilükkamine on ootel';
+$lang['Trust'] = 'Usalda';
+$lang['Everyone'] = 'Kõik';
