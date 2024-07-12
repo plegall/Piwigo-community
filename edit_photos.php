@@ -340,7 +340,7 @@ if (count($page['errors']) != 0)
   $template->assign('errors', $page['errors']);
 }
 
-if (count($page['infos']) != 0)
+if (!empty($page['infos']))
 {
   $template->assign('infos', $page['infos']);
 }
