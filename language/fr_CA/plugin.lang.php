@@ -49,8 +49,8 @@ $lang['Zoom'] = 'Zoom';
 $lang['Upload your own photos'] = 'Ajoutez vos propres photos';
 $lang['%d photos uploaded by %s'] = '%d photos ajoutées par %s';
 $lang['Validation page: %s'] = 'Page de validation : %s';
-$lang['%d photos uploaded into album "%s"'] = '%d photos ajoutée à l\'album "%s"';
-$lang['Hi administrators,'] = 'Bonjours, chers administrateurs,';
+$lang['%d photos uploaded into album "%s"'] = '%d photos ajoutées à l\'album "%s"';
+$lang['Hi administrators,'] = 'Bonjour chers administrateurs,';
 
 $lang['No album, this photo is orphan'] = 'Aucun album, cette photo est orpheline';
 
