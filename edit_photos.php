@@ -119,7 +119,7 @@ if (isset($_POST['submit']))
     {
       $tag_ids = get_tag_ids($_POST['add_tags']);
       add_tags($tag_ids, $collection);
-      $page['infos'] = 'Tags added';
+      $page['infos'][] = 'Tags added';
     }
   }
 
@@ -142,7 +142,7 @@ DELETE
       $images_to_update = compare_image_tag_lists($taglist_before, $taglist_after);
       update_images_lastmodified($images_to_update);
 
-      $page['infos'] = 'Tags removed';
+      $page['infos'][] = 'Tags removed';
     }
     else
     {   
