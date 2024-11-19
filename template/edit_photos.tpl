@@ -273,7 +273,7 @@ UL.thumbnails SPAN.wrap2 {ldelim}
   <div style="clear:both;">
 
     <div style="float:left">
-    {include file='plugins/community/navigation_bar.tpl'|@get_extent:'navbar'}
+    {include file='plugins/community/template/navigation_bar.tpl'|@get_extent:'navbar'}
     </div>
 
     <div class="thumbnailsActionsNumber">

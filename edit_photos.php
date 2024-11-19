@@ -332,8 +332,8 @@ $template->assign(array(
 // | display page                                                          |
 // +-----------------------------------------------------------------------+
 
-$template->set_template_dir(realpath(dirname(__FILE__)));
-$template->set_filename('edit_photos','/template/edit_photos.tpl');
+$template->set_template_dir(realpath(dirname(__FILE__)).'/template');
+$template->set_filename('edit_photos','edit_photos.tpl');
 
 if (count($page['errors']) != 0)
 {
