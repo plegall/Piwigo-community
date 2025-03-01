@@ -37,14 +37,25 @@ add_event_handler('init', 'community_init');
  */
 function community_init()
 {
-  global $conf, $user;
+  global $conf, $user, $page;
 
   // prepare plugin configuration
   $conf['community'] = safe_unserialize($conf['community']);
 
   // TODO: generate permissions in $user['community_permissions'] if ws.php
   // + remove all calls of community_get_user_permissions related to webservices
-  if (!defined('IN_ADMIN') or !IN_ADMIN)
+
+  $get_user_permissions = true;
+  if (isset($page['user_use_cache']))
+  {
+    $get_user_permissions = $page['user_use_cache'];
+  }
+  elseif (defined('IN_ADMIN') and IN_ADMIN)
+  {
+    $get_user_permissions = false;
+  }
+
+  if ($get_user_permissions)
   {
     $user['community_permissions'] = community_get_user_permissions($user['id']);
   }
