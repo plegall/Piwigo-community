@@ -23,7 +23,7 @@
 
 if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 
-global $template, $conf, $user, $page;
+global $template, $conf, $user, $page, $persistent_cache;
 
 include_once(PHPWG_ROOT_PATH.'admin/include/functions.php');
 
@@ -119,6 +119,7 @@ if (isset($_POST['submit']))
     {
       $tag_ids = get_tag_ids($_POST['add_tags']);
       add_tags($tag_ids, $collection);
+      $persistent_cache->purge(true);
       $page['infos'][] = 'Tags added';
     }
   }
@@ -142,6 +143,7 @@ DELETE
       $images_to_update = compare_image_tag_lists($taglist_before, $taglist_after);
       update_images_lastmodified($images_to_update);
 
+      $persistent_cache->purge(true);
       $page['infos'][] = 'Tags removed';
     }
     else
