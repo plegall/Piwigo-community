@@ -383,17 +383,54 @@ function community_get_cache_key()
   }
 }
 
-function community_get_user_limits($user_id)
+function community_get_user_limits($user_id, $category_id)
 {
   // how many photos and storage for this user?
   $query = '
 SELECT
-    COUNT(id) AS nb_photos,
-    IFNULL(FLOOR(SUM(filesize)/1024), 0) AS storage
-  FROM '.IMAGES_TABLE.'
+    COUNT(it.id) AS nb_photos,
+    IFNULL(FLOOR(SUM(it.filesize)/1024), 0) AS storage
+  FROM '.IMAGES_TABLE.' AS it
+  INNER JOIN ' . IMAGE_CATEGORY_TABLE . ' AS ic ON ic.image_id = it.id  
   WHERE added_by = '.$user_id.'
+  AND ic.category_id = '. $category_id .'
 ;';
   return pwg_db_fetch_assoc(pwg_query($query));
+}
+
+function community_get_upload_limit($user_id, $category_id)
+{
+	global $conf;
+
+	$query = '
+		SELECT
+		    group_id
+		  FROM '.USER_GROUP_TABLE.'
+		  WHERE user_id = '.$user_id.'
+		;';
+	$user_group_ids = array_from_query($query, 'group_id');
+	$query = '
+		SELECT
+		    nb_photos,
+		    storage
+		  FROM '.COMMUNITY_PERMISSIONS_TABLE.'
+		  WHERE ((type = \'any_visitor\')';
+			if ($user_id != $conf['guest_id'])
+			{
+				$query.= '
+		    OR (type = \'any_registered_user\')
+		    OR (type = \'user\' AND user_id = '.$user_id.')';
+				if (count($user_group_ids) > 0)
+				{
+					$query.= '
+		    OR (type = \'group\' AND group_id IN ('.implode(',', $user_group_ids).'))';
+				}
+			}
+			$query.= ')
+			AND (category_id = ' . $category_id . ')
+			;';
+	$recursive_categories = array();
+	return pwg_db_fetch_assoc(pwg_query($query));
 }
 
 // will be included in Piwigo 2.6
