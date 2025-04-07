@@ -472,7 +472,13 @@ p#uploadModeInfos {text-align:left;margin-top:1em;font-size:90%;color:#999;}
   animation: animatedBackground 1s linear infinite;
   -webkit-animation: animatedBackground 1s linear infinite;
 }
+
+li.plupload_delete a{
+  background-repeat:no-repeat;
+  border:0;
+}
 </style>
+
 {/literal}
 
 <div id="photosAddContent">

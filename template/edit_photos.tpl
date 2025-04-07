@@ -307,6 +307,11 @@ UL.thumbnails SPAN.wrap2 {ldelim}
 {if !empty($associated_tags)}
           <option value="del_tags">{'remove tags'|@translate}</option>
 {/if}
+{if !empty($community_element_set_global_plugins_actions)}
+    {foreach from=$community_element_set_global_plugins_actions item=action}
+          <option value="{$action.ID}">{$action.NAME}</option>
+    {/foreach}
+{/if}
         </select>
       </div>
       
@@ -339,6 +344,15 @@ UL.thumbnails SPAN.wrap2 {ldelim}
         </select>
   {/if}
       </div>
+
+      {if !empty($community_element_set_global_plugins_actions)}
+        {foreach from=$community_element_set_global_plugins_actions item=action}
+          <div id="action_{$action.ID}" class="bulkAction">
+          {if !empty($action.CONTENT)}{$action.CONTENT}{/if}
+          </div>
+        {/foreach}
+      {/if}
+
 
       <!-- progress bar -->
       <div id="regenerationMsg" class="bulkAction" style="display:none">

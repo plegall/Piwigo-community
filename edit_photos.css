@@ -71,7 +71,7 @@
 #permitAction {display: flex;}
 #permitAction select {padding: 12px 10px; width: 280px; margin-bottom: 25px; -webkit-appearance: none;}
 #applyAction {padding: 10px 18px; margin-left: 0;}
-.permitActionItem {margin-left: 30px; width: 300px;}
+.permitActionItem {margin-left: 30px;}
 .permitActionItem .selectize-control.single.plugin-remove_button {width: auto !important;}
 .permitActionItem .selectize-input.items.full.has-options.has-items {width: 500px !important; line-height: 23px;}
 #action_associate {display: flex;}

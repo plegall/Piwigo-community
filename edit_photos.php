@@ -83,7 +83,9 @@ else if (isset($_POST['setSelected']))
 }
 else if (isset($_POST['selection']))
 {
-  $collection = $_POST['selection'];
+  //This is added to make sure the image ids used are those of the requesting user
+  //Its a security measure
+  $collection = array_intersect($page['cat_elements_id'],$_POST['selection']);
 }
 
 // +-----------------------------------------------------------------------+
@@ -178,6 +180,8 @@ DELETE
       $page['errors'][] = l10n('You need to confirm deletion');
     }
   }
+
+  trigger_notify('community_element_set_global_action', $action, $collection);
 
   if ($redirect)
   {
@@ -394,6 +398,6 @@ SELECT
     $template->assign('EDIT_ALBUM', 'unknown album');
   }
 }
-
+trigger_notify('community_loc_end_element_set_global');
 $template->assign_var_from_handle('PLUGIN_INDEX_CONTENT_BEGIN', 'edit_photos');
 ?>
