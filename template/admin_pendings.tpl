@@ -242,16 +242,19 @@ $(document).ready(function(){
     const value = $(this)[0].value;
 
     let serializedData = $form.serialize();
-    serializedData = serializedData.concat(`&photos%5B%5D=${value}&validate="Valider"`);
-
+    serializedData = serializedData.concat(`&photos%5B%5D=${value}&validate=true`);
     $.ajax({
       type: "POST",
       url: "",
       data: serializedData,
+      success: function (response) {
+        // We need to force the reload to update the list, but we no longer get the success message displayed
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+      }
     });
 
-    // force reload mais affiche pas les messages de succès
-    window.location.reload();
   });
 
   // Envoi du formulaire lors du clique sur le bouton de rejet dans la card
@@ -266,10 +269,13 @@ $(document).ready(function(){
       type: "POST",
       url: "",
       data: serializedData,
+            success: function (response) {
+        // We need to force the reload to update the list, but we no longer get the success message displayed
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+      }
     });
-
-    // force reload mais affiche pas les messages de succès
-    window.location.reload();
   });
 });
 </script>
