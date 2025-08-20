@@ -213,24 +213,10 @@ if (isset($page['thumbnails']))
   }
 }
 
-$upload_max_filesize = min(
-  get_ini_size('upload_max_filesize'),
-  get_ini_size('post_max_size')
-  );
-
-if ($upload_max_filesize == get_ini_size('upload_max_filesize'))
-{
-  $upload_max_filesize_shorthand = get_ini_size('upload_max_filesize', false);
-}
-else
-{
-  $upload_max_filesize_shorthand = get_ini_size('post_max_filesize', false);
-}
-
 $template->assign(
     array(
-      'upload_max_filesize' => $upload_max_filesize,
-      'upload_max_filesize_shorthand' => $upload_max_filesize_shorthand,
+      'upload_max_filesize' => $conf['upload_form_max_file_size']*1024*1024,
+      'upload_max_filesize_shorthand' => $conf['upload_form_max_file_size'].'M',
     )
   );
 
