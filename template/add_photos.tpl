@@ -582,7 +582,7 @@ li.plupload_delete a{
   {if isset($max_upload_resolution)}
 {'Approximate maximum resolution: %dM pixels (that\'s %dx%d pixels).'|@translate|@sprintf:$max_upload_resolution:$max_upload_width:$max_upload_height}
   {/if}
-{$quota_details}
+{if isset($quota_details)}{$quota_details}{/if}
     </p>
 
       <div id="uploader">
