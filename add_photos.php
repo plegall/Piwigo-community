@@ -269,9 +269,8 @@ $upload_switch = $upload_modes[ ($upload_mode_index + 1) % 2 ];
 
 $template->assign(
   array(
-    'uploadify_path' => COMMUNITY_PATH.'uploadify',
+    'ABSOLUTE_ROOT_URL' => get_absolute_root_url(),
     'upload_file_types' => implode(', ', $unique_exts),
-    'uploadify_fileTypeExts' => implode(';', prepend_append_array_items($uploadify_exts, '*.', '')),
     'upload_mode' => $upload_mode,
     'form_action' => PHOTOS_ADD_BASE_URL.'&amp;upload_mode='.$upload_mode.'&amp;processed=1',
     'switch_url' => PHOTOS_ADD_BASE_URL.'&amp;upload_mode='.$upload_switch,
