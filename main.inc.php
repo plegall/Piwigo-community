@@ -39,6 +39,16 @@ function community_init()
 {
   global $conf, $user, $page;
 
+  // in Batch Manager Unit, in case an admin save photo properties, if level 16 does
+  // not exist, Piwigo will downgrade it to 8 (Admins) which is not the intended plan.
+  //
+  // admin.picture_modify handles the "save properties" form on its own and has no
+  // such check
+  if (isset($_REQUEST['method']) and 'pwg.images.setInfo' == $_REQUEST['method'])
+  {
+    $conf['available_permission_levels'][] = 16;
+  }
+
   // prepare plugin configuration
   $conf['community'] = safe_unserialize($conf['community']);
 
@@ -93,6 +103,15 @@ function community_loc_end_intro()
   
     $page['messages'][] = $message;
   }
+}
+
+add_event_handler('loc_end_element_set_unit', 'community_loc_end_element_set_unit');
+add_event_handler('loc_end_picture_modify', 'community_loc_end_element_set_unit');
+function community_loc_end_element_set_unit()
+{
+  global $template;
+
+  $template->assign('level_options', array(16 => l10n('Level 16')) + get_privacy_level_options());
 }
 
 add_event_handler('init', 'community_load_language');
