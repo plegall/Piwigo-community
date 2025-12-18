@@ -600,10 +600,12 @@ SELECT
 
     if ($params['fullname'])
     {
-      $row['name'] = strip_tags(get_cat_display_name_cache($row['uppercats'], null, false));
+      $row['name'] = strip_tags(get_cat_display_name_cache($row['uppercats'], null));
     }
     else
     {
+      $row['name_raw'] = $row['name'];
+
       $row['name'] = strip_tags(
         trigger_change(
           'render_category_name',
@@ -612,14 +614,14 @@ SELECT
           )
         );
     }
-    
-    $row['comment'] = strip_tags(
-      trigger_change(
-        'render_category_description',
-        $row['comment'],
-        'ws_categories_getList'
-        )
-      );
+
+    $row['comment_raw'] = $row['comment'];
+
+    $row['comment'] = (string) trigger_change(
+      'render_category_description',
+      $row['comment'],
+      'ws_categories_getList'
+    );
     
     array_push($cats, $row);
   }
