@@ -81,4 +81,8 @@ $lang['Gallery root'] = 'Galéria gyökérkönyvtára';
 $lang['File %s too big (%uMB), quota of %uMB exceeded'] = 'Fájl %s túl nagy (%uMB), %uMB kvóta túllépve';
 $lang['User album only'] = 'Csak felhasználói album';
 $lang['Album of user'] = 'Felhasználó albuma';
-?>
+$lang['Photos posted by %s'] = 'Képeket közzétette: %s';
+$lang['No photo selected, no action possible.'] = 'Nincs kiválasztott kép, nincs lehetőség művelet végrehajtására.';
+$lang['No photo can be deleted'] = 'Egyetlen kép sem törölhető';
+$lang['Everyone'] = 'Mindenki';
+$lang['Drag files here.'] = 'Húzza ide a fájlokat.';
