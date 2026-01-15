@@ -364,6 +364,7 @@ $template->assign(
     'TITLE' => '<a href="'.get_gallery_home_url().'">'.l10n('Home').'</a>'.$conf['level_separator'].$title,
     'selection' => $collection,
     'all_elements' => $page['cat_elements_id'],
+    'all_elements_imploded' => implode(',', $page['cat_elements_id']),
     'START' => $page['start'],
     'PWG_TOKEN' => get_pwg_token(),
     'U_DISPLAY'=>$base_url.get_query_string_diff(array('display')),
