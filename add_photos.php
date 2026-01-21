@@ -77,7 +77,7 @@ include_once(COMMUNITY_PATH.'include/photos_add_direct_process.inc.php');
 // +-----------------------------------------------------------------------+
 
 // has the user reached its limits?
-$user['community_usage'] = community_get_user_limits($user['id']);
+//$user['community_usage'] = community_get_user_limits($user['id']);
 // echo '<pre>'; print_r($user['community_usage']); echo '</pre>';
 
 // +-----------------------------------------------------------------------+
@@ -98,6 +98,16 @@ SELECT
   $images = array_from_query($query);
 
   $nb_images_deleted = 0;
+  if (is_admin())
+  {
+  	$user_permissions['storage'] = -1;
+  	$user_permissions['nb_photos'] = -1;
+  } else {
+  $upload_limit = community_get_upload_limit($user['id'], $_POST['category']);
+  $user_permissions['storage'] = $upload_limit['storage'];
+  $user_permissions['nb_photos'] = $upload_limit['nb_photos'];
+  $user['community_usage'] = community_get_user_limits($user['id'], $_POST['category']);
+  }
   
   // upload has just happened, maybe the user is over quota
   if ($user_permissions['storage'] > 0 and $user['community_usage']['storage'] > $user_permissions['storage'])
@@ -119,7 +129,7 @@ SELECT
         }
       }
 
-      $user['community_usage'] = community_get_user_limits($user['id']);
+      $user['community_usage'] = community_get_user_limits($user['id'], $_POST['category']);
       
       if ($user['community_usage']['storage'] <= $user_permissions['storage'])
       {
@@ -148,7 +158,7 @@ SELECT
         }
       }
 
-      $user['community_usage'] = community_get_user_limits($user['id']);
+      $user['community_usage'] = community_get_user_limits($user['id'], $_POST['category']);
       
       if ($user['community_usage']['nb_photos'] <= $user_permissions['nb_photos'])
       {
