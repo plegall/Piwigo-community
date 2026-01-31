@@ -1,0 +1,80 @@
+<?php
+// +-----------------------------------------------------------------------+
+// | This file is part of Piwigo.                                          |
+// |                                                                       |
+// | For copyright and license information, please view the COPYING.txt    |
+// | file that was distributed with this source code.                      |
+// +-----------------------------------------------------------------------+
+$lang['You need to confirm deletion'] = '삭제 확인이 필요합니다';
+$lang['Your photos are waiting for validation, administrators have been notified'] = '귀하의 사진이 승인 대기 중이며 관리자에게 알림이 전송되었습니다';
+$lang['Zoom'] = '확대';
+$lang['a group'] = '그룹';
+$lang['a specific user'] = '특정 사용자';
+$lang['a user can own only one album'] = '사용자는 하나의 앨범만 소유할 수 있음';
+$lang['ability to create sub-albums'] = '하위 앨범 생성 가능';
+$lang['any registered user'] = '모든 등록된 사용자';
+$lang['any visitor'] = '모든 방문자';
+$lang['high trust'] = '높은 신뢰도';
+$lang['low trust'] = '낮은 신뢰도';
+$lang['no limit'] = '제한 없음';
+$lang['sub-albums creation'] = '하위 앨범 생성';
+$lang['up to %d photos (for each user)'] = '최대 %d 장 (각 앨범당)';
+$lang['up to %dMB (for each user)'] = '최대 %dMB (사용자당)';
+$lang['uploaded photos are directly displayed in the gallery'] = '업로드된 사진은 갤러리에 바로 표시됩니다';
+$lang['uploaded photos must be validated by an administrator'] = '업로드된 사진은 관리자의 승인이 필요합니다';
+$lang['web size'] = '웹용 크기';
+$lang['Photos posted by %s'] = '%s가 게시한 사진';
+$lang['Photos posted by %s in album %s'] = '%s가 앨범 %s에 게시한 사진';
+$lang['Piwigo automatically creates an album for each user, on first connection'] = 'Piwigo는 첫 접속 시 각 사용자에 대해 자동으로 앨범을 생성합니다';
+$lang['Select at least one photo'] = '사진을 하나 이상 선택하세요';
+$lang['Select at least one tag'] = '태그를 하나 이상 선택하세요';
+$lang['Set Photo Properties'] = '사진 속성 설정';
+$lang['The whole gallery'] = '전체 갤러리';
+$lang['Trust'] = '신뢰도';
+$lang['Upload Permissions'] = '업로드 권한';
+$lang['Upload your own photos'] = '자신의 사진 업로드';
+$lang['User album only'] = '사용자 앨범만';
+$lang['User albums'] = '사용자 앨범';
+$lang['Validate or reject pending photos'] = '보류 중인 사진 승인 또는 거부';
+$lang['Validation page: %s'] = '승인 페이지: %s';
+$lang['Where should Piwigo create user albums?'] = 'Piwigo가 사용자 앨범을 생성할 위치는 어디입니까?';
+$lang['Where?'] = '어디에?';
+$lang['Which level of trust?'] = '신뢰 수준은?';
+$lang['Who?'] = '누가?';
+$lang['Edit a permission'] = '권한 편집';
+$lang['Edit photos'] = '사진 편집';
+$lang['Edit your photos'] = '사진 편집';
+$lang['Everyone'] = '모두';
+$lang['File %s too big (%uMB), quota of %uMB exceeded'] = '파일 %s가 너무 큽니다(%uMB), %uMB 할당량 초과';
+$lang['Gallery root'] = '갤러리 루트';
+$lang['Hi administrators,'] = '안녕하세요 관리자님,';
+$lang['How many photos?'] = '사진은 몇 장인가요?';
+$lang['How much disk space?'] = '디스크 공간은 얼마나 되나요?';
+$lang['Level 16'] = '보류 중';
+$lang['Maximum number of photos reached (%u)'] = '최대 사진 수(%u)에 도달했습니다';
+$lang['No photo can be deleted'] = '삭제할 사진이 없습니다';
+$lang['No photo selected, no action possible.'] = '선택된 사진이 없습니다. 작업을 수행할 수 없습니다.';
+$lang['Pending Photos'] = '보류 중인 사진';
+$lang['Permission added'] = '권한 추가됨';
+$lang['Permission removed'] = '권한 제거됨';
+$lang['Permission updated'] = '권한 업데이트됨';
+$lang['Photo %s rejected.'] = '사진 %s 거부되었습니다.';
+$lang[' (already owns album "%s")'] = ' (이미 앨범 “%s” 소유 중)';
+$lang[' (owns this album)'] = ' (이 앨범 소유 중)';
+$lang['%d photos rejected'] = '%d 장의 사진 거부되었습니다';
+$lang['%d photos uploaded by %s'] = '%d 장의 사진이 %s에 의해 업로드되었습니다';
+$lang['%d photos uploaded into album "%s"'] = '%d 장의 사진이 앨범 "%s"에 업로드되었습니다';
+$lang['%d photos validated'] = '%d 장의 사진이 검증되었습니다.';
+$lang['%s (the group)'] = '%s (그룹)';
+$lang['%s (the user)'] = '%s (사용자)';
+$lang['%u pending photos'] = '%u 장의 대기 중인 사진';
+$lang['(in addition to user album)'] = '(사용자 앨범 외)';
+$lang['Add a permission'] = '권한 추가';
+$lang['Album of user'] = '사용자 앨범';
+$lang['Available %s.'] = '%s 사용 가능.';
+$lang['Available quota %s.'] = '할당량 %s 사용 가능.';
+$lang['Cancel'] = '취소';
+$lang['Delete permission'] = '권한 삭제';
+$lang['Disk usage quota reached (%uMB)'] = '디스크 사용량 제한 초과 (%uMB)';
+$lang['Drag files here.'] = '파일을 여기로 드래그하세요.';
+$lang['Edit Photos'] = '사진 편집';
