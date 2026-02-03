@@ -78,3 +78,5 @@ $lang['Delete permission'] = '권한 삭제';
 $lang['Disk usage quota reached (%uMB)'] = '디스크 사용량 제한 초과 (%uMB)';
 $lang['Drag files here.'] = '파일을 여기로 드래그하세요.';
 $lang['Edit Photos'] = '사진 편집';
+$lang['%s out of %s'] = '%s / %s';
+$lang['No album, this photo is orphan'] = '앨범 없음, 이 사진은 사용되지 않았습니다';
