@@ -711,6 +711,7 @@ function community_ws_session_getStatus($params, &$service)
   else
   {
     $res['upload_categories_getList_method'] = 'community.categories.getList';
+    $res['create_categories'] = array_map('intval', $user['community_permissions']['create_categories']);
   }
 
   return $res;
