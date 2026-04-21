@@ -249,6 +249,11 @@ SELECT
       );
   }
 
+  if (count($return['create_categories']) > 0)
+  {
+    $return['create_categories'] = array_map('intval', array_values($return['create_categories']));
+  }
+
   if ($return['user_album'])
   {
     $user_album_category_id = community_get_user_album($user_id);
