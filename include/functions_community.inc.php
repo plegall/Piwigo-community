@@ -177,9 +177,14 @@ SELECT
   // photos inside (for nobody)
   $forbidden_categories = calculate_permissions($user['id'], $user['status']);
   
+  // Both lists may be null or empty, and exploding such a value yields a list holding
+  // a single empty string instead of an empty list. array_filter removes it, so that
+  // the difference below cannot produce an empty identifier which would be imploded
+  // into "IN ()" and rejected by the database as a syntax error. Album identifiers are
+  // always positive, so no valid one is removed.
   $empty_categories = array_diff(
-    explode(',', $user['forbidden_categories']),
-    explode(',', $forbidden_categories)
+    array_filter(explode(',', $user['forbidden_categories'] ?? '')),
+    array_filter(explode(',', $forbidden_categories ?? ''))
     );
 
   if (count($empty_categories) > 0)
